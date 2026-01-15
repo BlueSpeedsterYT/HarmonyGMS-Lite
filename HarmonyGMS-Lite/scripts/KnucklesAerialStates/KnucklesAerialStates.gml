@@ -29,7 +29,7 @@ function knuckles_is_gliding(phase)
 		    glide_force = 0.5;
 			
 			// Animate
-			// TODO: Gliding Animation
+			animation_init(PLAYER_ANIMATION.GLIDE);
 			break;
 		}
 		case PHASE.STEP:

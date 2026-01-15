@@ -282,4 +282,6 @@ global.ani_knuckles_spring = [global.ani_knuckles_spring_v0, global.ani_knuckles
 
 global.ani_knuckles_spring_twirl_v0 = new animation(sprKnucklesSpringTwirl, [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3], 11);
 
+global.ani_knuckles_glide_v0 = new animation(sprKnucklesGlide, 3);
+
 #endregion

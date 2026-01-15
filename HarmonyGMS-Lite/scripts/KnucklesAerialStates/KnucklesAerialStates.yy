@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"KnucklesAerialStates",
   "parent":{
-    "name":"States",
-    "path":"folders/Scripts/Player/States.yy",
+    "name":"Knuckles",
+    "path":"folders/Scripts/Player/States/Characters/Knuckles.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

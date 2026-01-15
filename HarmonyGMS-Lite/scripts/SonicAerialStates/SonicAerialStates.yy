@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"SonicAerialStates",
   "parent":{
-    "name":"States",
-    "path":"folders/Scripts/Player/States.yy",
+    "name":"Sonic",
+    "path":"folders/Scripts/Player/States/Characters/Sonic.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

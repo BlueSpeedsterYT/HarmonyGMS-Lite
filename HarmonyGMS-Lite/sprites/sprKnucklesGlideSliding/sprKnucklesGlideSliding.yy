@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Glide Sliding",
-    "path":"folders/Sprites/Zone/Player/Characters/Knuckles/Glide Sliding.yy",
+    "name":"Knuckles",
+    "path":"folders/Sprites/Zone/Player/Characters/Knuckles.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

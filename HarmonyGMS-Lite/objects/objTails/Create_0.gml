@@ -5,6 +5,7 @@ event_inherited();
 character_index = CHARACTER.TAILS;
 
 fly_time = 0;
+fly_force = 0;
 
 trick_speed =
 [
@@ -18,14 +19,19 @@ tails_stamp = new stamp();
 
 player_try_skill = function()
 {
-    // Tails has no air attacks so he only got to have the jump skill.
-	// Good for him.
-	// Sadly his flight is screwed over by water which is different than Sonic 3 so uhhhhhh.
 	if (not on_ground)
     {
-        if (input_button.jump.pressed)
+        // Tails has no air attacks so he only got to have the jump skill.
+		// Good for him.
+		// Sadly his flight is screwed over by water which is different than Sonic 3 so uhhhhhh.
+		if (input_button.jump.pressed)
         {
 			// Fly
+			// Like Sonic 3, he can go to higher bounds never expected.
+			// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
+			// the Advance games.
+			fly_time = time_to_frames(0, 8);
+			player_perform(tails_is_flying);
 			return true;
         }
     }
@@ -35,7 +41,9 @@ player_try_skill = function()
 		// it is a ground attack.
 		if (input_button.attack.pressed)
 		{
-			
+			// Tail Swipe
+			// it is a swiping attack.
+			return true;
 		}
 	}
     return false;
@@ -392,6 +400,49 @@ player_animate = function()
             }
             break;
         }
+		case PLAYER_ANIMATION.FLYING:
+		{
+			player_set_animation(global.ani_tails_flying_v0);
+            player_set_radii(6, 14);
+			if (image_index == 0)
+            {
+                hitboxes[0].set_size(-6, -10, 6, 10);
+                hitboxes[1].set_size(-22, -23, 21, -11);
+            }
+			break;
+		}
+		case PLAYER_ANIMATION.FLYING_TURN:
+		{
+			player_set_animation(global.ani_tails_flying_turn_v0);
+            player_set_radii(6, 14);
+			if (image_index == 0)
+            {
+                hitboxes[0].set_size(-6, -10, 6, 10);
+                hitboxes[1].set_size(-17, -19, 17, -11);
+            }
+			break;
+		}
+		case PLAYER_ANIMATION.FLYING_TIRED:
+		{
+			player_set_animation(global.ani_tails_flying_tired_v0);
+            player_set_radii(6, 14);
+			switch (image_index)
+            {
+                case 0:
+                {
+                    hitboxes[0].set_size(-6, -10, 6, 10);
+                    hitboxes[1].set_size();
+                    break;
+                }
+                case 2:
+                {
+                    hitboxes[0].set_size(-6, -10, 6, 10);
+                    hitboxes[1].set_size();
+                    break;
+                }
+			}
+			break;
+		}
     }
 };
 

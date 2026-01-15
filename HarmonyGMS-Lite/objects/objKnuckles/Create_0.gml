@@ -20,10 +20,10 @@ player_try_skill = function()
 {
     if (not on_ground)
     {
-        // Drill Claw
 		if (input_button.attack.pressed)
         {
-            player_perform(knuckles_is_preparing_drill_clawing)
+            // Drill Claw
+			player_perform(knuckles_is_preparing_drill_clawing)
 			return true;
         }
 		else if (input_button.jump.pressed)
@@ -36,6 +36,17 @@ player_try_skill = function()
 			return true;
         }
     }
+	else
+	{
+		if (input_button.attack.pressed)
+		{
+			// Punch/Spiral Attack
+			// If the player is not in boost mode, then Knuckles would do a simple punch.
+			// however, that punch turns into a spiral strike when in boost mode.
+			// Be noteful on how you handle that.
+			return true;
+		}
+	}
     return false;
 };
 

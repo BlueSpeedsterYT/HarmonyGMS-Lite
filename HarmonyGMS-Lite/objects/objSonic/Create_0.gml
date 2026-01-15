@@ -16,10 +16,10 @@ player_try_skill = function()
 {
     if (not on_ground)
     {
-        // Bound
 		if (input_button.attack.pressed)
         {
-            player_perform(sonic_is_preparing_bound);
+            // Bound
+			player_perform(sonic_is_preparing_bound);
 			return true;
         }
 		else if (input_button.jump.pressed)
@@ -28,6 +28,17 @@ player_try_skill = function()
 			return true;
 		}
     }
+	else
+	{
+		if (input_button.attack.pressed)
+		{
+			// Skid Attack
+			// Sonic's skid attack is simple and effective, however
+			// it gets supercharged while in boost mode, the skys the limit with this power.
+			// so use it wisely.
+			return true;
+		}
+	}
     return false;
 };
 

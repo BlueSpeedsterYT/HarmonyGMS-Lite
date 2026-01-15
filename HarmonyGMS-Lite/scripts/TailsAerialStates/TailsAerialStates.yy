@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"TailsAerialStates",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TailsAerialStates",
+  "parent":{
+    "name":"Tails",
+    "path":"folders/Scripts/Player/States/Characters/Tails.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

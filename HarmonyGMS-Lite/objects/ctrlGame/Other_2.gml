@@ -80,7 +80,7 @@ enum PLAYER_ANIMATION
 	// Sonic-Only Animations
 	// TODO: Add them.
 	// Tails-Only Animations
-	// TODO: Add them.
+	FLYING, FLYING_TURN, FLYING_TIRED,
 	// Knuckles-Only Animations
 	GLIDE, GLIDE_TURN, GLIDE_SLIDING, GLIDE_FALL
 }

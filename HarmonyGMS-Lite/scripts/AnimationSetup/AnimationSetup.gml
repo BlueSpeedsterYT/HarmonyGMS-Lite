@@ -202,6 +202,12 @@ global.ani_tails_spring = [global.ani_tails_spring_v0, global.ani_tails_spring_v
 
 global.ani_tails_spring_twirl_v0 = new animation(sprTailsSpringTwirl, [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3], 11);
 
+global.ani_tails_flying_v0 = new animation(sprTailsFlying, 2, 0, [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 8, 9, 10, 7]);
+
+global.ani_tails_flying_turn_v0 = new animation(sprTailsFlyingTurn, 1, -1);
+
+global.ani_tails_flying_tired_v0 = new animation(sprTailsFlyingTired, [6, 3, 6, 6, 6, 6, 6, 6, 6, 6], 2);
+
 #endregion
 
 #region Knuckles

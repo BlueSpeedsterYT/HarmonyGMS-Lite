@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxKnucklesDrillClaw",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.317551,
+  "exportDir":"",
+  "name":"sfxKnucklesDrillClaw",
+  "parent":{
+    "name":"Per-Character",
+    "path":"folders/Audio/SFX/Player/Per-Character.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxKnucklesDrillClaw.wav",
+  "volume":1.0,
+}

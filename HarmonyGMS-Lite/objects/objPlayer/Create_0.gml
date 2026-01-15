@@ -1,0 +1,505 @@
+/// @description Initialize
+image_speed = 0;
+
+character_index = CHARACTER.NONE;
+player_index = -1;
+
+// State machine
+state = player_is_ready;
+state_previous = -1;
+state_changed = false;
+
+spin_dash_charge = 0;
+
+jump_cap = true;
+
+trick_index = TRICK_TYPE.FRONT;
+trick_speed = array_create(TRICK_TYPE.BACK + 1);
+for (var i = 0; i < array_length(trick_speed); i++)
+{
+    trick_speed[i] = array_create(2);
+}
+
+// Shield
+shield = SHIELD.NONE;
+
+// Timers
+state_time = 0;
+control_lock_time = 0;
+recovery_time = 0;
+invincibility_time = 0;
+superspeed_time = 0;
+rotation_lock_time = 0;
+camera_look_time = 0;
+
+// Physics
+x_speed = 0;
+y_speed = 0;
+
+player_refresh_physics();
+
+// Collision detection
+x_radius = 8;
+x_wall_radius = 10;
+
+y_radius = 15;
+y_tile_reach = 16;
+
+hitboxes[0] = new hitbox(c_maroon);
+hitboxes[1] = new hitbox(c_green);
+
+landed = false;
+on_ground = true;
+//ground_snap = true;
+
+direction = 0;
+gravity_direction = 0;
+local_direction = 0;
+mask_direction = 0;
+
+/* AUTHOR NOTE: "down" is treated as 0 degrees instead of 270. */
+
+cliff_sign = 0;
+
+collision_layer = 0;
+
+// Copy the stage's tilemaps
+tilemaps = variable_clone(ctrlZone.tilemaps, 0);
+tilemap_count = array_length(tilemaps);
+
+// Validate semisolid tilemap; if it exists, the tilemap count is even
+semisolid_tilemap = -1;
+if (tilemap_count & 1 == 0)
+{
+	semisolid_tilemap = array_last(tilemaps);
+	--tilemap_count;
+}
+
+// Discard the "CollisionPlane1" layer tilemap, if it exists
+if (tilemap_count == 3)
+{
+	array_delete(tilemaps, 2, 1);
+	--tilemap_count;
+}
+
+ground_id = noone;
+
+// Input
+input_allow = true;
+input_axis_x = 0;
+input_axis_y = 0;
+
+/// @method button(verb)
+/// @description Creates a new button.
+/// @param {Enum.INPUT_VERB} verb Verb to check.
+button = function(_verb) constructor
+{
+	verb = _verb;
+	check = false;
+	pressed = false;
+	released = false;
+};
+
+// NOTE: This button index follows the same order as Advance 2.
+input_button =
+{
+	jump : new button(INPUT_VERB.JUMP),
+	attack : new button(INPUT_VERB.ATTACK),
+	trick : new button(INPUT_VERB.TRICK),
+    start : new button(INPUT_VERB.START),
+    select : new button(INPUT_VERB.SELECT)
+};
+
+// Animation
+animation_data = new animation_core();
+//animation_history = array_create(16);
+
+// Stamps
+spin_dash_stamp = new stamp();
+shield_stamp = new stamp();
+
+// Camera
+camera = noone;
+
+// Misc.
+/// @method player_perform(action, [start])
+/// @description Sets the given function as the player's current state.
+/// @param {Function} action State function to set.
+/// @param {Boolean} [start] Start state function.
+player_perform = function (action, start = true)
+{
+	var reset = (argument_count > 1);
+	if (state != action or reset)
+	{
+		state_previous = state;
+		state = action;
+		state_changed = true;
+		if (script_exists(state_previous)) state_previous(PHASE.EXIT);
+		if (start)
+		{
+			if (script_exists(state)) state(PHASE.ENTER);
+		}
+	}
+};
+
+/// @method player_reset_input()
+/// @description Resets all player input.
+player_reset_input = function()
+{
+	input_axis_x = 0;
+	input_axis_y = 0;
+	
+	struct_foreach(input_button, function(name, value)
+	{
+		var verb = value.verb;
+		value.check = false;
+		value.pressed = false;
+		value.released = false;
+	});
+};
+
+/// @method player_try_jump()
+/// @description Sets the player's current state to jumping, if applicable.
+/// @returns {Bool}
+player_try_jump = function()
+{
+	if (input_button.jump.pressed)
+	{
+		player_perform(player_is_jumping);
+		animation_init(PLAYER_ANIMATION.JUMP);
+		sound_play(sfxJump);
+		return true;
+	}
+	return false;
+};
+
+/// @method player_try_roll()
+/// @description Sets the player's current state to rolling, if applicable.
+/// @returns {Bool}
+player_try_roll = function()
+{
+	if (input_axis_y == 1 and abs(x_speed) >= ROLL_THRESHOLD)
+	{
+		sound_play(sfxRoll);
+		player_perform(player_is_rolling);
+		animation_init(PLAYER_ANIMATION.ROLL);
+		return true;
+	}
+	return false;
+};
+
+/// @method player_try_trick([time])
+/// @desctiption Sets the player's current state to tricking, if applicable.
+/// @param [time] Time to check (optional, defaults to state_time).
+/// @returns {Bool}
+player_try_trick = function(time = state_time)
+{
+	if (time == 0 and input_button.trick.pressed)
+	{
+		trick_index = TRICK_TYPE.BACK;
+		if (input_axis_y == -1) trick_index = TRICK_TYPE.UP;
+		else if (input_axis_y == 1) trick_index = TRICK_TYPE.DOWN;
+		else if (input_axis_x == image_xscale) trick_index = TRICK_TYPE.FRONT;
+        player_gain_score(100);
+		if (not (object_index == objSonic and trick_index == TRICK_TYPE.DOWN))
+		{
+			var trick_claw = (object_index == objKnuckles and trick_index == TRICK_TYPE.DOWN);
+			sound_play(trick_claw ? sfxKnucklesDrillClaw : sfxDefaultTrick);
+		}
+		player_perform(player_is_trick_preparing);
+		return true;
+	}
+	return false;
+};
+
+/// @method player_rotate_mask()
+/// @description Rotates the player's collision mask along steep enough ground.
+player_rotate_mask = function ()
+{
+	if (rotation_lock_time > 0 and not landed)
+	{
+		--rotation_lock_time;
+		exit;
+	}
+	
+	var new_rotation = round(direction / 90) mod 4 * 90;
+	if (mask_direction != new_rotation)
+	{
+		mask_direction = new_rotation;
+		rotation_lock_time = (not landed) * max(16 - abs(x_speed * 2) div 1, 0);
+	}
+}
+
+/// @method player_resist_slope(force)
+/// @description Applies slope friction to the player's horizontal speed, if appropriate.
+/// @param {Real} force Friction value to use.
+player_resist_slope = function (force)
+{
+	// Abort if...
+	if (x_speed == 0 and control_lock_time <= 0) exit; // Not moving or sliding down
+	if (local_direction > 135 and local_direction < 225) exit; // Attached to a ceiling
+	if (local_direction < 22.5 or local_direction > 337.5) exit; // Moving on a shallow surface
+	
+	// Apply
+	x_speed -= dsin(local_direction) * force;
+};
+
+/// @method player_set_animation(ani, [ang])
+/// @description Sets the given animation within the player's animation core.
+/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
+/// @param {Real} [ang] Angle to set (optional, defaults to gravity_direction).
+player_set_animation = function(ani, ang = gravity_direction)
+{
+	animation_set(ani);
+	image_angle = ang;
+};
+
+/// @method player_set_radii(xrad, yrad)
+/// @description Sets the given radii as the player's virtual mask.
+/// @param {Real} xrad Horizontal radius to use.
+/// @param {Real} yrad Vertical radius to use.
+player_set_radii = function(xrad, yrad)
+{
+    // Abort if radii already match
+    if (x_radius == xrad and y_radius == yrad) exit;
+    
+    var old_x_radius = x_radius;
+    var old_y_radius = y_radius;
+    var sine = dsin(mask_direction);
+	var cosine = dcos(mask_direction);
+    x_radius = xrad;
+    x_wall_radius = x_radius + 2;
+    y_radius = yrad;
+    x += sine * (old_y_radius - y_radius);
+    y += cosine * (old_y_radius - y_radius);
+};
+
+/// @method player_animate_teeter(ani)
+/// @description Sets the given animation within the player's animation core based on teeter conditions.
+/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
+player_animate_teeter = function(ani)
+{
+	animation_data.variant = (cliff_sign != image_xscale);
+    player_set_animation(ani);
+};
+
+/// @method player_animate_run(ani)
+/// @description Sets the given animation within the player's animation core based on running conditions.
+/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
+/// @param {Real} [ang] Angle to set (optional, defaults to direction).
+player_animate_run = function(ani, ang = direction)
+{
+    var variant = animation_data.variant;
+    if (on_ground)
+    {
+    	var abs_speed = abs(x_speed);
+        variant = 5;
+    	if (abs_speed <= 1.25) variant = 0;
+	    else if (abs_speed <= 2.5) variant = 1;
+	    else if (abs_speed <= 4.0) variant = 2;
+	    else if (abs_speed <= 9.0) variant = 3;
+	    else if (abs_speed <= 10.0) variant = 4;
+    }
+    player_set_animation(ani, ang);
+    animation_data.variant = variant;
+    if (on_ground) animation_data.speed = clamp((abs(x_speed) / 3) + (abs(x_speed) / 4), 0.5, 8);
+};
+
+/// @method player_animate_fall(ani)
+/// @description Sets the given animation within the player's animation core based on falling conditions.
+/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
+player_animate_fall = function(ani)
+{
+	if (animation_data.variant == 0 and animation_is_finished()) animation_data.variant = 1;
+    player_set_animation(ani, rotate_towards(mask_direction, image_angle));
+};
+
+/// @method player_animate_jump(ani)
+/// @description Sets the given animation within the player's animation core based on jumping conditions.
+/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
+player_animate_jump = function(ani)
+{
+	switch (animation_data.variant)
+    {
+        case 0:
+        {
+            if (animation_is_finished()) animation_data.variant = 1;
+            break;
+        }
+        case 1:
+        {
+            if (y_speed > 0 and not is_undefined(player_find_floor(y_radius + 32))) animation_data.variant = 2;
+            break;
+        }
+    }
+    player_set_animation(ani);
+};
+
+/// @method player_animate_spring(ani)
+/// @description Sets the given animation within the player's animation core based on spring conditions.
+/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
+player_animate_spring = function(ani)
+{
+	switch (animation_data.variant)
+    {
+        case 0:
+        {
+            if (y_speed > 0) animation_data.variant = 1;
+            break;
+        }
+        case 1:
+        {
+            if (animation_is_finished()) animation_data.variant = 2;
+            break;
+        }
+    }
+    player_set_animation(ani);
+};
+
+/// @method player_gain_score(num)
+/// @description Increases the player's score count by the given amount.
+/// @param {Real} num Amount of points to give.
+player_gain_score = function (num)
+{
+	var previous_count = global.score_count div 50000;
+	global.score_count = min(global.score_count + num, SCORE_CAP);
+	
+	// Gain lives
+	var count = global.score_count div 50000;
+	if (count != previous_count) player_gain_lives(count - previous_count);
+};
+
+/// @method player_gain_rings(num)
+/// @description Increases the player's ring count by the given amount.
+/// @param {Real} num Amount of rings to give.
+player_gain_rings = function(num)
+{
+	global.ring_count = min(global.ring_count + num, RING_CAP);
+	
+	// Gain lives
+    static ring_life_threshold = 99;
+    if (global.ring_count > ring_life_threshold)
+    {
+        var change = global.ring_count div 100;
+        player_gain_lives(change - ring_life_threshold div 100);
+        ring_life_threshold = change * 100 + 99;
+    }
+};
+
+/// @method player_lose_rings()
+/// @description Creates up to 32 lost rings in circles of 16 at the player's position.
+player_lose_rings = function()
+{
+    var total = min(global.ring_count, 32);
+    var len = 4;
+    var dir = 101.25;
+    var flip = false;
+    
+    for (var ring = 0; ring < total; ring++)
+    {
+        if (ring == 16)
+        {
+            len = 2;
+            dir = 101.25;
+        }
+        
+        with (instance_create_layer(x div 1, y div 1, "General", objRing))
+        {
+            gravity_direction = other.gravity_direction;
+            x_speed = lengthdir_x(len, dir);
+            y_speed = lengthdir_y(len, dir);
+            lost = true;
+            if (flip)
+            {
+                x_speed *= -1;
+                dir += 22.5;
+            }
+        }
+        flip = !flip;
+    }
+    
+    global.ring_count = 0;
+    sound_play(sfxRingLoss);
+};
+
+/// @method player_gain_lives(num)
+/// @description Increases the player's life count by the given amount.
+/// @param {Real} num Amount of lives to give.
+player_gain_lives = function(num)
+{
+	if (LIVES_ENABLED)
+    {
+        global.life_count = min(global.life_count + num, LIVES_CAP);
+        //audio_play_life();
+    }
+};
+
+/// @method player_damage(inst)
+/// @description Evaluates the player's condition after taking a hit.
+/// Setting inst to the player's id will force a death, while setting it to noone will just hurt the player.
+/// @param {Id.Instance} inst Instance to check.
+player_damage = function(inst)
+{
+    // Abort if the player is already dead or hurt
+    if (state == player_is_dead or ((state == player_is_hurt or recovery_time > 0 or invincibility_time > 0) and inst != id)) exit;
+    
+    if (inst == id or (player_index == 0 and shield == SHIELD.NONE and global.ring_count == 0))
+    {
+        y_speed = -7;
+        sound_play(inst != noone and inst.object_index == objSpikes ? sfxSpikes : sfxDeath);
+        return player_perform(player_is_dead);
+    }
+    else
+    {
+    	var hurt_speed = -2;
+        var ring_loss = false;
+        animation_init(PLAYER_ANIMATION.HURT);
+        if (inst == noone or abs(x_speed) <= 2.5)
+        {
+            if (abs(x_speed) > 0.625) x_speed = sign(x_speed) * hurt_speed;
+            else x_speed = image_xscale * hurt_speed;
+            animation_data.variant = 0;
+        }
+        else
+        {
+            x_speed = sign(x_speed) * -hurt_speed;
+            animation_data.variant = 1;
+        }
+        y_speed = -4;
+        if (player_index == 0)
+        {
+            if (shield != SHIELD.NONE)
+            {
+                shield = SHIELD.NONE;
+            }
+            else
+            {
+                ring_loss = true;
+                player_lose_rings();
+            }
+        }
+        //if (not ring_loss) sound_play(inst != noone and inst.object_index == objSpikes ? sfxSpikes : sfxHurt);
+        return player_perform(player_is_hurt);
+    }
+};
+
+/// @method player_try_skill()
+/// @description Checks if the player performs a character skill.
+/// @returns {Bool}
+player_try_skill = function () { return false; };
+
+/// @method player_refresh_aerial_skills()
+/// @description Resets aerial character skills when grounded.
+player_refresh_aerial_skills = function() {};
+
+/// @method player_animate()
+/// @description Sets the player's current animation.
+player_animate = function() {};
+
+/// @method player_draw_before()
+/// @description Draws player effects behind the character sprite.
+player_draw_before = function() {};
+
+/// @method player_draw_after()
+/// @description Draws player effects in front of the character sprite.
+player_draw_after = function() {};

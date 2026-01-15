@@ -1,0 +1,132 @@
+/// @description Behave
+if (ctrlGame.game_paused) exit;
+
+if (input_allow)
+{
+	if (player_index == 0)
+	{
+		input_axis_x = InputOpposing(INPUT_VERB.LEFT, INPUT_VERB.RIGHT);
+		input_axis_y = InputOpposing(INPUT_VERB.UP, INPUT_VERB.DOWN);
+    
+		struct_foreach(input_button, function(name, value)
+		{
+		    var verb = value.verb;
+		    value.check = InputCheck(verb);
+		    value.pressed = InputPressed(verb);
+		    value.released = InputReleased(verb);
+		});
+	};
+};
+
+if (script_exists(state)) 
+{
+    state(PHASE.STEP);
+    if (state_changed) state_changed = false;
+}
+
+player_animate();
+
+x_speed = clamp(x_speed, -9, 9);
+
+with (spin_dash_stamp)
+{
+    var action = other.state;
+    if (action == player_is_spin_dashing)
+    {
+        var x_int = other.x div 1;
+        var y_int = other.y div 1;
+        var sine = dsin(other.gravity_direction);
+        var cosine = dcos(other.gravity_direction);
+        var charge = floor(other.spin_dash_charge);
+        x = x_int + sine * other.y_radius;
+        y = y_int + cosine * other.y_radius;
+        image_xscale = other.image_xscale;
+        image_angle = other.mask_direction;
+        animation_data.variant = (charge > 2);
+        animation_set(global.ani_spin_dash_dust);
+    }
+    else if (not is_undefined(animation_data.ani))
+    {
+        animation_set(undefined);
+    }
+}
+
+with (shield_stamp)
+{
+    var shield = other.shield;
+    var invincible = (other.invincibility_time > 0);
+    if (shield != SHIELD.NONE or invincible)
+    {
+        var x_int = other.x div 1;
+        var y_int = other.y div 1;
+        var sine = dsin(other.gravity_direction);
+        var cosine = dcos(other.gravity_direction);
+        x = x_int;
+        y = y_int;
+        
+        var shield_advance = (shield == SHIELD.BASIC or shield == SHIELD.MAGNETIC or invincible);
+        animation_init(invincible ? -1 : shield);
+        switch (animation_data.index)
+        {
+            case -1:
+            {
+                animation_set(global.ani_shield_invincibility_v0);
+                if (animation_data.time mod 8 == 0)
+                {
+                    var x_off = irandom_range(-16, 16);
+                    var y_off = irandom_range(-16, 16);
+                    particle_create(x + x_off, y + y_off, global.ani_shield_invincibility_sparkle_v0);
+                }
+                break;
+            }
+            case SHIELD.BASIC:
+            {
+                animation_set(global.ani_shield_basic_v0);
+                break;
+            }
+            case SHIELD.MAGNETIC:
+            {
+                animation_set(global.ani_shield_magnetic_v0);
+                break;
+            }
+        }
+        
+        // Visible
+        visible = (shield_advance) ? animation_data.time mod 4 < 2 : true;
+        
+        image_xscale = 1;
+        image_angle = other.gravity_direction;
+        image_alpha = 1;
+    }
+    else if (not is_undefined(animation_data.ani))
+    {
+        animation_set(undefined);
+    }
+}
+
+with (camera)
+{
+	var action = other.state;
+	
+	if (action == player_is_dead) exit;
+	// Direct camera
+	x = other.x div 1;
+	y = other.y div 1;
+	gravity_direction = other.gravity_direction;
+	on_ground = other.on_ground;
+
+	// Reset camera panning
+	if (panning_oy != 0)
+	{
+		if ((action != player_is_looking and action != player_is_crouching) or other.camera_look_time > 0)
+		{
+			panning_oy -= 2 * sign(panning_oy);
+		}
+	}
+	
+	// Camera padding
+	if (on_ground) y -= dcos(other.mask_direction) * (PLAYER_HEIGHT - other.y_radius);
+	
+	// Camera movement
+	event_user(0);
+}

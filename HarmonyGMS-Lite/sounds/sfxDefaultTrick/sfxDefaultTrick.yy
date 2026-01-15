@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.6249887,
+  "duration":0.70371884,
   "exportDir":"",
   "name":"sfxDefaultTrick",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxDefaultTrick.wav",
+  "soundFile":"sfxDefaultTrick.ogg",
   "volume":1.0,
 }

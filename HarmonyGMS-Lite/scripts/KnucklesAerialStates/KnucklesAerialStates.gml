@@ -61,6 +61,13 @@ function knuckles_is_gliding(phase)
 		    // Accelerate
 			x_speed = glide_speed * dcos(glide_angle);
 			
+			// Attach to a wall and climb
+			// NOTE: Might tackle this later as it does impact the gliding state
+			//if (player_ray_collision(tilemaps, x_wall_radius * glide_direction, 0) != noone)
+			//{
+				//return player_perform(knuckles_is_climbing);
+			//}
+			
 			// Move
 			player_move_in_air();
 			if (state_changed) exit;
@@ -68,6 +75,7 @@ function knuckles_is_gliding(phase)
 			// Land
 			if (on_ground) 
 			{
+				if (x_speed != 0) image_xscale = sign(x_speed);
 				if (local_direction >= 45 and local_direction <= 315)
 				{
 					control_lock_time = SLIDE_DURATION;
@@ -90,18 +98,20 @@ function knuckles_is_gliding(phase)
 		    if (abs(oy) > 0) 
 			{
 		        y_speed += min(abs(oy), 0.125) * sign(oy);
-		    }
-
-			// Attach to a wall and climb
-			// NOTE: IT DOES NOT WORK I HATE SONIC FOR GMS
-			var hit_wall = player_beam_collision(tilemaps, x_wall_radius * glide_direction);
-			if (hit_wall != noone)
-			{
-				return player_perform(knuckles_is_climbing);
 			}
-
-		    // Reset direction
-			if (x_speed != 0) image_xscale = sign(x_speed);
+			
+			// Animate
+			var glide_angle_sa2 = (glide_angle / 1.40625);
+			image_xscale = (glide_angle_sa2 == 0x80) ? -1 : 1;
+			if (not (glide_angle_sa2 & 0x7F))
+			{
+				animation_init(PLAYER_ANIMATION.GLIDE);
+			}
+			else
+			{
+				var glide_turn_sa2_calc = (glide_angle_sa2 & 0x7F) >> 5;
+				animation_init(PLAYER_ANIMATION.GLIDE_TURN, glide_turn_sa2_calc);
+			}
 			break;
 		}
 		case PHASE.EXIT:
@@ -129,7 +139,7 @@ function knuckles_is_falling(phase)
 			x_speed *= 0.25;
 			
 			// Animate
-			// TODO: Animation
+			animation_init(PLAYER_ANIMATION.GLIDE_FALL, 0);
 			break;
 		}
 		case PHASE.STEP:

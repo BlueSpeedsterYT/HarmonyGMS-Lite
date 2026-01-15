@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.41666666,
+  "duration":0.43392292,
   "exportDir":"",
   "name":"sfxBrake",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxBrake.wav",
+  "soundFile":"sfxBrake.ogg",
   "volume":1.0,
 }

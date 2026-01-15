@@ -456,13 +456,106 @@ player_animate = function()
 		case PLAYER_ANIMATION.GLIDE:
 		{
 			player_set_animation(global.ani_knuckles_glide_v0);
-			player_set_radii(6, 14);
+			player_set_radii(6, 6);
 			if (image_index == 0)
             {
-                hitboxes[0].set_size(-10, -7, 10, 5);
-                hitboxes[1].set_size(4, -11, 19, 8);
+                hitboxes[0].set_size(-16, -8, 6, 6);
+                hitboxes[1].set_size(-2, -12, 15, 9);
             }
 			break;
 		}
+		case PLAYER_ANIMATION.GLIDE_TURN:
+		{
+			player_set_animation(global.ani_knuckles_glide_turn);
+			player_set_radii(6, 6);
+			switch (animation_data.variant)
+			{
+				case 0:
+				{
+					if (image_index == 0)
+		            {
+		                hitboxes[0].set_size(-6, -8, 16, 6);
+		                hitboxes[1].set_size(-2, -12, 12, 9);
+		            }
+					break;
+				}
+				case 1:
+				{
+					if (image_index == 0)
+		            {
+		                hitboxes[0].set_size(-10, -8, 12, 6);
+						hitboxes[1].set_size(2, -12, 16, 9);
+		            }
+					break;
+				}
+				case 2:
+				{
+					if (image_index == 0)
+		            {
+		                hitboxes[0].set_size(-14, -8, 8, 6);
+		                hitboxes[1].set_size(-16, -12, -2, 9);
+		            }
+					break;
+				}
+				case 3:
+				{
+					if (image_index == 0)
+		            {
+		                hitboxes[0].set_size(-18, -8, 4, 6);
+		                hitboxes[1].set_size(-12, -12, 2, 9);
+		            }
+					break;
+				}
+			}
+			break;
+		}
+		case PLAYER_ANIMATION.GLIDE_SLIDING:
+		{
+			player_set_animation(global.ani_knuckles_glide_sliding_v0);
+			player_set_radii(6, 6);
+			if (image_index == 0)
+            {
+                hitboxes[0].set_size(-19, -6, 5, 7);
+                hitboxes[1].set_size(-2, -10, 11, 10);
+            }
+			break;
+		}
+		case PLAYER_ANIMATION.GLIDE_FALL:
+        {
+            player_set_animation(global.ani_knuckles_glide_falling);
+            player_set_radii(6, 14);
+            switch (animation_data.variant)
+            {
+                case 0:
+                {
+                    if (image_index == 0)
+                    {
+                        hitboxes[0].set_size(-6, -16, 6, 14);
+                        hitboxes[1].set_size();
+                    }
+                    break;
+                }
+                case 1:
+                {
+                    switch (image_index)
+                    {
+                        case 0:
+                        {
+                            hitboxes[0].set_size(-6, -16, 6, 14);
+                            hitboxes[1].set_size();
+                            break;
+                        }
+                        case 2:
+                        {
+                            hitboxes[0].set_size(-6, -6, 6, 16);
+                            hitboxes[1].set_size();
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            break;
+        }
     }
 };

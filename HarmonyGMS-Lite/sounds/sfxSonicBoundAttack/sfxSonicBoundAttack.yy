@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.6891837,
+  "duration":1.0693878,
   "exportDir":"",
   "name":"sfxSonicBoundAttack",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxSonicBoundAttack.wav",
+  "soundFile":"sfxSonicBoundAttack.ogg",
   "volume":1.0,
 }

@@ -25,7 +25,7 @@ function knuckles_is_climbing(phase)
 			}
 			
 			// Climb
-			y_speed = 1 * input_axis_y;
+			y_speed = knuckles_climb_speed * input_axis_y;
 			
 			// Move
 			player_move_in_air();

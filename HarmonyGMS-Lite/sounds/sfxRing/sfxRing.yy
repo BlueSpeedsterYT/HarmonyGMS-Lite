@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.8,
+  "duration":0.74573696,
   "exportDir":"",
   "name":"sfxRing",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxRing.wav",
+  "soundFile":"sfxRing.ogg",
   "volume":1.0,
 }

@@ -71,12 +71,18 @@ enum PHASE
 
 enum PLAYER_ANIMATION
 {
+	// Shared Animations
 	IDLE, TEETER, TURN, RUN, BRAKE, LOOK, CROUCH,
 	ROLL, SPIN_DASH, FALL, JUMP,
 	HURT, DEAD, 
 	TRICK_UP, TRICK_DOWN, TRICK_FRONT, TRICK_BACK, 
 	SPRING, SPRING_TWIRL,
-	GLIDE, GLIDE_TURN
+	// Sonic-Only Animations
+	// TODO: Add them.
+	// Tails-Only Animations
+	// TODO: Add them.
+	// Knuckles-Only Animations
+	GLIDE, GLIDE_TURN, GLIDE_SLIDING, GLIDE_FALL
 }
 
 enum TRICK_TYPE

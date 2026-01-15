@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":2.4,
+  "duration":1.5045352,
   "exportDir":"",
   "name":"sfxRingLoss",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxRingLoss.wav",
+  "soundFile":"sfxRingLoss.ogg",
   "volume":1.0,
 }

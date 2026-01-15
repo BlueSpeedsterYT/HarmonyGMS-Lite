@@ -126,6 +126,9 @@ function player_refresh_physics()
 	// Character values
 	sonic_bound_force = 0.21875;
 	sonic_bound_height = 6;
+	knuckles_glide_acceleration = 0.015625;
+	knuckles_glide_slide_friction = 0.125;
+	knuckles_climb_speed = 1;
 	
 	// Superspeed modification
 	if (superspeed_time > 0)

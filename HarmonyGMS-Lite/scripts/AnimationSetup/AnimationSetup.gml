@@ -284,4 +284,16 @@ global.ani_knuckles_spring_twirl_v0 = new animation(sprKnucklesSpringTwirl, [4, 
 
 global.ani_knuckles_glide_v0 = new animation(sprKnucklesGlide, 3);
 
+global.ani_knuckles_glide_turn_v0 = new animation(sprKnucklesGlideTurn0, 1);
+global.ani_knuckles_glide_turn_v1 = new animation(sprKnucklesGlideTurn1, 1);
+global.ani_knuckles_glide_turn_v2 = new animation(sprKnucklesGlideTurn2, 1);
+global.ani_knuckles_glide_turn_v3 = new animation(sprKnucklesGlideTurn3, 1);
+global.ani_knuckles_glide_turn = [global.ani_knuckles_glide_turn_v0, global.ani_knuckles_glide_turn_v1, global.ani_knuckles_glide_turn_v2, global.ani_knuckles_glide_turn_v3]
+
+global.ani_knuckles_glide_sliding_v0 = new animation(sprKnucklesGlideSliding, 2);
+
+global.ani_knuckles_glide_falling_v0 = new animation(sprKnucklesGlideFalling0, 3, 4);
+global.ani_knuckles_glide_falling_v1 = new animation(sprKnucklesGlideFalling1, 1, -1);
+global.ani_knuckles_glide_falling = [global.ani_knuckles_glide_falling_v0, global.ani_knuckles_glide_falling_v1];
+
 #endregion

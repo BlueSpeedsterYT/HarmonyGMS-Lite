@@ -52,13 +52,11 @@ function player_ground(height)
 		var offset = y_radius - height + 1;
 		x -= dsin(mask_direction) * offset;
 		y -= dcos(mask_direction) * offset;
-		
 		player_detect_angle();
 	}
 	else
 	{
 		on_ground = false;
-		objCamera.on_ground = false;
 		mask_direction = gravity_direction;
 	}
 }
@@ -100,6 +98,87 @@ function player_detect_angle()
 	}
 	else direction = mask_direction;
 	local_direction = angle_wrap(direction - gravity_direction);
+}
+
+/// @description Keeps the player within the camera boundary.
+/// @returns {Bool} Whether or not the player has fallen below the boundary relative to their rotation.
+function player_in_camera_bounds()
+{
+	// Check if already inside (early out)
+	if (gravity_direction mod 180 == 0)
+	{
+		var x1 = x - x_radius;
+		var y1 = y - y_radius;
+		var x2 = x + x_radius;
+		var y2 = y + y_radius;
+	}
+	else
+	{
+		var x1 = x - y_radius;
+		var y1 = y - x_radius;
+		var x2 = x + y_radius;
+		var y2 = y + x_radius;
+	}
+	
+	with (objCamera)
+	{
+		var left = bound_left;
+		var top = bound_top;
+		var right = bound_right;
+		var bottom = bound_bottom;
+	}
+	
+	if (rectangle_in_rectangle(x1, y1, x2, y2, left, top, right, bottom) == 1)
+	{
+		return true;
+	}
+	
+	// Reposition
+	if (gravity_direction mod 180 == 0)
+	{
+		if (x1 < left)
+		{
+			x = left + x_radius;
+			x_speed = 0;
+		}
+		else if (x2 > right)
+		{
+			x = right - x_radius;
+			x_speed = 0;
+		}
+		else if (y1 > bottom and gravity_direction == 0)
+		{
+			y = bottom + y_radius;
+			return false;
+		}
+		else if (y2 < top and gravity_direction == 180)
+		{
+			y = top - y_radius;
+			return false;
+		}
+	}
+	else if (y1 < top)
+	{
+		y = top + x_radius;
+		x_speed = 0;
+	}
+	else if (y2 > bottom)
+	{
+		y = bottom - x_radius;
+		x_speed = 0;
+	}
+	else if (x1 > right and gravity_direction == 90)
+	{
+		x = right + y_radius;
+		return false;
+	}
+	else if (x2 < left and gravity_direction == 270)
+	{
+		x = left - y_radius;
+		return false;
+	}
+	
+	return true;
 }
 
 /// @description Resets the player's physics variables back to their default values, applying any modifiers afterward.

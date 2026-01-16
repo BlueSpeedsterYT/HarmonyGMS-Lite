@@ -59,3 +59,52 @@ function player_is_sprung(phase)
 		}
 	}
 }
+
+/// @function player_is_corkscrewing(phase)
+function player_is_corkscrewing(phase)
+{
+	switch (phase)
+	{
+		case PHASE.ENTER:
+		{
+			// Detach from ground
+			player_ground(undefined);
+            
+            // Animate 
+			animation_init(PLAYER_ANIMATION.SPRING_TWIRL, 0, [PLAYER_ANIMATION.ROLL]);
+            break;
+		}
+		case PHASE.STEP:
+		{
+			// Accelerate
+			if (input_axis_x != 0)
+			{
+				image_xscale = input_axis_x;
+				if (abs(x_speed) < speed_cap or sign(x_speed) != input_axis_x)
+				{
+					x_speed += acceleration * input_axis_x;
+					if (abs(x_speed) > speed_cap and sign(x_speed) == input_axis_x)
+					{
+						x_speed = speed_cap * input_axis_x;
+					}
+				}
+			}
+			else
+			{
+				if (abs(x_speed) > 0)
+				{
+					x_speed += deceleration * input_axis_x;
+				}
+				else
+				{
+					return player_perform(player_is_falling);
+				}
+			}
+			break;
+		}
+		case PHASE.EXIT:
+		{
+			break;
+		}
+	}
+}

@@ -7,7 +7,7 @@
 #macro CAMERA_HEIGHT 224
 #macro CAMERA_WIDTH_CENTER (CAMERA_WIDTH / 2)
 #macro CAMERA_HEIGHT_CENTER (CAMERA_HEIGHT / 2)
-#macro CAMERA_X_BORDER 8
+#macro CAMERA_X_BORDER 0
 #macro CAMERA_Y_BORDER 32
 #macro CAMERA_X_OFFSET (CAMERA_X_BORDER / 2)
 #macro CAMERA_Y_OFFSET (CAMERA_Y_BORDER / 2)
@@ -27,7 +27,7 @@
 #macro COLL_FLAG_LEFT 0x40000
 #macro COLL_FLAG_RIGHT 0x80000
 
-#macro LIVES_ENABLED false
+#macro LIVES_ENABLED (ctrlGame.game_mode == GAME_MODE.SINGLE)
 
 #macro SLIDE_DURATION 32
 #macro RECOVERY_DURATION time_to_frames(0, 2)
@@ -70,6 +70,28 @@
 #macro RING_CAP 999
 #macro LIVES_CAP 999 
 
+enum GAME_FLAG
+{
+	NONE = (1 << 0),
+	KEEP_CHARACTERS = (1 << 1),
+	KEEP_SCORE = (1 << 2),
+	HIDE_PAUSE_MENU = (1 << 3),
+	HIDE_HUD = (1 << 4),
+}
+
+enum PAUSE_FLAG
+{
+	NONE = (1 << 0),
+	TEXT = (1 << 1),
+	TRANSITION = (1 << 2),
+	MENU = (1 << 3),
+}
+
+enum GAME_MODE
+{
+	SINGLE, MULTI, TIME_ATTACK
+}
+
 enum CHARACTER
 {
 	NONE = -1, SONIC, TAILS, KNUCKLES
@@ -94,12 +116,13 @@ enum PLAYER_ANIMATION
 	TRICK_UP, TRICK_DOWN, TRICK_FRONT, TRICK_BACK, 
 	SPRING, SPRING_TWIRL,
 	// Sonic-Only Animations
-	INSTA_SHIELD, SKIDDING,
+	INSTA_SHIELD, FORWARD_THRUST, SKIDDING,
 	// Tails-Only Animations
-	FLYING, FLYING_TURN, FLYING_TIRED,
+	TAIL_SWIPE, FLYING, FLYING_TURN, FLYING_TIRED,
 	// Knuckles-Only Animations
 	GLIDE, GLIDE_TURN, GLIDE_SLIDING, GLIDE_FALL,
-	CLIMB_ATTACH, CLIMB // <-- This includes the idle, movement, lifting upwards and landing animations
+	CLIMB_ATTACH, CLIMB, // <-- This includes the idle, movement, lifting upwards and landing animations
+	SPIRAL_ATTACK
 }
 
 enum TRICK_TYPE

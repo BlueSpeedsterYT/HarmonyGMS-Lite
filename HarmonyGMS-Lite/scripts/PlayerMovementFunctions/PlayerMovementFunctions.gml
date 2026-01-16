@@ -28,11 +28,8 @@ function player_move_on_ground()
 		var hit_wall = player_beam_collision(tilemaps);
 		if (hit_wall != noone)
 		{
-			// Eject from wall
-			var wall_sign = player_wall_eject(hit_wall);
-			
 			// Stop if moving towards wall
-			if (sign(x_speed) == wall_sign)
+			if (sign(x_speed) == player_wall_eject(hit_wall))
 			{
 				x_speed = 0;
 			}
@@ -50,9 +47,7 @@ function player_move_on_ground()
 			}
 			else
 			{
-				//var hit_floor = player_find_floor(y_radius + (ground_snap ? y_tile_reach : 1));
 				var hit_floor = player_find_floor(y_radius + min(2 + abs(x_speed) div 1, y_tile_reach));
-				//var hit_floor = player_find_floor(y_radius * 2);
 				if (hit_floor != undefined)
 				{
 					// Get floor data
@@ -89,11 +84,8 @@ function player_move_in_air()
 		var hit_wall = player_beam_collision(tilemaps);
 		if (hit_wall != noone)
 		{
-			// Eject from wall
-			var wall_sign = player_wall_eject(hit_wall);
-			
 			// Stop if moving towards wall
-			if (sign(x_speed) == wall_sign) x_speed = 0;
+			if (sign(x_speed) == player_wall_eject(hit_wall)) x_speed = 0;
 		}
 	}
 	
@@ -178,10 +170,8 @@ function player_move_in_air()
 			    if (local_direction < 45 or local_direction > 315) x_speed *= 0.5;
 			}
 			
-			// Stop falling
+			// Stop falling, set flags and exit loop
 			y_speed = 0;
-			
-			// Set flags and exit loop
 			landed = false;
 			on_ground = true;
 			player_refresh_aerial_skills();

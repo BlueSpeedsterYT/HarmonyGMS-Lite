@@ -103,6 +103,7 @@ function sonic_is_skidding(phase)
 		}
 		case PHASE.EXIT:
 		{
+			state_time = 0;
 			break;
 		}
 	}

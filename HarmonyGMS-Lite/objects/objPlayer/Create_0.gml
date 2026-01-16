@@ -430,7 +430,7 @@ player_gain_lives = function(num)
 	if (LIVES_ENABLED)
     {
         global.life_count = min(global.life_count + num, LIVES_CAP);
-        //audio_play_life();
+        //music_overlay(bgmLife);
     }
 };
 

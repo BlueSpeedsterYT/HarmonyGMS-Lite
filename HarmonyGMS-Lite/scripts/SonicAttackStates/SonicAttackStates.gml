@@ -5,7 +5,7 @@ function sonic_is_skidding(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Set speed
+			// Set variables
 			x_speed = 3 * image_xscale;
 			
 			// Play sound
@@ -52,6 +52,7 @@ function sonic_is_skidding(phase)
 							animation_data.variant++;
 							sound_play(sfxSliding);
 							x_speed = 4 * image_xscale;
+							state_time = 33;
 							break;
 						}
 						
@@ -65,53 +66,36 @@ function sonic_is_skidding(phase)
 			}
 			else
 			{
-				// Move
-				player_move_in_air();
-				if (state_changed) exit;
-				
-				// Land
-				if (on_ground) return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
-				
-				// Fall
-				if (y_speed < gravity_cap)
-				{
-					y_speed = min(y_speed + gravity_force, gravity_cap);
-				}
-				
 				// We're not in the ground doing the animation so
 				// reset to the falling state immediately.
-				if (animation_data.index == PLAYER_ANIMATION.SKIDDING and animation_is_finished())
-				{
-					animation_init(PLAYER_ANIMATION.ROLL);
-					return player_perform(player_is_falling);
-				}
+				animation_init(PLAYER_ANIMATION.ROLL);
+				return player_perform(player_is_falling);
 			}
 			
 			// Do Skidding related stuff...
 			if (animation_data.index == PLAYER_ANIMATION.SKIDDING and animation_data.variant == 1)
 			{
 				// Create brake dust
-				if (on_ground and animation_data.time mod 4 == 0)
+				if (animation_data.time mod 4 == 0)
 				{
+					if (not on_ground) exit;
 					var ox = x + dsin(direction) * y_radius;
 					var oy = y + dcos(direction) * y_radius;
 					particle_create(ox, oy, global.ani_brake_dust_v0);
 				}
-				else
+				
+				// Finish off the skidding
+				if (state_time-- == 0)
 				{
-					// Finish off the skidding
-					if (animation_data.time > 32)
+					if (on_ground)
 					{
-						if (on_ground)
-						{
-							animation_data.variant++;
-						}
-						else
-						{
-							player_ground(undefined);
-							animation_init(PLAYER_ANIMATION.ROLL);
-							return player_perform(player_is_falling);
-						}
+						animation_data.variant++;
+					}
+					else
+					{
+						player_ground(undefined);
+						animation_init(PLAYER_ANIMATION.ROLL);
+						return player_perform(player_is_falling);
 					}
 				}
 			}

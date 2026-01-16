@@ -15,6 +15,6 @@ player_data += $"Spin Dash Charge: {spin_dash_charge}\n\n";
 player_data += $"Step: {ctrlGame.game_time}\n\n";
 player_data += $"Layer: {collision_layer}";
 
-//draw_text_transformed(CAMERA_WIDTH - 16, 9, player_data, 0.7, 0.7, 0);
+draw_text_transformed(CAMERA_WIDTH - 16, 9, player_data, 0.7, 0.7, 0);
 
 draw_set_halign(fa_left);

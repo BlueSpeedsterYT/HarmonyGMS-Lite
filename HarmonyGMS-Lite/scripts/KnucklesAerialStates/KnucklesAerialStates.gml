@@ -51,7 +51,7 @@ function knuckles_is_gliding(phase)
 			{
 		        if (glide_speed < 16)
 				{
-					glide_speed = min(glide_speed + 0.015625, 16);
+					glide_speed = min(glide_speed + KNUCKLES_GLIDE_ACCELERATION, 16);
 				}
 		    }
 
@@ -101,6 +101,9 @@ function knuckles_is_gliding(phase)
 			}
 			
 			// Animate
+			// NOTE: If you're ever going to tackle an Advance 2 Knuckles please do better than what
+			// I have done here, it would be wise if you understood how to make this stuff work
+			// without needing to do all of this.
 			var glide_angle_sa2 = (glide_angle / 1.40625);
 			image_xscale = (glide_angle_sa2 == 0x80) ? -1 : 1;
 			if (not (glide_angle_sa2 & 0x7F))

@@ -25,7 +25,10 @@ function knuckles_is_climbing(phase)
 			}
 			
 			// Climb
-			y_speed = knuckles_climb_speed * input_axis_y;
+			if (input_axis_y != 0)
+			{
+				y_speed = KNUCKLES_CLIMB_SPEED * input_axis_y;
+			}
 			
 			// Move
 			player_move_in_air();

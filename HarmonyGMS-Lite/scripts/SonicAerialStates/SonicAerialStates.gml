@@ -70,7 +70,7 @@ function player_is_bounding(phase)
 			// Fall
 			if (y_speed < gravity_cap)
 			{
-				y_speed = min(y_speed + sonic_bound_force, gravity_cap);
+				y_speed = min(y_speed + SONIC_BOUND_FORCE, gravity_cap);
 			}
 			
 			// Create bound effect
@@ -97,8 +97,8 @@ function player_is_rebounding(phase)
 			// Rebound
 			var sine = dsin(local_direction);
 			var cosine = dcos(local_direction);
-			y_speed = -cosine * sonic_bound_height;
-			x_speed = -sine * sonic_bound_height / 2;
+			y_speed = -cosine * SONIC_BOUND_HEIGHT;
+			x_speed = -sine * SONIC_BOUND_HEIGHT / 2;
 			
 			// Detach from ground
 			player_ground(undefined);
@@ -122,7 +122,7 @@ function player_is_rebounding(phase)
 			// Fall
 			if (y_speed < gravity_cap)
 			{
-				y_speed = min(y_speed + sonic_bound_force, gravity_cap);
+				y_speed = min(y_speed + SONIC_BOUND_FORCE, gravity_cap);
 			}
 			
 			if (y_speed > 0)

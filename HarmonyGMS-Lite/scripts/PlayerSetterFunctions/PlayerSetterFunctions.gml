@@ -120,19 +120,6 @@ function player_refresh_physics()
 	jump_height = 6.5;
 	jump_release = 4;
 	
-	// Trick values
-	trick_bound_height = 6;
-	
-	// Character values
-	sonic_bound_force = 0.21875;
-	sonic_bound_height = 6;
-	tails_fly_base_force = 0.03125;
-	tails_fly_ascend_force = 0.125;
-	tails_fly_threshold = -1;
-	knuckles_glide_acceleration = 0.015625;
-	knuckles_glide_slide_friction = 0.125;
-	knuckles_climb_speed = 1;
-	
 	// Superspeed modification
 	if (superspeed_time > 0)
 	{

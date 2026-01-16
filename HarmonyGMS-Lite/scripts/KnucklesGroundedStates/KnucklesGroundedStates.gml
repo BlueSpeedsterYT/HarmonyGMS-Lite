@@ -74,7 +74,7 @@ function knuckles_is_sliding(phase)
 			if (player_try_jump()) return true;
 
 		    // Friction
-			x_speed -= min(abs(x_speed), knuckles_glide_slide_friction) * sign(x_speed);
+			x_speed -= min(abs(x_speed), KNUCKLES_GLIDE_SLIDE_FRICTION) * sign(x_speed);
 			
 			// Move
 			player_move_on_ground();

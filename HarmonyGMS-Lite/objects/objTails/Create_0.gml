@@ -5,7 +5,7 @@ event_inherited();
 character_index = CHARACTER.TAILS;
 
 fly_time = -1;
-fly_force = tails_fly_base_force;
+fly_force = TAILS_FLY_BASE_FORCE;
 fly_sound = noone;
 
 trick_speed =
@@ -31,7 +31,7 @@ player_try_skill = function()
 			// Like Sonic 3, he can go to higher bounds never expected.
 			// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
 			// the Advance games.
-			fly_time = time_to_frames(0, 8);
+			fly_time = TAILS_FLIGHT_DURATION;
 			player_perform(tails_is_flying);
 			return true;
         }

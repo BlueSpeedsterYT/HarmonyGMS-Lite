@@ -13,7 +13,7 @@ function tails_is_flying(phase)
 			player_ground(undefined);
 			
 			// Give base flight force
-			fly_force = tails_fly_base_force;
+			fly_force = TAILS_FLY_BASE_FORCE;
 			
 			// Animate
 			animation_init(PLAYER_ANIMATION.FLYING);
@@ -22,9 +22,9 @@ function tails_is_flying(phase)
 		case PHASE.STEP:
 		{
 			// Fly Upwards
-			if (input_button.jump.pressed and fly_time and y_speed >= tails_fly_threshold)
+			if (input_button.jump.pressed and fly_time and y_speed >= TAILS_FLY_THRESHOLD)
 			{
-				fly_force = -tails_fly_ascend_force;
+				fly_force = -TAILS_FLY_ASCEND_FORCE;
 			}
 			
 			// Accelerate
@@ -61,9 +61,9 @@ function tails_is_flying(phase)
 			}
 			
 			// Cap out if the Y speed is over the threshold
-			if (y_speed < tails_fly_threshold)
+			if (y_speed < TAILS_FLY_THRESHOLD)
 			{
-				fly_force = tails_fly_base_force;
+				fly_force = TAILS_FLY_BASE_FORCE;
 			}
 			
 			// Change animations accordingly depending on the current flight time remaining

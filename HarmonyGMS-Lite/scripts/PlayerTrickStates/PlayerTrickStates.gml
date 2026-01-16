@@ -131,9 +131,6 @@ function player_is_tricking(phase)
                 return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
             }
 			
-			// Skill
-			if (player_try_skill()) exit;
-			
 			if (not trick_glide)
 			{
 				// Apply air resistance

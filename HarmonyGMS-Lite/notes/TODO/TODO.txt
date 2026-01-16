@@ -1,4 +1,4 @@
-> Implement Boost Mode (Either port Cluster 8.2 version, ait for Cluster MarkII or port from SA2 itself)
+> Implement Boost Mode (Either port Cluster 8.2 version, wait for Cluster MarkII or port from SA2 itself)
 > Finish up Knuckles (Add his ground attack skills and climbing)
 > Finish up Tails (Add his Tail Swipe)
 > Finish up Sonic (Add his Insta-Shield, Homing Attack and Foward Thrust)

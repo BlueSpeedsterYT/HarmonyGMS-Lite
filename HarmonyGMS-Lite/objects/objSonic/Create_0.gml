@@ -38,6 +38,7 @@ player_try_skill = function()
 			// Sonic's skid attack is simple and effective, however
 			// it gets supercharged while in boost mode, the skys the limit with this power.
 			// so use it wisely.
+			player_perform(sonic_is_skidding);
 			return true;
 		}
 	}
@@ -380,5 +381,51 @@ player_animate = function()
             }
             break;
         }
+		case PLAYER_ANIMATION.SKIDDING:
+		{
+			player_set_animation(global.ani_sonic_skidding);
+			player_set_radii(6, 9);
+			switch (animation_data.variant)
+			{
+				case 0:
+				{
+					switch (image_index)
+                    {
+                        case 0:
+                        {
+                            hitboxes[0].set_size(-6, -6, 6, 16);
+                            hitboxes[1].set_size();
+                            break;
+                        }
+                        case 1:
+                        {
+                            hitboxes[0].set_size(-16, -6, 10, 10);
+                            hitboxes[1].set_size(-16, -20, 23, 16);
+                            break;
+                        }
+                    }
+                    break;
+				}
+				case 1:
+				{
+					if (image_index == 0)
+		            {
+		                hitboxes[0].set_size(-14, -2, 14, 16);
+						hitboxes[1].set_size(-3, -8, 21, 18);
+		            }
+					break;
+				}
+				case 2:
+				{
+					if (image_index == 0)
+		            {
+		                hitboxes[0].set_size(-16, -6, 6, 6);
+		                hitboxes[1].set_size();
+		            }
+					break;
+				}
+			}
+			break;
+		}
     }
 };

@@ -94,7 +94,7 @@ enum PLAYER_ANIMATION
 	TRICK_UP, TRICK_DOWN, TRICK_FRONT, TRICK_BACK, 
 	SPRING, SPRING_TWIRL,
 	// Sonic-Only Animations
-	// TODO: Add them.
+	INSTA_SHIELD, SKIDDING,
 	// Tails-Only Animations
 	FLYING, FLYING_TURN, FLYING_TIRED,
 	// Knuckles-Only Animations

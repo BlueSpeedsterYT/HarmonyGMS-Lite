@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SonicAerialStates",
+  "%Name":"SonicAttackStates",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SonicAerialStates",
+  "name":"SonicAttackStates",
   "parent":{
     "name":"Sonic",
     "path":"folders/Scripts/Player/States/Characters/Sonic.yy",

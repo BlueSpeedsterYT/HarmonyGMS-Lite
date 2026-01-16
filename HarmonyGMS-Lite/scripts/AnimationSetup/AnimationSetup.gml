@@ -120,6 +120,11 @@ global.ani_sonic_spring = [global.ani_sonic_spring_v0, global.ani_sonic_spring_v
 
 global.ani_sonic_spring_twirl_v0 = new animation(sprSonicSpringTwirl, [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3], 11);
 
+global.ani_sonic_skidding_v0 = new animation(sprSonicSkidding0, [2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1], -1);
+global.ani_sonic_skidding_v1 = new animation(sprSonicSkidding1, 1, 0);
+global.ani_sonic_skidding_v2 = new animation(sprSonicSkidding2, 1, -1);
+global.ani_sonic_skidding = [global.ani_sonic_skidding_v0, global.ani_sonic_skidding_v1, global.ani_sonic_skidding_v2];
+
 #endregion
 
 #region Tails

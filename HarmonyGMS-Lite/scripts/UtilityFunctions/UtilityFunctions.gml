@@ -117,11 +117,11 @@ function instance_in_view(obj = id, padding = CAMERA_PADDING)
 /// @param {Real} [yspd] y-speed of the particle (optional, defaults to 0).
 /// @param {Real} [xaccel] x-acceleration of the particle (optional, defaults to 0).
 /// @param {Real} [yaccel] y-acceleration of the particle (optional, defaults to 0).
-/// @param {Real} [depth_offset] depth offset of the particle (optional, defaults to the objects depth - DEPTH_OFFSET_PARTICLE).
+/// @param {Real} [depth_offset] depth offset of the particle (optional, defaults to -DEPTH_OFFSET_PARTICLE).
 /// @returns {Id.Instance}
-function particle_create(ox, oy, ani, xspd = 0, yspd = 0, xaccel = 0, yaccel = 0, depth_offset = layer_get_depth("General") - DEPTH_OFFSET_PARTICLE)
+function particle_create(ox, oy, ani, xspd = 0, yspd = 0, xaccel = 0, yaccel = 0, depth_offset = -DEPTH_OFFSET_PARTICLE)
 {
-    var particle = instance_create_depth(ox, oy, depth_offset, objParticle);
+    var particle = instance_create_depth(ox, oy, layer_get_depth("General") + depth_offset, objParticle);
     with (particle)
     {
         animation_set(ani);

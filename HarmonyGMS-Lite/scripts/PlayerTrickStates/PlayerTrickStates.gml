@@ -47,13 +47,13 @@ function player_is_trick_preparing(phase)
 						case objSonic:
 						{
 							y_speed = 2;
-							return player_perform(sonic_is_preparing_bound, false);
+							return player_perform(sonic_is_bounding);
 						}
 						
 						case objKnuckles:
 						{
 							y_speed = 1;
-							return player_perform(knuckles_is_preparing_drill_clawing, false);
+							return player_perform(knuckles_is_drill_clawing);
 						}
 					}
 				}

@@ -39,7 +39,7 @@ function player_wall_eject(inst)
 		}
 	}
 	
-	return 0;
+	return undefined;
 }
 
 /// @description Aligns the player to the ground using the given height and updates their angle values.
@@ -106,6 +106,7 @@ function player_detect_angle()
 function player_refresh_physics()
 {
 	// Speed values
+	max_speed = 12;
 	speed_cap = 6;
 	acceleration = 0.046875;
 	deceleration = 0.5;

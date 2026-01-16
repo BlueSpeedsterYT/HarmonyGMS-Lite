@@ -26,7 +26,7 @@ if (script_exists(state))
 
 player_animate();
 
-x_speed = clamp(x_speed, -9, 9);
+x_speed = clamp(x_speed, -max_speed, max_speed);
 
 with (spin_dash_stamp)
 {

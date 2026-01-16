@@ -43,7 +43,7 @@ function sonic_is_skidding(phase)
 				}
 				
 				// Update
-				if (animation_is_finished())
+				if (animation_data.index == PLAYER_ANIMATION.SKIDDING and animation_is_finished())
 				{
 					switch (animation_data.variant)
 					{
@@ -80,7 +80,7 @@ function sonic_is_skidding(phase)
 				
 				// We're not in the ground doing the animation so
 				// reset to the falling state immediately.
-				if (animation_is_finished())
+				if (animation_data.index == PLAYER_ANIMATION.SKIDDING and animation_is_finished())
 				{
 					animation_init(PLAYER_ANIMATION.ROLL);
 					return player_perform(player_is_falling);

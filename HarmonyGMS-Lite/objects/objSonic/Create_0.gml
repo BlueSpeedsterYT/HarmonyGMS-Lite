@@ -27,6 +27,8 @@ player_try_skill = function()
 			// Insta-Shield (or Homing Attack at close distances)
 			return true;
 		}
+		// Forward Thrust
+		// NOT AVAILABLE since it would need to have an input buffer.
     }
 	else
 	{

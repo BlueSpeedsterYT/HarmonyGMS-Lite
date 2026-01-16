@@ -81,17 +81,35 @@ function tails_is_flying(phase)
 	            {
 	            	animation_init(PLAYER_ANIMATION.FLYING);
 	            }
+				
+				// Play the sound
+				if (not audio_is_playing(sfxTailsFlying))
+				{
+					audio_stop_sound(fly_sound);
+					fly_sound = sound_play(sfxTailsFlying);
+				}
 			}
 			else
 			{
 				// Tire out
 				animation_init(PLAYER_ANIMATION.FLYING_TIRED);
+				
+				// Stop the sound
+				if (audio_is_playing(fly_sound))
+				{
+					audio_stop_sound(fly_sound);
+				}
 			}
 			
 			break;
 		}
 		case PHASE.EXIT:
 		{
+			// Stop the sound
+			if (audio_is_playing(fly_sound))
+			{
+				audio_stop_sound(fly_sound);
+			}
 			break;
 		}
 	}

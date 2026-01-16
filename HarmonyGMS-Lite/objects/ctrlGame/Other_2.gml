@@ -82,7 +82,8 @@ enum PLAYER_ANIMATION
 	// Tails-Only Animations
 	FLYING, FLYING_TURN, FLYING_TIRED,
 	// Knuckles-Only Animations
-	GLIDE, GLIDE_TURN, GLIDE_SLIDING, GLIDE_FALL
+	GLIDE, GLIDE_TURN, GLIDE_SLIDING, GLIDE_FALL,
+	CLIMB_ATTACH, CLIMB // <-- This includes the idle, movement, lifting upwards and landing animations
 }
 
 enum TRICK_TYPE

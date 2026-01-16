@@ -4,8 +4,9 @@ event_inherited();
 
 character_index = CHARACTER.TAILS;
 
-fly_time = 0;
-fly_force = 0;
+fly_time = -1;
+fly_force = tails_fly_base_force;
+fly_sound = noone;
 
 trick_speed =
 [

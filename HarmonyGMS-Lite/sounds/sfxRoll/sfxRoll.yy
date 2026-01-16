@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxRoll.ogg",
+  "soundFile":"sfxRoll.wav",
   "volume":1.0,
 }

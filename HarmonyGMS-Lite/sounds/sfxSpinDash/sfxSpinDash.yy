@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.8402721,
+  "duration":0.81714284,
   "exportDir":"",
   "name":"sfxSpinDash",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxSpinDash.ogg",
+  "soundFile":"sfxSpinDash.wav",
   "volume":1.0,
 }

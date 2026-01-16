@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"sfxSpikesHurt",
+  "%Name":"sfxTailsFlying",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.6682313,
+  "duration":10.909388,
   "exportDir":"",
-  "name":"sfxSpikesHurt",
+  "name":"sfxTailsFlying",
   "parent":{
-    "name":"Player",
-    "path":"folders/Audio/SFX/Player.yy",
+    "name":"Per-Character",
+    "path":"folders/Audio/SFX/Player/Per-Character.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxSpikesHurt.wav",
+  "soundFile":"sfxTailsFlying.wav",
   "volume":1.0,
 }

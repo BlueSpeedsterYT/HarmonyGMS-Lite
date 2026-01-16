@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.41396827,
+  "duration":0.41687074,
   "exportDir":"",
   "name":"sfxSpring",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxSpring.ogg",
+  "soundFile":"sfxSpring.wav",
   "volume":1.0,
 }

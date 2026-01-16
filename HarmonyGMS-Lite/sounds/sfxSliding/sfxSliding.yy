@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"sfxSpikesHurt",
+  "%Name":"sfxSliding",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.6682313,
+  "duration":0.7514966,
   "exportDir":"",
-  "name":"sfxSpikesHurt",
+  "name":"sfxSliding",
   "parent":{
     "name":"Player",
     "path":"folders/Audio/SFX/Player.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxSpikesHurt.wav",
+  "soundFile":"sfxSliding.wav",
   "volume":1.0,
 }

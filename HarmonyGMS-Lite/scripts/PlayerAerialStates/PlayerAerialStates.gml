@@ -13,7 +13,7 @@ function player_is_falling(phase)
 			player_ground(undefined);
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.FALL, 0, [PLAYER_ANIMATION.ROLL]);
+			animation_init(PLAYER_ANIMATION.FALL, 0, [PLAYER_ANIMATION.RUN, PLAYER_ANIMATION.ROLL]);
 			break;
 		}
 		case PHASE.STEP:

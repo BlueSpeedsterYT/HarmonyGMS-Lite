@@ -300,9 +300,10 @@ player_animate_run = function(ani, ang = direction)
 	    else if (abs_speed <= 9.0) variant = 3;
 	    else if (abs_speed <= 10.0) variant = 4;
     }
-    player_set_animation(ani, ang);
+	var angle = on_ground ? ang : rotate_towards(mask_direction, image_angle);
+    player_set_animation(ani, angle);
     animation_data.variant = variant;
-    if (on_ground) animation_data.speed = clamp((abs(x_speed) / 3) + (abs(x_speed) / 4), 0.5, 8);
+    animation_data.speed = clamp((abs(x_speed) / 3) + (abs(x_speed) / 4), 0.5, 8);
 };
 
 /// @method player_animate_fall(ani)

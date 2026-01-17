@@ -141,8 +141,8 @@
   "swatchColours":null,
   "swfPrecision":0.5,
   "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
+    "name":"Tails",
+    "path":"texturegroups/Tails",
   },
   "type":0,
   "VTile":false,

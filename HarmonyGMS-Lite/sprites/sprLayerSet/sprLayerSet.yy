@@ -44,8 +44,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"Layers",
-    "path":"folders/Sprites/Zone/General/Layers.yy",
+    "name":"Triggers",
+    "path":"folders/Sprites/Zone/General/Triggers.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -60,6 +60,7 @@ function player_is_sprung(phase)
 	}
 }
 
+// NOTE: Research more into how Sonic Advance 2 handles this. BADLY.
 /// @function player_is_corkscrewing(phase)
 function player_is_corkscrewing(phase)
 {
@@ -67,15 +68,14 @@ function player_is_corkscrewing(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Detach from ground
-			player_ground(undefined);
-            
-            // Animate 
-			animation_init(PLAYER_ANIMATION.SPRING_TWIRL, 0, [PLAYER_ANIMATION.ROLL]);
-            break;
+            // No animation set here cuz that's handled by the corkscrew object
+			break;
 		}
 		case PHASE.STEP:
 		{
+			// Jump
+			if (player_try_jump()) return true;
+			
 			// Accelerate
 			if (input_axis_x != 0)
 			{
@@ -95,11 +95,14 @@ function player_is_corkscrewing(phase)
 				{
 					x_speed += deceleration * input_axis_x;
 				}
-				else
-				{
-					return player_perform(player_is_falling);
-				}
 			}
+			
+			// Move
+			player_move_on_ground();
+			if (state_changed) exit;
+			
+			// Roll
+			if (player_try_roll()) return true;
 			break;
 		}
 		case PHASE.EXIT:

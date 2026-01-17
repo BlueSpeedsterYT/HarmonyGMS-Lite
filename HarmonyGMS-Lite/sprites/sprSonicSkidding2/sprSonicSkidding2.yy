@@ -89,8 +89,8 @@
   "swatchColours":null,
   "swfPrecision":0.5,
   "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
+    "name":"Sonic",
+    "path":"texturegroups/Sonic",
   },
   "type":0,
   "VTile":false,

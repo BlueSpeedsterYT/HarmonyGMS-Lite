@@ -1,0 +1,38 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"tsLeafForestCollision1",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"tsLeafForestCollision1",
+  "out_columns":20,
+  "out_tilehborder":0,
+  "out_tilevborder":0,
+  "parent":{
+    "name":"Leaf Forest",
+    "path":"folders/Tile Sets/Leaf Forest.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"sprLeafForestTilesCollision1",
+    "path":"sprites/sprLeafForestTilesCollision1/sprLeafForestTilesCollision1.yy",
+  },
+  "spriteNoExport":true,
+  "textureGroupId":{
+    "name":"Editor",
+    "path":"texturegroups/Editor",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":96,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":96,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":384,
+}

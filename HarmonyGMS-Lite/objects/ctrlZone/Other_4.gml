@@ -10,6 +10,13 @@ switch (room)
 		music_enqueue(bgmBlazeEventScrewStache, PRIORITY_MUSIC, true);
 		break;
 	}
+	case rmTest2:
+	{
+		name = "LEAF FOREST";
+		act = 1;
+		music_enqueue(bgmBlazeEventScrewStache, PRIORITY_MUSIC, true);
+		break;
+	}
 }
 
 transition_to(-1);

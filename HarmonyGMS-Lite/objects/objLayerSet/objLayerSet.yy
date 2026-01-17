@@ -8,8 +8,8 @@
   "name":"objLayerSet",
   "overriddenProperties":[],
   "parent":{
-    "name":"Layers",
-    "path":"folders/Objects/Zone/General/Layers.yy",
+    "name":"Triggers",
+    "path":"folders/Objects/Zone/General/Triggers.yy",
   },
   "parentObjectId":{
     "name":"objInteractable",

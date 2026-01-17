@@ -103,8 +103,8 @@
   "swatchColours":null,
   "swfPrecision":2.525,
   "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
+    "name":"Editor",
+    "path":"texturegroups/Editor",
   },
   "type":0,
   "VTile":false,

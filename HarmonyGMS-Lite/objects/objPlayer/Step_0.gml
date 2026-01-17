@@ -15,6 +15,12 @@ if (input_allow)
 		    value.pressed = InputPressed(verb);
 		    value.released = InputReleased(verb);
 		});
+		
+		// Enter Debug
+		if (input_button.select.pressed)
+		{
+			player_perform((state != player_is_debugging) ? player_is_debugging : player_is_falling);
+		}
 	};
 };
 

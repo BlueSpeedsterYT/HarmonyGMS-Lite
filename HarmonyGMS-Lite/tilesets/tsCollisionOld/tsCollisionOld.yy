@@ -1,14 +1,14 @@
 {
   "$GMTileSet":"v1",
-  "%Name":"tsCollision",
+  "%Name":"tsCollisionOld",
   "autoTileSets":[],
   "macroPageTiles":{
     "SerialiseHeight":0,
     "SerialiseWidth":0,
     "TileSerialiseData":[],
   },
-  "name":"tsCollision",
-  "out_columns":128,
+  "name":"tsCollisionOld",
+  "out_columns":53,
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
@@ -18,8 +18,8 @@
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"sprCollisionTileset",
-    "path":"sprites/sprCollisionTileset/sprCollisionTileset.yy",
+    "name":"sprCollisionTilesetOld",
+    "path":"sprites/sprCollisionTilesetOld/sprCollisionTilesetOld.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{
@@ -34,5 +34,5 @@
   "tileWidth":16,
   "tilexoff":0,
   "tileyoff":0,
-  "tile_count":16384,
+  "tile_count":2860,
 }

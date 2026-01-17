@@ -90,7 +90,7 @@
               -173,0,-271,-2147483648,-173,0,-271,-2147483648,-173,0,-271,-2147483648,-173,0,-271,-2147483648,-173,
               0,-271,-2147483648,-173,0,-271,-2147483648,-173,0,-271,-2147483648,-173,0,-271,-2147483648,-173,0,-271,
               -2147483648,-173,0,-271,-2147483648,-173,0,-271,-2147483648,-173,0,-271,-2147483648,
-            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollision","path":"tilesets/tsCollision/tsCollision.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
+            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollisionOld","path":"tilesets/tsCollisionOld/tsCollisionOld.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
         {"$GMRTileLayer":"","%Name":"CollisionPlane0","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"CollisionPlane0","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":102,"SerialiseWidth":444,"TileCompressedData":[
               -86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,
               -2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,
@@ -115,7 +115,7 @@
               -2147483648,-35,0,-409,-2147483648,-35,0,-409,-2147483648,-35,0,-409,-2147483648,-35,0,-409,-2147483648,
               -35,0,-409,-2147483648,-35,0,-409,-2147483648,-35,0,-409,-2147483648,-35,0,-409,-2147483648,-35,0,-409,
               -2147483648,-35,0,-409,-2147483648,-35,0,-409,-2147483648,-35,0,-409,-2147483648,-35,0,-6338,-2147483648,
-            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollision","path":"tilesets/tsCollision/tsCollision.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollisionOld","path":"tilesets/tsCollisionOld/tsCollisionOld.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
         {"$GMRTileLayer":"","%Name":"CollisionPlane1","depth":500,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"CollisionPlane1","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":102,"SerialiseWidth":444,"TileCompressedData":[
               -86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,
               -2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,
@@ -138,7 +138,7 @@
               6,268435457,268435553,268435552,268435551,268435550,268435549,-438,-2147483648,6,268435457,268435605,
               268435604,268435603,268435602,268435601,-438,-2147483648,6,268435457,268435657,268435656,268435655,268435654,
               268435653,-438,-2147483648,6,268435457,268435709,268435708,268435707,268435706,268435705,-13554,-2147483648,
-            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollision","path":"tilesets/tsCollision/tsCollision.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollisionOld","path":"tilesets/tsCollisionOld/tsCollisionOld.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
         {"$GMRTileLayer":"","%Name":"CollisionSemisolid","depth":600,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"CollisionSemisolid","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":102,"SerialiseWidth":444,"TileCompressedData":[
               -86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,
               -2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,-86,0,-358,-2147483648,
@@ -154,8 +154,8 @@
               -2147483648,-31,0,-413,-2147483648,-31,0,-413,-2147483648,-31,0,-413,-2147483648,-31,0,-413,-2147483648,
               -18,0,-18,1,-408,-2147483648,-31,0,-413,-2147483648,-31,0,-413,-2147483648,-31,0,-413,-2147483648,-31,
               0,-413,-2147483648,-31,0,-2015,-2147483648,-12,1,-72,-2147483648,-18,1,-16920,-2147483648,
-            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollision","path":"tilesets/tsCollision/tsCollision.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
-      ],"name":"Collision","properties":[],"resourceType":"GMRLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+            ],"TileDataFormat":1,},"tilesetId":{"name":"tsCollisionOld","path":"tilesets/tsCollisionOld/tsCollisionOld.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
+      ],"name":"Collision","properties":[],"resourceType":"GMRLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":false,},
     {"$GMRTileLayer":"","%Name":"GraphicsPlane0","depth":700,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"GraphicsPlane0","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":17,"SerialiseWidth":74,"TileCompressedData":[-609,-2147483648,1,62,-189,-2147483648,1,62,-48,-2147483648,1,62,-409,-2147483648,],"TileDataFormat":1,},"tilesetId":{"name":"tsZoneMap","path":"tilesets/tsZoneMap/tsZoneMap.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRInstanceLayer":"","%Name":"General","depth":800,"effectEnabled":true,"effectType":null,"gridX":8,"gridY":8,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_29DC1FF8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_29DC1FF8","objectId":{"name":"objPlayerSpawn","path":"objects/objPlayerSpawn/objPlayerSpawn.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":240.0,"y":944.0,},

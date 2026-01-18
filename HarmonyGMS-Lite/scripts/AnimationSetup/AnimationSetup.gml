@@ -24,6 +24,12 @@ global.ani_spring_diagonal_alt_v0 = new animation(sprSpringDiagonalAlt, 0);
 global.ani_spring_diagonal_alt_v1 = new animation(sprSpringDiagonalAlt, [2, 4, 2, 4, 2], -1, [1, 2, 3, 4, 5]);
 global.ani_spring_diagonal_alt = [global.ani_spring_diagonal_alt_v0, global.ani_spring_diagonal_alt_v1];
 
+global.ani_spring_bouncy_v0 = new animation(sprSpringBouncy0, 0);
+global.ani_spring_bouncy_v1 = new animation(sprSpringBouncy1, [1, 2, 1, 5, 3], -1, [0, 1, 2, 0, 2]);
+global.ani_spring_bouncy_v2 = new animation(sprSpringBouncy2, [1, 2, 1, 5, 3], -1, [0, 1, 3, 0, 4]);
+global.ani_spring_bouncy_v3 = new animation(sprSpringBouncy3, [1, 2, 1, 5, 3], -1, [0, 1, 5, 2, 3]);
+global.ani_spring_bouncy = [global.ani_spring_bouncy_v0, global.ani_spring_bouncy_v1, global.ani_spring_bouncy_v2, global.ani_spring_bouncy_v3];
+
 #endregion
 
 #region Player

@@ -23,6 +23,7 @@
     {"name":"inst_58FB5B4F","path":"rooms/rmTest2/rmTest2.yy",},
     {"name":"inst_B9CAFC9","path":"rooms/rmTest2/rmTest2.yy",},
     {"name":"inst_371BDDBE","path":"rooms/rmTest2/rmTest2.yy",},
+    {"name":"inst_7438711C","path":"rooms/rmTest2/rmTest2.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -262,6 +263,7 @@
         {"$GMRInstance":"v4","%Name":"inst_371BDDBE","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_371BDDBE","objectId":{"name":"objSpringVertical","path":"objects/objSpringVertical/objSpringVertical.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"objSpring","path":"objects/objSpring/objSpring.yy",},"propertyId":{"name":"force","path":"objects/objSpring/objSpring.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"12",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":3424.0,"y":1088.0,},
+        {"$GMRInstance":"v4","%Name":"inst_7438711C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_7438711C","objectId":{"name":"objBouncySpringVertical","path":"objects/objBouncySpringVertical/objBouncySpringVertical.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":3920.0,"y":1150.0,},
       ],"layers":[],"name":"General","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"GraphicsPlane1","depth":900,"effectEnabled":true,"effectType":"none","gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"GraphicsPlane1","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":32,"SerialiseWidth":206,"TileCompressedData":[
           -74,0,-132,-2147483648,-74,0,-132,-2147483648,-74,0,-132,-2147483648,-74,0,-132,-2147483648,-74,0,-132,

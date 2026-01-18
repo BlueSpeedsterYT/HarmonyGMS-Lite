@@ -120,6 +120,10 @@ global.ani_sonic_spring = [global.ani_sonic_spring_v0, global.ani_sonic_spring_v
 
 global.ani_sonic_spring_twirl_v0 = new animation(sprSonicSpringTwirl, [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3], 11);
 
+global.ani_sonic_dash_v0 = new animation(sprSonicDash0, [1, 2, 2, 2], 1);
+global.ani_sonic_dash_v1 = new animation(sprSonicDash1, 2, 5);
+global.ani_sonic_dash = [global.ani_sonic_dash_v0, global.ani_sonic_dash_v1];
+
 global.ani_sonic_skidding_v0 = new animation(sprSonicSkidding0, [2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1], -1);
 global.ani_sonic_skidding_v1 = new animation(sprSonicSkidding1, 1, 0);
 global.ani_sonic_skidding_v2 = new animation(sprSonicSkidding2, 1, -1);
@@ -207,6 +211,10 @@ global.ani_tails_spring = [global.ani_tails_spring_v0, global.ani_tails_spring_v
 
 global.ani_tails_spring_twirl_v0 = new animation(sprTailsSpringTwirl, [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3], 11);
 
+global.ani_tails_dash_v0 = new animation(sprTailsDash0, [1, 2, 2, 2], 1);
+global.ani_tails_dash_v1 = new animation(sprTailsDash1, [1, 2, 2, 2, 2, 2, 2, 2, 2], 6);
+global.ani_tails_dash = [global.ani_tails_dash_v0, global.ani_tails_dash_v1];
+
 global.ani_tails_flying_v0 = new animation(sprTailsFlying, 2, 0, [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 8, 9, 10, 7]);
 
 global.ani_tails_flying_turn_v0 = new animation(sprTailsFlyingTurn, 1, -1);
@@ -292,6 +300,10 @@ global.ani_knuckles_spring_v2 = new animation(sprKnucklesSpring2, 3);
 global.ani_knuckles_spring = [global.ani_knuckles_spring_v0, global.ani_knuckles_spring_v1, global.ani_knuckles_spring_v2];
 
 global.ani_knuckles_spring_twirl_v0 = new animation(sprKnucklesSpringTwirl, [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3], 11);
+
+global.ani_knuckles_dash_v0 = new animation(sprKnucklesDash0, [1, 2, 2, 2], 1);
+global.ani_knuckles_dash_v1 = new animation(sprKnucklesDash1, 2, 5);
+global.ani_knuckles_dash = [global.ani_knuckles_dash_v0, global.ani_knuckles_dash_v1];
 
 global.ani_knuckles_glide_v0 = new animation(sprKnucklesGlide, 3);
 

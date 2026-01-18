@@ -336,27 +336,6 @@ player_animate_jump = function(ani)
     player_set_animation(ani);
 };
 
-/// @method player_animate_spring(ani)
-/// @description Sets the given animation within the player's animation core based on spring conditions.
-/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
-player_animate_spring = function(ani)
-{
-	switch (animation_data.variant)
-    {
-        case 0:
-        {
-            if (y_speed > 0) animation_data.variant = 1;
-            break;
-        }
-        case 1:
-        {
-            if (animation_is_finished()) animation_data.variant = 2;
-            break;
-        }
-    }
-    player_set_animation(ani);
-};
-
 /// @method player_gain_score(num)
 /// @description Increases the player's score count by the given amount.
 /// @param {Real} num Amount of points to give.

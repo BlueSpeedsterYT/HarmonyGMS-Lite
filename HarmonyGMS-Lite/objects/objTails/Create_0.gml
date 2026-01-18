@@ -337,7 +337,7 @@ player_animate = function()
         }
         case PLAYER_ANIMATION.SPRING:
         {
-            player_animate_spring(global.ani_tails_spring);
+            player_set_animation(global.ani_tails_spring);
             player_set_radii(6, 14);
             switch (animation_data.variant)
             {
@@ -401,6 +401,43 @@ player_animate = function()
             }
             break;
         }
+		case PLAYER_ANIMATION.DASH:
+		{
+			player_set_animation(global.ani_tails_dash);
+			player_set_radii(6, 14);
+			switch (animation_data.variant)
+			{
+				case 0:
+				{
+					switch (image_index)
+					{
+						case 0:
+						{
+							hitboxes[0].set_size(-6, -10, 6, 16);
+							hitboxes[1].set_size();
+							break;
+						}
+						case 1:
+						{
+							hitboxes[0].set_size(-6, -10, 6, 12);
+							hitboxes[1].set_size();
+							break;
+						}
+					}
+					break;
+				}
+				case 1:
+				{
+					if (image_index == 0)
+		            {
+		                hitboxes[0].set_size(-6, -10, 6, 12);
+						hitboxes[1].set_size();
+		            }
+					break;
+				}
+			}
+			break;
+		}
 		case PLAYER_ANIMATION.FLYING:
 		{
 			player_set_animation(global.ani_tails_flying_v0);

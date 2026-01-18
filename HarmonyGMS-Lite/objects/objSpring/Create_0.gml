@@ -9,6 +9,7 @@ ani_spring = global.ani_spring_vertical;
 reaction = function(pla)
 {
     var bit = 1 << pla.player_index;
+	var ani_spring = (abs(pla.x_speed) > 2.5 ? PLAYER_ANIMATION.SPRING_TWIRL : PLAYER_ANIMATION.SPRING);
     if (collision_player(0, pla))
     {
         if (active & bit == 0)
@@ -16,7 +17,11 @@ reaction = function(pla)
             var diff = angle_wrap(direction - pla.gravity_direction);
             if (diff == 90 or diff == 270)
             {
-                pla.player_perform(player_is_sprung);
+	            with (pla)
+				{
+					animation_init(ani_spring, 0);
+					player_perform(player_is_sprung);
+				}
                 pla.y_speed = -dsin(diff) * force;
             }
             else if (diff == 0 or diff == 180)
@@ -28,14 +33,22 @@ reaction = function(pla)
                 }
                 else
                 {
-                    pla.player_perform(player_is_sprung);
+                    with (pla)
+					{
+						animation_init(ani_spring, 0);
+						player_perform(player_is_sprung);
+					}
                 }
                 pla.image_xscale = image_xscale;
                 pla.x_speed = image_xscale * force;
             }
             else
             {
-                pla.player_perform(player_is_sprung);
+                with (pla)
+				{
+					animation_init(ani_spring, 0);
+					player_perform(player_is_sprung);
+				}
                 pla.image_xscale = image_xscale;
                 pla.x_speed = image_xscale * force;
                 pla.y_speed = -dsin(diff) * force;

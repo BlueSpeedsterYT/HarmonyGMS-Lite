@@ -114,7 +114,7 @@ enum PLAYER_ANIMATION
 	ROLL, SPIN_DASH, FALL, JUMP,
 	HURT, DEAD, 
 	TRICK_UP, TRICK_DOWN, TRICK_FRONT, TRICK_BACK, 
-	SPRING, SPRING_TWIRL,
+	SPRING, SPRING_TWIRL, DASH,
 	// Sonic-Only Animations
 	INSTA_SHIELD, FORWARD_THRUST, SKIDDING,
 	// Tails-Only Animations
@@ -131,7 +131,6 @@ enum TRICK_TYPE
 }
 
 // Misc.
-//show_debug_overlay(true);
 surface_depth_disable(true);
 InputPartySetParams(INPUT_VERB.CONFIRM, 1, INPUT_MAX_PLAYERS, false, INPUT_VERB.CANCEL, undefined);
 randomize();
@@ -158,4 +157,4 @@ instance_create_layer(0, 0, "Controllers", ctrlWindow);
 instance_create_layer(0, 0, "Controllers", ctrlMusic);
 
 // Start game
-transition_to(rmTest2);
+transition_to(rmTest);

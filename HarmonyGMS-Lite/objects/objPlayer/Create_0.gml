@@ -301,7 +301,7 @@ player_animate_run = function(ani, ang = direction)
 	var angle = on_ground ? ang : rotate_towards(mask_direction, image_angle);
     player_set_animation(ani, angle);
     animation_data.variant = variant;
-    animation_data.speed = clamp((abs(x_speed) / 3) + (abs(x_speed) / 4), 0.5, 8);
+    animation_data.ani_speed = clamp((abs(x_speed) / 3) + (abs(x_speed) / 4), 0.5, 8);
 };
 
 /// @method player_animate_fall(ani)

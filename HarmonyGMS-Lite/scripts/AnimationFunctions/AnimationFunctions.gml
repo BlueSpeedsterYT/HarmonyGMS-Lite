@@ -20,8 +20,8 @@ function animation_core() constructor
     variant = 0;
     ani = undefined;
     force = false;
-    alarm = 0;
-    speed = 1;
+    ani_alarm = 0;
+    ani_speed = 1;
     pos = 0;
     time = 0;
 }
@@ -51,7 +51,7 @@ function animation_set(ani)
     
     if (is_undefined(ani))
     {
-        animation_data.alarm = 0;
+        animation_data.ani_alarm = 0;
         animation_data.pos = -1;
         animation_data.time = 0;
         sprite_index = -1;
@@ -65,7 +65,7 @@ function animation_set(ani)
         var order = ani.order;
         var start = 0;
         
-        animation_data.alarm = (is_array(duration) ? duration[start] : duration);
+        animation_data.ani_alarm = (is_array(duration) ? duration[start] : duration);
         animation_data.pos = start;
         animation_data.time = 0;
         sprite_index = sprite;
@@ -74,7 +74,7 @@ function animation_set(ani)
     
     animation_data.ani = ani;
     animation_data.force = false;
-    animation_data.speed = 1;
+    animation_data.ani_speed = 1;
 }
 
 /// @function animation_update()
@@ -83,11 +83,11 @@ function animation_update()
 {
     if (not is_undefined(animation_data.ani))
     {
-        if (animation_data.alarm > 0)
+        if (animation_data.ani_alarm > 0)
         {
-            animation_data.alarm -= animation_data.speed;
+            animation_data.ani_alarm -= animation_data.ani_speed;
             
-            if (animation_data.alarm <= 0)
+            if (animation_data.ani_alarm <= 0)
             {
                 var ani = animation_data.ani;
                 var sprite = ani.sprite;
@@ -106,7 +106,7 @@ function animation_update()
                 
                 if (animation_data.pos != -1)
                 {
-                    animation_data.alarm = (is_array(duration) ? duration[animation_data.pos] : duration);
+                    animation_data.ani_alarm = (is_array(duration) ? duration[animation_data.pos] : duration);
                     image_index = (order_length > 0 ? order[animation_data.pos] : animation_data.pos);
                 }
             }
@@ -122,7 +122,7 @@ function animation_update()
 function animation_is_starting(index = 0)
 {
     var duration = animation_data.ani.duration;
-    return (animation_data.pos == index and animation_data.alarm == (is_array(duration) ? duration[index] : duration));
+    return (animation_data.pos == index and animation_data.ani_alarm == (is_array(duration) ? duration[index] : duration));
 }
 
 /// @function animation_is_finished()

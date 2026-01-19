@@ -163,4 +163,4 @@ instance_create_layer(0, 0, "Controllers", ctrlWindow);
 instance_create_layer(0, 0, "Controllers", ctrlMusic);
 
 // Start game
-transition_to(rmTest);
+transition_to(rmTest2);

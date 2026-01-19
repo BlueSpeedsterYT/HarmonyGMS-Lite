@@ -313,6 +313,7 @@
     {"id":{"name":"AnimationFunctions","path":"scripts/AnimationFunctions/AnimationFunctions.yy",},},
     {"id":{"name":"AnimationSetup","path":"scripts/AnimationSetup/AnimationSetup.yy",},},
     {"id":{"name":"AudioFunctions","path":"scripts/AudioFunctions/AudioFunctions.yy",},},
+    {"id":{"name":"CameraFunctions","path":"scripts/CameraFunctions/CameraFunctions.yy",},},
     {"id":{"name":"CollisionCheckingFunctions","path":"scripts/CollisionCheckingFunctions/CollisionCheckingFunctions.yy",},},
     {"id":{"name":"easings","path":"scripts/easings/easings.yy",},},
     {"id":{"name":"HitboxFunctions","path":"scripts/HitboxFunctions/HitboxFunctions.yy",},},

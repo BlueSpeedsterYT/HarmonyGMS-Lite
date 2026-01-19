@@ -16,5 +16,5 @@ if (superspeed_time != 0)
 }
 
 animation_update();
-with (spin_dash_stamp) animation_update();
-with (shield_stamp) animation_update();
+with (spin_dash_dust) animation_update();
+with (shield) animation_update();

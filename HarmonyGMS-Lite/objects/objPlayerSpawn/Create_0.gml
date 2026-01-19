@@ -11,5 +11,5 @@ for (var i = 0; i < array_length(global.characters); i++)
     with (player_inst) player_index = i;
 	ctrlZone.stage_players[i] = player_inst;
 }
-ctrlZone.stage_players[0].camera = instance_create_depth(x, y, depth - DEPTH_OFFSET_PLAYER, objCamera);
+instance_create_depth(x, y, depth - DEPTH_OFFSET_PLAYER, objCamera);
 instance_destroy();

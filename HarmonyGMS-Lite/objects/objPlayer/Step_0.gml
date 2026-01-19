@@ -34,7 +34,7 @@ player_animate();
 
 x_speed = clamp(x_speed, -max_speed, max_speed);
 
-with (spin_dash_stamp)
+with (spin_dash_dust)
 {
     var action = other.state;
     if (action == player_is_spin_dashing)
@@ -57,11 +57,10 @@ with (spin_dash_stamp)
     }
 }
 
-with (shield_stamp)
+with (shield)
 {
-    var shield = other.shield;
     var invincible = (other.invincibility_time > 0);
-    if (shield != SHIELD.NONE or invincible)
+    if (index != SHIELD.NONE or invincible)
     {
         var x_int = other.x div 1;
         var y_int = other.y div 1;
@@ -70,8 +69,8 @@ with (shield_stamp)
         x = x_int;
         y = y_int;
         
-        var shield_advance = (shield == SHIELD.BASIC or shield == SHIELD.MAGNETIC or invincible);
-        animation_init(invincible ? -1 : shield);
+        var shield_advance = (index == SHIELD.BASIC or index == SHIELD.MAGNETIC or invincible);
+        animation_init(invincible ? -1 : index);
         switch (animation_data.index)
         {
             case -1:
@@ -108,31 +107,4 @@ with (shield_stamp)
     {
         animation_set(undefined);
     }
-}
-
-with (camera)
-{
-	var action = other.state;
-	
-	if (action == player_is_dead) exit;
-	// Direct camera
-	x = other.x div 1;
-	y = other.y div 1;
-	gravity_direction = other.gravity_direction;
-	on_ground = other.on_ground;
-
-	// Reset camera panning
-	if (panning_oy != 0)
-	{
-		if ((action != player_is_looking and action != player_is_crouching) or other.camera_look_time > 0)
-		{
-			panning_oy -= 2 * sign(panning_oy);
-		}
-	}
-	
-	// Camera padding
-	if (on_ground) y -= dcos(other.mask_direction) * (PLAYER_HEIGHT - other.y_radius);
-	
-	// Camera movement
-	event_user(0);
 }

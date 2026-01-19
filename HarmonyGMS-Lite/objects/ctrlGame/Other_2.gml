@@ -130,10 +130,11 @@ enum TRICK_TYPE
 	UP, DOWN, FRONT, BACK
 }
 
-// Misc.
-surface_depth_disable(true);
-InputPartySetParams(INPUT_VERB.CONFIRM, 1, INPUT_MAX_PLAYERS, false, INPUT_VERB.CANCEL, undefined);
-randomize();
+
+enum CAMERA_STATE
+{
+	NULL = -1, FOLLOW, RETURN, KNUCKLES
+}
 
 // Volumes
 global.volume_master = 1;
@@ -151,6 +152,11 @@ global.life_count = 3;
 
 // Fonts
 global.font_debug = font_add_sprite(sprFontDebug, ord("!"), false, 1);
+
+// Misc.
+surface_depth_disable(true);
+InputPartySetParams(INPUT_VERB.CONFIRM, 1, INPUT_MAX_PLAYERS, false, INPUT_VERB.CANCEL, undefined);
+randomize();
 
 // Create global controllers
 instance_create_layer(0, 0, "Controllers", ctrlWindow);

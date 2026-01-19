@@ -6,7 +6,7 @@ event_inherited();
 
 var rolling = (animation_data.ani == global.ani_tails_roll_v0 || animation_data.ani == global.ani_tails_jump_v1);
 
-with (tails_stamp)
+with (tails)
 {
     if (rolling)
     {

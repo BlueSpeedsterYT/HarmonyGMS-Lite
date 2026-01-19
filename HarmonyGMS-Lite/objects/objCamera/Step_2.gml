@@ -1,25 +1,70 @@
 /// @description Move
+if (ctrlGame.game_paused) exit;
+
 // Calculate zoom
 if (zoom_active)
 {
     zoom_amount = interpolate(zoom_start, zoom_end, zoom_time++ / zoom_duration, EASE_SMOOTHSTEP);
     if (zoom_amount == zoom_end) zoom_active = false;
-    camera_resize();
+    resize_view();
 }
-
-var width_step = CAMERA_WIDTH * zoom_amount;
-var height_step = CAMERA_HEIGHT * zoom_amount;
 
 var view_x = camera_get_view_x(CAMERA_ID);
 var view_y = camera_get_view_y(CAMERA_ID);
+var width_step = CAMERA_WIDTH * zoom_amount;
+var height_step = CAMERA_HEIGHT * zoom_amount;
 
-// Calculate shake
-if (shake_active)
+switch (state)
 {
-    var shake_amount = max((shake_duration - shake_time++) / shake_duration, 0);
-    shake_x_offset = random_range(-shake_magnitude, shake_magnitude) * shake_amount;
-    shake_y_offset = random_range(-shake_magnitude, shake_magnitude) * shake_amount;
-    if (shake_amount <= 0) shake_active = false;
+    case CAMERA_STATE.FOLLOW:
+    {
+        x = focus.x div 1;
+        y = focus.y div 1;
+        gravity_direction = focus.gravity_direction;
+		on_ground = focus.on_ground;
+        roll_offset = (focus.y_radius - PLAYER_HEIGHT) * dsin(gravity_direction);
+        
+        // Look
+        var action = focus.state;
+        if ((action == player_is_looking or action == player_is_crouching) and look_time == 0)
+        {
+            switch (action)
+            {
+                case player_is_looking:
+                {
+                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_UP, 2);
+                    break;
+                }
+                case player_is_crouching:
+                {
+                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_DOWN, 2);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            y_offset = approach(y_offset, 0, 2);
+        }
+        break;
+    }
+    case CAMERA_STATE.RETURN:
+    {
+        x = approach(x, focus.x, return_speed);
+        y = approach(y, focus.y, return_speed);
+        return_speed += 0.25;
+        
+        if (x == focus.x and y == focus.y)
+        {
+            return_speed = 0;
+            state = CAMERA_STATE.FOLLOW;
+        }
+        break;
+    }
+    case CAMERA_STATE.KNUCKLES:
+    {
+        break;
+    }
 }
 
 // Calculate from view center
@@ -29,12 +74,12 @@ var camera_y = y - (view_y + height_step / 2) + shake_y_offset;
 // Calculate offsets
 var h_offset = 0;
 var v_offset = 0;
-if (panning_ox != 0 or panning_oy != 0)
+if (x_offset != 0 or y_offset != 0)
 {
-	var sine = dsin(gravity_direction);
-	var cosine = dcos(gravity_direction);
-	h_offset += (cosine * panning_ox) + (sine * panning_oy);
-	v_offset += (-sine * panning_ox) + (cosine * panning_oy);
+    var sine = dsin(gravity_direction);
+    var cosine = dcos(gravity_direction);
+    h_offset += cosine * x_offset + sine * y_offset;
+    v_offset += -sine * x_offset + cosine * y_offset;
 }
 
 // List volumes
@@ -106,8 +151,8 @@ for (var k = 0; k <= strength_count; k++)
 }
 
 // Calculate volumes
-var volume_x_constrain = array_create(array_length(volume_lists), 0);
-var volume_y_constrain = array_create(array_length(volume_lists), 0);
+var volume_lists_x_offset = array_create(array_length(volume_lists), 0);
+var volume_lists_y_offset = array_create(array_length(volume_lists), 0);
 
 for (var i = 0; i < array_length(volume_lists); i++)
 {
@@ -140,15 +185,15 @@ for (var i = 0; i < array_length(volume_lists); i++)
                 if (view_width > volume_width)
                 {
                     var volume_center = ((volume_left + volume_right) / 2) - 1;
-                    volume_x_constrain[i] = volume_center - x - h_offset;
+                    volume_lists_x_offset[i] = volume_center - x - h_offset;
                     center_h = true;
                 }
             }
             
             if (not center_h and (volume_left != undefined or volume_right != undefined))
             {
-                if (volume_left != undefined) volume_x_constrain[i] -= min(view_left - volume_left, 0);
-                if (volume_right != undefined) volume_x_constrain[i] -= max(view_right - volume_right, 0);
+                if (volume_left != undefined) volume_lists_x_offset[i] -= min(view_left - volume_left, 0);
+                if (volume_right != undefined) volume_lists_x_offset[i] -= max(view_right - volume_right, 0);
             }
             
             // Vertical constraint
@@ -160,15 +205,15 @@ for (var i = 0; i < array_length(volume_lists); i++)
                 if (view_height > volume_height)
                 {
                     var volume_middle = ((volume_top + volume_bottom) / 2) - 1;
-                    volume_y_constrain[i] = volume_middle - y - v_offset;
+                    volume_lists_y_offset[i] = volume_middle - y - v_offset;
                     center_v = true;
                 }
             }
             
             if (not center_v and (volume_top != undefined or volume_bottom != undefined))
             {
-                if (volume_top != undefined) volume_y_constrain[i] -= min(view_top - volume_top, 0);
-                if (volume_bottom != undefined) volume_y_constrain[i] -= max(view_bottom - volume_bottom, 9);
+                if (volume_top != undefined) volume_lists_y_offset[i] -= min(view_top - volume_top, 0);
+                if (volume_bottom != undefined) volume_lists_y_offset[i] -= max(view_bottom - volume_bottom, 9);
             }
         }
     }
@@ -179,27 +224,33 @@ volume_y_offset = 0;
 
 for (var i = 0; i < array_length(volume_lists_strength); i++)
 {
-    volume_x_offset += volume_x_constrain[i] * volume_lists_strength[i];
-    volume_y_offset += volume_y_constrain[i] * volume_lists_strength[i];
+    volume_x_offset += volume_lists_x_offset[i] * volume_lists_strength[i];
+    volume_y_offset += volume_lists_y_offset[i] * volume_lists_strength[i];
 }
 
-// Apply movement
+// Limit to view border
+if (state == CAMERA_STATE.FOLLOW and volume_list == noone)
+{
+    camera_x = max(abs(camera_x) - CAMERA_X_BORDER, 0) * sign(camera_x);
+    
+    if (on_ground)
+    {
+        ground_offset = ground_offset - ground_offset / 8;
+        camera_y = max(abs(camera_y) - ground_offset + roll_offset, 0) * sign(camera_y);
+    }
+    else if (not on_ground)
+    {
+        ground_offset = CAMERA_Y_BORDER;
+        camera_y = max(abs(camera_y) - ground_offset, 0) * sign(camera_y);
+    }
+}
+// Apply offsets
 camera_x += h_offset + volume_x_offset;
 camera_y += v_offset + volume_y_offset;
 
-// Limit to view border
-if (volume_list == noone)
-{
-	camera_x = max(abs(camera_x) - CAMERA_X_BORDER, 0) * sign(camera_x);
-	if (not on_ground) 
-	{
-		camera_y = max(abs(camera_y) - CAMERA_Y_BORDER, 0) * sign(camera_y);
-	}
-}
-
 // Limit movement speed
-var x_speed_cap = 24 * (lag_time_x == 0);
-var y_speed_cap = min(6 + abs(y - yprevious), 24) * (lag_time_y == 0);
+var x_speed_cap = 16 * (x_lag_time == 0);
+var y_speed_cap = min(6 + abs(y - yprevious), 24) * (y_lag_time == 0);
 if (abs(camera_x) > x_speed_cap) camera_x = x_speed_cap * sign(camera_x);
 if (abs(camera_y) > y_speed_cap) camera_y = y_speed_cap * sign(camera_y);
 
@@ -210,3 +261,48 @@ if (camera_x != 0 or camera_y != 0)
 	camera_y = clamp(view_y + camera_y, bound_top, bound_bottom - height_step);
 	camera_set_view_pos(CAMERA_ID, camera_x, camera_y);
 }
+
+
+// Refresh view position
+view_x = camera_get_view_x(CAMERA_ID);
+view_y = camera_get_view_y(CAMERA_ID);
+
+// Left target
+if (bound_left < target_left)
+{
+	bound_left = view_x;
+	bound_left = min(bound_left + target_speed, target_left);
+}
+
+if (bound_left > target_left) bound_left = max(bound_left - target_speed, target_left);
+if (bound_left < view_x - 16) bound_left = target_left;
+
+// Top target
+if (bound_top < target_top)
+{
+    bound_top = view_y;
+    bound_top = min(bound_top + target_speed, target_top);
+}
+
+if (bound_top > target_top) bound_top = max(bound_top - target_speed, target_top);
+if (bound_top < view_y - 16) bound_top = target_top;
+
+// Right target
+if (bound_right > target_right)
+{
+	bound_right = view_x + width_step;
+	bound_right = max(bound_right - target_speed, target_right);
+}
+
+if (bound_right < target_right) bound_right = min(bound_right + target_speed, target_right);
+if (bound_right > view_x + width_step + 16) bound_right = target_right;
+
+// Bottom target
+if (bound_bottom > target_bottom)
+{
+	bound_bottom = view_y + height_step;
+	bound_bottom = max(bound_bottom - target_speed, target_bottom);
+}
+
+if (bound_bottom < target_bottom) bound_bottom = min(bound_bottom + target_speed, target_bottom);
+if (bound_bottom > view_y + height_step + 16) bound_bottom = target_bottom;

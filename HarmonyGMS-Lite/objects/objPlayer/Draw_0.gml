@@ -1,16 +1,34 @@
 /// @description Draw
 var x_int = x div 1;
 var y_int = y div 1;
+var shield_behind = false;
 
-// Character sprite
+// Shield (Back)
+with (shield)
+{
+	
+}
+
+// Character
 image_alpha = (recovery_time > 0 ? (recovery_time mod 4 < 2) : 1);
 player_draw_before();
 draw_self_floored();
 player_draw_after();
 
-// Stamps
-with (spin_dash_stamp) draw_self_floored();
-with (shield_stamp) if (visible) draw_self_floored();
+// Spin Dash Dust
+with (spin_dash_dust) draw_self_floored();
+
+// Shield (Front)
+with (shield)
+{
+	if (not shield_behind)
+	{
+		if (visible) 
+		{
+			draw_self_floored();
+		}
+	}
+}
 
 if (not ctrlGame.game_debug) exit;
 

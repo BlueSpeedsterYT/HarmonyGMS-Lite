@@ -3,7 +3,7 @@ if (ctrlGame.game_paused) exit;
 
 with (objPlayer)
 {
-	if (other.target == noone and shield == SHIELD.MAGNETIC)
+	if (other.target == noone and shield.index == SHIELD.MAGNETIC)
 	{
 		if (abs(point_distance(other.x, other.y, x, y)) <= other.magnet_range)
 		{
@@ -12,7 +12,7 @@ with (objPlayer)
 			other.lost = false;
 		}
 	}
-	else if (other.target == id and not shield == SHIELD.MAGNETIC)
+	else if (other.target == id and not shield.index == SHIELD.MAGNETIC)
 	{
 		other.target = noone;
         other.magnetized = false;

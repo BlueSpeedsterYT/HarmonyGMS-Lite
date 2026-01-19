@@ -240,7 +240,7 @@ function player_is_looking(phase)
 	{
 		case PHASE.ENTER:
 		{
-			camera_look_time = 120;
+			camera_set_look_time(120);
 			animation_init(PLAYER_ANIMATION.LOOK);
 			break;
 		}
@@ -286,16 +286,6 @@ function player_is_looking(phase)
             {
                 return player_perform(player_is_standing);
             }
-			
-			// Ascend camera
-			if (camera_look_time > 0)
-			{
-				--camera_look_time;
-			}
-			else with (camera)
-			{
-				if (panning_oy > CAMERA_PAN_TARGET_UP) panning_oy -= 2;
-			}
 			break;
 		}
 		case PHASE.EXIT:
@@ -312,7 +302,7 @@ function player_is_crouching(phase)
 	{
 		case PHASE.ENTER:
 		{
-			camera_look_time = 120;
+			camera_set_look_time(120);
 			animation_init(PLAYER_ANIMATION.CROUCH);
 			break;
 		}
@@ -358,16 +348,6 @@ function player_is_crouching(phase)
             {
                 return player_perform(player_is_standing);
             }
-			
-			// Descend camera
-			if (camera_look_time > 0)
-			{
-				--camera_look_time;
-			}
-			else with (camera)
-			{
-				if (panning_oy < CAMERA_PAN_TARGET_DOWN) panning_oy += 2;
-			}
 			break;
 		}
 		case PHASE.EXIT:
@@ -479,7 +459,7 @@ function player_is_spin_dashing(phase)
 			if (input_axis_y != 1)
 			{
 				x_speed = image_xscale * (8 + spin_dash_charge div 2);
-				with (camera) lag_time_x = 16;
+				camera_set_x_lag_time(16);
 				audio_stop_sound(sfxRoll);
 				sound_play(sfxSpinDash);
 				return player_perform(player_is_rolling);

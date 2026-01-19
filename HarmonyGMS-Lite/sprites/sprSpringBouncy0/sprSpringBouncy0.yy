@@ -23,7 +23,7 @@
   ],
   "name":"sprSpringBouncy0",
   "nineSlice":null,
-  "origin":9,
+  "origin":7,
   "parent":{
     "name":"Springs",
     "path":"folders/Sprites/Zone/General/Springs.yy",
@@ -76,7 +76,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":16,
-    "yorigin":22,
+    "yorigin":24,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

@@ -241,6 +241,7 @@
     {"name":"AnimationFunctions","order":4,"path":"scripts/AnimationFunctions/AnimationFunctions.yy",},
     {"name":"AnimationSetup","order":5,"path":"scripts/AnimationSetup/AnimationSetup.yy",},
     {"name":"AudioFunctions","order":6,"path":"scripts/AudioFunctions/AudioFunctions.yy",},
+    {"name":"CameraFunctions","order":7,"path":"scripts/CameraFunctions/CameraFunctions.yy",},
     {"name":"CollisionCheckingFunctions","order":1,"path":"scripts/CollisionCheckingFunctions/CollisionCheckingFunctions.yy",},
     {"name":"easings","order":2,"path":"scripts/easings/easings.yy",},
     {"name":"HitboxFunctions","order":3,"path":"scripts/HitboxFunctions/HitboxFunctions.yy",},

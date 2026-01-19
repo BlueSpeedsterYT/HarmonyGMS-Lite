@@ -1,5 +1,6 @@
-/// @description Lag
+/// @description Timer
 if (ctrlGame.game_paused) exit;
 
-if (lag_time_x > 0) lag_time_x--;
-if (lag_time_y > 0) lag_time_y--;
+if (look_time > 0) look_time--;
+if (x_lag_time > 0) x_lag_time--;
+if (y_lag_time > 0) y_lag_time--;

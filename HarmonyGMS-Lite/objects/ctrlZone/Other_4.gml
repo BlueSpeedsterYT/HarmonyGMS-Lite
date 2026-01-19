@@ -14,7 +14,7 @@ switch (room)
 	{
 		name = "LEAF FOREST";
 		act = 1;
-		music_enqueue(bgmBlazeEventScrewStache, PRIORITY_MUSIC, true);
+		music_enqueue(bgmHydrocityAct1Sonic360, PRIORITY_MUSIC, true);
 		break;
 	}
 }

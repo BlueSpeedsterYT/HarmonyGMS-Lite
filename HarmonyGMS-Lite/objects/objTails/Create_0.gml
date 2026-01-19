@@ -133,7 +133,7 @@ player_animate = function()
         }
         case PLAYER_ANIMATION.ROLL:
         {
-            player_set_animation(global.ani_tails_roll_v0);
+            player_set_animation(global.ani_tails_roll_v0, 0);
             player_set_radii(6, 9);
             if (image_index == 0)
             {

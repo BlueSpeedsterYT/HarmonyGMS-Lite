@@ -34,6 +34,7 @@ reaction = function(pla)
 			pla.state_time = 16;
 			pla.player_refresh_aerial_skills();
             active |= bit;
+			sound_play(sfxDashRing);
         }
     }
     else 

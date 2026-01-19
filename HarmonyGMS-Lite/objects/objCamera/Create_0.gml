@@ -27,8 +27,6 @@ y_lag_time = 0;
 // Offset
 x_offset = 0;
 y_offset = 0;
-ground_offset = 0;
-roll_offset = 0;
 
 // Zoom
 zoom_active = false;
@@ -85,7 +83,7 @@ view_to_room_x = function(ox)
 {
     var zoom_offset = (CAMERA_WIDTH * (1 - zoom_amount)) / 2;
     ox *= zoom_amount;
-    ox += zoom_offset + (x - CAMERA_WIDTH / 2) - 1;
+    ox += zoom_offset + (x - CAMERA_WIDTH_CENTER) - 1;
     return ox;
 };
 
@@ -97,6 +95,6 @@ view_to_room_y = function(oy)
 {
     var zoom_offset = (CAMERA_HEIGHT * (1 - zoom_amount)) / 2;
     oy *= zoom_amount;
-    oy += zoom_offset + (y - CAMERA_HEIGHT / 2) - 1;
+    oy += zoom_offset + (y - CAMERA_HEIGHT_CENTER) - 1;
     return oy;
 };

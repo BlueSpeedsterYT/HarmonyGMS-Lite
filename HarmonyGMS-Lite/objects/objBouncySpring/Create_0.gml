@@ -31,6 +31,8 @@ reaction = function(pla)
             active |= bit;
             animation_data.variant = index;
             // TODO: SA2 uses a different sound for the bouncy springs so use that
+			// NOTE: SA2 has two different bouncy sounds, one for the pole, the other for the spring.
+			// gonna have to figure out how to record sounds like that in SA2
 			//sound_play(sfxSpring);
         }
     }

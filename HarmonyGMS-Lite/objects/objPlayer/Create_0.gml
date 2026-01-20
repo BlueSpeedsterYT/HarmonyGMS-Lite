@@ -368,32 +368,31 @@ player_gain_rings = function(num)
 /// @description Creates up to 32 lost rings in circles of 16 at the player's position.
 player_lose_rings = function()
 {
-    var total = min(global.ring_count, 32);
-    var len = 4;
+    var spd = 4;
     var dir = 101.25;
-    var flip = false;
     
-    for (var ring = 0; ring < total; ring++)
+    for (var n = min(global.ring_count, 32); n > 0; --n)
     {
-        if (ring == 16)
-        {
-            len = 2;
-            dir = 101.25;
-        }
-        
         with (instance_create_layer(x div 1, y div 1, "General", objRing))
         {
             gravity_direction = other.gravity_direction;
-            x_speed = lengthdir_x(len, dir);
-            y_speed = lengthdir_y(len, dir);
-            lost = true;
-            if (flip)
+			image_angle = gravity_direction;
+			
+			lost = true;
+            x_speed = lengthdir_x(spd, dir);
+            y_speed = lengthdir_y(spd, dir);
+            if (n & 1 != 0)
             {
                 x_speed *= -1;
                 dir += 22.5;
             }
         }
-        flip = !flip;
+		
+		if (n == 16)
+		{
+			spd = 2;
+            dir = 101.25;
+		}
     }
     
     global.ring_count = 0;

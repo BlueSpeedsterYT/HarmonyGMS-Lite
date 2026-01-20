@@ -240,7 +240,7 @@ function player_is_looking(phase)
 	{
 		case PHASE.ENTER:
 		{
-			camera_set_look_time(120);
+			camera_set_look_time(LOOK_DURATION);
 			animation_init(PLAYER_ANIMATION.LOOK);
 			break;
 		}
@@ -302,7 +302,7 @@ function player_is_crouching(phase)
 	{
 		case PHASE.ENTER:
 		{
-			camera_set_look_time(120);
+			camera_set_look_time(LOOK_DURATION);
 			animation_init(PLAYER_ANIMATION.CROUCH);
 			break;
 		}

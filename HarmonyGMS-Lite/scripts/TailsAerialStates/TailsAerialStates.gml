@@ -12,19 +12,43 @@ function tails_is_flying(phase)
 			// Detach from ground
 			player_ground(undefined);
 			
-			// Give base flight force
-			fly_force = TAILS_FLY_BASE_FORCE;
-			
 			// Animate
 			animation_init(PLAYER_ANIMATION.FLYING);
 			break;
 		}
 		case PHASE.STEP:
 		{
-			// Fly Upwards
-			if (input_button.jump.pressed and fly_time and y_speed >= TAILS_FLY_THRESHOLD)
+			// Decrease timer
+			if (fly_time > 0)
 			{
-				fly_force = -TAILS_FLY_ASCEND_FORCE;
+				--fly_time;
+			}
+			
+			// Set up flight system
+			if (fly_force_time != 1)
+			{
+				if (y_speed >= TAILS_FLY_THRESHOLD)
+				{
+					fly_force = -TAILS_FLY_ASCEND_FORCE;
+					if (++fly_force_time == 32)
+					{
+						fly_force_time = 1;
+					}
+				}
+				else
+				{
+					fly_force_time = 1;
+				}
+			}
+			else
+			{
+				// Fly Upwards
+				if (input_button.jump.pressed and fly_time and y_speed >= TAILS_FLY_THRESHOLD)
+				{
+					fly_force_time = 2;
+				}
+				
+				fly_force = TAILS_FLY_BASE_FORCE;
 			}
 			
 			// Accelerate
@@ -60,12 +84,6 @@ function tails_is_flying(phase)
 				y_speed = min(y_speed + fly_force, gravity_cap);
 			}
 			
-			// Cap out if the Y speed is over the threshold
-			if (y_speed < TAILS_FLY_THRESHOLD)
-			{
-				fly_force = TAILS_FLY_BASE_FORCE;
-			}
-			
 			// Reset when at the top
 			var top = objCamera.bound_top;
 			if (y < top)
@@ -75,7 +93,6 @@ function tails_is_flying(phase)
 			}
 			
 			// Change animations accordingly depending on the current flight time remaining
-			if (fly_time > 0) fly_time--;
 			if (fly_time)
 			{
 				// Turn

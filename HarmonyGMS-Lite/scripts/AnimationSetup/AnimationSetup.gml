@@ -1,6 +1,6 @@
 #region Explosions
 
-global.ani_explosion_destroy_v0 = new animation(sprExplosionDestroy, [3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 6], -1);
+// TODO: Reimport and implement the Advance 2 effects
 
 #endregion
 

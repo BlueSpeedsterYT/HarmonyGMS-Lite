@@ -17,6 +17,7 @@ with (objPlayer)
 		other.target = noone;
         other.magnetized = false;
 		other.lost = true;
+		other.lifespan = 256;
 	}
 }
 

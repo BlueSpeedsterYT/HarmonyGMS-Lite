@@ -5,7 +5,7 @@ state = CAMERA_STATE.FOLLOW;
 // Focus
 focus = ctrlZone.stage_players[0];
 on_ground = false;
-look_time = 0;
+look_time = LOOK_DURATION;
 
 // Bounds
 bound_left = 0;

@@ -30,6 +30,7 @@
 #macro DEBUG_ENABLED (ctrlGame.game_debug == true)
 #macro LIVES_ENABLED (ctrlGame.game_mode == GAME_MODE.SINGLE)
 
+#macro LOOK_DURATION time_to_frames(0, 2)
 #macro SLIDE_DURATION 32
 #macro RECOVERY_DURATION time_to_frames(0, 2)
 #macro INVINCIBILITY_DURATION time_to_frames(0, 20)

@@ -571,7 +571,6 @@
     {"id":{"name":"sprDashRingHorizontal0","path":"sprites/sprDashRingHorizontal0/sprDashRingHorizontal0.yy",},},
     {"id":{"name":"sprDashRingHorizontal1","path":"sprites/sprDashRingHorizontal1/sprDashRingHorizontal1.yy",},},
     {"id":{"name":"sprDashRingVertical","path":"sprites/sprDashRingVertical/sprDashRingVertical.yy",},},
-    {"id":{"name":"sprExplosionDestroy","path":"sprites/sprExplosionDestroy/sprExplosionDestroy.yy",},},
     {"id":{"name":"sprFontDebug","path":"sprites/sprFontDebug/sprFontDebug.yy",},},
     {"id":{"name":"sprKnucklesBrake","path":"sprites/sprKnucklesBrake/sprKnucklesBrake.yy",},},
     {"id":{"name":"sprKnucklesBrakeFast","path":"sprites/sprKnucklesBrakeFast/sprKnucklesBrakeFast.yy",},},

@@ -174,6 +174,7 @@ function player_move_in_air()
 			y_speed = 0;
 			landed = false;
 			on_ground = true;
+			shield_action = true;
 			player_refresh_aerial_skills();
 			break;
 		}

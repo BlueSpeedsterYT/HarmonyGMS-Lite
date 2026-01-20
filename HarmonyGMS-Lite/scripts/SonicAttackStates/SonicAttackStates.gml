@@ -187,7 +187,9 @@ function sonic_is_bounding(phase)
 			// Create bound effect
 			if (animation_data.time mod 2 == 0)
 			{
-				particle_create(x div 1, y div 1, global.ani_sonic_trick_down_v2, 0, 0, 0, 0, 10);
+				var ox = x div 1;
+				var oy = y div 1;
+				particle_create(ox, oy, global.ani_sonic_trick_down_v2, , , , , , , 10);
 			}
 			break;
 		}

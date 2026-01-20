@@ -124,18 +124,22 @@ function instance_in_view(obj = id, padding = CAMERA_PADDING)
 /// @param {Real} x x-coordinate of the particle.
 /// @param {Real} y y-coordinate of the particle.
 /// @param {Struct.animation} ani animation of the particle.
+/// @param {Real} [rot] Rotation of the particle (optional, defaults to 0).
+/// @param {Real} [life] Lifespan of the particle (optional, defaults to -1).
 /// @param {Real} [xspd] x-speed of the particle (optional, defaults to 0).
 /// @param {Real} [yspd] y-speed of the particle (optional, defaults to 0).
 /// @param {Real} [xaccel] x-acceleration of the particle (optional, defaults to 0).
 /// @param {Real} [yaccel] y-acceleration of the particle (optional, defaults to 0).
 /// @param {Real} [depth_offset] depth offset of the particle (optional, defaults to -DEPTH_OFFSET_PARTICLE).
 /// @returns {Id.Instance}
-function particle_create(ox, oy, ani, xspd = 0, yspd = 0, xaccel = 0, yaccel = 0, depth_offset = -DEPTH_OFFSET_PARTICLE)
+function particle_create(ox, oy, ani, rot = 0, life = -1, xspd = 0, yspd = 0, xaccel = 0, yaccel = 0, depth_offset = -DEPTH_OFFSET_PARTICLE)
 {
     var particle = instance_create_depth(ox, oy, layer_get_depth("General") + depth_offset, objParticle);
     with (particle)
     {
         animation_set(ani);
+        image_angle = angle_wrap(rot);
+        lifespan = life;
         x_speed = xspd;
         y_speed = yspd;
         x_acceleration = xaccel;

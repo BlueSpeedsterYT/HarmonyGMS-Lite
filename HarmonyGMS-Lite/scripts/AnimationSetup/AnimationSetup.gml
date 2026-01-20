@@ -113,6 +113,7 @@ global.ani_sonic_trick_down = [global.ani_sonic_trick_down_v0, global.ani_sonic_
 
 global.ani_sonic_trick_front_v0 = new animation(sprSonicTrickFront0, [2, 4, 1], -1);
 global.ani_sonic_trick_front_v1 = new animation(sprSonicTrickFront1, 1);
+global.ani_sonic_trick_front_v2 = new animation(sprSonicTrickFront2, 1);
 global.ani_sonic_trick_front = [global.ani_sonic_trick_front_v0, global.ani_sonic_trick_front_v1];
 
 global.ani_sonic_trick_back_v0 = new animation(sprSonicTrickBack, 1, -1, [0]);
@@ -129,6 +130,9 @@ global.ani_sonic_spring_twirl_v0 = new animation(sprSonicSpringTwirl, [4, 4, 4, 
 global.ani_sonic_dash_v0 = new animation(sprSonicDash0, [1, 2, 2, 2], 1);
 global.ani_sonic_dash_v1 = new animation(sprSonicDash1, 2, 5);
 global.ani_sonic_dash = [global.ani_sonic_dash_v0, global.ani_sonic_dash_v1];
+
+global.ani_sonic_insta_shield_v0 = new animation(sprSonicInsta0, [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2], 8);
+global.ani_sonic_insta_shield_v1 = new animation(sprSonicInsta1, 2, -1);
 
 global.ani_sonic_skidding_v0 = new animation(sprSonicSkidding0, [2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1], -1);
 global.ani_sonic_skidding_v1 = new animation(sprSonicSkidding1, 1, 0);
@@ -284,11 +288,13 @@ global.ani_knuckles_dead_v0 = new animation(sprKnucklesDead, [3, 3, 12, 2, 3, 3]
 global.ani_knuckles_trick_up_v0 = new animation(sprKnucklesTrickUp0, [1, 2, 1], -1);
 global.ani_knuckles_trick_up_v1 = new animation(sprKnucklesTrickUp1, [4, 4, 8, 8, 8], -1);
 global.ani_knuckles_trick_up_v2 = new animation(sprKnucklesTrickUp2, [7, 6, 3, 3, 3], 2);
+global.ani_knuckles_trick_up_v3 = new animation(sprKnucklesTrickUp3, [2, 2, 2, 2, 3, 3, 3, 3], -1);
 global.ani_knuckles_trick_up = [global.ani_knuckles_trick_up_v0, global.ani_knuckles_trick_up_v1, global.ani_knuckles_trick_up_v2];
 
 global.ani_knuckles_trick_down_v0 = new animation(sprKnucklesTrickDown0, [2, 3, 2, 2], -1);
 global.ani_knuckles_trick_down_v1 = new animation(sprKnucklesTrickDown1, 2);
 global.ani_knuckles_trick_down_v2 = new animation(sprKnucklesTrickDown2, [1, 1, 1, 1, 4, 2, 2], -1);
+global.ani_knuckles_trick_down_v3 = new animation(sprKnucklesTrickDown3, 2, -1);
 global.ani_knuckles_trick_down = [global.ani_knuckles_trick_down_v0, global.ani_knuckles_trick_down_v1, global.ani_knuckles_trick_down_v2];
 
 global.ani_knuckles_trick_front_v0 = new animation(sprKnucklesTrickFront0, [2, 2, 2, 2, 4], -1);

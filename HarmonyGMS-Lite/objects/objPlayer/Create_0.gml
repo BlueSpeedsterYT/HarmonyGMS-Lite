@@ -24,7 +24,7 @@ for (var i = 0; i < array_length(trick_speed); i++)
 // Shield
 shield = new stamp();
 shield.index = SHIELD.NONE;
-shield_action = false;
+shield_action = true;
 
 // Timers
 state_time = 0;

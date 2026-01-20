@@ -11,7 +11,7 @@ player_data += $"Direction: {string_format(direction, 3, 0)} | {string_format(lo
 player_data += $"Mask Direction: {mask_direction}\n\n";
 player_data += $"Control Lock: {control_lock_time}\n\n";
 player_data += $"Facing: {image_xscale}\n\n";
-player_data += $"Spin Dash Charge: {spin_dash_charge}\n\n";
+player_data += $"Spin Dash Charge: {string_format(spin_dash_charge, 3, 2)}\n\n";
 player_data += $"Step: {ctrlGame.game_time}\n\n";
 player_data += $"Layer: {collision_layer}";
 

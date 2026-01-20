@@ -12,6 +12,9 @@ trick_speed =
     [-5, -3.5]
 ];
 
+insta_shield = new stamp();
+trick_spin = new stamp();
+
 player_try_skill = function()
 {
     if (not on_ground)
@@ -25,6 +28,21 @@ player_try_skill = function()
 		else if (input_button.jump.pressed)
 		{
 			// Insta-Shield (or Homing Attack at close distances)
+			// TODO: Implement some sort of range check to allow for the homing attack to take
+			// over from the insta-shield
+			shield_action = false;
+			animation_init(PLAYER_ANIMATION.INSTA_SHIELD);
+			player_perform(player_is_falling, false);
+			with (insta_shield)
+		    {
+		        x = other.x div 1;
+		        y = other.y div 1;
+				depth = other.depth;
+		        image_xscale = other.image_xscale;
+		        image_angle = other.image_angle;
+        
+		        animation_set(global.ani_sonic_insta_shield_v1);
+		    }
 			return true;
 		}
 		// Forward Thrust
@@ -418,6 +436,28 @@ player_animate = function()
 			}
 			break;
 		}
+		case PLAYER_ANIMATION.INSTA_SHIELD:
+		{
+			player_set_animation(global.ani_sonic_insta_shield_v0);
+			player_set_radii(6, 9);
+			switch (image_index)
+			{
+				case 0:
+				{
+					hitboxes[0].set_size(-8, -8, 8, 8);
+					hitboxes[1].set_size(-14, -14, 14, 14);
+					break;
+				}
+				
+				case 8:
+				{
+					// yea i dunno why either
+					hitboxes[0].set_size(-8, -8, 8, 8);
+					break;
+				}
+			}
+			break;
+		}
 		case PLAYER_ANIMATION.SKIDDING:
 		{
 			player_set_animation(global.ani_sonic_skidding);
@@ -465,4 +505,10 @@ player_animate = function()
 			break;
 		}
     }
+};
+
+player_draw_after = function()
+{
+	with (trick_spin) draw_self_floored();
+	with (insta_shield) draw_self_floored();
 };

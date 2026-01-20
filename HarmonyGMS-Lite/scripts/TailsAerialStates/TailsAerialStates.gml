@@ -66,6 +66,14 @@ function tails_is_flying(phase)
 				fly_force = TAILS_FLY_BASE_FORCE;
 			}
 			
+			// Reset when at the top
+			var top = objCamera.bound_top;
+			if (y < top)
+			{
+				y = top;
+				if (y_speed < 0) y_speed = 0;
+			}
+			
 			// Change animations accordingly depending on the current flight time remaining
 			if (fly_time > 0) fly_time--;
 			if (fly_time)

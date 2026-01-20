@@ -1,4 +1,4 @@
 /// @description Debug
-if (not ctrlGame.game_debug) exit;
+if (not DEBUG_ENABLED) exit;
 
 with (objInteractable) draw_hitboxes();

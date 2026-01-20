@@ -3,8 +3,8 @@
 // Constants
 #macro CAMERA_ID view_camera[0]
 #macro CAMERA_PADDING 64
-#macro CAMERA_WIDTH 386
-#macro CAMERA_HEIGHT 224
+#macro CAMERA_WIDTH 284
+#macro CAMERA_HEIGHT 160
 #macro CAMERA_WIDTH_CENTER (CAMERA_WIDTH / 2)
 #macro CAMERA_HEIGHT_CENTER (CAMERA_HEIGHT / 2)
 #macro CAMERA_X_BORDER 0
@@ -27,6 +27,7 @@
 #macro COLL_FLAG_LEFT 0x40000
 #macro COLL_FLAG_RIGHT 0x80000
 
+#macro DEBUG_ENABLED (ctrlGame.game_debug == true)
 #macro LIVES_ENABLED (ctrlGame.game_mode == GAME_MODE.SINGLE)
 
 #macro SLIDE_DURATION 32

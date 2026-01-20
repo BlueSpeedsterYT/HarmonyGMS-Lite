@@ -5,5 +5,5 @@ game_speed = 1;
 game_mode = GAME_MODE.SINGLE;
 game_flags = 0;
 game_paused = 0;
-game_debug = true;
+game_debug = debug_mode;
 show_debug_overlay(game_debug);

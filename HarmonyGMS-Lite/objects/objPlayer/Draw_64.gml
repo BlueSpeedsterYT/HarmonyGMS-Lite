@@ -1,5 +1,5 @@
 /// @description Debug
-if (not ctrlGame.game_debug) exit;
+if (not DEBUG_ENABLED) exit;
 if (player_index != 0) exit;
 draw_set_font(global.font_debug);
 draw_set_halign(fa_right);

@@ -17,7 +17,7 @@ if (input_allow)
 		});
 		
 		// Enter Debug
-		if (input_button.select.pressed)
+		if (DEBUG_ENABLED and input_button.select.pressed)
 		{
 			player_perform((state != player_is_debugging) ? player_is_debugging : player_is_falling);
 		}
@@ -34,29 +34,6 @@ player_animate();
 
 x_speed = clamp(x_speed, -max_speed, max_speed);
 
-with (spin_dash_dust)
-{
-    var action = other.state;
-    if (action == player_is_spin_dashing)
-    {
-        var x_int = other.x div 1;
-        var y_int = other.y div 1;
-        var sine = dsin(other.gravity_direction);
-        var cosine = dcos(other.gravity_direction);
-        var charge = floor(other.spin_dash_charge);
-        x = x_int + sine * other.y_radius;
-        y = y_int + cosine * other.y_radius;
-        image_xscale = other.image_xscale;
-        image_angle = other.mask_direction;
-        animation_data.variant = (charge > 2);
-        animation_set(global.ani_spin_dash_dust);
-    }
-    else if (not is_undefined(animation_data.ani))
-    {
-        animation_set(undefined);
-    }
-}
-
 with (shield)
 {
     var invincible = (other.invincibility_time > 0);
@@ -64,8 +41,6 @@ with (shield)
     {
         var x_int = other.x div 1;
         var y_int = other.y div 1;
-        var sine = dsin(other.gravity_direction);
-        var cosine = dcos(other.gravity_direction);
         x = x_int;
         y = y_int;
         
@@ -102,6 +77,29 @@ with (shield)
         image_xscale = 1;
         image_angle = other.gravity_direction;
         image_alpha = 1;
+    }
+    else if (not is_undefined(animation_data.ani))
+    {
+        animation_set(undefined);
+    }
+}
+
+with (spin_dash_dust)
+{
+    var action = other.state;
+    if (action == player_is_spin_dashing)
+    {
+        var x_int = other.x div 1;
+        var y_int = other.y div 1;
+        var sine = dsin(other.gravity_direction);
+        var cosine = dcos(other.gravity_direction);
+        var charge = floor(other.spin_dash_charge);
+        x = x_int + sine * other.y_radius;
+        y = y_int + cosine * other.y_radius;
+        image_xscale = other.image_xscale;
+        image_angle = other.mask_direction;
+        animation_data.variant = (charge > 2);
+        animation_set(global.ani_spin_dash_dust);
     }
     else if (not is_undefined(animation_data.ani))
     {

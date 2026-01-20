@@ -30,7 +30,7 @@ with (shield)
 	}
 }
 
-if (not ctrlGame.game_debug) exit;
+if (not DEBUG_ENABLED) exit;
 
 // Hitboxes
 draw_hitboxes(mask_direction);

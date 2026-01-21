@@ -12,7 +12,7 @@ function sonic_is_skidding(phase)
 			sound_play(sfxSwipe);
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.SKIDDING, 0);
+			animation_init(SONIC_ANIMATION.SKIDDING, 0);
 			break;
 		}
 		case PHASE.STEP:
@@ -20,7 +20,7 @@ function sonic_is_skidding(phase)
 			if (on_ground)
 			{
 				// Friction
-				var is_skidding_anim = (animation_data.index == PLAYER_ANIMATION.SKIDDING and animation_data.variant == 1);
+				var is_skidding_anim = (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_data.variant == 1);
 				var friction_value = is_skidding_anim ? 0.125 : acceleration;
 				x_speed -= min(abs(x_speed), friction_value) * sign(x_speed);
 				
@@ -43,7 +43,7 @@ function sonic_is_skidding(phase)
 				}
 				
 				// Update
-				if (animation_data.index == PLAYER_ANIMATION.SKIDDING and animation_is_finished())
+				if (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_is_finished())
 				{
 					switch (animation_data.variant)
 					{
@@ -73,7 +73,7 @@ function sonic_is_skidding(phase)
 			}
 			
 			// Do Skidding related stuff...
-			if (animation_data.index == PLAYER_ANIMATION.SKIDDING and animation_data.variant == 1)
+			if (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_data.variant == 1)
 			{
 				// Create brake dust
 				if (animation_data.time mod 4 == 0)

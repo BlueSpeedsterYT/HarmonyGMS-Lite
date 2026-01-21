@@ -31,7 +31,7 @@ player_try_skill = function()
 			// TODO: Implement some sort of range check to allow for the homing attack to take
 			// over from the insta-shield
 			shield_action = false;
-			animation_init(PLAYER_ANIMATION.INSTA_SHIELD);
+			animation_init(SONIC_ANIMATION.INSTA_SHIELD);
 			player_perform(player_is_falling, false);
 			with (insta_shield)
 		    {
@@ -436,7 +436,7 @@ player_animate = function()
 			}
 			break;
 		}
-		case PLAYER_ANIMATION.INSTA_SHIELD:
+		case SONIC_ANIMATION.INSTA_SHIELD:
 		{
 			player_set_animation(global.ani_sonic_insta_shield_v0);
 			player_set_radii(6, 9);
@@ -458,7 +458,7 @@ player_animate = function()
 			}
 			break;
 		}
-		case PLAYER_ANIMATION.SKIDDING:
+		case SONIC_ANIMATION.SKIDDING:
 		{
 			player_set_animation(global.ani_sonic_skidding);
 			player_set_radii(6, 9);

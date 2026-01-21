@@ -13,7 +13,7 @@ function player_is_falling(phase)
 			player_ground(undefined);
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.FALL, 0, [PLAYER_ANIMATION.RUN, PLAYER_ANIMATION.ROLL, PLAYER_ANIMATION.INSTA_SHIELD]);
+			animation_init(PLAYER_ANIMATION.FALL, 0, [PLAYER_ANIMATION.RUN, PLAYER_ANIMATION.ROLL]);
 			break;
 		}
 		case PHASE.STEP:
@@ -79,7 +79,7 @@ function player_is_jumping(phase)
 			player_ground(undefined);
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.JUMP, 0, [PLAYER_ANIMATION.INSTA_SHIELD]);
+			animation_init(PLAYER_ANIMATION.JUMP, 0);
 			break;
 		}
 		case PHASE.STEP:

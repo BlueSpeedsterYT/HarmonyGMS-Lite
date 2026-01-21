@@ -501,7 +501,7 @@ player_animate = function()
 			}
 			break;
 		}
-		case PLAYER_ANIMATION.GLIDE:
+		case KNUCKLES_ANIMATION.GLIDE:
 		{
 			player_set_animation(global.ani_knuckles_glide_v0);
 			player_set_radii(6, 6);
@@ -512,7 +512,7 @@ player_animate = function()
             }
 			break;
 		}
-		case PLAYER_ANIMATION.GLIDE_TURN:
+		case KNUCKLES_ANIMATION.GLIDE_TURN:
 		{
 			player_set_animation(global.ani_knuckles_glide_turn);
 			player_set_radii(6, 6);
@@ -557,7 +557,7 @@ player_animate = function()
 			}
 			break;
 		}
-		case PLAYER_ANIMATION.GLIDE_SLIDING:
+		case KNUCKLES_ANIMATION.GLIDE_SLIDING:
 		{
 			player_set_animation(global.ani_knuckles_glide_sliding_v0);
 			player_set_radii(6, 6);
@@ -568,7 +568,7 @@ player_animate = function()
             }
 			break;
 		}
-		case PLAYER_ANIMATION.GLIDE_FALL:
+		case KNUCKLES_ANIMATION.GLIDE_FALL:
         {
             player_set_animation(global.ani_knuckles_glide_falling);
             player_set_radii(6, 14);

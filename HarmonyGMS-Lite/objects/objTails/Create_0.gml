@@ -440,7 +440,7 @@ player_animate = function()
 			}
 			break;
 		}
-		case PLAYER_ANIMATION.FLYING:
+		case TAILS_ANIMATION.FLYING:
 		{
 			player_set_animation(global.ani_tails_flying_v0);
             player_set_radii(6, 14);
@@ -451,7 +451,7 @@ player_animate = function()
             }
 			break;
 		}
-		case PLAYER_ANIMATION.FLYING_TURN:
+		case TAILS_ANIMATION.FLYING_TURN:
 		{
 			player_set_animation(global.ani_tails_flying_turn_v0);
             player_set_radii(6, 14);
@@ -462,7 +462,7 @@ player_animate = function()
             }
 			break;
 		}
-		case PLAYER_ANIMATION.FLYING_TIRED:
+		case TAILS_ANIMATION.FLYING_TIRED:
 		{
 			player_set_animation(global.ani_tails_flying_tired_v0);
             player_set_radii(6, 14);

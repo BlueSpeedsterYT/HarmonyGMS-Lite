@@ -29,7 +29,7 @@ function knuckles_is_gliding(phase)
 		    glide_force = 0.5;
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.GLIDE);
+			animation_init(KNUCKLES_ANIMATION.GLIDE);
 			break;
 		}
 		case PHASE.STEP:
@@ -108,12 +108,12 @@ function knuckles_is_gliding(phase)
 			image_xscale = (glide_angle_sa2 == 0x80) ? -1 : 1;
 			if (not (glide_angle_sa2 & 0x7F))
 			{
-				animation_init(PLAYER_ANIMATION.GLIDE);
+				animation_init(KNUCKLES_ANIMATION.GLIDE);
 			}
 			else
 			{
 				var glide_turn_sa2_calc = (glide_angle_sa2 & 0x7F) >> 5;
-				animation_init(PLAYER_ANIMATION.GLIDE_TURN, glide_turn_sa2_calc);
+				animation_init(KNUCKLES_ANIMATION.GLIDE_TURN, glide_turn_sa2_calc);
 			}
 			break;
 		}
@@ -142,7 +142,7 @@ function knuckles_is_falling(phase)
 			x_speed *= 0.25;
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.GLIDE_FALL, 0);
+			animation_init(KNUCKLES_ANIMATION.GLIDE_FALL, 0);
 			break;
 		}
 		case PHASE.STEP:

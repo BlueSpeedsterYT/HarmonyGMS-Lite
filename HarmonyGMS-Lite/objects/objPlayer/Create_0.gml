@@ -12,6 +12,8 @@ state_changed = false;
 spin_dash_charge = 0;
 spin_dash_dust = new stamp();
 
+aerial_flags = 0;
+
 jump_cap = true;
 
 trick_index = TRICK_TYPE.FRONT;
@@ -24,7 +26,6 @@ for (var i = 0; i < array_length(trick_speed); i++)
 // Shield
 shield = new stamp();
 shield.index = SHIELD.NONE;
-shield_action = true;
 
 // Timers
 state_time = 0;
@@ -268,8 +269,12 @@ player_set_radii = function(xrad, yrad)
     x_radius = xrad;
     x_wall_radius = x_radius + 2;
     y_radius = yrad;
-    x += sine * (old_y_radius - y_radius);
-    y += cosine * (old_y_radius - y_radius);
+	
+    if (on_ground)
+    {
+        x += sine * (old_y_radius - y_radius);
+        y += cosine * (old_y_radius - y_radius);
+    }
 };
 
 /// @method player_animate_teeter(ani)
@@ -465,9 +470,9 @@ player_damage = function(inst)
 /// @returns {Bool}
 player_try_skill = function () { return false; };
 
-/// @method player_refresh_aerial_skills()
+/// @method player_refresh_aerials()
 /// @description Resets aerial character skills when grounded.
-player_refresh_aerial_skills = function() {};
+player_refresh_aerials = function() {};
 
 /// @method player_animate()
 /// @description Sets the player's current animation.

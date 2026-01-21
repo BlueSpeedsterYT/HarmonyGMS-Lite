@@ -89,6 +89,15 @@ enum PAUSE_FLAG
 	MENU = (1 << 3),
 }
 
+enum AERIAL_FLAG
+{
+	NONE = (1 << 0),
+	PLATFORM = (1 << 1),
+	SHIELD_ACTION = (1 << 2),
+	BOUND = (1 << 3),
+	AIR_DASH = (1 << 4),
+}
+
 enum GAME_MODE
 {
 	SINGLE, MULTI, TIME_ATTACK

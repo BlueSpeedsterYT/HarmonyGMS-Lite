@@ -114,9 +114,6 @@ function player_is_running(phase)
 		}
 		case PHASE.STEP:
 		{
-			var facing = sign(x_speed);
-			var velocity = abs(x_speed);
-			
 			// Jump
 			if (player_try_jump()) return true;
 			
@@ -129,26 +126,30 @@ function player_is_running(phase)
 				if (input_axis_x != 0)
 				{
 					// If moving in the opposite direction...
-					if (x_speed != 0 and facing != input_axis_x)
+					if (x_speed != 0 and sign(x_speed) != input_axis_x)
 					{
 						// Decelerate and reverse direction
 						can_brake = true;
 						x_speed += deceleration * input_axis_x;
-                        if (facing == input_axis_x)
+                        if (sign(x_speed) == input_axis_x)
                         {
                             // Turn
-                            if (image_xscale != input_axis_x) can_turn = true;
+                            if (sign(x_speed) != image_xscale) can_turn = true;
 							x_speed = deceleration * input_axis_x;
                         }
 					}
+                    else if (x_speed == 0 and image_xscale != input_axis_x)
+                    {
+                        can_turn = true;
+                    }
 					else
 					{
 						// Accelerate
 						can_brake = false;
 						image_xscale = input_axis_x;
-						if (velocity < speed_cap)
+						if (abs(x_speed) < speed_cap)
 						{
-							x_speed = min(velocity + acceleration, speed_cap) * input_axis_x;
+							x_speed = min(abs(x_speed) + acceleration, speed_cap) * input_axis_x;
 						}
 					}
 				}
@@ -194,6 +195,7 @@ function player_is_running(phase)
 			if (x_speed == 0 and input_axis_x == 0) return player_perform(player_is_standing);
 			
 			// Animate
+			var velocity = abs(x_speed);
             if (can_turn)
             {
                 x_speed = 0;

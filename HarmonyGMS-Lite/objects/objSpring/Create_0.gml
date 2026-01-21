@@ -54,7 +54,8 @@ reaction = function(pla)
                 pla.y_speed = -dsin(diff) * force;
             }
             pla.state_time = max(2, TRICK_LOCK_DURATION - (force / 1.5) div 1);
-			pla.player_refresh_aerial_skills();
+			pla.aerial_flags = 0;
+			pla.player_refresh_aerials();
             active |= bit;
             animation_data.variant = 1;
             sound_play(sfxSpring);

@@ -5,9 +5,12 @@ function player_is_falling(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Rise
-			y_speed = -dsin(local_direction) * x_speed;
-			x_speed *= dcos(local_direction);
+            if (not (aerial_flags & AERIAL_FLAG.PLATFORM))
+            {
+                // Rise
+                y_speed = -dsin(local_direction) * x_speed;
+                x_speed *= dcos(local_direction);
+            }
 			
 			// Detach from ground
 			player_ground(undefined);
@@ -54,6 +57,7 @@ function player_is_falling(phase)
 		}
 		case PHASE.EXIT:
 		{
+			aerial_flags &= ~AERIAL_FLAG.PLATFORM;
 			break;
 		}
 	}

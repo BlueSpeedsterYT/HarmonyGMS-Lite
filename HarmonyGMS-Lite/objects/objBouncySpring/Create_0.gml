@@ -27,7 +27,8 @@ reaction = function(pla)
             pla.y_speed = -force;
 			pla.y_speed = clamp(pla.y_speed, -12.0, -7.5);
             pla.state_time = max(2, TRICK_LOCK_DURATION - (force / 1.5) div 1);
-			pla.player_refresh_aerial_skills();
+			pla.aerial_flags = 0;
+			pla.player_refresh_aerials();
             active |= bit;
             animation_data.variant = index;
             // TODO: SA2 uses a different sound for the bouncy springs so use that

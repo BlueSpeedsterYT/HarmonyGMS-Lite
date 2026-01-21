@@ -16,11 +16,13 @@ reaction = function (pla)
 	            {
 					with (pla)
 					{
+						x_speed += 3;
+						y_speed = -17;
 						animation_init(PLAYER_ANIMATION.SPRING_TWIRL, 0);
 						player_perform(player_is_sprung);
 					}
-					pla.x_speed += 17;
-	                pla.y_speed = -3;
+					pla.aerial_flags = 0;
+					pla.player_refresh_aerials();
 		            active |= bit;
 		            sound_play(sfxSpring);
 				}
@@ -31,13 +33,15 @@ reaction = function (pla)
 				{
 					with (pla)
 					{
+						x_speed += -3;
+						y_speed = -17;
 						// NOTE: Needs a different jumping animation but for now,
 						// set it as the default jumping animation.
 						animation_init(PLAYER_ANIMATION.JUMP, 0);
 						player_perform(player_is_sprung);
 					}
-					pla.x_speed += -17;
-	                pla.y_speed = -3;
+					pla.aerial_flags = 0;
+					pla.player_refresh_aerials();
 					active |= bit;
 		            sound_play(sfxSpring);
 				}

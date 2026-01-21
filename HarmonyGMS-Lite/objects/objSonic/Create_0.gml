@@ -30,20 +30,23 @@ player_try_skill = function()
 			// Insta-Shield (or Homing Attack at close distances)
 			// TODO: Implement some sort of range check to allow for the homing attack to take
 			// over from the insta-shield
-			shield_action = false;
-			animation_init(SONIC_ANIMATION.INSTA_SHIELD);
-			player_perform(player_is_falling, false);
-			with (insta_shield)
-		    {
-		        x = other.x div 1;
-		        y = other.y div 1;
-				depth = other.depth;
-		        image_xscale = other.image_xscale;
-		        image_angle = other.image_angle;
+			if (not (aerial_flags & AERIAL_FLAG.SHIELD_ACTION))
+			{
+				aerial_flags |= AERIAL_FLAG.SHIELD_ACTION;
+				animation_init(SONIC_ANIMATION.INSTA_SHIELD);
+				player_perform(player_is_falling, false);
+				with (insta_shield)
+			    {
+			        x = other.x div 1;
+			        y = other.y div 1;
+					depth = other.depth;
+			        image_xscale = other.image_xscale;
+			        image_angle = other.image_angle;
         
-		        animation_set(global.ani_sonic_insta_shield_v1);
-		    }
-			return true;
+			        animation_set(global.ani_sonic_insta_shield_v1);
+			    }
+				return true;
+			}
 		}
 		// Forward Thrust
 		// NOT AVAILABLE since it would need to have an input buffer.

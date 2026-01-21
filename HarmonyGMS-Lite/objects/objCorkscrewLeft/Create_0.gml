@@ -3,7 +3,7 @@ event_inherited();
 hitboxes[0].set_size(-16, -88, 32, 96);
 reaction = function (pla)
 {
-	// Be free
+	// Be Corkscrewing... on the right!
 	if (collision_player(0, pla))
 	{
 		// collide

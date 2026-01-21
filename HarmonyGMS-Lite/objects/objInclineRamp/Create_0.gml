@@ -5,7 +5,8 @@ hitboxes[0].set_size(0, 0, sprite_width, sprite_height);
 reaction = function (pla)
 {
 	var bit = 1 << pla.player_index;
-    if (collision_player(0, pla))
+    if (not pla.on_ground) exit;
+	if (collision_player(0, pla))
     {
         if (active & bit == 0)
         {

@@ -1,6 +1,6 @@
 /// @description Initialize
 event_inherited();
-hitboxes[0].set_size(-2, -11, 4, 12);
+hitboxes[0].set_size(-16, -88, 32, 96);
 reaction = function (pla)
 {
 	// Go Corkscrewing

@@ -423,7 +423,7 @@ player_damage = function(inst)
     if (inst == id or (player_index == 0 and shield.index == SHIELD.NONE and global.ring_count == 0))
     {
         y_speed = -7;
-        sound_play(inst != noone and inst.object_index == objSpikes ? sfxSpikesHurt : sfxHurt);
+        sound_play(sfxHurt);
         return player_perform(player_is_dead);
     }
     else

@@ -179,6 +179,9 @@ function player_is_dead(phase)
 			// Detach from ground
 			player_ground(undefined);
 			
+			// Set camera mode
+			camera_set_state(CAMERA_STATE.NULL);
+			
 			// Animate
 			animation_init(PLAYER_ANIMATION.DEAD);
 			break;

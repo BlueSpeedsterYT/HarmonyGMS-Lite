@@ -25,19 +25,19 @@ function tails_is_flying(phase)
 			}
 			
 			// Set up flight system
-			if (fly_force_time != 1)
+			if (fly_state_time != 1)
 			{
 				if (y_speed >= TAILS_FLY_THRESHOLD)
 				{
 					fly_force = -TAILS_FLY_ASCEND_FORCE;
-					if (++fly_force_time == 32)
+					if (++fly_state_time == 32)
 					{
-						fly_force_time = 1;
+						fly_state_time = 1;
 					}
 				}
 				else
 				{
-					fly_force_time = 1;
+					fly_state_time = 1;
 				}
 			}
 			else
@@ -45,7 +45,7 @@ function tails_is_flying(phase)
 				// Fly Upwards
 				if (input_button.jump.pressed and fly_time and y_speed >= TAILS_FLY_THRESHOLD)
 				{
-					fly_force_time = 2;
+					fly_state_time = 2;
 				}
 				
 				fly_force = TAILS_FLY_BASE_FORCE;
@@ -135,6 +135,7 @@ function tails_is_flying(phase)
 			{
 				audio_stop_sound(fly_sound);
 			}
+			fly_state_time = 0;
 			break;
 		}
 	}

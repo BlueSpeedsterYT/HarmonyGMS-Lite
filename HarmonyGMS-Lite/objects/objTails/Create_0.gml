@@ -6,7 +6,7 @@ character_index = CHARACTER.TAILS;
 
 fly_time = -1;
 fly_force = TAILS_FLY_BASE_FORCE;
-fly_force_time = 0;
+fly_state_time = 0;
 fly_sound = noone;
 
 trick_speed =
@@ -33,7 +33,7 @@ player_try_skill = function()
 			// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
 			// the Advance games.
 			fly_time = TAILS_FLIGHT_DURATION;
-			fly_force_time = 1; 
+			fly_state_time = 1; 
 			player_perform(tails_is_flying);
 			return true;
         }
@@ -485,14 +485,6 @@ player_animate = function()
 		}
     }
 };
-
-player_refresh_aerial_skills = function()
-{
-	fly_time = -1;
-	fly_force = TAILS_FLY_BASE_FORCE;
-	fly_force_time = 0;
-	fly_sound = noone;
-}
 
 player_draw_before = function()
 {

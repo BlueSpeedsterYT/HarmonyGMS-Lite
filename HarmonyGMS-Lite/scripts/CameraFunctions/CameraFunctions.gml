@@ -1,3 +1,15 @@
+/// @function camera_set_state(new_state, [force])
+/// @description Sets the camera's state.
+/// @param {Enum.CAMERA_STATE} new_state State to set.
+/// @param {Bool} [force] Set state even if not the camera's focus (optional, defaults to false).
+function camera_set_state(new_state, force = false)
+{
+    with (objCamera)
+    {
+        if (force or focus == other.id) state = new_state;
+    }
+}
+
 /// @function camera_set_look_time(time, [force])
 /// @description Sets the camera's look time.
 /// @param {Real} time Time to set.

@@ -198,7 +198,13 @@ function player_is_dead(phase)
             x += sine * y_speed;
             y += cosine * y_speed;
 			
-			// TODO: SonicForGMS checks if the player is 48 below bound_bottom.
+			// Lock up
+			var y_int = y div 1;
+			var cam_y = camera_get_view_y(CAMERA_ID);
+			if (y_int >= cam_y + (CAMERA_HEIGHT + 80) - 1)
+			{
+				return player_handle_death();
+			}
 			
 			// Fall
 			if (y_speed < gravity_cap)

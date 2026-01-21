@@ -186,7 +186,7 @@ global.ani_tails_fall = [global.ani_tails_fall_v0, global.ani_tails_fall_v1];
 
 global.ani_tails_jump_v0 = new animation(sprTailsJump0, 3, -1);
 global.ani_tails_jump_v1 = new animation(sprTailsJump1, 2);
-global.ani_tails_jump_v2 = new animation(sprTailsJump2, [1, 2, 2, 2, 2, 2]);
+global.ani_tails_jump_v2 = new animation(sprTailsJump2, [1, 2, 2, 2, 2, 2], 3);
 global.ani_tails_jump = [global.ani_tails_jump_v0, global.ani_tails_jump_v1, global.ani_tails_jump_v2];
 
 global.ani_tails_hurt_v0 = new animation(sprTailsHurt0, [3, 8, 8, 8, 8], -1);

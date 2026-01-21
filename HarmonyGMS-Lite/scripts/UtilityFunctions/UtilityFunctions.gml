@@ -225,20 +225,10 @@ function string_pad(val, digits)
     return string_repeat("-", val < 0) + string_replace_all(string_format(abs(val), digits, 0), " ", "0");
 }
 
-/// @description Fades out from the current room and into the given room.
-/// @param {Asset.GMRoom} target_room Room to switch to.
-/// @param {Real} [steps] Transition length in steps (optional, default is 24.)
-/// @param {Color} [color] Transition color (optional, default is c_black.)
-function transition_to(target_room, steps = 24, color = c_black)
+/// @description Sets up the needed Game Over screen
+/// @param {Real} type Type of Game Over gotten.
+function game_over_create(type)
 {
-	// Abort if already transitioning
-	if (instance_exists(objTransition)) exit;
-	
-	// Transition
-	with (instance_create_depth(0, 0, -100, objTransition))
-	{
-		self.target_room = target_room;
-		self.transition_color = color;
-		image_speed = 1 / steps;
-	}
+	// TODO: Set this up.
+	show_debug_message($"game has ended due to {type == GAME_OVER_TYPE.ZERO_LIVES ? "a lack of lives" : "staying up for ten minutes"}");
 }

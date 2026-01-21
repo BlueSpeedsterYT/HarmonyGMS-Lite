@@ -27,8 +27,10 @@
 #macro COLL_FLAG_LEFT 0x40000
 #macro COLL_FLAG_RIGHT 0x80000
 
+#macro GAME_MODE_IS_TIME_ATTACK (ctrlGame.game_mode == GAME_MODE.TIME_ATTACK)
 #macro DEBUG_ENABLED (ctrlGame.game_debug == true)
-#macro LIVES_ENABLED (ctrlGame.game_mode == GAME_MODE.SINGLE)
+#macro LIVES_ENABLED (false or (not GAME_MODE_IS_TIME_ATTACK))
+#macro TIME_OVER_ENABLED false
 
 #macro LOOK_DURATION time_to_frames(0, 2)
 #macro SLIDE_DURATION 32
@@ -98,9 +100,16 @@ enum AERIAL_FLAG
 	AIR_DASH = (1 << 4),
 }
 
+enum GAME_OVER_TYPE
+{
+	NONE = (1 << 0),
+	ZERO_LIVES = (1 << 1),
+	TIME_UP = (1 << 2)
+}
+
 enum GAME_MODE
 {
-	SINGLE, MULTI, TIME_ATTACK
+	SINGLE, TIME_ATTACK,
 }
 
 enum CHARACTER
@@ -187,4 +196,4 @@ instance_create_layer(0, 0, "Controllers", ctrlWindow);
 instance_create_layer(0, 0, "Controllers", ctrlMusic);
 
 // Start game
-transition_to(rmTest2);
+room_goto(rmTest2);

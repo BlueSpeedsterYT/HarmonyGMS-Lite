@@ -1,12 +1,13 @@
 /// @description Initialize
 image_speed = 0;
 stage_players = [];
+pause_enabled = true;
 
 // Timing
 stage_time = 0;
 time_limit = time_to_frames(10, 0);
 time_over = false;
-time_enabled = true;
+time_enabled = false;
 
 // Stage data
 name = "";

@@ -19,4 +19,6 @@ switch (room)
 	}
 }
 
-transition_to(-1);
+// Create UI elements
+instance_create_layer(0, 0, "Overlays", objHUD);
+

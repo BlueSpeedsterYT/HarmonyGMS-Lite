@@ -34,6 +34,7 @@ recovery_time = 0;
 invincibility_time = 0;
 superspeed_time = 0;
 rotation_lock_time = 0;
+death_time = 0;
 
 // Physics
 x_speed = 0;
@@ -121,6 +122,8 @@ animation_data = new animation_core();
 camera = noone;
 
 // Misc.
+ring_life_threshold = LIVES_ENABLED ? 99 : 0;
+
 /// @method player_perform(action, [start])
 /// @description Sets the given function as the player's current state.
 /// @param {Function} action State function to set.
@@ -348,8 +351,11 @@ player_gain_score = function (num)
 	global.score_count = min(global.score_count + num, SCORE_CAP);
 	
 	// Gain lives
-	var count = global.score_count div 50000;
-	if (count != previous_count) player_gain_lives(count - previous_count);
+	if (LIVES_ENABLED)
+	{
+		var count = global.score_count div 50000;
+		if (count != previous_count) player_gain_lives(count - previous_count);
+	}
 };
 
 /// @method player_gain_rings(num)
@@ -360,13 +366,15 @@ player_gain_rings = function(num)
 	global.ring_count = min(global.ring_count + num, RING_CAP);
 	
 	// Gain lives
-    static ring_life_threshold = 99;
-    if (global.ring_count > ring_life_threshold)
-    {
-        var change = global.ring_count div 100;
-        player_gain_lives(change - ring_life_threshold div 100);
-        ring_life_threshold = change * 100 + 99;
-    }
+	if (LIVES_ENABLED)
+	{
+	    if (global.ring_count > ring_life_threshold)
+	    {
+	        var change = global.ring_count div 100;
+	        player_gain_lives(change - ring_life_threshold div 100);
+	        ring_life_threshold = change * 100 + 99;
+	    }
+	}
 };
 
 /// @method player_lose_rings()
@@ -463,6 +471,68 @@ player_damage = function(inst)
         if (not ring_loss) sound_play(inst != noone and inst.object_index == objSpikes ? sfxSpikesHurt : sfxHurt);
         return player_perform(player_is_hurt);
     }
+};
+
+/// @method player_handle_death()
+/// @description Sets up how the player death is handled
+player_handle_death = function()
+{
+	if (death_time == time_to_frames(0, 1))
+	{
+		// TODO: Handle potential Multiplayer later.
+		if ((not TIME_OVER_ENABLED and ctrlZone.time_over)
+		or (GAME_MODE_IS_TIME_ATTACK and ctrlZone.time_over))
+		{
+			if (GAME_MODE_IS_TIME_ATTACK)
+			{
+				// TODO: Reset to a potential Time Attack menu.
+			}
+			else
+			{
+				// Show a Game Over screen depending on certain conditions
+				if (LIVES_ENABLED)
+				{
+					game_over_create((--global.life_count == 0) ? GAME_OVER_TYPE.ZERO_LIVES : GAME_OVER_TYPE.TIME_UP);
+				}
+				else
+				{
+					game_over_create(GAME_OVER_TYPE.TIME_UP);
+				}
+			}
+		}
+		else
+		{
+			global.ring_count = 0;
+			if (GAME_MODE_IS_TIME_ATTACK)
+			{
+				// TODO: Reset to a potential Time Attack menu.
+			}
+			else
+			{
+				// Check if the lives system is allowed here
+				if (LIVES_ENABLED)
+				{
+					// Show a Game Over screen upon having zero lives
+					if (--global.life_count == 0)
+					{
+						game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
+					}
+					else
+					{
+						room_restart();
+					}
+				}
+				else
+				{
+					room_restart();
+				}
+			}
+		}
+	}
+	else
+	{
+		++death_time;
+	}
 };
 
 /// @method player_try_skill()

@@ -229,6 +229,19 @@ function string_pad(val, digits)
 /// @param {Real} type Type of Game Over gotten.
 function game_over_create(type)
 {
-	// TODO: Set this up.
-	show_debug_message($"game has ended due to {type == GAME_OVER_TYPE.ZERO_LIVES ? "a lack of lives" : "staying up for ten minutes"}");
+	if (instance_exists(objGameOver)) exit;
+	
+	with (instance_create_layer(0, 0, "Overlays", objGameOver))
+	{
+		game_over_cause = type;
+		delay = 10;
+		if (type & GAME_OVER_TYPE.ZERO_LIVES)
+		{
+			frames_until_done = 140;
+		}
+		else
+		{
+			frames_until_done = 180;
+		}
+	}
 }

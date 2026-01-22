@@ -480,7 +480,7 @@ player_handle_death = function()
 	if (death_time == time_to_frames(0, 1))
 	{
 		// TODO: Handle potential Multiplayer later.
-		if ((not TIME_OVER_ENABLED and ctrlZone.time_over)
+		if ((TIME_OVER_ENABLED and ctrlZone.time_over)
 		or (GAME_MODE_IS_TIME_ATTACK and ctrlZone.time_over))
 		{
 			if (GAME_MODE_IS_TIME_ATTACK)
@@ -493,10 +493,12 @@ player_handle_death = function()
 				if (LIVES_ENABLED)
 				{
 					game_over_create((--global.life_count == 0) ? GAME_OVER_TYPE.ZERO_LIVES : GAME_OVER_TYPE.TIME_UP);
+					exit;
 				}
 				else
 				{
 					game_over_create(GAME_OVER_TYPE.TIME_UP);
+					exit;
 				}
 			}
 		}
@@ -516,15 +518,18 @@ player_handle_death = function()
 					if (--global.life_count == 0)
 					{
 						game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
+						exit;
 					}
 					else
 					{
 						room_restart();
+						exit;
 					}
 				}
 				else
 				{
 					room_restart();
+					exit;
 				}
 			}
 		}

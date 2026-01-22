@@ -18,34 +18,43 @@ switch (state)
 {
     case CAMERA_STATE.FOLLOW:
     {
-        x = focus.x div 1;
-        y = focus.y div 1;
         gravity_direction = focus.gravity_direction;
-		on_ground = focus.on_ground;
+		
+		if (focus == ctrlZone.stage_players[0])
+		{
+			var action = focus.state;
+			on_ground = focus.on_ground;
         
-        // Look
-        var action = focus.state;
-        if (look_time > 0)
-        {
-            y_offset = approach(y_offset, 0, 2);
-            if (action == player_is_looking or action == player_is_crouching) look_time--;
-        }
-        else
-        {
-            switch (action)
-            {
-                case player_is_looking:
-                {
-                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_UP, 2);
-                    break;
-                }
-                case player_is_crouching:
-                {
-                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_DOWN, 2);
-                    break;
-                }
-            }
-        }
+			// Move
+			if (action != player_is_dead)
+			{
+				x = focus.x div 1;
+				y = focus.y div 1;
+			}
+		
+	        // Look
+	        if (look_time > 0)
+	        {
+	            y_offset = approach(y_offset, 0, 2);
+	            if (action == player_is_looking or action == player_is_crouching) look_time--;
+	        }
+	        else
+	        {
+	            switch (action)
+	            {
+	                case player_is_looking:
+	                {
+	                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_UP, 2);
+	                    break;
+	                }
+	                case player_is_crouching:
+	                {
+	                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_DOWN, 2);
+	                    break;
+	                }
+	            }
+	        }
+		}
         break;
     }
     case CAMERA_STATE.RETURN:

@@ -183,9 +183,6 @@ function player_is_dead(phase)
 			// Detach from ground
 			player_ground(undefined);
 			
-			// Set camera mode
-			camera_set_state(CAMERA_STATE.NULL);
-			
 			// Animate
 			animation_init(PLAYER_ANIMATION.DEAD);
 			break;
@@ -205,11 +202,13 @@ function player_is_dead(phase)
 			{
 				return player_handle_death();
 			}
-			
-			// Fall
-			if (y_speed < gravity_cap)
+			else
 			{
-				y_speed = min(y_speed + gravity_force, gravity_cap);
+				// Fall
+				if (y_speed < gravity_cap)
+				{
+					y_speed = min(y_speed + gravity_force, gravity_cap);
+				}
 			}
 			break;
 		}

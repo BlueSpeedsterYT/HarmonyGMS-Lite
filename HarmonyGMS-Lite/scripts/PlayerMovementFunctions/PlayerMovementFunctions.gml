@@ -19,7 +19,10 @@ function player_move_on_ground()
 		// Apply movement step
 		x += dcos(direction) * step;
 		y -= dsin(direction) * step;
-		player_in_camera_bounds(); //TODO: Add Death State
+		if (not player_in_camera_bounds())
+		{
+			player_damage(id);
+		}
 		
 		// Find surrounding stage entities
 		player_detect_entities();
@@ -75,7 +78,10 @@ function player_move_in_air()
 		// Apply movement step
 		x += dcos(mask_direction) * step;
 		y -= dsin(mask_direction) * step;
-		player_in_camera_bounds();
+		if (not player_in_camera_bounds())
+		{
+			player_damage(id);
+		}
 		
 		// Find surrounding stage objects
 		player_detect_entities();
@@ -99,7 +105,10 @@ function player_move_in_air()
 		// Apply movement step
 		x += dsin(mask_direction) * step;
 		y += dcos(mask_direction) * step;
-		player_in_camera_bounds();
+		if (not player_in_camera_bounds())
+		{
+			player_damage(id);
+		}
 		
 		// Find surrounding stage objects
 		player_detect_entities();

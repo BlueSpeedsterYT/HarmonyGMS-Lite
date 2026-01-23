@@ -1,5 +1,5 @@
 /// @description Setup
-global.characters = [CHARACTER.TAILS, CHARACTER.NONE];
+global.characters = [CHARACTER.KNUCKLES, CHARACTER.NONE];
 
 var player_objects = [objSonic, objTails, objKnuckles];
 ctrlZone.stage_players = array_create(INPUT_MAX_PLAYERS, noone);

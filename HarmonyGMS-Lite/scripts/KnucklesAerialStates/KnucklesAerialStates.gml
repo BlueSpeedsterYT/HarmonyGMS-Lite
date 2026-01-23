@@ -34,9 +34,14 @@ function knuckles_is_gliding(phase)
 		}
 		case PHASE.STEP:
 		{
+			var glide_angle_sa2 = (glide_angle / 1.40625);
+			var glide_turn_sa2_calc = (glide_angle_sa2 & 0x7F) >> 5;
+			image_xscale = (glide_angle == 180) ? -1 : 1;
+			
 			// Glide fall
 			if (not input_button.jump.check)
 			{
+				image_xscale = (glide_angle <= 90) ? 1 : -1;
 				return player_perform(knuckles_is_falling);
 			}
 			
@@ -63,10 +68,10 @@ function knuckles_is_gliding(phase)
 			
 			// Attach to a wall and climb
 			// NOTE: Might tackle this later as it does impact the gliding state
-			//if (player_ray_collision(tilemaps, x_wall_radius * glide_direction, 0) != noone)
-			//{
-				//return player_perform(knuckles_is_climbing);
-			//}
+			if (player_arm_collision(tilemaps, x_wall_radius * glide_direction, 0) != noone)
+			{
+				return player_perform(knuckles_is_climbing);
+			}
 			
 			// Move
 			player_move_in_air();
@@ -83,6 +88,7 @@ function knuckles_is_gliding(phase)
 				}
 				else
 				{
+					sound_play(sfxSliding);
 					return player_perform(knuckles_is_sliding);
 				}
 			}
@@ -104,15 +110,12 @@ function knuckles_is_gliding(phase)
 			// NOTE: If you're ever going to tackle an Advance 2 Knuckles please do better than what
 			// I have done here, it would be wise if you understood how to make this stuff work
 			// without needing to do all of this.
-			var glide_angle_sa2 = (glide_angle / 1.40625);
-			image_xscale = (glide_angle_sa2 == 0x80) ? -1 : 1;
 			if (not (glide_angle_sa2 & 0x7F))
 			{
 				animation_init(KNUCKLES_ANIMATION.GLIDE);
 			}
 			else
 			{
-				var glide_turn_sa2_calc = (glide_angle_sa2 & 0x7F) >> 5;
 				animation_init(KNUCKLES_ANIMATION.GLIDE_TURN, glide_turn_sa2_calc);
 			}
 			break;

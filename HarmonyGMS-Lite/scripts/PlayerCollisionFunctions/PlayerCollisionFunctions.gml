@@ -38,3 +38,14 @@ function player_beam_collision(obj, xrad = x_wall_radius, yoff = 0)
 {
 	return collision_beam(xrad, yoff, mask_direction, obj);
 }
+
+/// @function player_arm_collision(obj, [xrad], [yoff])
+/// @description Checks if the given entity's mask intersects an "arm" from the player's position.
+/// @param {Asset.GMObject|Id.Instance|Id.TileMapElement} obj Object, instance or tilemap to check.
+/// @param {Real} [xrad] Distance in pixels to extend the line horizontally in one direction (optional, default is the player's wall radius).
+/// @param {Real} [yoff] Distance in pixels to offset the line vertically (optional, default is 0).
+/// @returns {Asset.GMObject|Id.Instance|Id.TileMapElement}
+function player_arm_collision(obj, xrad = x_wall_radius, yoff = 0)
+{
+	return collision_arm(xrad, yoff, mask_direction, obj);
+}

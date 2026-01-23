@@ -1,44 +1,50 @@
 /// @description Moves the player's virtual mask out of collision with the given wall.
 /// @param {Id.Instance|Id.TileMapElement} inst Instance or tilemap to eject from.
-/// @returns {Real} Sign of the wall from the player.
+/// @returns {Real|Undefined} Sign of the wall from the player, or undefined on failure to reposition.
 function player_wall_eject(inst)
 {
+	var x_int = x div 1;
+	var y_int = y div 1;
 	var sine = dsin(mask_direction);
 	var cosine = dcos(mask_direction);
-	var inside = collision_point(x div 1, y div 1, inst, true, false) != noone;
-	
-	for (var ox = 1; ox <= x_wall_radius; ++ox)
+
+	if (collision_point(x_int, y_int, inst, true, false) == noone)
 	{
-		if (not inside)
+		for (var ox = x_wall_radius - 1; ox > -1; --ox)
 		{
-			// Left of the wall
-			if (player_ray_collision(inst, ox, 0))
+			if (player_beam_collision(inst, ox) == noone)
 			{
-				x -= cosine * (x_wall_radius - ox + 1);
-				y += sine * (x_wall_radius - ox + 1);
-				return 1;
-			}
-			else if (player_ray_collision(inst, -ox, 0)) // Right of the wall
-			{
-				x += cosine * (x_wall_radius - ox + 1);
-				y -= sine * (x_wall_radius - ox + 1);
-				return -1;
+				if (collision_point(x_int + cosine * (ox + 1), y_int - sine * (ox + 1), inst, true, false) != noone)
+				{
+					x -= cosine * (x_wall_radius - ox);
+					y += sine * (x_wall_radius - ox);
+					return 1;
+				}
+				else if (collision_point(x_int - cosine * (ox + 1), y_int + sine * (ox + 1), inst, true, false) != noone)
+				{
+					x += cosine * (x_wall_radius - ox);
+					y -= sine * (x_wall_radius - ox);
+					return -1;
+				}
 			}
 		}
-		else if (not player_ray_collision(inst, ox, 0)) // Right of the wall
+	}
+	else for (var ox = 1; ox <= x_wall_radius; ++ox)
+	{
+		if (collision_point(x_int + cosine * ox, y_int - sine * ox, inst, true, false) == noone)
 		{
 			x += cosine * (x_wall_radius + ox);
 			y -= sine * (x_wall_radius + ox);
 			return -1;
 		}
-		else if (not player_ray_collision(inst, -ox, 0)) // Left of the wall
+		else if (collision_point(x_int - cosine * ox, y_int + sine * ox, inst, true, false) == noone)
 		{
 			x -= cosine * (x_wall_radius + ox);
 			y += sine * (x_wall_radius + ox);
 			return 1;
 		}
 	}
-	
+
 	return undefined;
 }
 
@@ -73,16 +79,16 @@ function player_detect_angle()
 	
 	// Abort on no collision
 	if (edge == 0) exit;
-	
-	// Define offset point from which the ground normal should be calculated
-	var sine = dsin(mask_direction);
-	var cosine = dcos(mask_direction);
-	var ox = x div 1 + sine * y_radius;
-	var oy = y div 1 + cosine * y_radius;
 
-	// Calculate the ground normal and set new angle values
+	// Set new angle values
 	if (edge & (edge - 1) == 0) // Check if only one sensor is grounded (power of 2 calculation)
 	{
+		// Define offset point from which the ground normal should be calculated
+		var sine = dsin(mask_direction);
+		var cosine = dcos(mask_direction);
+		var ox = x div 1 + sine * y_radius;
+		var oy = y div 1 + cosine * y_radius;
+		
 		// Reposition offset point, if applicable
 		if (edge == 1)
 		{

@@ -76,3 +76,24 @@ function collision_beam(xrad, yoff, rot, obj)
 	
 	return collision_line(x1, y1, x2, y2, obj, true, false);
 }
+
+/// @description Checks if the given instance intersects a line from the calling instance's center point.
+/// @param {Real} xrad Distance to extend the sensor horizontally in one direction.
+/// @param {Real} yoff Distance to offset the line vertically.
+/// @param {Bool} rot Angle to rotate the line.
+/// @param {Asset.GMObject|Id.Instance|Id.TileMapElement} obj Object, instance or tilemap to check.
+/// @returns {Asset.GMObject|Id.Instance|Id.TileMapElement}
+function collision_arm(xrad, yoff, rot, obj)
+{
+	var x_int = x div 1;
+	var y_int = y div 1;
+	var sine = dsin(rot);
+	var cosine = dcos(rot);
+	
+	var x1 = x_int;
+	var y1 = y_int;
+	var x2 = x_int + (cosine * xrad) + (sine * yoff);
+	var y2 = y_int - (sine * xrad) + (cosine * yoff);
+	
+	return collision_line(x1, y1, x2, y2, obj, true, false);
+}

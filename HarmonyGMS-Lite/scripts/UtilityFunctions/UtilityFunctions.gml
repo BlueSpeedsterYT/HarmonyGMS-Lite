@@ -235,7 +235,7 @@ function game_over_create(type)
 	{
 		game_over_cause = type;
 		delay = 10;
-		if (type & GAME_OVER_TYPE.ZERO_LIVES)
+		if (type == GAME_OVER_TYPE.ZERO_LIVES)
 		{
 			frames_until_done = 140;
 		}

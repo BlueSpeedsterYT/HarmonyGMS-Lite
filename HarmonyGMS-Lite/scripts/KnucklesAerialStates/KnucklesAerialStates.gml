@@ -34,14 +34,10 @@ function knuckles_is_gliding(phase)
 		}
 		case PHASE.STEP:
 		{
-			var glide_angle_sa2 = (glide_angle / 1.40625);
-			var glide_turn_sa2_calc = (glide_angle_sa2 & 0x7F) >> 5;
-			image_xscale = (glide_angle == 180) ? -1 : 1;
-			
 			// Glide fall
 			if (not input_button.jump.check)
 			{
-				image_xscale = (glide_angle <= 90) ? 1 : -1;
+				if (x_speed != 0) image_xscale = sign(x_speed);
 				return player_perform(knuckles_is_falling);
 			}
 			
@@ -52,7 +48,7 @@ function knuckles_is_gliding(phase)
 		    }
 			
 			// Give speed if dead ahead
-			if (abs(glide_angle) mod 180 == 0) 
+			if (glide_angle mod 180 == 0) 
 			{
 		        if (glide_speed < 16)
 				{
@@ -107,16 +103,15 @@ function knuckles_is_gliding(phase)
 			}
 			
 			// Animate
-			// NOTE: If you're ever going to tackle an Advance 2 Knuckles please do better than what
-			// I have done here, it would be wise if you understood how to make this stuff work
-			// without needing to do all of this.
-			if (not (glide_angle_sa2 & 0x7F))
+			if (glide_angle mod 180 == 0)
 			{
+				image_xscale = glide_angle == 180 ? -1 : 1;
 				animation_init(KNUCKLES_ANIMATION.GLIDE);
 			}
 			else
 			{
-				animation_init(KNUCKLES_ANIMATION.GLIDE_TURN, glide_turn_sa2_calc);
+				image_xscale = 1; // NOTE: This is a stupid fix
+				animation_init(KNUCKLES_ANIMATION.GLIDE_TURN, (glide_angle div 45));
 			}
 			break;
 		}

@@ -11,7 +11,7 @@ switch (state)
 		}
 		else
 		{
-			if (game_over_cause & GAME_OVER_TYPE.ZERO_LIVES)
+			if (game_over_cause == GAME_OVER_TYPE.ZERO_LIVES)
 			{
 				// TODO: Play jingle here
 			}
@@ -25,11 +25,11 @@ switch (state)
 	}
 	case 1:
 	{
-		if (game_over_cause & GAME_OVER_TYPE.ZERO_LIVES)
+		if (game_over_cause == GAME_OVER_TYPE.ZERO_LIVES)
 		{
 			if (frames_until_done > 60)
 			{
-				var temp_x = frames_until_done + (CAMERA_WIDTH_CENTER - 20);
+				var temp_x = (CAMERA_WIDTH_CENTER + 40) - (100 - frames_until_done);
 				left_x = temp_x;
 				right_x = temp_x;
 			}

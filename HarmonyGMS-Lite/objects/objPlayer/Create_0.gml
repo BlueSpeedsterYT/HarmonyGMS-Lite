@@ -492,13 +492,18 @@ player_handle_death = function()
 				// Show a Game Over screen depending on certain conditions
 				if (LIVES_ENABLED)
 				{
-					game_over_create((--global.life_count == 0) ? GAME_OVER_TYPE.ZERO_LIVES : GAME_OVER_TYPE.TIME_UP);
-					exit;
+					if (--global.life_count > 0)
+					{
+						return game_over_create(GAME_OVER_TYPE.TIME_UP);
+					}
+					else
+					{
+						return game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
+					}
 				}
 				else
 				{
-					game_over_create(GAME_OVER_TYPE.TIME_UP);
-					exit;
+					return game_over_create(GAME_OVER_TYPE.TIME_UP);
 				}
 			}
 		}
@@ -515,21 +520,18 @@ player_handle_death = function()
 				if (LIVES_ENABLED)
 				{
 					// Show a Game Over screen upon having zero lives
-					if (--global.life_count == 0)
+					if (--global.life_count > 0)
 					{
-						game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
-						exit;
+						return room_restart();
 					}
 					else
 					{
-						room_restart();
-						exit;
+						return game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
 					}
 				}
 				else
 				{
-					room_restart();
-					exit;
+					return room_restart();
 				}
 			}
 		}

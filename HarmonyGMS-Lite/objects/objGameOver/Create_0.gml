@@ -12,7 +12,7 @@ update_over_text = function(screen_type)
 {
 	if (frames_until_done > 140)
 	{
-		var temp_x = (CAMERA_WIDTH_CENTER + 140) - frames_until_done;
+		var temp_x = (CAMERA_WIDTH_CENTER - 280) + (frames_until_done * 2);
 		left_x = temp_x;
 		right_x = temp_x;
 	}

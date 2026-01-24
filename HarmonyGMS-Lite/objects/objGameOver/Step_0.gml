@@ -56,6 +56,14 @@ switch (state)
 				}
 				else
 				{
+					// NOTE: This lil code-snippet was moved from the player to here for one simple reason.
+					// it did not work as intended. (The life counter decreased too quick while in Time Over)
+					// As such, the life loss is done here instead of the player, with the check
+					// needed for lives of course.
+					if (LIVES_ENABLED) 
+					{
+						--global.life_count;
+					}
 					room_restart();
 				}
 			}

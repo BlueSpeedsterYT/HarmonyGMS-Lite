@@ -494,7 +494,7 @@ player_handle_death = function()
 				if (LIVES_ENABLED)
 				{
 					// Show a Game Over screen depending on certain conditions
-					if (--global.life_count > 0)
+					if (global.life_count > 0)
 					{
 						// When it is Time Over
 						return game_over_create(GAME_OVER_TYPE.TIME_UP);

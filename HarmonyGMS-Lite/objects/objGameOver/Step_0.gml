@@ -82,6 +82,8 @@ switch (state)
 	{
 		if (--frames_until_done == 0)
 		{
+			// NOTE: Input *HATES* using "game_restart()" here, find another way
+			// to reset the game accordingly instead if possible.
 			game_restart();
 		}
 		break;

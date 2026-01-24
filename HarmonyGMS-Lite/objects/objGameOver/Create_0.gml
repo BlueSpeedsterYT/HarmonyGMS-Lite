@@ -5,7 +5,7 @@ delay = 0;
 state = 0;
 frames_until_done = 0;
 left_x = 0;
-right_x = 0;
+right_x = CAMERA_WIDTH;
 
 /// @method update_over_text(screen_type)
 update_over_text = function(screen_type)

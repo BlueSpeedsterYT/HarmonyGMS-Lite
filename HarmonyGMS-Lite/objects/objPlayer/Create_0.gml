@@ -34,7 +34,7 @@ recovery_time = 0;
 invincibility_time = 0;
 superspeed_time = 0;
 rotation_lock_time = 0;
-death_time = 0;
+death_time = time_to_frames(0, 1);
 
 // Physics
 x_speed = 0;
@@ -477,60 +477,71 @@ player_damage = function(inst)
 /// @description Sets up how the player death is handled
 player_handle_death = function()
 {
-	if (death_time == time_to_frames(0, 1))
+	if (death_time == 0)
 	{
-		// TODO: Handle potential Multiplayer later.
+		// Check if the player has gotten a time over
 		if ((TIME_OVER_ENABLED and ctrlZone.time_over)
 		or (GAME_MODE_IS_TIME_ATTACK and ctrlZone.time_over))
 		{
+			// If the mode is Time Attack
 			if (GAME_MODE_IS_TIME_ATTACK)
 			{
 				// TODO: Reset to a potential Time Attack menu.
 			}
-			else
+			else // Else it is Single/Multi Player
 			{
-				// Show a Game Over screen depending on certain conditions
+				// Check if the lives system is allowed here
 				if (LIVES_ENABLED)
 				{
+					// Show a Game Over screen depending on certain conditions
 					if (--global.life_count > 0)
 					{
+						// When it is Time Over
 						return game_over_create(GAME_OVER_TYPE.TIME_UP);
 					}
 					else
 					{
+						// When the life count is at *zero*
 						return game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
 					}
 				}
 				else
 				{
+					// Show a Time Over screen
 					return game_over_create(GAME_OVER_TYPE.TIME_UP);
 				}
 			}
 		}
 		else
 		{
+			// Reset Ring Count
 			global.ring_count = 0;
+			
+			// If the mode is Time Attack
 			if (GAME_MODE_IS_TIME_ATTACK)
 			{
 				// TODO: Reset to a potential Time Attack menu.
 			}
-			else
+			else // Else it is Single/Multi Player
 			{
 				// Check if the lives system is allowed here
 				if (LIVES_ENABLED)
 				{
-					// Show a Game Over screen upon having zero lives
+					// Depending on certain conditions
 					if (--global.life_count > 0)
 					{
+						// Restart the stage
 						return room_restart();
 					}
 					else
 					{
+						// Show a Game Over screen
 						return game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
 					}
 				}
 				else
 				{
+					// Restart the stage
 					return room_restart();
 				}
 			}
@@ -538,7 +549,7 @@ player_handle_death = function()
 	}
 	else
 	{
-		++death_time;
+		--death_time;
 	}
 };
 

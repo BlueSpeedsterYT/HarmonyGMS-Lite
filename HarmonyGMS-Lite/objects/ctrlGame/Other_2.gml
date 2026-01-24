@@ -181,7 +181,7 @@ set_loop_points(bgmBlazeEventScrewStache, (1419264 div 44100), (10019092 div 441
 global.characters = [];
 global.score_count = 0;
 global.ring_count = 0;
-global.life_count = 1;
+global.life_count = 3;
 
 // Fonts
 global.font_debug = font_add_sprite(sprFontDebug, ord("!"), false, 1);

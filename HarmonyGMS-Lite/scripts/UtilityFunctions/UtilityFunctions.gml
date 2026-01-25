@@ -134,7 +134,7 @@ function instance_in_view(obj = id, padding = CAMERA_PADDING)
 /// @returns {Id.Instance}
 function particle_create(ox, oy, ani, rot = 0, life = -1, xspd = 0, yspd = 0, xaccel = 0, yaccel = 0, depth_offset = -DEPTH_OFFSET_PARTICLE)
 {
-    var particle = instance_create_depth(ox, oy, layer_get_depth("General") + depth_offset, objParticle);
+    var particle = instance_create_depth(ox, oy, (ctrlZone.stage_depth + depth_offset), objParticle);
     with (particle)
     {
         animation_set(ani);

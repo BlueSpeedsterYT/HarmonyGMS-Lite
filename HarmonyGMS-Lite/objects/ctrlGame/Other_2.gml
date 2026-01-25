@@ -86,9 +86,9 @@ enum GAME_FLAG
 enum PAUSE_FLAG
 {
 	NONE = (1 << 0),
-	TEXT = (1 << 1),
-	TRANSITION = (1 << 2),
-	MENU = (1 << 3),
+	MENU = (1 << 1),
+	TEXT = (1 << 2),
+	TRANSITION = (1 << 3),
 }
 
 enum AERIAL_FLAG

@@ -1,27 +1,25 @@
 /// @description Behave
 if (ctrlGame.game_paused) exit;
 
-if (input_allow)
+// Input
+if (input_allow and (player_index == 0))
 {
-	if (player_index == 0)
-	{
-		input_axis_x = InputOpposing(INPUT_VERB.LEFT, INPUT_VERB.RIGHT);
-		input_axis_y = InputOpposing(INPUT_VERB.UP, INPUT_VERB.DOWN);
+	input_axis_x = InputOpposing(INPUT_VERB.LEFT, INPUT_VERB.RIGHT);
+	input_axis_y = InputOpposing(INPUT_VERB.UP, INPUT_VERB.DOWN);
     
-		struct_foreach(input_button, function(name, value)
-		{
-		    var verb = value.verb;
-		    value.check = InputCheck(verb);
-		    value.pressed = InputPressed(verb);
-		    value.released = InputReleased(verb);
-		});
+	struct_foreach(input_button, function(name, value)
+	{
+		var verb = value.verb;
+		value.check = InputCheck(verb);
+		value.pressed = InputPressed(verb);
+		value.released = InputReleased(verb);
+	});
 		
-		// Enter Debug
-		if (DEBUG_ENABLED and input_button.select.pressed)
-		{
-			player_perform((state != player_is_debugging) ? player_is_debugging : player_is_falling);
-		}
-	};
+	// Enter Debug
+	if (DEBUG_ENABLED and input_button.select.pressed)
+	{
+		player_perform((state != player_is_debugging) ? player_is_debugging : player_is_falling);
+	}
 };
 
 if (script_exists(state)) 

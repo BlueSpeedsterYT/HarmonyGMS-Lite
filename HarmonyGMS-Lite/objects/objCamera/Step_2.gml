@@ -1,5 +1,5 @@
 /// @description Move
-if (ctrlGame.game_paused) exit;
+if (ctrlGame.game_paused & PAUSE_FLAG.MENU) exit;
 
 // Calculate zoom
 if (zoom_active)

@@ -386,7 +386,7 @@ player_lose_rings = function()
     
     for (var n = min(global.ring_count, 32); n > 0; --n)
     {
-        with (instance_create_layer(x div 1, y div 1, "General", objRing))
+        with (instance_create_depth(x div 1, y div 1, ctrlZone.stage_depth, objRing))
         {
             gravity_direction = other.gravity_direction;
 			image_angle = gravity_direction;

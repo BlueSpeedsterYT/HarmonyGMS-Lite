@@ -21,7 +21,7 @@ function player_move_on_ground()
 		y -= dsin(direction) * step;
 		
 		// Die if out of bounds
-		if (not player_in_camera_bounds()) return player_damage(id);
+		if (not player_in_camera_bounds()) player_damage(id);
 		
 		// Find surrounding stage entities
 		player_detect_entities();
@@ -79,7 +79,7 @@ function player_move_in_air()
 		y -= dsin(mask_direction) * step;
 		
 		// Die if out of bounds
-		if (not player_in_camera_bounds()) return player_damage(id);
+		if (not player_in_camera_bounds()) player_damage(id);
 		
 		// Find surrounding stage objects
 		player_detect_entities();
@@ -105,7 +105,7 @@ function player_move_in_air()
 		y += dcos(mask_direction) * step;
 		
 		// Die if out of bounds
-		if (not player_in_camera_bounds()) return player_damage(id);
+		if (not player_in_camera_bounds()) player_damage(id);
 		
 		// Find surrounding stage objects
 		player_detect_entities();

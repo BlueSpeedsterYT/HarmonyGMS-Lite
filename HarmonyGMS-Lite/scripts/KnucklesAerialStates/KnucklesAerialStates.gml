@@ -29,7 +29,7 @@ function knuckles_is_gliding(phase)
 		    glide_force = 0.5;
 			
 			// Animate
-			animation_init(KNUCKLES_ANIMATION.GLIDE);
+			animation_play(KNUCKLES_ANIMATION.GLIDE);
 			break;
 		}
 		case PHASE.STEP:
@@ -106,12 +106,12 @@ function knuckles_is_gliding(phase)
 			if (glide_angle mod 180 == 0)
 			{
 				image_xscale = glide_angle == 180 ? -1 : 1;
-				animation_init(KNUCKLES_ANIMATION.GLIDE);
+				animation_play(KNUCKLES_ANIMATION.GLIDE);
 			}
 			else
 			{
 				image_xscale = 1; // NOTE: This is a stupid fix
-				animation_init(KNUCKLES_ANIMATION.GLIDE_TURN, (glide_angle div 45));
+				animation_play(KNUCKLES_ANIMATION.GLIDE_TURN, (glide_angle div 45));
 			}
 			break;
 		}
@@ -140,7 +140,7 @@ function knuckles_is_falling(phase)
 			x_speed *= 0.25;
 			
 			// Animate
-			animation_init(KNUCKLES_ANIMATION.GLIDE_FALL, 0);
+			animation_play(KNUCKLES_ANIMATION.GLIDE_FALL, 0);
 			break;
 		}
 		case PHASE.STEP:
@@ -212,7 +212,7 @@ function knuckles_is_preparing_drill_clawing(phase)
 			sound_play(sfxKnucklesDrillClaw);
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.TRICK_DOWN);
+			animation_play(PLAYER_ANIMATION.TRICK_DOWN);
 			break;
 		}
 		case PHASE.STEP:
@@ -333,7 +333,7 @@ function knuckles_is_somersaulting(phase)
             if (animation_is_starting(5)) sound_play(sfxRoll);
             if (animation_is_finished())
             {
-                animation_init(PLAYER_ANIMATION.ROLL);
+                animation_play(PLAYER_ANIMATION.ROLL);
                 return player_perform(on_ground ? player_is_rolling : player_is_falling, false);
             }
             break;

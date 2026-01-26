@@ -13,7 +13,7 @@ function tails_is_flying(phase)
 			player_ground(undefined);
 			
 			// Animate
-			animation_init(TAILS_ANIMATION.FLYING);
+			animation_play(TAILS_ANIMATION.FLYING);
 			break;
 		}
 		case PHASE.STEP:
@@ -98,13 +98,13 @@ function tails_is_flying(phase)
 				// Turn
 	            if (input_axis_x != 0 and image_xscale != input_axis_x)
 	            {
-	                animation_init(TAILS_ANIMATION.FLYING_TURN);
+	                animation_play(TAILS_ANIMATION.FLYING_TURN);
 	                image_xscale *= -1;
 	            }
             
 	            if (animation_data.index == TAILS_ANIMATION.FLYING_TURN and animation_is_finished())
 	            {
-	            	animation_init(TAILS_ANIMATION.FLYING);
+	            	animation_play(TAILS_ANIMATION.FLYING);
 	            }
 				
 				// Play the sound
@@ -117,7 +117,7 @@ function tails_is_flying(phase)
 			else
 			{
 				// Tire out
-				animation_init(TAILS_ANIMATION.FLYING_TIRED);
+				animation_play(TAILS_ANIMATION.FLYING_TIRED);
 				
 				// Stop the sound
 				if (audio_is_playing(fly_sound))

@@ -12,7 +12,7 @@ function sonic_is_skidding(phase)
 			sound_play(sfxSwipe);
 			
 			// Animate
-			animation_init(SONIC_ANIMATION.SKIDDING, 0);
+			animation_play(SONIC_ANIMATION.SKIDDING, 0);
 			break;
 		}
 		case PHASE.STEP:
@@ -68,7 +68,7 @@ function sonic_is_skidding(phase)
 			{
 				// We're not in the ground doing the animation so
 				// reset to the falling state immediately.
-				animation_init(PLAYER_ANIMATION.ROLL);
+				animation_play(PLAYER_ANIMATION.ROLL);
 				return player_perform(player_is_falling);
 			}
 			
@@ -94,7 +94,7 @@ function sonic_is_skidding(phase)
 					else
 					{
 						player_ground(undefined);
-						animation_init(PLAYER_ANIMATION.ROLL);
+						animation_play(PLAYER_ANIMATION.ROLL);
 						return player_perform(player_is_falling);
 					}
 				}
@@ -121,7 +121,7 @@ function sonic_is_preparing_bound(phase)
 			y_speed = 0;
 			
 			// Animate
-			animation_init(PLAYER_ANIMATION.TRICK_DOWN);
+			animation_play(PLAYER_ANIMATION.TRICK_DOWN);
 			break;
 		}
 		case PHASE.STEP:

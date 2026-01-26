@@ -20,7 +20,7 @@ reaction = function(pla)
 			{
 				with (pla)
 				{
-					animation_init(PLAYER_ANIMATION.SPRING, (diff >= 45 and diff <= 135) ? 0 : 1);
+					animation_play(PLAYER_ANIMATION.SPRING, (diff >= 45 and diff <= 135) ? 0 : 1);
 					player_perform(player_is_sprung);
 				}
 			}

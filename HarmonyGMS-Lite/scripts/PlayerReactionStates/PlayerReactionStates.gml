@@ -70,7 +70,7 @@ function player_is_sprung(phase)
 				}
 				case PLAYER_ANIMATION.SPRING_TWIRL:
 				{
-					if (animation_is_finished()) animation_init(PLAYER_ANIMATION.SPRING, 2);
+					if (animation_is_finished()) animation_play(PLAYER_ANIMATION.SPRING, 2);
 					break;
 				}
 			}
@@ -94,7 +94,7 @@ function player_is_dashing(phase)
 			player_ground(undefined);
             
             // Animate 
-            animation_init(PLAYER_ANIMATION.DASH);
+            animation_play(PLAYER_ANIMATION.DASH);
             break;
 		}
 		case PHASE.STEP:

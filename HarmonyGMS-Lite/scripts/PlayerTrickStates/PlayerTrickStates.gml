@@ -10,29 +10,8 @@ function player_is_trick_preparing(phase)
 			y_speed = 0;
 			
 			// Animate
-			switch (trick_index)
-			{
-				case TRICK_TYPE.UP:
-				{
-					animation_init(PLAYER_ANIMATION.TRICK_UP);
-					break;
-				}
-				case TRICK_TYPE.DOWN:
-				{
-					animation_init(PLAYER_ANIMATION.TRICK_DOWN);
-					break;
-				}
-				case TRICK_TYPE.FRONT:
-				{
-					animation_init(PLAYER_ANIMATION.TRICK_FRONT);
-					break;
-				}
-				default:
-				{
-					animation_init(PLAYER_ANIMATION.TRICK_BACK);
-					break;
-				}
-			}
+			animation_play(pick(trick_index, [PLAYER_ANIMATION.TRICK_UP, PLAYER_ANIMATION.TRICK_DOWN,
+				PLAYER_ANIMATION.TRICK_FRONT, PLAYER_ANIMATION.TRICK_BACK]));
 			break;
 		}
 		case PHASE.STEP:
@@ -99,7 +78,7 @@ function player_is_tricking(phase)
 		case PHASE.STEP:
 		{
 			if (state_time != 0) state_time--;
-			if ((object_index == objSonic) and trick_index == TRICK_TYPE.FRONT and state_time == 0) animation_init(PLAYER_ANIMATION.FALL);
+			if ((object_index == objSonic) and trick_index == TRICK_TYPE.FRONT and state_time == 0) animation_play(PLAYER_ANIMATION.FALL);
 			
 			var trick_spiral = (object_index == objKnuckles and trick_index == TRICK_TYPE.UP);
 			var trick_glide = (object_index == objKnuckles and (trick_index == TRICK_TYPE.FRONT or trick_index == TRICK_TYPE.BACK) and state_time > 0);

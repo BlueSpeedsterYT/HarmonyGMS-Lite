@@ -9,7 +9,7 @@ function knuckles_is_landing(phase)
 			x_speed = 0;
 			
 			// Animate
-			animation_init(KNUCKLES_ANIMATION.GLIDE_FALL, 1);
+			animation_play(KNUCKLES_ANIMATION.GLIDE_FALL, 1);
 			break;
 		}
 		case PHASE.STEP:
@@ -65,7 +65,7 @@ function knuckles_is_sliding(phase)
 			x_speed = (x_speed * dcos(direction)) - (y_speed * dsin(direction));
 			
 			// Animate
-			animation_init(KNUCKLES_ANIMATION.GLIDE_SLIDING);
+			animation_play(KNUCKLES_ANIMATION.GLIDE_SLIDING);
 			break;
 		}
 		case PHASE.STEP:

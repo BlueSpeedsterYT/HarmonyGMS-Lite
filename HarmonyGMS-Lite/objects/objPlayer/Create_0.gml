@@ -168,7 +168,7 @@ player_try_jump = function()
 	if (input_button.jump.pressed)
 	{
 		player_perform(player_is_jumping);
-		animation_init(PLAYER_ANIMATION.JUMP);
+		animation_play(PLAYER_ANIMATION.JUMP);
 		sound_play(sfxJump);
 		return true;
 	}
@@ -184,7 +184,7 @@ player_try_roll = function()
 	{
 		sound_play(sfxRoll);
 		player_perform(player_is_rolling);
-		animation_init(PLAYER_ANIMATION.ROLL);
+		animation_play(PLAYER_ANIMATION.ROLL);
 		return true;
 	}
 	return false;
@@ -443,7 +443,7 @@ player_damage = function(inst)
     {
     	var hurt_speed = -2;
         var ring_loss = false;
-        animation_init(PLAYER_ANIMATION.HURT);
+        animation_play(PLAYER_ANIMATION.HURT);
         if (inst == noone or abs(x_speed) <= 2.5)
         {
             if (abs(x_speed) > 0.625) x_speed = sign(x_speed) * hurt_speed;

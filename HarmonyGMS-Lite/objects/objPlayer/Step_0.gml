@@ -4,15 +4,15 @@ if (ctrlGame.game_paused) exit;
 // Input
 if (input_allow and (player_index == 0))
 {
-	input_axis_x = InputOpposing(INPUT_VERB.LEFT, INPUT_VERB.RIGHT);
-	input_axis_y = InputOpposing(INPUT_VERB.UP, INPUT_VERB.DOWN);
+	input_axis_x = InputOpposing(INPUT_VERB.LEFT, INPUT_VERB.RIGHT, player_index);
+	input_axis_y = InputOpposing(INPUT_VERB.UP, INPUT_VERB.DOWN, player_index);
     
 	struct_foreach(input_button, function(name, value)
 	{
 		var verb = value.verb;
-		value.check = InputCheck(verb);
-		value.pressed = InputPressed(verb);
-		value.released = InputReleased(verb);
+		value.check = InputCheck(verb, player_index);
+		value.pressed = InputPressed(verb, player_index);
+		value.released = InputReleased(verb, player_index);
 	});
 		
 	// Enter Debug
@@ -43,7 +43,7 @@ with (shield)
         y = y_int;
         
         var shield_advance = (index == SHIELD.BASIC or index == SHIELD.MAGNETIC or invincible);
-        animation_init(invincible ? -1 : index);
+        animation_play(invincible ? -1 : index);
         switch (animation_data.index)
         {
             case -1:

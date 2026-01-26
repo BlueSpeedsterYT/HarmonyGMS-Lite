@@ -17,7 +17,7 @@ reaction = function(pla)
 	        
 			with (pla)
 			{
-				animation_init(ani_spring, 0);
+				animation_play(ani_spring, 0);
 				player_perform(player_is_sprung);
 			}
 			var stored_y_speed = pla.y_speed;

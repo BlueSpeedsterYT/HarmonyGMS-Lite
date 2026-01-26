@@ -1,13 +1,13 @@
-> Implement Boost Mode (Either port Cluster 8.2 version, wait for Cluster MarkII or port from SA2 itself)
-> Finish up Knuckles (Add his ground attack skills and climbing)
-> Finish up Tails (Add his Tail Swipe)
-> Finish up Sonic (Add his Insta-Shield, Homing Attack and Foward Thrust)
-> Implement Cream (Would also need to add Cheese) [LATER]
-> Implement Amy (She's basically a Sonic clone mostly so it would be simple to add) [LATER]
-> Implement Advance 2's HUD and Stage Start [LATER]
-> Replace Cluster 8.2's test stage with a proper Advance 2 stage (Like Leaf Forest Act 1)
 > Implement Grinding
+> Implement Boost Mode (Either port Cluster 8.2 version, wait for Cluster MarkII or port from SA2 itself)
+> Finish up Sonic (Add his Homing Attack and Foward Thrust)
+> Implement Cream (Would also need to add Cheese) [LATER]
+> Finish up Tails (Add his Tail Swipe)
+> Finish up Knuckles (Add his ground attack skills and climbing)
+> Implement Amy (She's basically a Sonic clone mostly so it would be simple to add) [LATER]
+> Add in the missing effects for select Sonic, Tails and Knuckles animations [DONE FOR SONIC, MISSING FOR TAILS AND KNUCKLES]
+> Implement Advance 2's HUD and Stage Start [LATER]
+> Replace Cluster 8.2's test stage with a proper Advance 2 stage (Like Leaf Forest Act 1) [SLOWLY WORKING ON IT]
 > Implement a saving and loading system [LATER]
 > Implement enemies
 > Update Input system to allow for double pressing (Needed for Sonic's Forward Thrust)
-> Add in the missing effects for select Sonic, Tails and Knuckles animations

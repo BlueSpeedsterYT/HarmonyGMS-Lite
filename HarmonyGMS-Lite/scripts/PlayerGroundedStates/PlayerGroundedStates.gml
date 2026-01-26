@@ -36,8 +36,7 @@ function player_is_standing(phase)
 			}
 			
 			// Animate
-            var ani_idle = (cliff_sign != 0 ? PLAYER_ANIMATION.TEETER : PLAYER_ANIMATION.IDLE);
-            animation_init(ani_idle, 0, [PLAYER_ANIMATION.TURN]);
+			animation_play(cliff_sign != 0 ? PLAYER_ANIMATION.TEETER : PLAYER_ANIMATION.IDLE, 0, [PLAYER_ANIMATION.TURN]);
 			break;
 		}
 		case PHASE.STEP:
@@ -68,13 +67,13 @@ function player_is_standing(phase)
 			// Turn
             if (animation_data.index != PLAYER_ANIMATION.TEETER and input_axis_x != 0 and image_xscale != input_axis_x)
             {
-                animation_init(PLAYER_ANIMATION.TURN);
+                animation_play(PLAYER_ANIMATION.TURN);
                 image_xscale *= -1;
             }
             
             if (animation_data.index == PLAYER_ANIMATION.TURN and animation_is_finished())
             {
-            	animation_init(PLAYER_ANIMATION.IDLE);
+                animation_play(cliff_sign != 0 ? PLAYER_ANIMATION.TEETER : PLAYER_ANIMATION.IDLE);
             }
             
             if (animation_data.index != PLAYER_ANIMATION.TURN)
@@ -109,7 +108,7 @@ function player_is_running(phase)
 		case PHASE.ENTER:
 		{
 			// Animate
-            animation_init(PLAYER_ANIMATION.RUN);
+			animation_play(PLAYER_ANIMATION.RUN);
 			break;
 		}
 		case PHASE.STEP:
@@ -199,7 +198,7 @@ function player_is_running(phase)
             if (can_turn)
             {
                 x_speed = 0;
-                animation_init(PLAYER_ANIMATION.TURN, animation_data.index == PLAYER_ANIMATION.BRAKE);
+                animation_play(PLAYER_ANIMATION.TURN, animation_data.index == PLAYER_ANIMATION.BRAKE);
                 image_xscale *= -1;
                 return player_perform(player_is_standing);
             }
@@ -209,7 +208,7 @@ function player_is_running(phase)
 				{
 					if (mask_direction == gravity_direction and velocity >= 4)
 					{
-						animation_init(PLAYER_ANIMATION.BRAKE, velocity > 9.0);
+						animation_play(PLAYER_ANIMATION.BRAKE, velocity > 9.0);
 						sound_play(sfxBrake);
 					}
 				}
@@ -223,7 +222,7 @@ function player_is_running(phase)
 			}
 			else
 			{
-				animation_init(PLAYER_ANIMATION.RUN);
+				animation_play(PLAYER_ANIMATION.RUN);
 			}
 			break;
 		}
@@ -243,7 +242,7 @@ function player_is_looking(phase)
 		case PHASE.ENTER:
 		{
 			camera_set_look_time(LOOK_DURATION);
-			animation_init(PLAYER_ANIMATION.LOOK);
+			animation_play(PLAYER_ANIMATION.LOOK);
 			break;
 		}
 		case PHASE.STEP:
@@ -305,7 +304,7 @@ function player_is_crouching(phase)
 		case PHASE.ENTER:
 		{
 			camera_set_look_time(LOOK_DURATION);
-			animation_init(PLAYER_ANIMATION.CROUCH);
+			animation_play(PLAYER_ANIMATION.CROUCH);
 			break;
 		}
 		case PHASE.STEP:
@@ -366,7 +365,7 @@ function player_is_rolling(phase)
 	{
 		case PHASE.ENTER:
 		{
-			animation_init(PLAYER_ANIMATION.ROLL);
+			animation_play(PLAYER_ANIMATION.ROLL);
 			break;
 		}
 		case PHASE.STEP:
@@ -434,7 +433,7 @@ function player_is_spin_dashing(phase)
 		case PHASE.ENTER:
 		{
 			spin_dash_charge = 0;
-			animation_init(PLAYER_ANIMATION.SPIN_DASH);
+			animation_play(PLAYER_ANIMATION.SPIN_DASH);
 			sound_play(sfxRoll);
 			break;
 		}
@@ -471,7 +470,7 @@ function player_is_spin_dashing(phase)
 			if (input_button.jump.pressed)
 			{
 				spin_dash_charge = min(spin_dash_charge + 2, 8);
-				animation_init(PLAYER_ANIMATION.SPIN_DASH, 1);
+				animation_play(PLAYER_ANIMATION.SPIN_DASH, 1);
 				
 				// Sound
 				var rev_sound = sound_play(sfxRoll);

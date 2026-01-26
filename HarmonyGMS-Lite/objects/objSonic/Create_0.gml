@@ -33,7 +33,7 @@ player_try_skill = function()
 			if (not (aerial_flags & AERIAL_FLAG.SHIELD_ACTION))
 			{
 				aerial_flags |= AERIAL_FLAG.SHIELD_ACTION;
-				animation_init(SONIC_ANIMATION.INSTA_SHIELD);
+				animation_play(SONIC_ANIMATION.INSTA_SHIELD);
 				player_perform(player_is_falling, false);
 				with (insta_shield)
 			    {

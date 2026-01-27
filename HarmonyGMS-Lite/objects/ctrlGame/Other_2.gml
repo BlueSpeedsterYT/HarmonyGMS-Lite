@@ -185,6 +185,7 @@ global.life_count = 3;
 
 // Fonts
 global.font_debug = font_add_sprite(sprFontDebug, ord("!"), false, 1);
+global.font_hud = font_add_sprite(sprFontHUD, ord("!"), false, 0);
 
 // Misc.
 surface_depth_disable(true);

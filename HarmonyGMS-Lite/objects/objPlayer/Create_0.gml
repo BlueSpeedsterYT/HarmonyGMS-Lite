@@ -91,7 +91,9 @@ ground_id = noone;
 // Input
 input_allow = true;
 input_axis_x = 0;
+input_axis_pressed_x = 0;
 input_axis_y = 0;
+input_axis_pressed_y = 0;
 
 /// @method button(verb)
 /// @description Creates a new button.

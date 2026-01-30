@@ -134,6 +134,8 @@ global.ani_sonic_dash = [global.ani_sonic_dash_v0, global.ani_sonic_dash_v1];
 global.ani_sonic_insta_shield_v0 = new animation(sprSonicInsta0, [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2], 8);
 global.ani_sonic_insta_shield_v1 = new animation(sprSonicInsta1, 2, -1);
 
+global.ani_sonic_thrust_v0 = new animation(sprSonicThrust, 2, 4);
+
 global.ani_sonic_skidding_v0 = new animation(sprSonicSkidding0, [2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1], -1);
 global.ani_sonic_skidding_v1 = new animation(sprSonicSkidding1, 1, 0);
 global.ani_sonic_skidding_v2 = new animation(sprSonicSkidding2, 1, -1);

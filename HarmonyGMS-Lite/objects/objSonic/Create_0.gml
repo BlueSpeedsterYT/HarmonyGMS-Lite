@@ -20,11 +20,11 @@ player_try_skill = function()
     if (not on_ground)
     {
 		if (input_button.attack.pressed)
-        {
-            // Bound
+		{
+			// Bound
 			player_perform(sonic_is_preparing_bound);
 			return true;
-        }
+		}
 		else if (input_button.jump.pressed)
 		{
 			// Insta-Shield (or Homing Attack at close distances)
@@ -33,6 +33,7 @@ player_try_skill = function()
 			if (not (aerial_flags & AERIAL_FLAG.SHIELD_ACTION))
 			{
 				aerial_flags |= AERIAL_FLAG.SHIELD_ACTION;
+				sound_play(sfxSonicInstaShield);
 				animation_play(SONIC_ANIMATION.INSTA_SHIELD);
 				player_perform(player_is_falling, false);
 				with (insta_shield)
@@ -48,8 +49,21 @@ player_try_skill = function()
 				return true;
 			}
 		}
-		// Forward Thrust
-		// NOT AVAILABLE since it would need to have an input buffer.
+		else if (input_axis_pressed_x != 0)
+		{
+			// Forward Thrust
+			state_time++;
+			if (state_time == 2)
+			{
+				state_time = 0;
+				x_speed += (2.25 * image_xscale);
+				y_speed = 0;
+				sound_play(sfxSonicThrust);
+				animation_play(SONIC_ANIMATION.FORWARD_THRUST);
+				player_perform(player_is_falling, false);
+				return true;
+			}
+		}
     }
 	else
 	{
@@ -456,6 +470,27 @@ player_animate = function()
 				{
 					// yea i dunno why either
 					hitboxes[0].set_size(-8, -8, 8, 8);
+					break;
+				}
+			}
+			break;
+		}
+		case SONIC_ANIMATION.FORWARD_THRUST:
+		{
+			player_set_animation(global.ani_sonic_thrust_v0);
+			player_set_radii(6, 9);
+			switch (image_index)
+			{
+				case 0:
+				{
+					hitboxes[0].set_size(-6, -12, 6, 18);
+					hitboxes[1].set_size();
+					break;
+				}
+				
+				case 4:
+				{
+					hitboxes[0].set_size(-6, -14, 8, 16);
 					break;
 				}
 			}

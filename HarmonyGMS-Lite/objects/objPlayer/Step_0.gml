@@ -5,7 +5,9 @@ if (ctrlGame.game_paused) exit;
 if (input_allow and (player_index == 0))
 {
 	input_axis_x = InputOpposing(INPUT_VERB.LEFT, INPUT_VERB.RIGHT, player_index);
+	input_axis_pressed_x = InputOpposingPressed(INPUT_VERB.LEFT, INPUT_VERB.RIGHT, player_index);
 	input_axis_y = InputOpposing(INPUT_VERB.UP, INPUT_VERB.DOWN, player_index);
+	input_axis_pressed_y = InputOpposingPressed(INPUT_VERB.UP, INPUT_VERB.DOWN, player_index);
     
 	struct_foreach(input_button, function(name, value)
 	{

@@ -556,6 +556,7 @@
     {"id":{"name":"sfxRing","path":"sounds/sfxRing/sfxRing.yy",},},
     {"id":{"name":"sfxRingLoss","path":"sounds/sfxRingLoss/sfxRingLoss.yy",},},
     {"id":{"name":"sfxRoll","path":"sounds/sfxRoll/sfxRoll.yy",},},
+    {"id":{"name":"sfxShieldGot","path":"sounds/sfxShieldGot/sfxShieldGot.yy",},},
     {"id":{"name":"sfxSliding","path":"sounds/sfxSliding/sfxSliding.yy",},},
     {"id":{"name":"sfxSomersaultSlide","path":"sounds/sfxSomersaultSlide/sfxSomersaultSlide.yy",},},
     {"id":{"name":"sfxSonicBoundAttack","path":"sounds/sfxSonicBoundAttack/sfxSonicBoundAttack.yy",},},

@@ -1,6 +1,6 @@
-#region Explosions
+#region Dust Cloud
 
-// TODO: Reimport and implement the Advance 2 effects
+global.ani_dust_cloud_v0 = new animation(sprDustCloud, 6, -1);
 
 #endregion
 

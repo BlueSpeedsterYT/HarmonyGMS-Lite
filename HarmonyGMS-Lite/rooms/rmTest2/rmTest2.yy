@@ -52,6 +52,8 @@
     {"name":"inst_4192D7D5","path":"rooms/rmTest2/rmTest2.yy",},
     {"name":"inst_612576B1","path":"rooms/rmTest2/rmTest2.yy",},
     {"name":"inst_2CB69206","path":"rooms/rmTest2/rmTest2.yy",},
+    {"name":"inst_21366998","path":"rooms/rmTest2/rmTest2.yy",},
+    {"name":"inst_C3357A0","path":"rooms/rmTest2/rmTest2.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -481,6 +483,12 @@
         {"$GMRInstance":"v4","%Name":"inst_4192D7D5","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4192D7D5","objectId":{"name":"objCorkscrewRight","path":"objects/objCorkscrewRight/objCorkscrewRight.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":6624.0,"y":1576.0,},
         {"$GMRInstance":"v4","%Name":"inst_612576B1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_612576B1","objectId":{"name":"objCorkscrewLeft","path":"objects/objCorkscrewLeft/objCorkscrewLeft.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":7200.0,"y":1576.0,},
         {"$GMRInstance":"v4","%Name":"inst_2CB69206","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2CB69206","objectId":{"name":"objSpikes","path":"objects/objSpikes/objSpikes.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2384.0,"y":816.0,},
+        {"$GMRInstance":"v4","%Name":"inst_21366998","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_21366998","objectId":{"name":"objItemBox","path":"objects/objItemBox/objItemBox.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"objItemBox","path":"objects/objItemBox/objItemBox.yy",},"propertyId":{"name":"index","path":"objects/objItemBox/objItemBox.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"ITEM_INDEX.RINGS_5",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1880.0,"y":1056.0,},
+        {"$GMRInstance":"v4","%Name":"inst_C3357A0","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_C3357A0","objectId":{"name":"objItemBox","path":"objects/objItemBox/objItemBox.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"objItemBox","path":"objects/objItemBox/objItemBox.yy",},"propertyId":{"name":"index","path":"objects/objItemBox/objItemBox.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"ITEM_INDEX.SHIELD",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2360.0,"y":752.0,},
       ],"layers":[],"name":"General","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"GraphicsPlane1","depth":900,"effectEnabled":true,"effectType":"none","gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"GraphicsPlane1","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":32,"SerialiseWidth":206,"TileCompressedData":[
           -74,0,-132,-2147483648,-74,0,-132,-2147483648,-74,0,-132,-2147483648,-74,0,-132,-2147483648,-74,0,-132,

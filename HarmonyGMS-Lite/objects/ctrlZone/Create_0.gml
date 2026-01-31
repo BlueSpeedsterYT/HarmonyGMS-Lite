@@ -5,7 +5,7 @@ stage_depth = layer_get_depth("General");
 pause_enabled = true;
 
 // Timing
-stage_time = 0;
+stage_time = time_to_frames(0, 0);
 time_limit = time_to_frames(10, 0);
 time_over = false;
 time_enabled = false;

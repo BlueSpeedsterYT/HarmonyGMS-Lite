@@ -17,7 +17,7 @@ switch (state)
 			}
 			else
 			{
-				// TODO: Play sound here.
+				sound_play(sfxTimeOver);
 			}
 			state++;
 		}

@@ -23,10 +23,17 @@ draw_text(hud_x + 27, 0, string_pad(global.ring_count, 3));
 draw_set_color(c_white);
         
 // Score
-var score_cap = 999999;
+var score_cap = SCORE_CAP;
 draw_text(hud_x + 27, hud_y + 11, $"{global.score_count > score_cap ? score_cap : string_pad(global.score_count, 6)}");
         
 // Time
+// Play Warning sound
+if (TIME_OVER_ENABLED and (not time_over) and time >= time_to_frames(9, 40) and (time mod 60) == 0)
+{
+	sound_play(sfxTimeWarning);
+}
+
+// Draw the Timer
 var time_x = (CAMERA_WIDTH / 2);
 var time_y = 0;
 draw_text(time_x - 21, time_y, ":");

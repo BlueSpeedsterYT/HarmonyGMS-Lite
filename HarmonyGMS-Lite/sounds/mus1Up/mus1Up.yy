@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"mus1Up",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":4.3921313,
+  "exportDir":"",
+  "name":"mus1Up",
+  "parent":{
+    "name":"Jingles",
+    "path":"folders/Audio/Music/Jingles.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"mus1Up.ogg",
+  "volume":1.0,
+}

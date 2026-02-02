@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"musActClear",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":3.9151928,
+  "exportDir":"",
+  "name":"musActClear",
+  "parent":{
+    "name":"Jingles",
+    "path":"folders/Audio/Music/Jingles.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"musActClear.ogg",
+  "volume":1.0,
+}

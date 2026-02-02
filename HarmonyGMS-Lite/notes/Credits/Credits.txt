@@ -10,8 +10,16 @@ monolith4007 - HarmonyGMS
 * https://github.com/monolith4007/HarmonyGMS
 
 TsukiruP - Cluster Framework, Cluster Framework MarkII
-* https://github.com/monolith4007/HarmonyGMS
-* https://github.com/monolith4007/HarmonyGMS
+* https://github.com/TsukiruP/Cluster-Framework
+* https://github.com/TsukiruP/Cluster-Framework-MarkII
+
+Ice is Nice - Not So Simple Sonic Advance Worlds, Not So Simple Sonic Advance 2 Worlds
+* https://forums.sonicretro.org/threads/not-so-simple-sonic-advance-worlds-series.39976/
+
+Luna-Alex - Sonic Advance Revamped (alongside most of the sound effect rips used in the project)
+* https://x.com/SonicRevamped
+* https://www.tumblr.com/sonicadvancerevamped
+* https://sonicfangameshq.com/forums/showcase/sonic-advance-revamped-lite-winter-demo.2410/
 
 Sonic Advance Trilogy Research - Sonic Advance 2 Decompilation
 * https://github.com/SAT-R/sa2

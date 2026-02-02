@@ -7,14 +7,14 @@ switch (room)
 	{
 		name = "DEMONSTRATION";
 		act = 1;
-		music_enqueue(bgmBlazeEventScrewStache, PRIORITY_MUSIC, true);
+		music_enqueue(musBlazeEventScrewStache, PRIORITY_MUSIC, true);
 		break;
 	}
 	case rmTest2:
 	{
 		name = "LEAF FOREST";
 		act = 1;
-		music_enqueue(bgmHydrocityAct1Sonic360, PRIORITY_MUSIC, true);
+		music_enqueue(musHydrocityAct1Sonic360, PRIORITY_MUSIC, true);
 		break;
 	}
 }

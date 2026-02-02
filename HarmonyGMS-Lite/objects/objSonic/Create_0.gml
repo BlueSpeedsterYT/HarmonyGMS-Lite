@@ -49,20 +49,15 @@ player_try_skill = function()
 				return true;
 			}
 		}
-		else if (input_axis_pressed_x != 0)
+		else if (input_axis_pressed_x != 0 and sign(input_double_tap_direction_x) == image_xscale)
 		{
 			// Forward Thrust
-			state_time++;
-			if (state_time == 2)
-			{
-				state_time = 0;
-				x_speed += (2.25 * image_xscale);
-				y_speed = 0;
-				sound_play(sfxSonicThrust);
-				animation_play(SONIC_ANIMATION.FORWARD_THRUST);
-				player_perform(player_is_falling, false);
-				return true;
-			}
+			x_speed += (2.25 * input_double_tap_direction_x);
+			y_speed = 0;
+			sound_play(sfxSonicThrust);
+			animation_play(SONIC_ANIMATION.FORWARD_THRUST);
+			player_perform(player_is_falling, false);
+			return true;
 		}
     }
 	else

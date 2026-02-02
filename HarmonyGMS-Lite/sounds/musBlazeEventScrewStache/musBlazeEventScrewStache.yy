@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"musBlazeEventScrewStache",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":427.19772,
+  "exportDir":"",
+  "name":"musBlazeEventScrewStache",
+  "parent":{
+    "name":"Stages",
+    "path":"folders/Audio/Music/Stages.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"musBlazeEventScrewStache.ogg",
+  "volume":1.0,
+}

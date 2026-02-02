@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"bgmHydrocityAct1Sonic360",
+  "%Name":"musGameOver",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,17 +10,17 @@
   "compression":1,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":155.1093,
+  "duration":6.8717685,
   "exportDir":"",
-  "name":"bgmHydrocityAct1Sonic360",
+  "name":"musGameOver",
   "parent":{
-    "name":"Music",
-    "path":"folders/Audio/Music.yy",
+    "name":"Jingles",
+    "path":"folders/Audio/Music/Jingles.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"bgmHydrocityAct1Sonic360.ogg",
+  "soundFile":"musGameOver.ogg",
   "volume":1.0,
 }

@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"bgmBlazeEventScrewStache",
+  "%Name":"musHydrocityAct1Sonic360",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,17 +10,17 @@
   "compression":1,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":427.19772,
+  "duration":155.1093,
   "exportDir":"",
-  "name":"bgmBlazeEventScrewStache",
+  "name":"musHydrocityAct1Sonic360",
   "parent":{
-    "name":"Music",
-    "path":"folders/Audio/Music.yy",
+    "name":"Stages",
+    "path":"folders/Audio/Music/Stages.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"bgmBlazeEventScrewStache.ogg",
+  "soundFile":"musHydrocityAct1Sonic360.ogg",
   "volume":1.0,
 }

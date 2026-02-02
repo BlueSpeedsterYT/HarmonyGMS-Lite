@@ -180,7 +180,7 @@ global.volume_sound = 1;
 global.volume_music = 1;
 
 // Music
-set_loop_points(bgmBlazeEventScrewStache, (1419264 div 44100), (10019092 div 44100));
+set_loop_points(musBlazeEventScrewStache, (1419264 div 44100), (10019092 div 44100));
 
 // Player values
 global.characters = [];

@@ -94,6 +94,10 @@ input_axis_x = 0;
 input_axis_pressed_x = 0;
 input_axis_y = 0;
 input_axis_pressed_y = 0;
+input_double_tap_timer_x = 0;
+input_double_tap_timer_y = 0;
+input_double_tap_direction_x = 0;
+input_double_tap_direction_y = 0;
 
 /// @method button(verb)
 /// @description Creates a new button.
@@ -422,7 +426,7 @@ player_gain_lives = function(num)
 	if (LIVES_ENABLED)
     {
         global.life_count = min(global.life_count + num, LIVES_CAP);
-        //music_overlay(bgmLife);
+        music_overlay(mus1Up);
     }
 };
 

@@ -155,7 +155,11 @@ player_perform = function (action, start = true)
 player_reset_input = function()
 {
 	input_axis_x = 0;
+	input_axis_pressed_x = 0;
 	input_axis_y = 0;
+	input_axis_pressed_y = 0;
+	input_double_tap_direction_x = 0;
+	input_double_tap_direction_y = 0;
 	
 	struct_foreach(input_button, function(name, value)
 	{

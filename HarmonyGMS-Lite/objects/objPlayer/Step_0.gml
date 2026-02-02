@@ -9,14 +9,6 @@ if (input_allow and (player_index == 0))
 	input_axis_y = InputOpposing(INPUT_VERB.UP, INPUT_VERB.DOWN, player_index);
 	input_axis_pressed_y = InputOpposingPressed(INPUT_VERB.UP, INPUT_VERB.DOWN, player_index);
     
-	struct_foreach(input_button, function(name, value)
-	{
-		var verb = value.verb;
-		value.check = InputCheck(verb, player_index);
-		value.pressed = InputPressed(verb, player_index);
-		value.released = InputReleased(verb, player_index);
-	});
-	
 	input_double_tap_timer_x++;
 	input_double_tap_timer_y++;
 	
@@ -25,14 +17,7 @@ if (input_allow and (player_index == 0))
 	{
 		if (input_double_tap_timer_x > 3 and input_double_tap_timer_x < 13)
 		{
-			if (input_axis_pressed_x == -1)
-			{
-				input_double_tap_direction_x = -1;
-			}
-			else if (input_axis_pressed_x == 1)
-			{
-				input_double_tap_direction_x = 1;
-			}
+			input_double_tap_direction_x = (input_axis_pressed_x == -1) ? -1 : 1;
 			input_double_tap_timer_x = 0;
 		}
 		else if (input_double_tap_timer_x > 0)
@@ -46,14 +31,7 @@ if (input_allow and (player_index == 0))
 	{
 		if (input_double_tap_timer_y > 3 and input_double_tap_timer_y < 13)
 		{
-			if (input_axis_pressed_y == -1)
-			{
-				input_double_tap_direction_y = -1;
-			}
-			else if (input_axis_pressed_y == 1)
-			{
-				input_double_tap_direction_y = 1;
-			}
+			input_double_tap_direction_y = (input_axis_pressed_y == -1) ? -1 : 1;
 			input_double_tap_timer_y = 0;
 		}
 		else if (input_double_tap_timer_y > 0)
@@ -61,6 +39,14 @@ if (input_allow and (player_index == 0))
 			input_double_tap_timer_y = 0;
 		}
 	}
+	
+	struct_foreach(input_button, function(name, value)
+	{
+		var verb = value.verb;
+		value.check = InputCheck(verb, player_index);
+		value.pressed = InputPressed(verb, player_index);
+		value.released = InputReleased(verb, player_index);
+	});
 	
 	// Enter Debug
 	if (DEBUG_ENABLED and input_button.select.pressed)

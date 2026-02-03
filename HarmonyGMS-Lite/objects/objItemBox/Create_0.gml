@@ -104,18 +104,21 @@ itembox_apply_item = function(pla)
 		case ITEM_INDEX.RINGS_RANDOM:
 		{
 			pla.player_gain_rings(choose(1, 5, 10, 30, 50));
+			sound_play(sfxRing);
 			break;
 		}
 		
 		case ITEM_INDEX.RINGS_5:
 		{
 			pla.player_gain_rings(5);
+			sound_play(sfxRing);
 			break;
 		}
 		
 		case ITEM_INDEX.RINGS_10:
 		{
 			pla.player_gain_rings(10);
+			sound_play(sfxRing);
 			break;
 		}
 	}
@@ -123,9 +126,6 @@ itembox_apply_item = function(pla)
 
 reaction = function(pla)
 {
-	// Abort if the player is considered *dead*
-	if (pla.state == player_is_dead) exit;
-	
 	if (collide_with_itembox(pla) == true)
 	{
 		if (show_itembox)

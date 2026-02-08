@@ -63,22 +63,10 @@ itembox_apply_item = function(pla)
 		}
 		
 		case ITEM_INDEX.SHIELD:
-		{
-			with (pla)
-			{
-				shield.index = SHIELD.BASIC;
-				sound_play(sfxShieldGot);
-			}
-			break;
-		}
-		
 		case ITEM_INDEX.SHIELD_MAGNETIC:
 		{
-			with (pla)
-			{
-				shield.index = SHIELD.MAGNETIC;
-				sound_play(sfxShieldGot);
-			}
+			pla.shield.index = index == ITEM_INDEX.SHIELD ? SHIELD.BASIC : SHIELD.MAGNETIC;
+			sound_play(sfxShieldGot);
 			break;
 		}
 		
@@ -137,6 +125,8 @@ reaction = function(pla)
 				{
 					y_speed = -3;
 					animation_play(PLAYER_ANIMATION.SPRING, 0);
+					// BUG: You can still trick off of this, when you're actually
+					// not supposed to.
 					player_perform(player_is_sprung);
 				}
 			}

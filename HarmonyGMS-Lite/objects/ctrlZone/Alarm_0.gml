@@ -1,7 +1,13 @@
 /// @description Instance culling
 
 // Deactivate instances
-instance_deactivate_object(objInteractable);
+with (objInteractable)
+{
+	if (not is_constant)
+	{
+		instance_deactivate_object(id);
+	}
+}
 
 // Activate instances within the view
 var view_left = camera_get_view_x(CAMERA_ID) - CAMERA_PADDING;

@@ -10,6 +10,8 @@ time_limit = time_to_frames(10, 0);
 time_over = false;
 time_enabled = false;
 
+// alarm[0] = 5;
+
 // Stage data
 name = "";
 act = 0;

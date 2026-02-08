@@ -6,6 +6,12 @@ active = 0;
 animation_data = new animation_core();
 ani_spring = global.ani_spring_vertical;
 
+/// @method hitbox_update()
+hitbox_update = function()
+{
+	
+}
+
 reaction = function(pla)
 {
     var bit = 1 << pla.player_index;

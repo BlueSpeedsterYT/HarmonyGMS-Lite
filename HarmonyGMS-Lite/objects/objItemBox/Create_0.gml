@@ -87,6 +87,7 @@ itembox_apply_item = function(pla)
 			with (pla)
 			{
 				invincibility_time = INVINCIBILITY_DURATION;
+				music_overlay(musInvincibility, true, INVINCIBILITY_DURATION);
 			}
 			break;
 		}

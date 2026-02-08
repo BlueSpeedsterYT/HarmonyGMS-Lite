@@ -23,23 +23,34 @@ for (var i = 0; i < array_length(trick_speed); i++)
     trick_speed[i] = array_create(2);
 }
 
-// Shield
+// Status
 shield = new stamp();
 shield.index = SHIELD.NONE;
 
+/// @method player_refresh_status()
+/// @description Resets the player's status.
+player_refresh_status = function()
+{
+    shield.index = SHIELD.NONE;
+    aerial_flags &= ~AERIAL_FLAG.SHIELD_ACTION;
+    recovery_time = 0;
+    invincibility_time = 0;
+    superspeed_time = 0;
+    confusion_time = 0;
+};
+
 // Timers
-state_time = 0;
+rotation_lock_time = 0;
 control_lock_time = 0;
+state_time = 0;
+
 recovery_time = 0;
 invincibility_time = 0;
 superspeed_time = 0;
-rotation_lock_time = 0;
-death_time = time_to_frames(0, 1);
 
 // Physics
 x_speed = 0;
 y_speed = 0;
-
 player_refresh_physics();
 
 // Collision detection
@@ -487,7 +498,7 @@ player_damage = function(inst)
 /// @description Sets up how the player death is handled
 player_handle_death = function()
 {
-	if (death_time == 0)
+	if (state_time++ == time_to_frames(0, 1))
 	{
 		// Check if the player has gotten a time over
 		if ((TIME_OVER_ENABLED and ctrlZone.time_over)
@@ -556,10 +567,6 @@ player_handle_death = function()
 				}
 			}
 		}
-	}
-	else
-	{
-		--death_time;
 	}
 };
 

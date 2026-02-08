@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprSpringVertical",
-    "path":"sprites/sprSpringVertical/sprSpringVertical.yy",
+    "name":"sprSpringVertical0",
+    "path":"sprites/sprSpringVertical0/sprSpringVertical0.yy",
   },
   "spriteMaskId":null,
   "visible":true,

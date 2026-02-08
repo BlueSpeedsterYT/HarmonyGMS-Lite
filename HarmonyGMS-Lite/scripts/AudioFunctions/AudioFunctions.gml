@@ -20,7 +20,9 @@ function set_loop_points(soundid, loop_start = 0, loop_end = 0)
 
 /// @description Plays the given music track as an overlay, muting the stream until it has finished playing.
 /// @param {Asset.GMSound} soundid Sound asset to play.
-function music_overlay(soundid)
+/// @param {Bool} loop Looping value to set.
+/// @param {Real} time Time value to set.
+function music_overlay(soundid, loop = false, time = audio_sound_length(soundid) * room_speed)
 {
 	with (ctrlMusic)
 	{
@@ -30,8 +32,8 @@ function music_overlay(soundid)
 		
 		// Play overlay
 		var music_volume = (global.volume_music * global.volume_master);
-		overlay = audio_play_sound(soundid, PRIORITY_OVERLAY, false, music_volume);
-		alarm[0] = audio_sound_length(soundid) * room_speed;
+		overlay = audio_play_sound(soundid, PRIORITY_OVERLAY, loop, music_volume);
+		alarm[0] = time;
 	}
 }
 
@@ -48,7 +50,7 @@ function music_enqueue(soundid, priority, loop)
 			ds_priority_add(queue, soundid, priority);
 		}
 		
-		if (ds_priority_find_max(queue) == soundid)
+		if (not audio_is_playing(soundid) and ds_priority_find_max(queue) == soundid)
 		{
 			play_music(soundid, priority, loop);
 		}
@@ -63,5 +65,15 @@ function music_dequeue(soundid)
 	{
 		ds_priority_delete_value(queue, soundid);
 		if (audio_is_playing(soundid)) play_music(ds_priority_find_max(queue));
+	}
+}
+
+/// @description Clears the music queue and fades out the current track.
+function music_clear()
+{
+	with (ctrlMusic)
+	{
+		ds_priority_clear(queue);
+		if (audio_is_playing(stream)) audio_sound_gain(stream, 0);
 	}
 }

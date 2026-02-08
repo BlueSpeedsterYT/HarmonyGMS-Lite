@@ -13,7 +13,8 @@ switch (state)
 		{
 			if (game_over_cause == GAME_OVER_TYPE.ZERO_LIVES)
 			{
-				// TODO: Play jingle here
+				music_clear();
+				music_enqueue(musGameOver, PRIORITY_MUSIC, false);
 			}
 			else
 			{

@@ -8,20 +8,20 @@ global.ani_dust_cloud_v0 = new animation(sprDustCloud, 6, -1);
 
 global.ani_ring_sparkle_v0 = new animation(sprRingSparkle, 4, -1);
 
-global.ani_spring_vertical_v0 = new animation(sprSpringVertical, 0);
-global.ani_spring_vertical_v1 = new animation(sprSpringVertical, [2, 4, 2, 4, 2], -1, [1, 2, 3, 4, 5]);
+global.ani_spring_vertical_v0 = new animation(sprSpringVertical0, 0);
+global.ani_spring_vertical_v1 = new animation(sprSpringVertical1, [1, 2, 1, 5, 3], -1);
 global.ani_spring_vertical = [global.ani_spring_vertical_v0, global.ani_spring_vertical_v1];
 
-global.ani_spring_horizontal_v0 = new animation(sprSpringHorizontal, 0);
-global.ani_spring_horizontal_v1 = new animation(sprSpringHorizontal, [2, 4, 2, 4, 2], -1, [1, 2, 3, 4, 5]);
+global.ani_spring_horizontal_v0 = new animation(sprSpringHorizontal0, 0);
+global.ani_spring_horizontal_v1 = new animation(sprSpringHorizontal1, [1, 2, 1, 5, 3], -1);
 global.ani_spring_horizontal = [global.ani_spring_horizontal_v0, global.ani_spring_horizontal_v1];
 
-global.ani_spring_diagonal_v0 = new animation(sprSpringDiagonal, 0);
-global.ani_spring_diagonal_v1 = new animation(sprSpringDiagonal, [2, 4, 2, 4, 2], -1, [1, 2, 3, 4, 5]);
+global.ani_spring_diagonal_v0 = new animation(sprSpringDiagonal0, 0);
+global.ani_spring_diagonal_v1 = new animation(sprSpringDiagonal1, [1, 2, 1, 5, 3], -1);
 global.ani_spring_diagonal = [global.ani_spring_diagonal_v0, global.ani_spring_diagonal_v1];
 
-global.ani_spring_diagonal_alt_v0 = new animation(sprSpringDiagonalAlt, 0);
-global.ani_spring_diagonal_alt_v1 = new animation(sprSpringDiagonalAlt, [2, 4, 2, 4, 2], -1, [1, 2, 3, 4, 5]);
+global.ani_spring_diagonal_alt_v0 = new animation(sprSpringDiagonalAlt0, 0);
+global.ani_spring_diagonal_alt_v1 = new animation(sprSpringDiagonalAlt1, [1, 2, 1, 5, 3], -1);
 global.ani_spring_diagonal_alt = [global.ani_spring_diagonal_alt_v0, global.ani_spring_diagonal_alt_v1];
 
 global.ani_spring_bouncy_v0 = new animation(sprSpringBouncy0, 0);

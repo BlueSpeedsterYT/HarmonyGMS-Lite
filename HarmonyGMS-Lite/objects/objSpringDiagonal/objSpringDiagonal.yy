@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprSpringDiagonal",
-    "path":"sprites/sprSpringDiagonal/sprSpringDiagonal.yy",
+    "name":"sprSpringDiagonal0",
+    "path":"sprites/sprSpringDiagonal0/sprSpringDiagonal0.yy",
   },
   "spriteMaskId":null,
   "visible":true,

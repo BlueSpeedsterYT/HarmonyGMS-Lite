@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprSpringDiagonalAlt",
-    "path":"sprites/sprSpringDiagonalAlt/sprSpringDiagonalAlt.yy",
+    "name":"sprSpringDiagonalAlt0",
+    "path":"sprites/sprSpringDiagonalAlt0/sprSpringDiagonalAlt0.yy",
   },
   "spriteMaskId":null,
   "visible":true,

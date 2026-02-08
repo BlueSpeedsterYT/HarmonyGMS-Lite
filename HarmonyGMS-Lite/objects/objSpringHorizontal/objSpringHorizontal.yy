@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprSpringHorizontal",
-    "path":"sprites/sprSpringHorizontal/sprSpringHorizontal.yy",
+    "name":"sprSpringHorizontal0",
+    "path":"sprites/sprSpringHorizontal0/sprSpringHorizontal0.yy",
   },
   "spriteMaskId":null,
   "visible":true,

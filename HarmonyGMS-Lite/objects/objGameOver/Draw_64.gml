@@ -1,6 +1,6 @@
 /// @description Draw
 
-	// Black Fade
+	// Black Background
 	// TODO: That.
 	
 	// Game/Time Text

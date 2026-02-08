@@ -18,6 +18,8 @@
 #macro PRIORITY_MUSIC 1
 #macro PRIORITY_OVERLAY 2
 
+#macro TEN_MILLISECONDS 1000
+
 #macro DEPTH_OFFSET_AFTERIMAGE 25
 #macro DEPTH_OFFSET_PLAYER 50
 #macro DEPTH_OFFSET_PARTICLE 75
@@ -178,9 +180,6 @@ enum CAMERA_STATE
 global.volume_master = 1;
 global.volume_sound = 1;
 global.volume_music = 1;
-
-// Music
-set_loop_points(musBlazeEventScrewStache, (1419264 div 44100), (10019092 div 44100));
 
 // Player values
 global.characters = [];

@@ -135,9 +135,6 @@ input_button =
 animation_data = new animation_core();
 //animation_history = array_create(16);
 
-// Camera
-camera = noone;
-
 // Misc.
 ring_life_threshold = LIVES_ENABLED ? 99 : 0;
 
@@ -196,17 +193,40 @@ player_try_jump = function()
 	return false;
 };
 
-/// @method player_try_roll()
-/// @description Sets the player's current state to rolling, if applicable.
+/// @method player_try_appeal()
+/// @description Sets the player's current state to appeal, if applicable.
 /// @returns {Bool}
-player_try_roll = function()
+player_try_appeal = function()
 {
-	if (input_axis_y == 1 and abs(x_speed) >= ROLL_THRESHOLD)
+	if (input_axis_y == -1 and x_speed == 0)
 	{
-		sound_play(sfxRoll);
-		player_perform(player_is_rolling);
-		animation_play(PLAYER_ANIMATION.ROLL);
+		player_perform(player_is_appealing);
+		animation_play(PLAYER_ANIMATION.APPEAL);
 		return true;
+	}
+	return false;
+};
+
+/// @method player_try_crouch_or_roll()
+/// @description Sets the player's current state to either crouching or rolling, if applicable.
+/// @returns {Bool}
+player_try_crouch_or_roll = function()
+{
+	if (input_axis_y == 1)
+	{
+		if ((abs(x_speed) + 0.49609375) > ROLL_THRESHOLD)
+		{
+			sound_play(sfxRoll);
+			player_perform(player_is_rolling);
+			animation_play(PLAYER_ANIMATION.ROLL);
+			return true;
+		}
+		else if (x_speed == 0)
+		{
+			player_perform(player_is_crouching);
+			animation_play(PLAYER_ANIMATION.CROUCH);
+			return true;
+		}
 	}
 	return false;
 };

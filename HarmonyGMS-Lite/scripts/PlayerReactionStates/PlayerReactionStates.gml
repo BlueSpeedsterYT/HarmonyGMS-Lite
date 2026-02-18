@@ -177,8 +177,8 @@ function player_is_corkscrewing(phase)
 			player_move_on_ground();
 			if (state_changed) exit;
 			
-			// Roll
-			if (player_try_roll()) return true;
+			// Crouch or Roll
+			if (player_try_crouch_or_roll()) return true;
 			break;
 		}
 		case PHASE.EXIT:

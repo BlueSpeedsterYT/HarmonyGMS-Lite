@@ -84,11 +84,11 @@ function player_is_standing(phase)
                     return player_perform(player_is_running);
                 }
                 
-                // Look / crouch
+                // Look / crouch or roll
                 if (cliff_sign == 0)
                 {
-                    if (input_axis_y == -1) return player_perform(player_is_looking);
-                    if (input_axis_y == 1) return player_perform(player_is_crouching);
+                    if (player_try_appeal()) return true;
+                    if (player_try_crouch_or_roll()) return true;
                 }
             }
 			break;
@@ -187,8 +187,8 @@ function player_is_running(phase)
 			// Apply slope friction
 			player_resist_slope(SLOPE_FRICTION);
 			
-			// Roll
-			if (player_try_roll()) return true;
+			// Crouch or Roll
+			if (player_try_crouch_or_roll()) return true;
 			
 			// Stand
 			if (x_speed == 0 and input_axis_x == 0) return player_perform(player_is_standing);
@@ -234,15 +234,14 @@ function player_is_running(phase)
 	}
 }
 
-/// @function player_is_looking(phase)
-function player_is_looking(phase)
+/// @function player_is_appealing(phase)
+function player_is_appealing(phase)
 {
 	switch (phase)
 	{
 		case PHASE.ENTER:
 		{
-			camera_set_look_time(LOOK_DURATION);
-			animation_play(PLAYER_ANIMATION.LOOK);
+			animation_play(PLAYER_ANIMATION.APPEAL);
 			break;
 		}
 		case PHASE.STEP:
@@ -274,14 +273,14 @@ function player_is_looking(phase)
 			if (x_speed != 0) return player_perform(player_is_running);
 			
 			// Stand
-            if (animation_data.index == PLAYER_ANIMATION.LOOK and animation_data.variant == 1 and animation_is_finished())
+            if (animation_data.index == PLAYER_ANIMATION.APPEAL and animation_data.variant == 1 and animation_is_finished())
             {
             	return player_perform(player_is_standing);
             }
             
 			if (input_axis_x == 0 and input_axis_y == 0)
             {
-                if (animation_data.index == PLAYER_ANIMATION.LOOK and animation_data.variant == 0) animation_data.variant = 1;
+                if (animation_data.index == PLAYER_ANIMATION.APPEAL and animation_data.variant == 0) animation_data.variant = 1;
             }
             else if (input_axis_y != -1)
             {
@@ -303,7 +302,6 @@ function player_is_crouching(phase)
 	{
 		case PHASE.ENTER:
 		{
-			camera_set_look_time(LOOK_DURATION);
 			animation_play(PLAYER_ANIMATION.CROUCH);
 			break;
 		}
@@ -353,6 +351,7 @@ function player_is_crouching(phase)
 		}
 		case PHASE.EXIT:
 		{
+			camera_set_look_time(LOOK_DURATION);
 			break;
 		}
 	}

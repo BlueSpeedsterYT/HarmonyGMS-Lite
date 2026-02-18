@@ -141,9 +141,9 @@ player_animate = function()
             }
             break;
         }
-        case PLAYER_ANIMATION.LOOK:
+        case PLAYER_ANIMATION.APPEAL:
         {
-            player_set_animation(global.ani_knuckles_look);
+            player_set_animation(global.ani_knuckles_appeal);
             player_set_radii(6, 14);
             if (image_index == 0)
             {
@@ -151,6 +151,25 @@ player_animate = function()
                 hitboxes[1].set_size();
             }
             
+            if (animation_data.variant == 0)
+            {
+                switch (image_index)
+                {
+                    case 34:
+                    case 38:
+                    {
+                        hitboxes[1].set_size(2, -17, 23, 16);
+                        sound_play(sfxKnucklesPunch);
+                        break;
+                    }
+                    case 45:
+                    {
+                        hitboxes[1].set_size(2, -16, 25, 16);
+                        sound_play(sfxKnucklesPunch);
+                        break;
+                    }
+                }
+            }
             break;
         }
         case PLAYER_ANIMATION.CROUCH:

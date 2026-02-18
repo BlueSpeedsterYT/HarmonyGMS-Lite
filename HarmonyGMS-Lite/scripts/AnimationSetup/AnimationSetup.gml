@@ -72,9 +72,9 @@ global.ani_sonic_brake_v0 = new animation(sprSonicBrake, [2, 4, 4], 1);
 global.ani_sonic_brake_fast_v0 = new animation(sprSonicBrakeFast, [1, 1, 3, 3], 2);
 global.ani_sonic_brake = [global.ani_sonic_brake_v0, global.ani_sonic_brake_fast_v0];
 
-global.ani_sonic_look_v0 = new animation(sprSonicLook, [4, 4, 12, 12, 12, 12], 2);
-global.ani_sonic_look_v1 = new animation(sprSonicLook, 2, -1, [1, 0]);
-global.ani_sonic_look = [global.ani_sonic_look_v0, global.ani_sonic_look_v1];
+global.ani_sonic_appeal_v0 = new animation(sprSonicAppeal0, [4, 12, 4, 4, 4, 4, 6, 4, 6, 4, 6, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 49);
+global.ani_sonic_appeal_v1 = new animation(sprSonicAppeal1, [4, 4, 4, 4, 4, 16, 4], -1);
+global.ani_sonic_appeal = [global.ani_sonic_appeal_v0, global.ani_sonic_appeal_v1];
 
 global.ani_sonic_crouch_v0 = new animation(sprSonicCrouch, 1, -1);
 global.ani_sonic_crouch_v1 = new animation(sprSonicCrouch, 1, -1, [1, 0]);
@@ -167,9 +167,9 @@ global.ani_tails_brake_v0 = new animation(sprTailsBrake, [2, 4, 4, 4], 1);
 global.ani_tails_brake_fast_v0 = new animation(sprTailsBrakeFast, [2, 3, 3], 1);
 global.ani_tails_brake = [global.ani_tails_brake_v0, global.ani_tails_brake_fast_v0];
 
-global.ani_tails_look_v0 = new animation(sprTailsLook, [4, 4, 10, 10, 10, 10], 2);
-global.ani_tails_look_v1 = new animation(sprTailsLook, 2, -1, [1, 0]);
-global.ani_tails_look = [global.ani_tails_look_v0, global.ani_tails_look_v1];
+global.ani_tails_appeal_v0 = new animation(sprTailsAppeal0, [6, 8, 6, 6, 8, 6, 6, 6, 6, 18, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10], 17);
+global.ani_tails_appeal_v1 = new animation(sprTailsAppeal1, [8, 8, 4, 4, 4], -1);
+global.ani_tails_appeal = [global.ani_tails_appeal_v0, global.ani_tails_appeal_v1];
 
 global.ani_tails_crouch_v0 = new animation(sprTailsCrouch, [1, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], 2);
 global.ani_tails_crouch_v1 = new animation(sprTailsCrouch, 1, -1, [1, 0]);
@@ -264,9 +264,9 @@ global.ani_knuckles_brake_v0 = new animation(sprKnucklesBrake, 2, 1);
 global.ani_knuckles_brake_fast_v0 = new animation(sprKnucklesBrakeFast, [1, 1, 3, 3], 2);
 global.ani_knuckles_brake = [global.ani_knuckles_brake_v0, global.ani_knuckles_brake_fast_v0];
 
-global.ani_knuckles_look_v0 = new animation(sprKnucklesLook, [4, 4, 2], -1);
-global.ani_knuckles_look_v1 = new animation(sprKnucklesLook, 2, -1, [1, 0]);
-global.ani_knuckles_look = [global.ani_knuckles_look_v0, global.ani_knuckles_look_v1];
+global.ani_knuckles_appeal_v0 = new animation(sprKnucklesAppeal0, [6, 5, 3, 5, 3, 5, 3, 5, 3, 6, 4, 5, 3, 5, 3, 5, 3, 5, 3, 6, 4, 3, 3, 2, 2, 4, 3, 3, 2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2], 32);
+global.ani_knuckles_appeal_v1 = new animation(sprKnucklesAppeal1, 1, -1);
+global.ani_knuckles_appeal = [global.ani_knuckles_appeal_v0, global.ani_knuckles_appeal_v1];
 
 global.ani_knuckles_crouch_v0 = new animation(sprKnucklesCrouch, 1, -1);
 global.ani_knuckles_crouch_v1 = new animation(sprKnucklesCrouch, 1, -1, [1, 0]);

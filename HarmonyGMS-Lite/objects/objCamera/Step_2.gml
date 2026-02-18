@@ -36,17 +36,12 @@ switch (state)
 	        if (look_time > 0)
 	        {
 	            y_offset = approach(y_offset, 0, 2);
-	            if (action == player_is_looking or action == player_is_crouching) look_time--;
+	            if (action == player_is_crouching) look_time--;
 	        }
 	        else
 	        {
 	            switch (action)
 	            {
-	                case player_is_looking:
-	                {
-	                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_UP, 2);
-	                    break;
-	                }
 	                case player_is_crouching:
 	                {
 	                    y_offset = approach(y_offset, CAMERA_PAN_TARGET_DOWN, 2);

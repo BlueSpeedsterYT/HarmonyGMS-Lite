@@ -119,9 +119,9 @@ player_animate = function()
             }
             break;
         }
-        case PLAYER_ANIMATION.LOOK:
+        case PLAYER_ANIMATION.APPEAL:
         {
-            player_set_animation(global.ani_tails_look);
+            player_set_animation(global.ani_tails_appeal);
             player_set_radii(6, 14);
             if (image_index == 0)
             {

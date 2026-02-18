@@ -74,8 +74,6 @@ mask_direction = 0;
 
 /* AUTHOR NOTE: "down" is treated as 0 degrees instead of 270. */
 
-cliff_sign = 0;
-
 collision_layer = 0;
 
 // Copy the stage's tilemaps
@@ -319,15 +317,6 @@ player_set_radii = function(xrad, yrad)
         x += sine * (old_y_radius - y_radius);
         y += cosine * (old_y_radius - y_radius);
     }
-};
-
-/// @method player_animate_teeter(ani)
-/// @description Sets the given animation within the player's animation core based on teeter conditions.
-/// @param {Undefined|Struct.animation|Array} ani Animation to set. Accepts an array as animation variants.
-player_animate_teeter = function(ani)
-{
-	animation_data.variant = (cliff_sign != image_xscale);
-    player_set_animation(ani);
 };
 
 /// @method player_animate_run(ani)

@@ -53,10 +53,6 @@ global.ani_shield_invincibility_sparkle_v0 = new animation(sprShieldInvincibilit
 
 global.ani_sonic_idle_v0 = new animation(sprSonicIdle, [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 12, 6, 6, 6, 12, 8, 6, 6, 6, 6]);
 
-global.ani_sonic_teeter_front_v0 = new animation(sprSonicTeeterFront, 3, 1);
-global.ani_sonic_teeter_back_v0 = new animation(sprSonicTeeterBack, [3, 4, 4, 4, 4, 4, 4, 4, 4], 1);
-global.ani_sonic_teeter = [global.ani_sonic_teeter_front_v0, global.ani_sonic_teeter_back_v0];
-
 global.ani_sonic_turn_v0 = new animation(sprSonicTurn, 1, -1);
 global.ani_sonic_turn_brake_v0 = new animation(sprSonicTurnBrake, 2, -1);
 global.ani_sonic_turn = [global.ani_sonic_turn_v0, global.ani_sonic_turn_brake_v0];
@@ -146,10 +142,6 @@ global.ani_sonic_skidding = [global.ani_sonic_skidding_v0, global.ani_sonic_skid
 #region Tails
 
 global.ani_tails_idle_v0 = new animation(sprTailsIdle, 8);
-
-global.ani_tails_teeter_front_v0 = new animation(sprTailsTeeterFront, 3, 1);
-global.ani_tails_teeter_back_v0 = new animation(sprTailsTeeterBack, 4, 1);
-global.ani_tails_teeter = [global.ani_tails_teeter_front_v0, global.ani_tails_teeter_back_v0];
 
 global.ani_tails_turn_v0 = new animation(sprTailsTurn, 1, -1);
 global.ani_tails_turn_brake_v0 = new animation(sprTailsTurnBrake, 2, -1);
@@ -244,10 +236,6 @@ global.ani_tails_super_swipe = [global.ani_tails_super_swipe_v0, global.ani_tail
 #region Knuckles
 
 global.ani_knuckles_idle_v0 = new animation(sprKnucklesIdle, [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 5, 5, 5, 5, 5, 5, 5, 12, 6, 5, 5, 5, 5, 5, 5]);
-
-global.ani_knuckles_teeter_front_v0 = new animation(sprKnucklesTeeterFront, 3, 1);
-global.ani_knuckles_teeter_back_v0 = new animation(sprKnucklesTeeterBack, [3, 4, 4, 4, 4, 4, 4], 1);
-global.ani_knuckles_teeter = [global.ani_knuckles_teeter_front_v0, global.ani_knuckles_teeter_back_v0];
 
 global.ani_knuckles_turn_v0 = new animation(sprKnucklesTurn, 1, -1);
 global.ani_knuckles_turn_brake_v0 = new animation(sprKnucklesTurnBrake, 1, -1);

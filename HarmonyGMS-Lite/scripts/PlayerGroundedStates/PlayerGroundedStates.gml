@@ -26,17 +26,8 @@ function player_is_standing(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Check if standing on a cliff
-			cliff_sign = 0;
-			var height = y_radius + y_tile_reach;
-			if (not player_ray_collision(tilemaps, 0, height))
-			{
-				cliff_sign = player_ray_collision(tilemaps, -x_radius, height) -
-					player_ray_collision(tilemaps, x_radius, height);
-			}
-			
 			// Animate
-			animation_play(cliff_sign != 0 ? PLAYER_ANIMATION.TEETER : PLAYER_ANIMATION.IDLE, 0, [PLAYER_ANIMATION.TURN]);
+			animation_play(PLAYER_ANIMATION.IDLE, 0, [PLAYER_ANIMATION.TURN]);
 			break;
 		}
 		case PHASE.STEP:
@@ -65,7 +56,7 @@ function player_is_standing(phase)
 			if (player_try_skill()) exit;
 			
 			// Turn
-            if (animation_data.index != PLAYER_ANIMATION.TEETER and input_axis_x != 0 and image_xscale != input_axis_x)
+            if (input_axis_x != 0 and image_xscale != input_axis_x)
             {
                 animation_play(PLAYER_ANIMATION.TURN);
                 image_xscale *= -1;
@@ -73,7 +64,7 @@ function player_is_standing(phase)
             
             if (animation_data.index == PLAYER_ANIMATION.TURN and animation_is_finished())
             {
-                animation_play(cliff_sign != 0 ? PLAYER_ANIMATION.TEETER : PLAYER_ANIMATION.IDLE);
+                animation_play(PLAYER_ANIMATION.IDLE);
             }
             
             if (animation_data.index != PLAYER_ANIMATION.TURN)
@@ -85,11 +76,8 @@ function player_is_standing(phase)
                 }
                 
                 // Look / crouch or roll
-                if (cliff_sign == 0)
-                {
-                    if (player_try_appeal()) return true;
-                    if (player_try_crouch_or_roll()) return true;
-                }
+                if (player_try_appeal()) return true;
+                if (player_try_crouch_or_roll()) return true;
             }
 			break;
 		}

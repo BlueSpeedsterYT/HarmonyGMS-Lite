@@ -65,33 +65,6 @@ player_animate = function()
             }
             break;
         }
-        case PLAYER_ANIMATION.TEETER:
-        {
-            player_animate_teeter(global.ani_knuckles_teeter);
-            player_set_radii(6, 14);
-            switch (animation_data.variant)
-            {
-                case 0:
-                {
-                    if (image_index == 0)
-                    {
-                        hitboxes[0].set_size(-5, -14, 7, 16);
-                        hitboxes[1].set_size();
-                    }
-                    break;
-                }
-                case 1:
-                {
-                    if (image_index == 0)
-                    {
-                        hitboxes[0].set_size(-6, -14, 6, 16);
-                        hitboxes[1].set_size();
-                    }
-                    break;
-                }
-            }
-            break;
-        }
         case PLAYER_ANIMATION.TURN:
         {
             player_set_animation(global.ani_knuckles_turn);

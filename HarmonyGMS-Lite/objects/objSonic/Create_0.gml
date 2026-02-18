@@ -102,17 +102,6 @@ player_animate = function()
             }
             break;
         }
-        case PLAYER_ANIMATION.TEETER:
-        {
-            player_animate_teeter(global.ani_sonic_teeter);
-            player_set_radii(6, 14);
-            if (image_index == 0)
-            {
-                hitboxes[0].set_size(-6, -13, 6, 16);
-                hitboxes[1].set_size();
-            }
-            break;
-        }
         case PLAYER_ANIMATION.TURN:
         {
             player_set_animation(global.ani_sonic_turn);

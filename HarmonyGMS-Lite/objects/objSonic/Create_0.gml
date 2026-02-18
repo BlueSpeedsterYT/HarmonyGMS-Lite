@@ -30,30 +30,38 @@ player_try_skill = function()
 			// Insta-Shield (or Homing Attack at close distances)
 			// TODO: Implement some sort of range check to allow for the homing attack to take
 			// over from the insta-shield
-			sound_play(sfxSonicInstaShield);
-			animation_play(SONIC_ANIMATION.INSTA_SHIELD);
-			player_perform(player_is_falling, false);
-			with (insta_shield)
+			if (not (aerial_flags & AERIAL_FLAG.SHIELD_ACTION))
 			{
-				x = other.x div 1;
-				y = other.y div 1;
-				depth = other.depth;
-				image_xscale = other.image_xscale;
-				image_angle = other.image_angle;
+				aerial_flags |= AERIAL_FLAG.SHIELD_ACTION;
+				with (insta_shield)
+				{
+					x = other.x div 1;
+					y = other.y div 1;
+					depth = other.depth;
+					image_xscale = other.image_xscale;
+					image_angle = other.image_angle;
 				
-				animation_set(global.ani_sonic_insta_shield_v1);
+					animation_set(global.ani_sonic_insta_shield_v1);
+				}
+				animation_play(SONIC_ANIMATION.INSTA_SHIELD);
+				sound_play(sfxSonicInstaShield);
+				player_perform(player_is_falling, false);
+				return true;
 			}
-			return true;
 		}
 		else if (input_axis_pressed_x != 0 and sign(input_double_tap_direction_x) == image_xscale)
 		{
 			// Forward Thrust
-			x_speed += (2.25 * input_double_tap_direction_x);
-			y_speed = 0;
-			sound_play(sfxSonicThrust);
-			animation_play(SONIC_ANIMATION.FORWARD_THRUST);
-			player_perform(player_is_falling, false);
-			return true;
+			if (not (aerial_flags & AERIAL_FLAG.FORWARD_THRUST))
+			{
+				aerial_flags |= AERIAL_FLAG.FORWARD_THRUST;
+				x_speed += (2.25 * input_double_tap_direction_x);
+				y_speed = 0;
+				animation_play(SONIC_ANIMATION.FORWARD_THRUST);
+				sound_play(sfxSonicThrust);
+				player_perform(player_is_falling, false);
+				return true;
+			}
 		}
     }
 	else
@@ -64,8 +72,15 @@ player_try_skill = function()
 			// Sonic's skid attack is simple and effective, however
 			// it gets supercharged while in boost mode, the skys the limit with this power.
 			// so use it wisely.
-			player_perform(sonic_is_skidding);
-			return true;
+			if (not (local_direction >= 45 and local_direction <= 315))
+			{
+				player_perform(sonic_is_skidding);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
     return false;

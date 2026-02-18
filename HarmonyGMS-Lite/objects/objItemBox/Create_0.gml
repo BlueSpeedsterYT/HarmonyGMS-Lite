@@ -124,9 +124,8 @@ reaction = function(pla)
 				with (pla)
 				{
 					y_speed = -3;
+					state_time = -1; // <-- This prevents the player from tricking.
 					animation_play(PLAYER_ANIMATION.SPRING, 0);
-					// BUG: You can still trick off of this, when you're actually
-					// not supposed to.
 					player_perform(player_is_sprung);
 				}
 			}

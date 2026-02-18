@@ -263,7 +263,7 @@ function player_is_looking(phase)
 			// Slide down steep slopes
 			if (local_direction >= 45 and local_direction <= 315)
 			{
-				control_lock_time = slide_duration;
+				control_lock_time = SLIDE_DURATION;
 				return player_perform(player_is_running);
 			}
 			

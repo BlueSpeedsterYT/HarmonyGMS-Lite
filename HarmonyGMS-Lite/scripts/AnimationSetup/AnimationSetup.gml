@@ -233,6 +233,12 @@ global.ani_tails_flying_turn_v0 = new animation(sprTailsFlyingTurn, 1, -1);
 
 global.ani_tails_flying_tired_v0 = new animation(sprTailsFlyingTired, [6, 3, 6, 6, 6, 6, 6, 6, 6, 6], 2);
 
+global.ani_tails_swipe_v0 = new animation(sprTailsTailSwipe, [2, 2, 2, 2, 2, 2, 3, 3, 3], -1);
+
+global.ani_tails_super_swipe_v0 = new animation(sprTailsSuperTailSwipe0, [1, 2, 2, 2, 2, 2, 2, 3], -1);
+global.ani_tails_super_swipe_v1 = new animation(sprTailsSuperTailSwipe1, [5, 2, 3, 3, 4], -1);
+global.ani_tails_super_swipe = [global.ani_tails_super_swipe_v0, global.ani_tails_super_swipe_v1];
+
 #endregion
 
 #region Knuckles

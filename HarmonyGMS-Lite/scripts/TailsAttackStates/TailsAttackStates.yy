@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"TailsAttackStates",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TailsAttackStates",
+  "parent":{
+    "name":"Tails",
+    "path":"folders/Scripts/Player/States/Characters/Tails.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

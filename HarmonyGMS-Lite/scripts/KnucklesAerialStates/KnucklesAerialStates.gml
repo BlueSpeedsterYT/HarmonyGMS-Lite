@@ -62,16 +62,16 @@ function knuckles_is_gliding(phase)
 		    // Accelerate
 			x_speed = glide_speed * dcos(glide_angle);
 			
-			// Attach to a wall and climb
-			// NOTE: Might tackle this later as it does impact the gliding state
-			if (player_arm_collision(tilemaps, x_wall_radius * glide_direction, 0) != noone)
-			{
-				return player_perform(knuckles_is_climbing);
-			}
-			
 			// Move
 			player_move_in_air();
 			if (state_changed) exit;
+			
+			// Attach to a wall and climb
+			// NOTE: Might tackle this later as it does impact the gliding state
+			if (player_arm_collision(tilemaps, x_wall_radius * glide_direction) != noone)
+			{
+				return player_perform(knuckles_is_climbing);
+			}
 			
 			// Land
 			if (on_ground) 

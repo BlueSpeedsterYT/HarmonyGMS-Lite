@@ -32,8 +32,8 @@ player_try_skill = function()
 			// Like Sonic 3, he can go to higher bounds never expected.
 			// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
 			// the Advance games.
-			fly_time = TAILS_FLIGHT_DURATION;
-			fly_state_time = 1; 
+			fly_time = TAILS_FLY_DURATION;
+			fly_state_time = 1;
 			player_perform(tails_is_flying);
 			return true;
         }
@@ -46,7 +46,15 @@ player_try_skill = function()
 		{
 			// Tail Swipe
 			// it is a swiping attack.
-			return true;
+			if (not (local_direction >= 45 and local_direction <= 315))
+			{
+				player_perform(tails_is_tail_swipe);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
     return false;
@@ -477,6 +485,69 @@ player_animate = function()
                 case 2:
                 {
                     hitboxes[0].set_size(-6, -10, 6, 10);
+                    hitboxes[1].set_size();
+                    break;
+                }
+			}
+			break;
+		}
+		case TAILS_ANIMATION.SWIPE:
+		{
+			player_set_animation(global.ani_tails_swipe_v0);
+            player_set_radii(6, 14);
+			switch (image_index)
+            {
+                case 0:
+                {
+                    hitboxes[0].set_size(-6, -10, 6, 16);
+                    hitboxes[1].set_size();
+                    break;
+                }
+                case 1:
+                {
+                    hitboxes[0].set_size(-2, -10, 10, 16);
+                    hitboxes[1].set_size();
+                    break;
+                }
+                case 2:
+                {
+                    hitboxes[0].set_size(0, -10, 12, 16);
+                    hitboxes[1].set_size();
+                    break;
+                }
+                case 3:
+                {
+                    hitboxes[0].set_size(-6, -10, 6, 16);
+                    hitboxes[1].set_size(6, -10, 20, 16);
+                    break;
+                }
+                case 4:
+                {
+                    hitboxes[0].set_size(2, -10, 14, 16);
+                    hitboxes[1].set_size(12, -10, 48, 16);
+                    break;
+                }
+                case 5:
+                {
+                    hitboxes[0].set_size(2, -10, 14, 16);
+                    hitboxes[1].set_size(14, -10, 40, 16);
+                    break;
+                }
+                case 6:
+                {
+                    hitboxes[0].set_size(-6, -10, 6, 16);
+                    hitboxes[1].set_size();
+                    break;
+                }
+                case 7:
+                {
+                    hitboxes[0].set_size(-4, -10, 8, 16);
+                    hitboxes[1].set_size();
+                    break;
+                }
+                case 8:
+                {
+                    hitboxes[0].set_size(-6, -10, 6, 16);
                     hitboxes[1].set_size();
                     break;
                 }

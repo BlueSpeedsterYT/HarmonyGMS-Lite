@@ -29,7 +29,12 @@ function sonic_is_skidding(phase)
 				if (state_changed) exit;
 				
 				// Get off ground
-				if (not on_ground) return player_ground(undefined);
+				if (not on_ground)
+				{
+					y_speed = -dsin(local_direction) * x_speed;
+					x_speed *= dcos(local_direction);
+					return player_ground(undefined);
+				}
 			
 				// Slide down steep slopes
 				if (abs(x_speed) < SLIDE_THRESHOLD and local_direction >= 90 and local_direction <= 270)
@@ -52,7 +57,6 @@ function sonic_is_skidding(phase)
 							animation_data.variant++;
 							sound_play(sfxSliding);
 							x_speed = 4 * image_xscale;
-							state_time = 33;
 							break;
 						}
 						
@@ -66,10 +70,32 @@ function sonic_is_skidding(phase)
 			}
 			else
 			{
+				// Move
+				player_move_in_air();
+				if (state_changed) exit;
+			
+				// Land
+				if (on_ground) return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
+				
+				// Apply air resistance
+				if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
+				{
+					x_speed *= AIR_DRAG;
+				}
+			
+				// Fall
+				if (y_speed < gravity_cap)
+				{
+					y_speed = min(y_speed + gravity_force, gravity_cap);
+				}
+				
 				// We're not in the ground doing the animation so
 				// reset to the falling state immediately.
-				animation_play(PLAYER_ANIMATION.ROLL);
-				return player_perform(player_is_falling);
+				if (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_is_finished())
+				{
+					animation_play(PLAYER_ANIMATION.ROLL);
+					return player_perform(player_is_falling, false);
+				}
 			}
 			
 			// Do Skidding related stuff...
@@ -85,7 +111,7 @@ function sonic_is_skidding(phase)
 				}
 				
 				// Finish off the skidding
-				if (state_time-- == 0)
+				if (animation_data.time >= 32)
 				{
 					if (on_ground)
 					{
@@ -103,7 +129,6 @@ function sonic_is_skidding(phase)
 		}
 		case PHASE.EXIT:
 		{
-			state_time = 0;
 			break;
 		}
 	}

@@ -55,12 +55,13 @@ function tails_is_flying(phase)
 			if (input_axis_x != 0)
 			{
 				if (not fly_time) image_xscale = input_axis_x;
-				if (abs(x_speed) < speed_cap or sign(x_speed) != input_axis_x)
+				var max_fly_speed = 6;
+				if (abs(x_speed) < max_fly_speed or sign(x_speed) != input_axis_x)
 				{
 					x_speed += air_acceleration * input_axis_x;
-					if (abs(x_speed) > speed_cap and sign(x_speed) == input_axis_x)
+					if (abs(x_speed) > max_fly_speed and sign(x_speed) == input_axis_x)
 					{
-						x_speed = speed_cap * input_axis_x;
+						x_speed = max_fly_speed * input_axis_x;
 					}
 				}
 			}

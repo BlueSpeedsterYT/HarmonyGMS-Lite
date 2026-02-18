@@ -16,6 +16,8 @@ draw_set_color(c_white);
 var pla_speed = ctrlZone.stage_players[0].x_speed;
 if (not ctrlGame.game_paused) image_index += (pla_speed / 8) + 0.25;
 image_index = image_index mod 256;
+var hud_x = 1;
+var hud_y = 3;
 draw_sprite(sprHUD, 0, hud_x, hud_y);
 draw_sprite(sprHUDRing, image_index, hud_x + 6, hud_y + 5);
 draw_set_color(global.ring_count == 0 and flash ? c_red : c_white);

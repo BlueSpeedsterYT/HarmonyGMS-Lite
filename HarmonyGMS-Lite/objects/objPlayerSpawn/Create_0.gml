@@ -1,11 +1,11 @@
-/// @description Setup
+/// @description Initialize
 if (not (ctrlGame.game_flags & GAME_FLAG.KEEP_CHARACTERS))
 {
 	global.characters = [];
 	for (var i = 0; i < INPUT_MAX_PLAYERS; i++)
 	{
-		var character_id = [CHARACTER.KNUCKLES, CHARACTER.NONE];
-		if (character_id[i] != CHARACTER.NONE) array_push(global.characters, character_id[i]);
+		var character_index = db_read(DATABASE_SAVE, CHARACTER.NONE, "character", i);
+		if (character_index != CHARACTER.NONE) array_push(global.characters, character_index);
 	}
 }
 
@@ -18,5 +18,6 @@ for (var i = 0; i < array_length(global.characters); i++)
     with (player_inst) player_index = i;
 	with (ctrlZone) array_push(stage_players, player_inst);
 }
+with (ctrlGame) game_flags &= ~GAME_FLAG.KEEP_CHARACTERS;
 instance_create_depth(x, y, depth - DEPTH_OFFSET_PLAYER, objCamera);
 instance_destroy();

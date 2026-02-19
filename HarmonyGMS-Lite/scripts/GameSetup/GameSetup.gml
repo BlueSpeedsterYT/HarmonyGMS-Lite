@@ -27,8 +27,8 @@
 
 #macro GAME_MODE_IS_TIME_ATTACK (ctrlGame.game_mode == GAME_MODE.TIME_ATTACK)
 #macro DEBUG_ENABLED (ctrlGame.game_debug == true)
-#macro LIVES_ENABLED (true and (not GAME_MODE_IS_TIME_ATTACK))
-#macro TIME_OVER_ENABLED true
+#macro LIVES_ENABLED (db_read(DATABASE_CONFIG, CONFIG_DEFAULT_LIVES, "lives") and (not GAME_MODE_IS_TIME_ATTACK))
+#macro TIME_OVER_ENABLED (db_read(DATABASE_CONFIG, CONFIG_DEFAULT_TIME_OVER, "time_over"))
 
 #macro TEN_MILLISECONDS 1000
 #macro PLAYER_HEIGHT 14
@@ -88,6 +88,7 @@ global.ring_count = 0;
 global.life_count = 3;
 
 // Fonts
+global.font_system = font_add_sprite(sprFontSystem, ord(" "), true, 1);
 global.font_debug = font_add_sprite(sprFontDebug, ord("!"), false, 1);
 global.font_hud = font_add_sprite(sprFontHUD, ord("!"), false, 0);
 

@@ -6,6 +6,7 @@ overlay = -1;
 queue = ds_priority_create();
 
 // Music Loop Points
+set_loop_points(musCharacterSelect, (14336 / 44100), (1433602 / 44100));
 set_loop_points(musBlazeEventScrewStache, (1419264 / 44100), (10019092 / 44100));
 set_loop_points(musInvincibility, (43008 / 32000), (537033 / 32000));
 

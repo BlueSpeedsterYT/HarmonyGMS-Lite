@@ -27,7 +27,7 @@ Sonic Advance Trilogy Research - Sonic Advance 2 Decompilation
 This project uses a stripped-down version of the Sonic Studio Engine template, and features various modifications from VectorSatyr's other templates.
 It also uses the angle detection method from the Harmony Framework.
 
-This project implements multiple open source libraries such as easings.gml, Input, as well as snippets from STANNcam.
+This project implements multiple open source libraries such as easings.gml, Input, db, as well as snippets from STANNcam.
 
 =============================================================================================================================
 

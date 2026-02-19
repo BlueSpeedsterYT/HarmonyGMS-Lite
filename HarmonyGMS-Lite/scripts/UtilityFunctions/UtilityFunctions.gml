@@ -157,6 +157,13 @@ function particle_create(ox, oy, ani, rot = 0, life = -1, xspd = 0, yspd = 0, xa
     return particle;
 }
 
+/// @description Sets the horizontal and vertical text alignment in one call. Ported from GM8.2.
+function draw_set_align(halign, valign)
+{
+	draw_set_halign(halign);
+	draw_set_valign(valign);
+}
+
 /// @description Resets draw color, alpha, text alignment, and blend mode. Ported from GM8.2.
 function draw_reset()
 {

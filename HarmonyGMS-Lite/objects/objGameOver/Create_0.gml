@@ -1,4 +1,4 @@
-/// @description Setup
+/// @description Initialize
 
 game_over_cause = GAME_OVER_TYPE.NONE;
 delay = 0;

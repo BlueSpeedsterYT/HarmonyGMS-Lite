@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxMenuAccept",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.27163264,
+  "exportDir":"",
+  "name":"sfxMenuAccept",
+  "parent":{
+    "name":"Menu",
+    "path":"folders/Audio/SFX/Menu.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxMenuAccept.wav",
+  "volume":1.0,
+}

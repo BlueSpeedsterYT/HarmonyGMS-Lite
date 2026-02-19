@@ -33,7 +33,7 @@ function music_overlay(soundid, loop = false, time = audio_sound_length(soundid)
 		// Play overlay
 		var music_volume = (global.volume_music * global.volume_master);
 		overlay = audio_play_sound(soundid, PRIORITY_OVERLAY, loop, music_volume);
-		alarm[0] = time;
+		alarm[0] = round(time);
 	}
 }
 

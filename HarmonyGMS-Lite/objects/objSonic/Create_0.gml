@@ -72,7 +72,7 @@ player_try_skill = function()
 			// Sonic's skid attack is simple and effective, however
 			// it gets supercharged while in boost mode, the skys the limit with this power.
 			// so use it wisely.
-			if (not (local_direction >= 45 and local_direction <= 315))
+			if (not (mask_direction != gravity_direction))
 			{
 				player_perform(sonic_is_skidding);
 				return true;

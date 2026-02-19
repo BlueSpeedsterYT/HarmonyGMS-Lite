@@ -212,7 +212,7 @@ player_try_crouch_or_roll = function()
 {
 	if (input_axis_y == 1)
 	{
-		if ((abs(x_speed) + 0.49609375) > ROLL_THRESHOLD)
+		if ((abs(x_speed) + 0.49609375) > ROLL_THRESHOLD or mask_direction != gravity_direction)
 		{
 			sound_play(sfxRoll);
 			player_perform(player_is_rolling);
@@ -271,18 +271,21 @@ player_rotate_mask = function ()
 	}
 }
 
-/// @method player_resist_slope(force)
+/// @method player_resist_slope(force, threshold)
 /// @description Applies slope friction to the player's horizontal speed, if appropriate.
 /// @param {Real} force Friction value to use.
-player_resist_slope = function (force)
+/// @param {Real} threshold Threshold value to use.
+player_resist_slope = function (force, threshold)
 {
+	var sine_value = dsin(local_direction);
 	// Abort if...
-	if (x_speed == 0 and control_lock_time <= 0) exit; // Not moving or sliding down
-	if (local_direction > 135 and local_direction < 225) exit; // Attached to a ceiling
+	if (not on_ground) exit; // Not on the ground
+	if (sign(sine_value) == sign(x_speed)) exit; // The signed sine value is equal to the signed horizontal speed value
 	if (local_direction < 22.5 or local_direction > 337.5) exit; // Moving on a shallow surface
+	if (abs(sine_value * force) <= threshold) exit; // Is under the provided threshold
 	
 	// Apply
-	x_speed -= dsin(local_direction) * force;
+	x_speed -= sine_value * force;
 };
 
 /// @method player_set_animation(ani, [ang])

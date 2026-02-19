@@ -41,6 +41,7 @@
         "ITEM_INDEX.RINGS_5",
         "ITEM_INDEX.RINGS_10",
       ],"multiselect":false,"name":"index","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"ITEM_INDEX.ONE_UP","varType":6,},
+    {"$GMObjectProperty":"v2","%Name":"can_bounce","filters":[],"listItems":[],"multiselect":false,"name":"can_bounce","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

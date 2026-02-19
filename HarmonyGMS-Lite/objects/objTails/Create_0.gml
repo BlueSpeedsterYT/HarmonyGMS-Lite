@@ -46,7 +46,7 @@ player_try_skill = function()
 		{
 			// Tail Swipe
 			// it is a swiping attack.
-			if (not (local_direction >= 45 and local_direction <= 315))
+			if (not (mask_direction != gravity_direction))
 			{
 				player_perform(tails_is_tail_swipe);
 				return true;

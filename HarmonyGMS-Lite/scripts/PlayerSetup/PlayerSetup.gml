@@ -93,5 +93,5 @@ enum KNUCKLES_ANIMATION
 	GLIDE = PLAYER_ANIMATION.MAX,
 	GLIDE_TURN, GLIDE_SLIDING, GLIDE_FALL,
 	CLIMB_ATTACH, CLIMB, // <-- This includes the idle, movement, lifting upwards and landing animations
-	SPIRAL_ATTACK
+	PUNCH, SPIRAL_ATTACK,
 }

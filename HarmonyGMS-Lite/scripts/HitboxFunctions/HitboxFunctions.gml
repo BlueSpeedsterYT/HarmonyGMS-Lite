@@ -167,45 +167,6 @@ function collision_player(hb, pla, plahb = -1)
     return result;
 }
 
-/// @description Checks if the player has collided with an itembox
-function collision_player_itembox(itembox, pla)
-{
-	var result = false;
-	
-	var x_int = itembox.x div 1;
-	var y_int = itembox.y div 1;
-	var left = itembox.hitboxes[0].left;
-    var top = itembox.hitboxes[0].top;
-    var right = itembox.hitboxes[0].right;
-    var bottom = itembox.hitboxes[0].bottom;
-	
-	var px_int = pla.x div 1;
-	var py_int = pla.y div 1;
-	var pleft = pla.hitboxes[1].left;
-    var ptop = pla.hitboxes[1].top;
-    var pright = pla.hitboxes[1].right;
-    var pbottom = pla.hitboxes[1].bottom;
-	
-	if (pla.state == player_is_dead) exit;
-	
-	var sx1 = px_int + pleft;
-	var sy1 = py_int + ptop;
-	var sx2 = px_int + pright;
-	var sy2 = py_int + pbottom;
-	
-	var dx1 = x_int + left;
-	var dy1 = y_int + top;
-	var dx2 = x_int + right;
-	var dy2 = y_int + bottom;
-	
-	if (rectangle_in_rectangle(sx1, sy1, sx2, sy2, dx1, dy1, dx2, dy2))
-	{
-		result = true;
-	}
-	
-	return result;
-}
-
 /// @description Converts the given flags to a direction in degrees.
 /// @param {Real} flags Flags to convert.
 /// @returns {Real}

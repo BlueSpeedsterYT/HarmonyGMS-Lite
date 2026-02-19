@@ -6,7 +6,6 @@ hitboxes[0].set_size(-13, -27, 13, 1);
 icon_offset = 0;
 icon_static = false;
 frames = 0;
-no_player_break_recoil = false;
 show_itembox = true;
 player_index = -1;
 
@@ -21,35 +20,6 @@ if ((GAME_MODE_IS_TIME_ATTACK or (not LIVES_ENABLED)) and index == ITEM_INDEX.ON
 if (GAME_MODE_IS_TIME_ATTACK and index == ITEM_INDEX.RINGS_RANDOM)
 {
 	index = ITEM_INDEX.RINGS_10;
-}
-
-collide_with_itembox = function(pla)
-{
-	var hitbox_flag = collision_player_itembox(id, pla);
-	if (pla.state != player_is_dead)
-	{
-		if (hitbox_flag == true)
-		{
-			no_player_break_recoil = true;
-			return no_player_break_recoil;
-		}
-		else
-		{
-			if (not collision_player(0, pla, 1))
-			{
-				return false;
-			}
-			else
-			{
-				no_player_break_recoil = false;
-				return true;
-			}
-		}
-	}
-	else
-	{
-		return false;
-	}
 }
 
 itembox_apply_item = function(pla)
@@ -115,14 +85,15 @@ itembox_apply_item = function(pla)
 
 reaction = function(pla)
 {
-	if (collide_with_itembox(pla) == true)
+	if (collision_player(0, pla))
 	{
 		if (show_itembox)
 		{
-			if (no_player_break_recoil == false or (not pla.on_ground))
+			if (can_bounce == true)
 			{
 				with (pla)
 				{
+					player_ground(undefined);
 					y_speed = -3;
 					state_time = -1; // <-- This prevents the player from tricking.
 					animation_play(PLAYER_ANIMATION.SPRING, 0);

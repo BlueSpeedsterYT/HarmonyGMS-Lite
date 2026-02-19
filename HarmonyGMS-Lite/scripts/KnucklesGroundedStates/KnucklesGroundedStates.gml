@@ -28,7 +28,7 @@ function knuckles_is_landing(phase)
 			}
 
 		    // Slide down steep slopes
-			if (local_direction >= 45 and local_direction <= 315)
+			if (mask_direction != gravity_direction)
 			{
 				control_lock_time = SLIDE_DURATION;
 				return player_perform(player_is_running);
@@ -87,13 +87,13 @@ function knuckles_is_sliding(phase)
 			}
 
 		    // Slide down steep slopes
-			if (abs(x_speed) < SLIDE_THRESHOLD)
+			if (abs(x_speed) < SLIDE_THRESHOLD and mask_direction != gravity_direction)
 			{
 				if (local_direction >= 90 and local_direction <= 270)
 				{
 					return player_perform(knuckles_is_falling);
 				}
-				else if (local_direction >= 45 and local_direction <= 315)
+				else
 				{
 					control_lock_time = SLIDE_DURATION;
 					return player_perform(player_is_running)
@@ -120,6 +120,103 @@ function knuckles_is_sliding(phase)
 		}
 		case PHASE.EXIT:
 		{
+			break;
+		}
+	}
+}
+
+/// @function knuckles_is_punching_left(phase)
+function knuckles_is_punching_left(phase)
+{
+	switch (phase)
+	{
+		case PHASE.ENTER:
+		{
+			// Set speed
+			if (abs(x_speed) < 3)
+			{
+				x_speed = 3 * image_xscale;
+			}
+			
+			// Animate
+			animation_play(KNUCKLES_ANIMATION.PUNCH, 0);
+			break;
+		}
+		case PHASE.STEP:
+		{
+			// Friction
+			x_speed -= min(abs(x_speed), 0.375) * sign(x_speed);
+			
+			// Move
+			player_move_on_ground();
+			if (state_changed) exit;
+			
+			// Slide down steep slopes
+			if (mask_direction != gravity_direction)
+			{
+				control_lock_time = SLIDE_DURATION;
+				return player_perform(player_is_running);
+			}
+			
+			// Update
+			if ((animation_data.index == KNUCKLES_ANIMATION.PUNCH and animation_data.variant == 0) and animation_is_finished())
+			{
+				if (on_ground)
+				{
+					return player_perform(knuckles_is_punching_right);
+				}
+				else
+				{
+					player_ground(undefined);
+					animation_play(PLAYER_ANIMATION.ROLL);
+					return player_perform(player_is_falling);
+				}
+			}
+			break;
+		}
+	}
+}
+
+/// @function knuckles_is_punching_right(phase)
+function knuckles_is_punching_right(phase)
+{
+	switch (phase)
+	{
+		case PHASE.ENTER:
+		{
+			// Set speed
+			if (abs(x_speed) < 3)
+			{
+				x_speed = 3 * image_xscale;
+			}
+			
+			// Animate
+			animation_play(KNUCKLES_ANIMATION.PUNCH, 1);
+			break;
+		}
+		case PHASE.STEP:
+		{
+			// Friction
+			x_speed -= min(abs(x_speed), 0.375) * sign(x_speed);
+			
+			// Move
+			player_move_on_ground();
+			if (state_changed) exit;
+			
+			// Update
+			if ((animation_data.index == KNUCKLES_ANIMATION.PUNCH and animation_data.variant == 1) and animation_is_finished())
+			{
+				if (on_ground)
+				{
+					return player_perform(player_is_standing);
+				}
+				else
+				{
+					player_ground(undefined);
+					animation_play(PLAYER_ANIMATION.ROLL);
+					return player_perform(player_is_falling);
+				}
+			}
 			break;
 		}
 	}

@@ -77,7 +77,7 @@ function knuckles_is_gliding(phase)
 			if (on_ground) 
 			{
 				if (x_speed != 0) image_xscale = sign(x_speed);
-				if (local_direction >= 45 and local_direction <= 315)
+				if (mask_direction != gravity_direction)
 				{
 					control_lock_time = SLIDE_DURATION;
 					return player_perform(player_is_running);
@@ -166,7 +166,7 @@ function knuckles_is_falling(phase)
 			// Land
 			if (on_ground) 
 			{
-				if (local_direction >= 45 and local_direction <= 315)
+				if (mask_direction != gravity_direction)
 				{
 					control_lock_time = SLIDE_DURATION;
 					return player_perform(player_is_running);

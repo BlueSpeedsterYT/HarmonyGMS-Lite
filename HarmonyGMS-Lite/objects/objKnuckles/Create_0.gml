@@ -44,7 +44,17 @@ player_try_skill = function()
 			// If the player is not in boost mode, then Knuckles would do a simple punch.
 			// however, that punch turns into a spiral strike when in boost mode.
 			// Be noteful on how you handle that.
-			return false;
+			if (not (mask_direction != gravity_direction))
+			{
+				// Start by punching to the left
+				player_perform(knuckles_is_punching_left);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+			return true;
 		}
 	}
     return false;
@@ -597,5 +607,46 @@ player_animate = function()
             }
             break;
         }
+		case KNUCKLES_ANIMATION.PUNCH:
+		{
+			player_set_animation(global.ani_knuckles_punch);
+            player_set_radii(6, 14);
+			switch (image_index)
+			{
+				case 0:
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				{
+					hitboxes[0].set_size(-6, -14, 6, 16);
+					hitboxes[1].set_size();
+					break;
+				}
+				case 1:
+				case 6:
+				{
+					if (image_index == 1)
+					{
+						hitboxes[0].set_size(-2, -14, 16, 16);
+						hitboxes[1].set_size(14, -17, 35, 16);
+					}
+					else
+					{
+						hitboxes[0].set_size(-6, -14, 17, 16);
+						hitboxes[1].set_size(13, -17, 35, 16);
+					}
+					sound_play(sfxKnucklesPunch);
+					break;
+				}
+				case 7:
+				{
+					hitboxes[0].set_size(-6, -14, 17, 16);
+					hitboxes[1].set_size();
+					break;
+				}
+			}
+			break;
+		}
     }
 };

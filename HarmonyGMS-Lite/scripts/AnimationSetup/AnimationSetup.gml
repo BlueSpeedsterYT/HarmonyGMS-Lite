@@ -327,4 +327,8 @@ global.ani_knuckles_glide_falling_v0 = new animation(sprKnucklesGlideFalling0, 3
 global.ani_knuckles_glide_falling_v1 = new animation(sprKnucklesGlideFalling1, 1, -1);
 global.ani_knuckles_glide_falling = [global.ani_knuckles_glide_falling_v0, global.ani_knuckles_glide_falling_v1];
 
+global.ani_knuckles_punch_v0 = new animation(sprKnucklesPunch, [2, 2, 2, 4, 2, 2], -1, [0, 0, 1, 2, 3, 0]);
+global.ani_knuckles_punch_v1 = new animation(sprKnucklesPunch, [2, 2, 2, 8, 3, 2], -1, [4, 5, 6, 7, 5, 4]);
+global.ani_knuckles_punch = [global.ani_knuckles_punch_v0, global.ani_knuckles_punch_v1];
+
 #endregion

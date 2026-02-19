@@ -4,7 +4,7 @@ if (not (ctrlGame.game_flags & GAME_FLAG.KEEP_CHARACTERS))
 	global.characters = [];
 	for (var i = 0; i < INPUT_MAX_PLAYERS; i++)
 	{
-		var character_id = [CHARACTER.SONIC, CHARACTER.NONE];
+		var character_id = [CHARACTER.KNUCKLES, CHARACTER.NONE];
 		if (character_id[i] != CHARACTER.NONE) array_push(global.characters, character_id[i]);
 	}
 }

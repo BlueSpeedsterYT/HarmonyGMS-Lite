@@ -21,6 +21,10 @@ if (InputPressed(INPUT_VERB.CONFIRM))
 	    // Quit
 	    case 1:
 	    {
+			audio_stop_all();
+			music_clear();
+			menu_close(false);
+			room_goto(rmCharacterSelect);
 			break;
 		}
 		    

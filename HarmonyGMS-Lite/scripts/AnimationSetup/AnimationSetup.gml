@@ -6,16 +6,16 @@ global.ani_dust_cloud_v0 = new animation(sprDustCloud, 6, -1);
 
 #region Character Select
 
-global.ani_css_sonic_portrait_v0 = new animation(sprSonicPortraitCSS, 1, -1, [0]);
-global.ani_css_sonic_portrait_v1 = new animation(sprSonicPortraitCSS, [5, 2, 15], -1, [1, 2, 3]);
+global.ani_css_sonic_portrait_v0 = new animation(sprCSSPortraitSonic, 1, -1, [0]);
+global.ani_css_sonic_portrait_v1 = new animation(sprCSSPortraitSonic, [5, 2, 15], -1, [1, 2, 3]);
 global.ani_css_sonic_portrait = [global.ani_css_sonic_portrait_v0, global.ani_css_sonic_portrait_v1];
 
-global.ani_css_tails_portrait_v0 = new animation(sprTailsPortraitCSS, 1, -1, [0]);
-global.ani_css_tails_portrait_v1 = new animation(sprTailsPortraitCSS, [4, 3, 3, 4, 15], -1, [1, 2, 3, 4, 5]);
+global.ani_css_tails_portrait_v0 = new animation(sprCSSPortraitTails, 1, -1, [0]);
+global.ani_css_tails_portrait_v1 = new animation(sprCSSPortraitTails, [4, 3, 3, 4, 15], -1, [1, 2, 3, 4, 5]);
 global.ani_css_tails_portrait = [global.ani_css_tails_portrait_v0, global.ani_css_tails_portrait_v1];
 
-global.ani_css_knuckles_portrait_v0 = new animation(sprKnucklesPortraitCSS, 1, -1, [0]);
-global.ani_css_knuckles_portrait_v1 = new animation(sprKnucklesPortraitCSS, [4, 3, 2, 15], -1, [1, 2, 3, 4]);
+global.ani_css_knuckles_portrait_v0 = new animation(sprCSSPortraitKnuckles, 1, -1, [0]);
+global.ani_css_knuckles_portrait_v1 = new animation(sprCSSPortraitKnuckles, [4, 3, 2, 15], -1, [1, 2, 3, 4]);
 global.ani_css_knuckles_portrait = [global.ani_css_knuckles_portrait_v0, global.ani_css_knuckles_portrait_v1];
 
 #endregion

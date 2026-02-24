@@ -82,7 +82,7 @@ global.volume_sound = 1;
 global.volume_music = 1;
 
 // Stage
-global.characters = [];
+global.character = CHARACTER.NONE;
 global.score_count = 0;
 global.ring_count = 0;
 global.life_count = 3;

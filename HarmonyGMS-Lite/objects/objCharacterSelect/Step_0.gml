@@ -1,88 +1,124 @@
 /// @description Behave
 
-	if (intro)
+	switch (state)
 	{
-		//if (skip_intro_timer++ >= 60 and InputPressed(INPUT_VERB.CONFIRM))
-		if (skip_intro_timer++ >= 60)
+		case 0:
 		{
-			cursor = 0;
-			intro = false;
-			allow_input = true;
-		}
-	}
-	
-	var input_axis_x = InputOpposingRepeat(INPUT_VERB.LEFT, INPUT_VERB.RIGHT);
-	var input_axis_y = InputOpposingRepeat(INPUT_VERB.UP, INPUT_VERB.DOWN);
-	cursor = clamp_inverse(cursor, 0, CHARACTER.MAX - 1);
-	char_portrait_x -= char_portrait_x_grav;
-	char_portrait_x_grav += char_portrait_x_speed;
-	if (char_portrait_x_grav < 0)
-	{
-		char_portrait_x_grav = 0;
-		char_portrait_x_speed = 0;
-	}
-	if (char_portrait_active)
-	{
-		if (char_portrait_x < (char_portrait_base_x + 64))
-		{
-			char_portrait_x_speed -= 1.3;
-		}
-		if (char_portrait_x <= char_portrait_base_x)
-		{
-			char_portrait_x = char_portrait_base_x;
-		}
-		if (char_portrait_x == char_portrait_base_x)
-		{
-			char_portrait_land = true;
-		}
-		if (char_portrait_x != char_portrait_base_x)
-		{
-			char_portrait_land = false;
-		}
-	}
-	
-	if (allow_input)
-	{
-		if (input_axis_x != 0 or input_axis_y != 0)
-		{
-			if (input_axis_x == 1 or input_axis_y == 1)
+			if (++anim_frames > 23)
 			{
-				cursor++;
+				anim_frames = 0;
+				state++;
 			}
-			else if (input_axis_x == -1 or input_axis_y == -1)
+			break;
+		}
+		case 1:
+		{
+			if ((++anim_frames > 60) or InputPressed(INPUT_VERB.CONFIRM))
 			{
-				cursor--;
+				InputVerbConsumeAll();
+				cursor_anim_frame++;
+				anim_frames = 0;
+				state++;
+				render_transition_ui_in();
 			}
-			animation_play(cursor, 0);
+			else
+			{
+				
+			}
+			break;
 		}
-		else if (InputPressed(INPUT_VERB.CONFIRM) and char_portrait_land == true)
+		case 2:
 		{
-			allow_input = false;
-			animation_play(cursor, 1);
+			cursor_anim_frame++;
+			if (++anim_frames >= 16)
+			{
+				cursor_anim_frame++;
+				anim_frames = 0;
+				state++;
+			}
+			else
+			{
+				render_transition_ui_in();
+			}
+			break;
 		}
-	}
-	
-	if (allow_input and ((not char_portrait_active) or (input_axis_x != 0 or input_axis_y != 0)))
-	{
-		char_portrait_x_grav = 17;
-		char_portrait_active = true;
-	}
-	
-	if ((not char_portrait_active and char_portrait_base_x > 0) or
-	(allow_input and (input_axis_x != 0 or input_axis_y != 0)))
-	{
-		char_portrait_x = CAMERA_WIDTH;
-		char_portrait_x_speed = 0;
-	}
-	
-	if (animation_data.variant == 1 and animation_is_finished())
-	{
-		if (fade_delay++ >= 20)
+		case 3:
 		{
-			db_write(DATABASE_SAVE, cursor, "character", 0);
-			db_write(DATABASE_SAVE, CHARACTER.NONE, "character", 1);
-			audio_stop_all();
-			music_clear();
-			room_goto(rmTest2);
+			var input_axis_x = InputOpposingRepeat(INPUT_VERB.LEFT, INPUT_VERB.RIGHT);
+			var input_axis_y = InputOpposingRepeat(INPUT_VERB.UP, INPUT_VERB.DOWN);
+			previous_cursor = clamp_inverse(previous_cursor, 0, cursor_cap + amy_unlocked);
+			cursor = clamp_inverse(cursor, 0, cursor_cap + amy_unlocked);
+	
+			if (complete_selection)
+			{
+				if (unlocked_characters[cursor] == true)
+				{
+					animation_play(cursor, 1);
+					global.character = cursor;
+					anim_frames = 0;
+					state = 7;
+				}
+			}
+			else
+			{
+				if (input_axis_x != 0 or input_axis_y != 0)
+				{
+					if (input_axis_x == 1 or input_axis_y == 1)
+					{
+						cursor_anim_frame = 0;
+						arrow_active_frames[0] = 12;
+						previous_cursor = cursor;
+						cursor++;
+						anim_frames = 0;
+						sound_play(sfxCSSCursor);
+					}
+					else if (input_axis_x == -1 or input_axis_y == -1)
+					{
+						cursor_anim_frame = 0;
+						arrow_active_frames[1] = 12;
+						previous_cursor = cursor;
+						cursor--;
+						anim_frames = 0;
+						sound_play(sfxCSSCursor);
+					}
+			
+					animation_play(cursor, 0);
+				}
+				else
+				{
+					if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
+					{
+						animation_play(cursor, 1);
+						global.character = cursor;
+						anim_frames = 0;
+						state = 7;
+					}
+				}
+			}
+			break;
+		}
+		case 4:
+		{
+			break;
+		}
+		case 5:
+		{
+			break;
+		}
+		case 6:
+		{
+			break;
+		}
+		case 7:
+		{
+			InputVerbConsumeAll();
+			anim_frames++;
+			if (anim_frames >= 30)
+			{
+				audio_stop_all();
+				music_clear();
+				room_goto(rmTest2);
+			}
+			break;
 		}
 	}

@@ -10,13 +10,6 @@ global.save_database = db_create();
 db_write(DATABASE_SAVE, "", "name");
 db_write(DATABASE_SAVE, 0, "playtime");
 
-for (var i = 0; i < INPUT_MAX_PLAYERS; i++)
-{
-    db_write(DATABASE_SAVE, CHARACTER.NONE, "character", i);
-}
-
-db_write(DATABASE_SAVE, CHARACTER.KNUCKLES, "character", 0);
-
 // Config
 global.config_database = db_create();
 db_write(DATABASE_CONFIG, CONFIG_DEFAULT_LIVES, "lives");

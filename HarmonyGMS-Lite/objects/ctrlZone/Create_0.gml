@@ -1,6 +1,6 @@
 /// @description Initialize
 image_speed = 0;
-stage_players = [];
+stage_player = noone;
 stage_depth = layer_get_depth("General");
 pause_enabled = true;
 

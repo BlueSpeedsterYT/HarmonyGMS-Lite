@@ -20,7 +20,7 @@ switch (state)
     {
         gravity_direction = focus.gravity_direction;
 		
-		if (focus == ctrlZone.stage_players[0])
+		if (focus == ctrlZone.stage_player)
 		{
 			var action = focus.state;
 			on_ground = focus.on_ground;

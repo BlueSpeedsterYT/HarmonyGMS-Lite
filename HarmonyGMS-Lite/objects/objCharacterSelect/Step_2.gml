@@ -2,6 +2,7 @@
 
 switch (cursor)
 {
+	default:
 	case CHARACTER.SONIC:
 	{
 		animation_set(global.ani_css_sonic_portrait);

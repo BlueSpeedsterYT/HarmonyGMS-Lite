@@ -13,7 +13,7 @@ draw_set_halign(fa_left);
 draw_set_color(c_white);
         
 // Rings
-var pla_speed = ctrlZone.stage_players[0].x_speed;
+var pla_speed = ctrlZone.stage_player.x_speed;
 if (not ctrlGame.game_paused) image_index += (pla_speed / 8) + 0.25;
 image_index = image_index mod 256;
 var hud_x = 1;
@@ -52,8 +52,7 @@ if (LIVES_ENABLED)
 	var lives_x = 6;
 	var lives_y = CAMERA_HEIGHT - 18;
 	var lives_cap = 9;
-	var character_index = global.characters[0];
-	draw_sprite(sprHUDLifeIcon, character_index, lives_x, lives_y);
+	draw_sprite(sprHUDLifeIcon, global.character, lives_x, lives_y);
 	draw_set_font(global.font_hud);
 	draw_text(lives_x + 24, lives_y - 2, $"{global.life_count > lives_cap ? lives_cap : (global.life_count > 0 ? global.life_count - 1 : 0)}");
 }

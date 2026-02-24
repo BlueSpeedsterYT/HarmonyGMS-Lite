@@ -4,7 +4,7 @@ var y_int = y div 1;
 
 if (index == ITEM_INDEX.ONE_UP)
 {
-	draw_sprite(sprItemIcon, global.characters[0], x_int, y_int + icon_offset);
+	draw_sprite(sprItemIcon, global.character, x_int, y_int + icon_offset);
 }
 else
 {

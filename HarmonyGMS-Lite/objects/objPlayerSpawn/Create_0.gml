@@ -1,23 +1,14 @@
 /// @description Initialize
-if (not (ctrlGame.game_flags & GAME_FLAG.KEEP_CHARACTERS))
+if (global.character == CHARACTER.NONE)
 {
-	global.characters = [];
-	for (var i = 0; i < INPUT_MAX_PLAYERS; i++)
-	{
-		var character_index = db_read(DATABASE_SAVE, CHARACTER.NONE, "character", i);
-		if (character_index != CHARACTER.NONE) array_push(global.characters, character_index);
-	}
+	instance_destroy();
 }
-
-var player_objects = [objSonic, objTails, objKnuckles];
-with (ctrlZone) stage_players = [];
-for (var i = 0; i < array_length(global.characters); i++)
+else
 {
-    var character_index = global.characters[i];
-    var player_inst = instance_create_depth(x - i * 32, y, depth + i - DEPTH_OFFSET_PLAYER, player_objects[character_index]);
-    with (player_inst) player_index = i;
-	stage_player_add(player_inst);
+	var player_objects = [objSonic, noone, objTails, objKnuckles, noone];
+	var player_inst = instance_create_depth(x - 32, y, depth - DEPTH_OFFSET_PLAYER, player_objects[global.character]);
+	with (player_inst) player_index = 0;
+	with (ctrlZone) stage_player = player_inst;
+	instance_create_depth(x, y, depth - DEPTH_OFFSET_PLAYER, objCamera);
+	instance_destroy();
 }
-with (ctrlGame) game_flags &= ~GAME_FLAG.KEEP_CHARACTERS;
-instance_create_depth(x, y, depth - DEPTH_OFFSET_PLAYER, objCamera);
-instance_destroy();

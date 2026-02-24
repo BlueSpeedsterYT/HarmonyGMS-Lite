@@ -3,7 +3,7 @@ image_speed = 0;
 state = CAMERA_STATE.FOLLOW;
 
 // Focus
-focus = ctrlZone.stage_players[0];
+focus = ctrlZone.stage_player;
 on_ground = false;
 look_time = LOOK_DURATION;
 

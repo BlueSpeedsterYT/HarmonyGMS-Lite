@@ -56,6 +56,14 @@ global.ani_spin_dash_dust_v0 = new animation(sprSpinDashDust0, 2);
 global.ani_spin_dash_dust_v1 = new animation(sprSpinDashDust1, 2);
 global.ani_spin_dash_dust = [global.ani_spin_dash_dust_v0, global.ani_spin_dash_dust_v1];
 
+global.ani_speed_break_v0 = new animation(sprSpeedBreak, 2, 0, [0, 1]);
+global.ani_speed_break_v1 = new animation(sprSpeedBreak, 2, -1, [0, 1, 0, 1, 0, 1, 2, 3, 4, 5]);
+global.ani_speed_break = [global.ani_speed_break_v0, global.ani_speed_break_v1];
+
+#endregion
+
+#region Shields
+
 global.ani_shield_basic_v0 = new animation(sprShieldBasic, 3);
 
 global.ani_shield_magnetic_v0 = new animation(sprShieldMagnetic, 3);

@@ -7,16 +7,20 @@ unlocked_characters = [true, false, true, true, amy_unlocked];
 cursor = 0;
 previous_cursor = 0;
 cursor_cap = 3;
+unknown_timer = 16; //it is basically unknown in SA2's decomp code but it does act as a anim_frames replacement.
 cursor_anim_frame = 0;
-complete_selection = false;
+up_arrow_active_frames = 0;
+down_arrow_active_frames = 0;
 anim_frames = 0;
-arrow_active_frames = [0, 0];
-char_title_x = CAMERA_WIDTH + (CAMERA_WIDTH_CENTER - 20);
+char_title_x = CAMERA_WIDTH + (CAMERA_WIDTH - 20);
 char_portrait_base_x = CAMERA_WIDTH_CENTER + 46;
 char_name_yscale = 0;
 char_sub_name_base_x = CAMERA_WIDTH_CENTER + 46;
 char_portrait_x = CAMERA_WIDTH + char_portrait_base_x;
 char_sub_name_x = CAMERA_WIDTH + char_sub_name_base_x;
+complete_selection = false;
+exiting = false;
+scrolled_down = false;
 animation_data = new animation_core();
 animation_play(cursor, 0);
 
@@ -30,9 +34,9 @@ render_transition_ui_in = function()
 	}
 	else
 	{
-		i = ((16 - anim_frames) * 20);
+		i = ((ceil(CAMERA_HEIGHT / 10) - anim_frames) * 20);
 	}
-	char_title_x = i + (CAMERA_WIDTH_CENTER - 20);
+	char_title_x = i + CAMERA_WIDTH;
 	
 	if (anim_frames < 8)
 	{
@@ -45,7 +49,7 @@ render_transition_ui_in = function()
 	
 	if (i > 0)
 	{
-		char_portrait_x = char_portrait_base_x + ((128 - (dcos(i * 16) / 128)) * 2);
+		char_portrait_x = char_portrait_base_x + ((CAMERA_WIDTH_CENTER + 8) - (dcos((i * 16) * 1.40625) / 128)) * 2;
 	}
 	else
 	{
@@ -64,7 +68,60 @@ render_transition_ui_in = function()
 	{
 		i = 0;
 	}
-	char_sub_name_x = char_sub_name_base_x + i * 20;
+	char_sub_name_x = char_sub_name_base_x + (i * 5) * 4;
 	
 	char_name_yscale = 256 - ((16 - anim_frames) * 15);
+}
+
+/// @method render_carousel_scroll()
+render_carousel_scroll = function()
+{
+	var character_portait_i = 0, character_title_i = 0, character_subname_i = 0;
+	
+	if (unknown_timer >= 8)
+	{
+		character_portait_i = 0;
+		character_title_i = 8;
+	}
+	else
+	{
+		character_portait_i = 8 - unknown_timer;
+		character_title_i = unknown_timer;
+	}
+	
+	if (unknown_timer < 4)
+	{
+		character_subname_i = 8;
+	}
+	else if (unknown_timer < 12)
+	{
+		character_subname_i = (12 - unknown_timer);
+	}
+	else
+	{
+		character_subname_i = 0;
+	}
+	
+	if (unknown_timer == 0)
+	{
+		animation_play(cursor, 0);
+	}
+	
+	if (character_portait_i > 0)
+	{
+		char_portrait_x = char_portrait_base_x + ((CAMERA_WIDTH_CENTER + 8) - (dcos((character_portait_i * 16) * 1.40625) / 128)) * 2;
+	}
+	else
+	{
+		char_portrait_x = char_portrait_base_x;
+	}
+	
+	char_sub_name_x = char_sub_name_base_x + (character_subname_i * 5) * 4;
+	
+	char_title_x = CAMERA_WIDTH;
+	
+	if (character_title_i < 8)
+	{
+		char_name_yscale = 256 - ((16 - character_title_i) * 15);
+	}
 }

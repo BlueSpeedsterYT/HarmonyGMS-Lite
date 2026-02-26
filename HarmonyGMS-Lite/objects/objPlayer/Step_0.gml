@@ -1,6 +1,61 @@
 /// @description Behave
 if (ctrlGame.game_paused) exit;
 
+// Boost Mode
+boost_index = (global.ring_count > 10 ? 1 : 0) + min(global.ring_count / 50, 3);
+
+if (boost_mode)
+{
+    if (on_ground or superspeed_time < 0)
+    {
+        boost_speed = boost_threshold[boost_index];
+        if (abs(x_speed) < 4.5 or superspeed_time < 0)
+        {
+            boost_mode = false;
+            boost_speed = 0;
+        }
+    }
+}
+else
+{
+    if (on_ground and abs(x_speed) >= speed_limit and not (superspeed_time < 0))
+    {
+        if (boost_speed >= boost_threshold[boost_index])
+        {
+            boost_mode = true;
+            player_speed_break();
+            camera_set_x_lag_time(16);
+            //audio_play_single(sndSpeedBreak);
+        }
+    }
+    else
+    {
+        boost_speed = 0;
+    }
+}
+
+if (boost_mode)
+{
+    speed_limit = 12;
+    speed_cap = 16;
+}
+else if (state == player_is_rolling)
+{
+    speed_limit = 6;
+    speed_cap = 16;
+}
+else
+{
+    speed_limit = 6;
+    speed_cap = 9;
+}
+    
+// TODO: Halve speed_limit when underwater.
+    
+acceleration = base_acceleration + (2 / 256) * min(global.ring_count / 50, 30);
+if (global.ring_count > 10) acceleration += 4 / 256;
+air_acceleration = acceleration * 2;
+
 // Input
 if (input_allow and (player_index == 0))
 {
@@ -60,11 +115,9 @@ if (script_exists(state))
     state(PHASE.STEP);
     if (state_changed) state_changed = false;
 }
-
 player_animate();
 
-x_speed = clamp(x_speed, -max_speed, max_speed);
-
+// Spin Dash Dust
 with (spin_dash_dust)
 {
     var action = other.state;
@@ -88,7 +141,7 @@ with (spin_dash_dust)
     }
 }
 
-
+// Shield
 with (shield)
 {
     var invincible = (other.invincibility_time > 0);
@@ -135,4 +188,113 @@ with (shield)
     {
         animation_set(undefined);
     }
+}
+
+// Speed Break
+with (speed_break)
+{
+    if (visible)
+    {
+        x = other.x div 1;
+        y = other.y div 1;
+        
+        switch (animation_data.variant)
+        {
+            case 1:
+            {
+                if (time++ > 24)
+                {
+                    visible = false;
+                    animation_set(undefined);
+                    break;
+                }
+                
+                for (var i = 0; i < SPEED_BREAK_COUNT; i++)
+                {
+                    positions[i][0] += accelerations[i][0];
+                    positions[i][1] += accelerations[i][1];
+                    
+                    positions[i][0] -= unkE2;
+                    positions[i][1] -= unkE4;
+                    
+                    accelerations[i][0] *= 0.78125;
+                    accelerations[i][1] *= 0.78125;
+                    
+                    unkE2 *= 1.00390625;
+                    unkE4 *= 1.00390625;
+                }
+                break;
+            }
+            default:
+            {
+                for (var i = 0; i < SPEED_BREAK_COUNT / 2; i++)
+                {
+                    if (i & 1)
+                    {
+                        positions[i][0] += accelerations[i][0];
+                        positions[i][1] += accelerations[i][1];
+                    }
+                    else
+                    {
+                        positions[i][0] -= accelerations[i][0];
+                        positions[i][1] -= accelerations[i][1];
+                    }
+                    
+                    accelerations[i][0] *= 0.78125;
+                    accelerations[i][1] *= 0.78125;
+                }
+                
+                if (time++ > 8)
+                {
+                    var x_scale = other.image_xscale;
+                    var rot = other.direction;
+                    animation_data.variant = 1;
+                    animation_set(global.ani_speed_break);
+                    for (var i = 0; i < SPEED_BREAK_COUNT; i++)
+                    {
+                        var rand_rot = irandom(359);
+                        if (x_scale == -1)
+                        {
+                            rand_rot += 90;
+                            unkE2 = dcos(rot + 180) * 4;
+                            unkE4 = -dsin(rot + 180) * 4;
+                        }
+                        else
+                        {
+                            unkE2 = dcos(rot) * 4;
+                            unkE4 = -dsin(rot) * 4;
+                        }
+                        
+                        var accel = irandom(4) + 6;
+                        accelerations[i][0] = dcos(rand_rot) * accel;
+                        accelerations[i][1] = -dsin(rand_rot) * accel;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Afterimages
+player_update_animation_history();
+
+afterimage_visible = boost_mode;
+if (afterimage_visible)
+{
+	for (var i = 0; i < AFTERIMAGE_COUNT; i++)
+	{
+	    var delay = i * 2 + 2;
+        var history_index = modwrap(animation_history_index - delay, 0, ANIMATION_RECORD_COUNT);
+        var record = animation_history[history_index];
+        with (afterimage_list[i])
+        {
+            x = record.x;
+            y = record.y;
+            image_xscale = record.image_xscale;
+            image_yscale = record.image_yscale;
+            image_angle = record.image_angle;
+            animation_set(record.ani);
+            animation_data.speed = record.ani_speed;
+        }
+	}
 }

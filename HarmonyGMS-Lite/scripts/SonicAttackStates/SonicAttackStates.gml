@@ -6,7 +6,10 @@ function sonic_is_skidding(phase)
 		case PHASE.ENTER:
 		{
 			// Set variables
-			x_speed = 3 * image_xscale;
+			if (not boost_mode)
+			{
+				x_speed = 3 * image_xscale;
+			}
 			
 			// Play sound
 			sound_play(sfxSwipe);
@@ -56,13 +59,13 @@ function sonic_is_skidding(phase)
 						{
 							animation_data.variant++;
 							sound_play(sfxSliding);
-							x_speed = 4 * image_xscale;
+							if (not boost_mode) x_speed = 4 * image_xscale;
 							break;
 						}
 						
 						case 2:
 						{
-							return player_perform(player_is_standing);
+							return player_perform(boost_mode ? player_is_running : player_is_standing);
 							break;
 						}
 					}
@@ -214,7 +217,7 @@ function sonic_is_bounding(phase)
 			{
 				var ox = x div 1;
 				var oy = y div 1;
-				particle_create(ox, oy, global.ani_sonic_trick_down_v2, , , , , , , 10);
+				particle_create(ox, oy, global.ani_sonic_trick_down_v2, , , , , , , 110);
 			}
 			break;
 		}

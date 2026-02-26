@@ -137,9 +137,13 @@ function player_is_running(phase)
 						// Accelerate
 						can_brake = false;
 						image_xscale = input_axis_x;
-						if (abs(x_speed) < speed_cap)
+						if (abs(x_speed) < speed_limit)
 						{
-							x_speed = min(abs(x_speed) + acceleration, speed_cap) * input_axis_x;
+							x_speed = min(abs(x_speed) + acceleration, speed_limit) * input_axis_x;
+						}
+						else
+						{
+							boost_speed += acceleration;
 						}
 					}
 				}
@@ -151,6 +155,8 @@ function player_is_running(phase)
 					/* AUTHOR NOTE: the values for friction and acceleration are the same in the 16-bit Genesis games. */
 				}
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_on_ground();
@@ -388,6 +394,8 @@ function player_is_rolling(phase)
 				// Friction
 				x_speed -= min(abs(x_speed), roll_friction) * sign(x_speed);
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_on_ground();

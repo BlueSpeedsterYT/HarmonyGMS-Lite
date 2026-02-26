@@ -149,15 +149,17 @@ function knuckles_is_falling(phase)
 			if (input_axis_x != 0)
 			{
 				image_xscale = input_axis_x;
-				if (abs(x_speed) < speed_cap or sign(x_speed) != input_axis_x)
+				if (abs(x_speed) < speed_limit or sign(x_speed) != input_axis_x)
 				{
 					x_speed += air_acceleration * input_axis_x;
-					if (abs(x_speed) > speed_cap and sign(x_speed) == input_axis_x)
+					if (abs(x_speed) > speed_limit and sign(x_speed) == input_axis_x)
 					{
-						x_speed = speed_cap * input_axis_x;
+						x_speed = speed_limit * input_axis_x;
 					}
 				}
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_in_air();

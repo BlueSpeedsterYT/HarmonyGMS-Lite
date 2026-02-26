@@ -19,15 +19,17 @@ function player_is_sprung(phase)
 			if (input_axis_x != 0)
 			{
 				image_xscale = input_axis_x;
-				if (abs(x_speed) < speed_cap or sign(x_speed) != input_axis_x)
+				if (abs(x_speed) < speed_limit or sign(x_speed) != input_axis_x)
 				{
 					x_speed += air_acceleration * input_axis_x;
-					if (abs(x_speed) > speed_cap and sign(x_speed) == input_axis_x)
+					if (abs(x_speed) > speed_limit and sign(x_speed) == input_axis_x)
 					{
-						x_speed = speed_cap * input_axis_x;
+						x_speed = speed_limit * input_axis_x;
 					}
 				}
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_in_air();
@@ -46,33 +48,6 @@ function player_is_sprung(phase)
 			if (y_speed < gravity_cap)
 			{
 				y_speed = min(y_speed + gravity_force, gravity_cap);
-			}
-			
-			// Animate
-			switch (animation_data.index)
-			{
-				case PLAYER_ANIMATION.SPRING:
-				{
-					switch (animation_data.variant)
-					{
-						case 0:
-						{
-							if (y_speed > 0) animation_data.variant = 1;
-							break;
-						}
-						case 1:
-						{
-							if (animation_is_finished()) animation_data.variant = 2;
-							break;
-						}
-					}
-					break;
-				}
-				case PLAYER_ANIMATION.SPRING_TWIRL:
-				{
-					if (animation_is_finished()) animation_play(PLAYER_ANIMATION.SPRING, 2);
-					break;
-				}
 			}
 			break;
 		}
@@ -156,12 +131,12 @@ function player_is_corkscrewing(phase)
 			if (input_axis_x != 0)
 			{
 				image_xscale = input_axis_x;
-				if (abs(x_speed) < speed_cap or sign(x_speed) != input_axis_x)
+				if (abs(x_speed) < speed_limit or sign(x_speed) != input_axis_x)
 				{
 					x_speed += acceleration * input_axis_x;
-					if (abs(x_speed) > speed_cap and sign(x_speed) == input_axis_x)
+					if (abs(x_speed) > speed_limit and sign(x_speed) == input_axis_x)
 					{
-						x_speed = speed_cap * input_axis_x;
+						x_speed = speed_limit * input_axis_x;
 					}
 				}
 			}
@@ -172,6 +147,8 @@ function player_is_corkscrewing(phase)
 					x_speed += deceleration * input_axis_x;
 				}
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_on_ground();

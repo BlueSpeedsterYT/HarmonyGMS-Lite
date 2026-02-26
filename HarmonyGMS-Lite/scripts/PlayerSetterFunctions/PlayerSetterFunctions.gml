@@ -191,9 +191,10 @@ function player_in_camera_bounds()
 function player_refresh_physics()
 {
 	// Speed values
-	max_speed = 12;
-	speed_cap = 6;
-	acceleration = 0.046875;
+	speed_limit = 6;
+	speed_cap = 16;
+	base_acceleration = 0.046875;
+	acceleration = base_acceleration;
 	deceleration = 0.5;
 	air_acceleration = 0.09375;
 	roll_deceleration = 0.125;
@@ -209,9 +210,10 @@ function player_refresh_physics()
 	// Superspeed modification
 	if (superspeed_time > 0)
 	{
-		speed_cap *= 2;
-		acceleration *= 2;
-		air_acceleration *= 2;
+		base_acceleration *= 2;
 		roll_friction *= 2;
 	}
+	
+	acceleration = base_acceleration;
+	air_acceleration = acceleration * 2;
 }

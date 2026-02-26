@@ -25,15 +25,17 @@ function player_is_falling(phase)
 			if (input_axis_x != 0)
 			{
 				image_xscale = input_axis_x;
-				if (abs(x_speed) < speed_cap or sign(x_speed) != input_axis_x)
+				if (abs(x_speed) < speed_limit or sign(x_speed) != input_axis_x)
 				{
 					x_speed += air_acceleration * input_axis_x;
-					if (abs(x_speed) > speed_cap and sign(x_speed) == input_axis_x)
+					if (abs(x_speed) > speed_limit and sign(x_speed) == input_axis_x)
 					{
-						x_speed = speed_cap * input_axis_x;
+						x_speed = speed_limit * input_axis_x;
 					}
 				}
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_in_air();
@@ -92,15 +94,17 @@ function player_is_jumping(phase)
 			if (input_axis_x != 0)
 			{
 				image_xscale = input_axis_x;
-				if (abs(x_speed) < speed_cap or sign(x_speed) != input_axis_x)
+				if (abs(x_speed) < speed_limit or sign(x_speed) != input_axis_x)
 				{
 					x_speed += air_acceleration * input_axis_x;
-					if (abs(x_speed) > speed_cap and sign(x_speed) == input_axis_x)
+					if (abs(x_speed) > speed_limit and sign(x_speed) == input_axis_x)
 					{
-						x_speed = speed_cap * input_axis_x;
+						x_speed = speed_limit * input_axis_x;
 					}
 				}
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_in_air();
@@ -145,6 +149,9 @@ function player_is_hurt(phase)
 	{
 		case PHASE.ENTER:
 		{
+			// Set flags
+			boost_mode = false;
+			
 			// Detach from ground
 			player_ground(undefined);
             break;
@@ -180,11 +187,17 @@ function player_is_dead(phase)
 	{
 		case PHASE.ENTER:
 		{
+			// Set flags
+			boost_mode = false;
+			
 			// Detach from ground
 			player_ground(undefined);
 			
 			// Animate
 			animation_play(PLAYER_ANIMATION.DEAD);
+			
+			// Disable pausing
+			if (player_index == 0) stage_pause_allow(false);
 			break;
 		}
 		case PHASE.STEP:
@@ -226,9 +239,10 @@ function player_is_debugging(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Reset Speed
+			// Reset stats
 			x_speed = 0;
 			y_speed = 0;
+			boost_mode = false;
 			
 			// Detach from ground
 			player_ground(undefined);

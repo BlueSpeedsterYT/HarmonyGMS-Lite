@@ -1,8 +1,13 @@
 /// @description Initialize
 image_speed = 0;
 stage_player = noone;
-stage_depth = layer_get_depth("General");
 pause_enabled = true;
+
+// Depths
+overlays_depth = layer_get_depth("Overlays");
+particles_depth = layer_get_depth("Particles");
+player_depth = layer_get_depth("Player");
+stage_depth = layer_get_depth("General");
 
 // Timing
 stage_time = time_to_frames(0, 0);

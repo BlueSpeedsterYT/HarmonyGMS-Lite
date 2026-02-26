@@ -681,6 +681,7 @@
     {"id":{"name":"sprSonicTrickUp2","path":"sprites/sprSonicTrickUp2/sprSonicTrickUp2.yy",},},
     {"id":{"name":"sprSonicTurn","path":"sprites/sprSonicTurn/sprSonicTurn.yy",},},
     {"id":{"name":"sprSonicTurnBrake","path":"sprites/sprSonicTurnBrake/sprSonicTurnBrake.yy",},},
+    {"id":{"name":"sprSpeedBreak","path":"sprites/sprSpeedBreak/sprSpeedBreak.yy",},},
     {"id":{"name":"sprSpikes","path":"sprites/sprSpikes/sprSpikes.yy",},},
     {"id":{"name":"sprSpinDashDust0","path":"sprites/sprSpinDashDust0/sprSpinDashDust0.yy",},},
     {"id":{"name":"sprSpinDashDust1","path":"sprites/sprSpinDashDust1/sprSpinDashDust1.yy",},},

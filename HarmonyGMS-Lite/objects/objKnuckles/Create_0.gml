@@ -46,8 +46,16 @@ player_try_skill = function()
 			// Be noteful on how you handle that.
 			if (not (mask_direction != gravity_direction))
 			{
-				// Start by punching to the left
-				player_perform(knuckles_is_punching_left);
+				if (not boost_mode)
+				{
+					// Start by punching to the left
+					player_perform(knuckles_is_punching_left);
+				}
+				else
+				{
+					// Start spiralling off!
+					show_debug_message("knux used Spiral Attack! It's not very effective (Implement it)");
+				}
 				return true;
 			}
 			else
@@ -446,7 +454,7 @@ player_animate = function()
         }
         case PLAYER_ANIMATION.SPRING:
         {
-            player_set_animation(global.ani_knuckles_spring);
+            player_animate_spring(global.ani_knuckles_spring);
             player_set_radii(6, 14);
             if (image_index == 0)
             {

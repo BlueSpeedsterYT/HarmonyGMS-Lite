@@ -5,6 +5,16 @@ if (not (ctrlGame.game_paused & PAUSE_FLAG.MENU))
     animation_update();
     with (spin_dash_dust) animation_update();
     with (shield) animation_update();
+    with (speed_break) animation_update();
+    
+    for (var i = 0; i < AFTERIMAGE_COUNT; i++)
+    {
+        with (afterimage_list[i])
+        {
+            animation_update();
+            time = ++time mod AFTERIMAGE_COUNT;
+        }
+    }
 }
 
 // Abort if game is paused at all
@@ -18,8 +28,8 @@ if (invincibility_time > 0)
 	invincibility_time--;
 }
 
-if (superspeed_time != 0)
+if (superspeed_time > 0)
 {
-    superspeed_time -= sign(superspeed_time);
+    superspeed_time--;
     if (superspeed_time == 0) player_refresh_physics();
 }

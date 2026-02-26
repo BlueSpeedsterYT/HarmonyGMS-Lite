@@ -9,6 +9,24 @@ with (shield)
 	
 }
 
+// Afterimages
+if (afterimage_visible)
+{
+    for (var i = 0; i < AFTERIMAGE_COUNT; i++)
+    {
+        with (afterimage_list[i])
+        {
+            if (time == i)
+            {
+                if (sprite_exists(sprite_index))
+                {
+                    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white, image_alpha);
+                }
+            }
+        }
+    }
+}
+
 // Character
 image_alpha = (recovery_time > 0 ? (recovery_time mod 4 < 2) : 1);
 player_draw_before();
@@ -28,6 +46,25 @@ with (shield)
 			draw_self_floored();
 		}
 	}
+}
+
+// Speed Break
+with (speed_break)
+{
+    if (visible)
+    {
+        for (var i = 0; i < SPEED_BREAK_COUNT / 2; i++)
+        {
+            if (animation_data.variant == 1 and time & 1)
+            {
+                draw_sprite(sprite_index, image_index, x + positions[i + (SPEED_BREAK_COUNT / 2)][0], y + positions[i + (SPEED_BREAK_COUNT / 2)][1]);
+            }
+            else
+            {
+                draw_sprite(sprite_index, image_index, x + positions[i][0], y + positions[i][1]);
+            }
+        }
+    }
 }
 
 if (not DEBUG_ENABLED) exit;

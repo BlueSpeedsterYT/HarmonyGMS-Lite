@@ -66,6 +66,8 @@ function tails_is_flying(phase)
 				}
 			}
 			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
+			
 			// Move
 			player_move_in_air();
 			if (state_changed) exit;

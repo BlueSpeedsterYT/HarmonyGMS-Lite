@@ -31,11 +31,17 @@
 #macro TIME_OVER_ENABLED (db_read(DATABASE_CONFIG, CONFIG_DEFAULT_TIME_OVER, "time_over"))
 
 #macro TEN_MILLISECONDS 1000
+
 #macro PLAYER_HEIGHT 14
+
+#macro ANIMATION_RECORD_COUNT 16
+#macro AFTERIMAGE_COUNT 3
+#macro SPEED_BREAK_COUNT 16
 
 #macro SCORE_CAP 999999
 #macro RING_CAP 999
 #macro LIVES_CAP 255
+#macro RING_LIFE_BASE_THRESHOLD 99
 
 enum GAME_FLAG
 {
@@ -86,6 +92,7 @@ global.character = CHARACTER.NONE;
 global.score_count = 0;
 global.ring_count = 0;
 global.life_count = 3;
+global.ring_life_threshold = RING_LIFE_BASE_THRESHOLD;
 
 // Fonts
 global.font_system = font_add_sprite(sprFontSystem, ord(" "), true, 1);

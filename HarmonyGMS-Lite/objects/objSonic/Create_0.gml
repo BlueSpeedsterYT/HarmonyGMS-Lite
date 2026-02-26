@@ -391,7 +391,7 @@ player_animate = function()
         }
         case PLAYER_ANIMATION.SPRING:
         {
-            player_set_animation(global.ani_sonic_spring);
+            player_animate_spring(global.ani_sonic_spring);
             player_set_radii(6, 14);
             if (image_index == 0)
             {

@@ -34,6 +34,7 @@
 			{
 				cursor_anim_frame++;
 				anim_frames = 0;
+				render_carousel_scroll();
 				state++;
 			}
 			else
@@ -65,24 +66,24 @@
 				{
 					if (input_axis_x == 1 or input_axis_y == 1)
 					{
-						cursor_anim_frame = 0;
-						arrow_active_frames[0] = 12;
+						up_arrow_active_frames = 12;
 						previous_cursor = cursor;
 						cursor++;
-						anim_frames = 0;
-						sound_play(sfxCSSCursor);
+						scrolled_down = false;
 					}
 					else if (input_axis_x == -1 or input_axis_y == -1)
 					{
-						cursor_anim_frame = 0;
-						arrow_active_frames[1] = 12;
+						down_arrow_active_frames = 12;
 						previous_cursor = cursor;
 						cursor--;
-						anim_frames = 0;
-						sound_play(sfxCSSCursor);
+						scrolled_down = true;
 					}
-			
-					animation_play(cursor, 0);
+					
+					cursor_anim_frame = 0;
+					anim_frames = 0;
+					unknown_timer = 0;
+					sound_play(sfxCSSCursor);
+					render_carousel_scroll();
 				}
 				else
 				{
@@ -93,20 +94,102 @@
 						anim_frames = 0;
 						state = 7;
 					}
+					
+					render_carousel_scroll();
 				}
 			}
 			break;
 		}
 		case 4:
 		{
+			unknown_timer++;
+			
+			if (up_arrow_active_frames != 0)
+			{
+				up_arrow_active_frames--;
+			}
+			
+			if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
+			{
+				complete_selection = true;
+			}
+			//else if(InputPressed(INPUT_VERB.CANCEL))
+			//{
+			//	if (not exiting)
+			//	{
+			//		sound_play(sfxMenuBack);
+			//	}
+				
+			//	exiting = true;
+			//}
+			
+			if (++anim_frames > 9)
+			{
+				anim_frames = 0;
+				state = 6;
+			}
+			
+			render_carousel_scroll();
 			break;
 		}
 		case 5:
 		{
+			unknown_timer++;
+			
+			if (down_arrow_active_frames != 0)
+			{
+				down_arrow_active_frames--;
+			}
+			
+			if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
+			{
+				complete_selection = true;
+			}
+			//else if(InputPressed(INPUT_VERB.CANCEL))
+			//{
+			//	if (not exiting)
+			//	{
+			//		sound_play(sfxMenuBack);
+			//	}
+				
+			//	exiting = true;
+			//}
+			
+			if (++anim_frames > 9)
+			{
+				anim_frames = 0;
+				state = 6;
+			}
+			
+			render_carousel_scroll();
 			break;
 		}
 		case 6:
 		{
+			unknown_timer++;
+			
+			if (up_arrow_active_frames != 0)
+			{
+				up_arrow_active_frames--;
+			}
+			
+			if (down_arrow_active_frames != 0)
+			{
+				down_arrow_active_frames--;
+			}
+			
+			if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
+			{
+				complete_selection = true;
+			}
+			
+			if (++anim_frames > 5)
+			{
+				cursor_anim_frame++;
+				state = 3;
+			}
+			
+			render_carousel_scroll();
 			break;
 		}
 		case 7:

@@ -4,9 +4,9 @@ event_inherited();
 
 character_index = CHARACTER.TAILS;
 
-fly_time = -1;
-fly_force = TAILS_FLY_BASE_FORCE;
+fly_time = 0;
 fly_state_time = 0;
+fly_force = TAILS_FLY_BASE_FORCE;
 fly_sound = noone;
 
 trick_speed =
@@ -18,47 +18,6 @@ trick_speed =
 ];
 
 tails = new stamp();
-
-player_try_skill = function()
-{
-	if (not on_ground)
-    {
-        // Tails has no air attacks so he only got to have the jump skill.
-		// Good for him.
-		// Sadly his flight is screwed over by water which is different than Sonic 3 so uhhhhhh.
-		if (input_button.jump.pressed)
-        {
-			// Fly
-			// Like Sonic 3, he can go to higher bounds never expected.
-			// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
-			// the Advance games.
-			fly_time = TAILS_FLY_DURATION;
-			fly_state_time = 1;
-			player_perform(tails_is_flying);
-			return true;
-        }
-    }
-	else
-	{
-		// However, unlike the air, Tails does have a ground attack...
-		// it is a ground attack.
-		if (input_button.attack.pressed)
-		{
-			// Tail Swipe
-			// it is a swiping attack.
-			if (not (mask_direction != gravity_direction))
-			{
-				player_perform(tails_is_tail_swipe);
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	}
-    return false;
-};
 
 player_animate = function()
 {

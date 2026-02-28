@@ -23,7 +23,7 @@
   ],
   "name":"sprCSSTitle",
   "nineSlice":null,
-  "origin":9,
+  "origin":5,
   "parent":{
     "name":"Character Select",
     "path":"folders/Sprites/Menu/Character Select.yy",
@@ -76,7 +76,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":144,
-    "yorigin":16,
+    "yorigin":12,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

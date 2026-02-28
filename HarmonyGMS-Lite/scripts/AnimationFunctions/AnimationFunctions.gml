@@ -125,6 +125,19 @@ function animation_is_starting(index = 0)
     return (animation_data.pos == index and animation_data.alarm == (is_array(duration) ? duration[index] : duration));
 }
 
+/// @function animation_is_matching(index, [variant])
+/// @description Checks if the current animation is matching the given index.
+/// @param {Real} index Animation index to check.
+/// @param {Real} [variant] Variant to set (optional, defaults to 0 if the indexes don't match).
+function animation_is_matching(index, variant = -1)
+{
+	// Abort if...
+	if (variant == -1 and animation_data.index == index) exit; // Indexes match with no given variant
+	
+	if (variant == -1) variant = 0;
+	return (animation_data.index == index and animation_data.variant == variant);
+}
+
 /// @function animation_is_finished()
 /// @description Checks if the animation is finished.
 /// @returns {Bool}

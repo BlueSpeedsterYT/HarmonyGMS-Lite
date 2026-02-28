@@ -5,10 +5,6 @@ function knuckles_is_gliding(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Rise
-			y_speed = -dsin(local_direction) * x_speed;
-			x_speed *= dcos(local_direction);
-			
 			// Detach from ground
 			player_ground(undefined);
 			
@@ -34,13 +30,6 @@ function knuckles_is_gliding(phase)
 		}
 		case PHASE.STEP:
 		{
-			// Glide fall
-			if (not input_button.jump.check)
-			{
-				if (x_speed != 0) image_xscale = sign(x_speed);
-				return player_perform(knuckles_is_falling);
-			}
-			
 			// Change Gliding direction
 			if (input_axis_x != 0) 
 			{
@@ -65,6 +54,13 @@ function knuckles_is_gliding(phase)
 			// Move
 			player_move_in_air();
 			if (state_changed) exit;
+			
+			// Glide fall
+			if (not input_button.jump.check)
+			{
+				if (x_speed != 0) image_xscale = sign(x_speed);
+				return player_perform(knuckles_is_falling);
+			}
 			
 			// Attach to a wall and climb
 			// NOTE: Might tackle this later as it does impact the gliding state

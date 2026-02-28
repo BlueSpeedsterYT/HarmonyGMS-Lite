@@ -95,16 +95,14 @@ reaction = function(pla)
 				{
 					player_ground(undefined);
 					y_speed = -3;
-					state_time = -1; // <-- This prevents the player from tricking.
 					animation_play(PLAYER_ANIMATION.SPRING, 0);
-					player_perform(player_is_sprung);
+					player_perform(player_is_falling, false);
 				}
 			}
-	
+			pla.aerial_flags = 0;
+			pla.player_refresh_aerials();
 			sound_play(sfxItemBoxBreak);
-	
 			particle_create(x, y, global.ani_dust_cloud_v0);
-			
 			frames = 0;
 			player_index = pla;
 			show_itembox = false;

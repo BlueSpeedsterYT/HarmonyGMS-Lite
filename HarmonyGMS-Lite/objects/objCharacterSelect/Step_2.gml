@@ -1,21 +1,41 @@
 /// @description Animate
 
-switch (cursor)
+with (character_portrait)
 {
-	default:
-	case CHARACTER.SONIC:
+	switch (index)
 	{
-		animation_set(global.ani_css_sonic_portrait);
-		break;
+		default:
+		case CHARACTER.SONIC:
+		{
+			animation_set(global.ani_css_sonic_portrait);
+			break;
+		}
+		case CHARACTER.TAILS:
+		{
+			animation_set(global.ani_css_tails_portrait);
+			break;
+		}
+		case CHARACTER.KNUCKLES:
+		{
+			animation_set(global.ani_css_knuckles_portrait);
+			break;
+		}
 	}
-	case CHARACTER.TAILS:
+}
+
+with (up_arrow)
+{
+	if (animation_data.index == 0)
 	{
-		animation_set(global.ani_css_tails_portrait);
-		break;
+		animation_set(global.ani_css_arrow);
 	}
-	case CHARACTER.KNUCKLES:
+}
+
+with (down_arrow)
+{
+	if (animation_data.index == 0)
 	{
-		animation_set(global.ani_css_knuckles_portrait);
-		break;
+		image_yscale = -1;
+		animation_set(global.ani_css_arrow);
 	}
 }

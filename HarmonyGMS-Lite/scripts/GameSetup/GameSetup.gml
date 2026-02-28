@@ -34,10 +34,6 @@
 
 #macro PLAYER_HEIGHT 14
 
-#macro ANIMATION_RECORD_COUNT 16
-#macro AFTERIMAGE_COUNT 3
-#macro SPEED_BREAK_COUNT 16
-
 #macro SCORE_CAP 999999
 #macro RING_CAP 999
 #macro LIVES_CAP 255
@@ -98,6 +94,11 @@ global.ring_life_threshold = RING_LIFE_BASE_THRESHOLD;
 global.font_system = font_add_sprite(sprFontSystem, ord(" "), true, 1);
 global.font_debug = font_add_sprite(sprFontDebug, ord("!"), false, 1);
 global.font_hud = font_add_sprite(sprFontHUD, ord("!"), false, 0);
+
+// Music Loop Points
+set_loop_points(musCharacterSelect, (14336 / 44100), (1433602 / 44100));
+set_loop_points(musBlazeEventScrewStache, (1419264 / 44100), (10019092 / 44100));
+set_loop_points(musInvincibility, (43008 / 32000), (537033 / 32000));
 
 // Misc.
 surface_depth_disable(true);

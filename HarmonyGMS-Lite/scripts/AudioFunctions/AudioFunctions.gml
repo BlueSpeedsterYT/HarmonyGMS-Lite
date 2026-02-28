@@ -1,11 +1,12 @@
 /// @description Plays the given sound effect, stopping any existing instances of it beforehand.
 /// @param {Asset.GMSound} soundid Sound asset to play.
+/// @param {Bool} [loop] Sets the sound to loop or not (optional, defaults to false).
 /// @returns {Id.Sound}
-function sound_play(soundid)
+function sound_play(soundid, loop = false)
 {
 	audio_stop_sound(soundid);
 	var sound_vol = (global.volume_sound * global.volume_master);
-	return audio_play_sound(soundid, PRIORITY_SOUND, false, sound_vol);
+	return audio_play_sound(soundid, PRIORITY_SOUND, loop, sound_vol);
 }
 
 /// @description Sets the loop points of the given music track.
@@ -22,7 +23,7 @@ function set_loop_points(soundid, loop_start = 0, loop_end = 0)
 /// @param {Asset.GMSound} soundid Sound asset to play.
 /// @param {Bool} loop Looping value to set.
 /// @param {Real} time Time value to set.
-function music_overlay(soundid, loop = false, time = audio_sound_length(soundid) * room_speed)
+function music_overlay(soundid, loop = false, time = audio_sound_length(soundid) * game_get_speed(gamespeed_fps))
 {
 	with (ctrlMusic)
 	{
@@ -64,7 +65,10 @@ function music_dequeue(soundid)
 	with (ctrlMusic)
 	{
 		ds_priority_delete_value(queue, soundid);
-		if (audio_is_playing(soundid)) play_music(ds_priority_find_max(queue));
+		if (audio_is_playing(soundid)) 
+		{
+			if (audio_is_playing(stream)) audio_sound_gain(stream, 0);
+		}
 	}
 }
 

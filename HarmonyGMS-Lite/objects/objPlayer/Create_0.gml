@@ -255,7 +255,7 @@ for (var i = 0; i < ANIMATION_RECORD_COUNT; i++)
 
 /// @method player_update_animation_history()
 /// @description Updates the animation history.
-player_update_animation_history = function ()
+player_update_animation_history = function()
 {
     with (animation_history[animation_history_index])
     {
@@ -325,7 +325,7 @@ with (speed_break)
 /// @description Sets the given function as the player's current state.
 /// @param {Function} action State function to set.
 /// @param {Boolean} [start] Start state function.
-player_perform = function (action, start = true)
+player_perform = function(action, start = true)
 {
 	var reset = (argument_count > 1);
 	if (state != action or reset)
@@ -429,9 +429,186 @@ player_try_trick = function(time = state_time)
 	return false;
 };
 
+/// @method player_try_skill()
+/// @description Checks if the player performs a character skill.
+/// @returns {Bool}
+player_try_skill = function()
+{
+	switch (object_index)
+	{
+		case objSonic:
+		{
+			if (not on_ground)
+			{
+				if (input_button.attack.pressed)
+				{
+					// Bound
+					if (state != sonic_is_preparing_bound)
+					{
+						player_perform(sonic_is_preparing_bound);
+						return true;
+					}
+				}
+				else if (input_button.jump.pressed)
+				{
+					// Insta-Shield (or Homing Attack at close distances)
+					// TODO: Implement some sort of range check to allow for the homing attack to take
+					// over from the insta-shield
+					if (not (aerial_flags & AERIAL_FLAG.SHIELD_ACTION))
+					{
+						aerial_flags |= AERIAL_FLAG.SHIELD_ACTION;
+						with (insta_shield)
+						{
+							x = other.x div 1;
+							y = other.y div 1;
+							depth = other.depth;
+							image_xscale = other.image_xscale;
+							image_angle = other.image_angle;
+				
+							animation_set(global.ani_sonic_insta_shield_v1);
+						}
+						animation_play(SONIC_ANIMATION.INSTA_SHIELD);
+						sound_play(sfxSonicInstaShield);
+						player_perform(player_is_falling, false);
+						return true;
+					}
+				}
+				else if (input_axis_pressed_x != 0 and sign(input_double_tap_direction_x) == image_xscale)
+				{
+					// Forward Thrust
+					if (not (aerial_flags & AERIAL_FLAG.FORWARD_THRUST))
+					{
+						aerial_flags |= AERIAL_FLAG.FORWARD_THRUST;
+						x_speed += (2.25 * input_double_tap_direction_x);
+						y_speed = 0;
+						animation_play(SONIC_ANIMATION.FORWARD_THRUST);
+						sound_play(sfxSonicThrust);
+						player_perform(player_is_falling, false);
+						return true;
+					}
+				}
+			}
+			else
+			{
+				if (input_button.attack.pressed)
+				{
+					// Skid Attack
+					// Sonic's skid attack is simple and effective, however
+					// it gets supercharged while in boost mode, the skys the limit with this power.
+					// so use it wisely.
+					if (not (mask_direction != gravity_direction))
+					{
+						player_perform(sonic_is_skidding);
+						return true;
+					}
+				}
+			}
+			break;
+		}
+		case objTails:
+		{
+			if (not on_ground)
+			{
+			    // Tails has no air attacks so he only got to have the jump skill.
+				// Good for him.
+				// Sadly his flight is screwed over by water which is different than Sonic 3 so uhhhhhh.
+				if (input_button.jump.pressed)
+			    {
+					// Fly
+					// Like Sonic 3, he can go to higher bounds never expected.
+					// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
+					// the Advance games.
+					if (state != tails_is_flying and fly_time < TAILS_FLY_DURATION)
+					{
+						player_perform(tails_is_flying);
+						return true;
+					}
+			    }
+			}
+			else
+			{
+				// However, unlike the air, Tails does have a ground attack...
+				// it is a ground attack.
+				if (input_button.attack.pressed)
+				{
+					// Tail Swipe
+					// it is a swiping attack.
+					if (not (mask_direction != gravity_direction))
+					{
+						player_perform(tails_is_tail_swipe);
+						return true;
+					}
+				}
+			}
+			break;
+		}
+		case objKnuckles:
+		{
+			if (not on_ground)
+			{
+				if (input_button.attack.pressed)
+				{
+					// Drill Claw
+					if (state != knuckles_is_preparing_drill_clawing)
+					{
+						player_perform(knuckles_is_preparing_drill_clawing);
+						return true;
+					}
+				}
+				else if (input_button.jump.pressed)
+				{
+					// Glide
+					// Unlike Sonic 3 for some reason, Knuckles can not glide underwater. Like at all.
+					// Maybe it's done to save on power and math on how his gliding works?
+					// SA1 allows him to float above water so I dunno...
+					if (state != knuckles_is_gliding)
+					{
+						player_perform(knuckles_is_gliding);
+						return true;
+					}
+				}
+			}
+			else
+			{
+				if (input_button.attack.pressed)
+				{
+					// Punch/Spiral Attack
+					// If the player is not in boost mode, then Knuckles would do a simple punch.
+					// however, that punch turns into a spiral strike when in boost mode.
+					// Be noteful on how you handle that.
+					if (not (mask_direction != gravity_direction))
+					{
+						player_perform((not boost_mode) ? knuckles_is_punching_left : knuckles_is_sprial_attack);
+						return true;
+					}
+				}
+			}
+			break;
+		}
+	}
+	
+	return false;
+}
+
+
+/// @method player_refresh_aerials()
+/// @description Resets aerial character skills when grounded.
+player_refresh_aerials = function() 
+{
+	switch (object_index)
+	{
+		default: break;
+		case objTails:
+		{
+			if (on_ground) fly_time = 0;
+			break;
+		}
+	}
+};
+
 /// @method player_rotate_mask()
 /// @description Rotates the player's collision mask along steep enough ground.
-player_rotate_mask = function ()
+player_rotate_mask = function()
 {
 	if (rotation_lock_time > 0 and not landed)
 	{
@@ -451,7 +628,7 @@ player_rotate_mask = function ()
 /// @description Applies slope friction to the player's horizontal speed, if appropriate.
 /// @param {Real} force Friction value to use.
 /// @param {Real} threshold Threshold value to use.
-player_resist_slope = function (force, threshold)
+player_resist_slope = function(force, threshold)
 {
 	var sine_value = dsin(local_direction);
 	// Abort if...
@@ -501,7 +678,7 @@ player_set_radii = function(xrad, yrad)
 /// @method player_gain_score(num)
 /// @description Increases the player's score count by the given amount.
 /// @param {Real} num Amount of points to give.
-player_gain_score = function (num)
+player_gain_score = function(num)
 {
 	var previous_count = global.score_count div 50000;
 	global.score_count = min(global.score_count + num, SCORE_CAP);
@@ -742,15 +919,6 @@ player_speed_break = function()
         }
     }
 };
-
-/// @method player_try_skill()
-/// @description Checks if the player performs a character skill.
-/// @returns {Bool}
-player_try_skill = function () { return false; };
-
-/// @method player_refresh_aerials()
-/// @description Resets aerial character skills when grounded.
-player_refresh_aerials = function() {};
 
 /// @method player_animate()
 /// @description Sets the player's current animation.

@@ -36,11 +36,10 @@
 				anim_frames = 0;
 				render_carousel_scroll();
 				state++;
+				return;
 			}
-			else
-			{
-				render_transition_ui_in();
-			}
+			
+			render_transition_ui_in();
 			break;
 		}
 		case 3:
@@ -52,31 +51,29 @@
 	
 			if (complete_selection)
 			{
-				if (unlocked_characters[cursor] == true)
-				{
-					animation_play(cursor, 1);
-					global.character = cursor;
-					anim_frames = 0;
-					state = 7;
-				}
+				character_selected(true);
 			}
 			else
 			{
 				if (input_axis_x != 0 or input_axis_y != 0)
 				{
-					if (input_axis_x == 1 or input_axis_y == 1)
+					if (input_axis_x == -1 or input_axis_y == -1)
 					{
 						up_arrow_active_frames = 12;
 						previous_cursor = cursor;
-						cursor++;
+						cursor--;
 						scrolled_down = false;
+						with (up_arrow) animation_play(0, 1);
+						state = 4;
 					}
-					else if (input_axis_x == -1 or input_axis_y == -1)
+					else if (input_axis_x == 1 or input_axis_y == 1)
 					{
 						down_arrow_active_frames = 12;
 						previous_cursor = cursor;
-						cursor--;
+						cursor++;
 						scrolled_down = true;
+						with (down_arrow) animation_play(0, 1);
+						state = 5;
 					}
 					
 					cursor_anim_frame = 0;
@@ -87,15 +84,14 @@
 				}
 				else
 				{
-					if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
+					if (InputPressed(INPUT_VERB.CONFIRM))
 					{
-						animation_play(cursor, 1);
-						global.character = cursor;
-						anim_frames = 0;
-						state = 7;
+						character_selected(unlocked_characters[cursor]);
 					}
-					
-					render_carousel_scroll();
+					else
+					{
+						render_carousel_scroll();
+					}
 				}
 			}
 			break;
@@ -107,6 +103,10 @@
 			if (up_arrow_active_frames != 0)
 			{
 				up_arrow_active_frames--;
+				if (up_arrow_active_frames == 0)
+				{
+					with (up_arrow) animation_play(0, 0);
+				}
 			}
 			
 			if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
@@ -139,6 +139,10 @@
 			if (down_arrow_active_frames != 0)
 			{
 				down_arrow_active_frames--;
+				if (down_arrow_active_frames == 0)
+				{
+					with (down_arrow) animation_play(0, 0);
+				}
 			}
 			
 			if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
@@ -171,11 +175,19 @@
 			if (up_arrow_active_frames != 0)
 			{
 				up_arrow_active_frames--;
+				if (up_arrow_active_frames == 0)
+				{
+					with (up_arrow) animation_play(0, 0);
+				}
 			}
 			
 			if (down_arrow_active_frames != 0)
 			{
 				down_arrow_active_frames--;
+				if (down_arrow_active_frames == 0)
+				{
+					with (down_arrow) animation_play(0, 0);
+				}
 			}
 			
 			if (InputPressed(INPUT_VERB.CONFIRM) and unlocked_characters[cursor] == true)
@@ -196,6 +208,26 @@
 		{
 			InputVerbConsumeAll();
 			anim_frames++;
+			cursor_anim_frame = (cursor_anim_frame & 0x3F) + 1;
+			
+			if (up_arrow_active_frames != 0)
+			{
+				up_arrow_active_frames--;
+				if (up_arrow_active_frames == 0)
+				{
+					with (up_arrow) animation_play(0, 0);
+				}
+			}
+			
+			if (down_arrow_active_frames != 0)
+			{
+				down_arrow_active_frames--;
+				if (down_arrow_active_frames == 0)
+				{
+					with (down_arrow) animation_play(0, 0);
+				}
+			}
+			
 			if (anim_frames >= 30)
 			{
 				audio_stop_all();

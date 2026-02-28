@@ -547,6 +547,7 @@
     {"id":{"name":"sprCollisionTilesetOld","path":"sprites/sprCollisionTilesetOld/sprCollisionTilesetOld.yy",},},
     {"id":{"name":"sprCorkscrewEnd","path":"sprites/sprCorkscrewEnd/sprCorkscrewEnd.yy",},},
     {"id":{"name":"sprCorkscrewStart","path":"sprites/sprCorkscrewStart/sprCorkscrewStart.yy",},},
+    {"id":{"name":"sprCSSArrow","path":"sprites/sprCSSArrow/sprCSSArrow.yy",},},
     {"id":{"name":"sprCSSBackground","path":"sprites/sprCSSBackground/sprCSSBackground.yy",},},
     {"id":{"name":"sprCSSCharacterName","path":"sprites/sprCSSCharacterName/sprCSSCharacterName.yy",},},
     {"id":{"name":"sprCSSCharacterSubName","path":"sprites/sprCSSCharacterSubName/sprCSSCharacterSubName.yy",},},

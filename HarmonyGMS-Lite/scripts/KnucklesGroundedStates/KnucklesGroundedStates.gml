@@ -174,6 +174,10 @@ function knuckles_is_punching_left(phase)
 			}
 			break;
 		}
+		case PHASE.EXIT:
+		{
+			break;
+		}
 	}
 }
 
@@ -217,6 +221,69 @@ function knuckles_is_punching_right(phase)
 					return player_perform(player_is_falling);
 				}
 			}
+			break;
+		}
+		case PHASE.EXIT:
+		{
+			break;
+		}
+	}
+}
+
+/// @function knuckles_is_sprial_attack(phase)
+function knuckles_is_sprial_attack(phase)
+{
+	switch (phase)
+	{
+		case PHASE.ENTER:
+		{
+			// Set flags
+			state_time = 32;
+			
+			// Animate
+			animation_play(KNUCKLES_ANIMATION.SPIRAL_ATTACK, 0);
+			break;
+		}
+		case PHASE.STEP:
+		{
+			// Friction
+			x_speed -= min(0, deceleration / 2) * sign(x_speed);
+			
+			// Move
+			player_move_on_ground();
+			if (state_changed) exit;
+			
+			// Reset speed
+			if ((local_direction + 90) & (358.59375) >= 180)
+			{
+				x_speed = 0;
+			}
+			
+			// Animate
+			if (--state_time == -1)
+			{
+				if (animation_is_matching(KNUCKLES_ANIMATION.SPIRAL_ATTACK, 0))
+				{
+					animation_data.variant++;
+				}
+				else if (animation_is_matching(KNUCKLES_ANIMATION.SPIRAL_ATTACK, 1) and animation_is_finished())
+				{
+					if (on_ground)
+					{
+						return player_perform(player_is_standing);
+					}
+					else
+					{
+						player_ground(undefined);
+						return player_perform(player_is_falling);
+					}
+				}
+			}
+			break;
+		}
+		case PHASE.EXIT:
+		{
+			state_time = 0;
 			break;
 		}
 	}

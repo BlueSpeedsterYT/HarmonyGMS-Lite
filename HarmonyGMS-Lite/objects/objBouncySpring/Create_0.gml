@@ -9,7 +9,90 @@ ani_spring = global.ani_spring_bouncy;
 /// @method hitbox_update()
 hitbox_update = function()
 {
-	
+	switch (animation_data.variant)
+	{
+		case 0:
+		{
+			hitboxes[0].set_size(-5, -21, 5, 0);
+			break;
+		}
+		case 1:
+		{
+			switch (image_index)
+			{
+				case 0:
+				{
+					hitboxes[0].set_size(-5, -21, 5, 0);
+					break;
+				}
+				case 1:
+				{
+					hitboxes[0].set_size(-5, -18, 5, 0);
+					break;
+				}
+				case 2:
+				{
+					hitboxes[0].set_size(-5, -25, 5, 0);
+					break;
+				}
+			}
+			break;
+		}
+		case 2:
+		{
+			switch (image_index)
+			{
+				case 0:
+				{
+					hitboxes[0].set_size(-5, -21, 5, 0);
+					break;
+				}
+				case 1:
+				{
+					hitboxes[0].set_size(-5, -18, 5, 0);
+					break;
+				}
+				case 3:
+				{
+					hitboxes[0].set_size(-5, -28, 5, 0);
+					break;
+				}
+				case 4:
+				{
+					hitboxes[0].set_size(-5, -26, 5, 0);
+					break;
+				}
+			}
+			break;
+		}
+		case 3:
+		{
+			switch (image_index)
+			{
+				case 0:
+				{
+					hitboxes[0].set_size(-5, -21, 5, 0);
+					break;
+				}
+				case 1:
+				{
+					hitboxes[0].set_size(-5, -18, 5, 0);
+					break;
+				}
+				case 3:
+				{
+					hitboxes[0].set_size(-5, -28, 5, 0);
+					break;
+				}
+				case 5:
+				{
+					hitboxes[0].set_size(-5, -45, 5, 0);
+					break;
+				}
+			}
+			break;
+		}
+	}
 }
 
 reaction = function(pla)
@@ -20,19 +103,18 @@ reaction = function(pla)
     {
         if (active & bit == 0)
         {
-	        
 			with (pla)
 			{
 				animation_play(ani_spring, 0);
 				player_perform(player_is_sprung);
 			}
 			var stored_y_speed = pla.y_speed;
-			var index = ((stored_y_speed * 256) div 400) div 1;
+			var index = ((stored_y_speed * 256) / 400) div 1;
 			index = clamp(index, 1, 3);
 			var force = (stored_y_speed + (stored_y_speed / 8))
             pla.y_speed = -force;
 			pla.y_speed = clamp(pla.y_speed, -12.0, -7.5);
-            pla.state_time = max(2, TRICK_LOCK_DURATION - (force / 1.5) div 1);
+            pla.state_time = 3;
 			pla.aerial_flags = 0;
 			pla.player_refresh_aerials();
             active |= bit;

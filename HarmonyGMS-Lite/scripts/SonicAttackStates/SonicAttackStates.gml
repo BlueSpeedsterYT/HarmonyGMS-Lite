@@ -5,7 +5,7 @@ function sonic_is_skidding(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Set variables
+			// Set flag
 			if (not boost_mode)
 			{
 				x_speed = 3 * image_xscale;
@@ -23,9 +23,12 @@ function sonic_is_skidding(phase)
 			if (on_ground)
 			{
 				// Friction
-				var is_skidding_anim = (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_data.variant == 1);
-				var friction_value = is_skidding_anim ? 0.125 : acceleration;
-				x_speed -= min(abs(x_speed), friction_value) * sign(x_speed);
+				if (not boost_mode)
+				{
+					var is_skidding_anim = (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_data.variant == 1);
+					var friction_value = is_skidding_anim ? 0.125 : acceleration;
+					x_speed -= min(abs(x_speed), friction_value) * sign(x_speed);
+				}
 				
 				// Move
 				player_move_on_ground();

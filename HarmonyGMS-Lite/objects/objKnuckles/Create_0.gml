@@ -16,58 +16,6 @@ trick_speed =
     [-5, -0]
 ];
 
-player_try_skill = function()
-{
-    if (not on_ground)
-    {
-		if (input_button.attack.pressed)
-        {
-            // Drill Claw
-			player_perform(knuckles_is_preparing_drill_clawing);
-			return true;
-        }
-		else if (input_button.jump.pressed)
-        {
-			// Glide
-			// Unlike Sonic 3 for some reason, Knuckles can not glide underwater. Like at all.
-			// Maybe it's done to save on power and math on how his gliding works?
-			// SA1 allows him to float above water so I dunno...
-			player_perform(knuckles_is_gliding);
-			return true;
-        }
-    }
-	else
-	{
-		if (input_button.attack.pressed)
-		{
-			// Punch/Spiral Attack
-			// If the player is not in boost mode, then Knuckles would do a simple punch.
-			// however, that punch turns into a spiral strike when in boost mode.
-			// Be noteful on how you handle that.
-			if (not (mask_direction != gravity_direction))
-			{
-				if (not boost_mode)
-				{
-					// Start by punching to the left
-					player_perform(knuckles_is_punching_left);
-				}
-				else
-				{
-					// Start spiralling off!
-					show_debug_message("knux used Spiral Attack! It's not very effective (Implement it)");
-				}
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-			return true;
-		}
-	}
-    return false;
-};
-
 player_animate = function()
 {
     switch (animation_data.index)
@@ -654,6 +602,10 @@ player_animate = function()
 					break;
 				}
 			}
+			break;
+		}
+		case KNUCKLES_ANIMATION.SPIRAL_ATTACK:
+		{
 			break;
 		}
     }

@@ -6,6 +6,10 @@ global.ani_dust_cloud_v0 = new animation(sprDustCloud, 6, -1);
 
 #region Character Select
 
+global.ani_css_arrow_v0 = new animation(sprCSSArrow, 1, -1, [0]);
+global.ani_css_arrow_v1 = new animation(sprCSSArrow, 3, 1, [1, 2, 3, 4]);
+global.ani_css_arrow = [global.ani_css_arrow_v0, global.ani_css_arrow_v1];
+
 global.ani_css_sonic_portrait_v0 = new animation(sprCSSPortraitSonic, 1, -1, [0]);
 global.ani_css_sonic_portrait_v1 = new animation(sprCSSPortraitSonic, [5, 2, 15], -1, [1, 2, 3]);
 global.ani_css_sonic_portrait = [global.ani_css_sonic_portrait_v0, global.ani_css_sonic_portrait_v1];

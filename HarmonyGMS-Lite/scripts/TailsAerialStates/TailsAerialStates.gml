@@ -5,9 +5,9 @@ function tails_is_flying(phase)
 	{
 		case PHASE.ENTER:
 		{
-			// Rise
-			y_speed = -dsin(local_direction) * x_speed;
-			x_speed *= dcos(local_direction);
+			// Fly
+			fly_state_time = 0;
+			fly_force = TAILS_FLY_BASE_FORCE;
 			
 			// Detach from ground
 			player_ground(undefined);
@@ -18,50 +18,17 @@ function tails_is_flying(phase)
 		}
 		case PHASE.STEP:
 		{
-			// Decrease timer
-			if (fly_time > 0)
-			{
-				--fly_time;
-			}
-			
-			// Set up flight system
-			if (fly_state_time != 1)
-			{
-				if (y_speed >= TAILS_FLY_THRESHOLD)
-				{
-					fly_force = -TAILS_FLY_ASCEND_FORCE;
-					if (++fly_state_time == 32)
-					{
-						fly_state_time = 1;
-					}
-				}
-				else
-				{
-					fly_state_time = 1;
-				}
-			}
-			else
-			{
-				// Fly Upwards
-				if (input_button.jump.pressed and fly_time and y_speed >= TAILS_FLY_THRESHOLD)
-				{
-					fly_state_time = 2;
-				}
-				
-				fly_force = TAILS_FLY_BASE_FORCE;
-			}
-			
 			// Accelerate
 			if (input_axis_x != 0)
 			{
-				if (not fly_time) image_xscale = input_axis_x;
-				var max_fly_speed = 6;
-				if (abs(x_speed) < max_fly_speed or sign(x_speed) != input_axis_x)
+				if (image_xscale != input_axis_x and fly_time < TAILS_FLY_DURATION) animation_play(TAILS_ANIMATION.FLYING_TURN);
+				image_xscale = input_axis_x;
+				if (abs(x_speed) < speed_limit or sign(x_speed) != input_axis_x)
 				{
 					x_speed += air_acceleration * input_axis_x;
-					if (abs(x_speed) > max_fly_speed and sign(x_speed) == input_axis_x)
+					if (abs(x_speed) > speed_limit and sign(x_speed) == input_axis_x)
 					{
-						x_speed = max_fly_speed * input_axis_x;
+						x_speed = speed_limit * input_axis_x;
 					}
 				}
 			}
@@ -75,6 +42,13 @@ function tails_is_flying(phase)
 			// Land
 			if (on_ground) return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
 			
+			// Ascend
+			if (input_button.jump.pressed and fly_time < TAILS_FLY_DURATION and y_speed >= TAILS_FLY_THRESHOLD)
+			{
+				fly_state_time = 60;
+				fly_force = -TAILS_FLY_ASCEND_FORCE;
+			}
+			
 			// Apply air resistance
 			if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
 			{
@@ -82,35 +56,31 @@ function tails_is_flying(phase)
 			}
 			
 			// Fall
-			if (y_speed < gravity_cap)
+			y_speed += fly_force;
+			
+			// Reset
+			if (y_speed < TAILS_FLY_THRESHOLD or fly_state_time == 0)
 			{
-				y_speed = min(y_speed + fly_force, gravity_cap);
+				fly_force = TAILS_FLY_BASE_FORCE;
 			}
 			
-			// Reset when at the top
-			var top = objCamera.bound_top;
-			if (y < top)
+			if (y < 0 and y_speed < 0)
 			{
-				y = top;
-				if (y_speed < 0) y_speed = 0;
+				y_speed = 0;
 			}
 			
-			// Change animations accordingly depending on the current flight time remaining
-			if (fly_time)
+			// Timers
+			fly_time = min(++fly_time, TAILS_FLY_DURATION);
+			fly_state_time = max(--fly_state_time, 0);
+			
+			// Animate
+			if (fly_time < TAILS_FLY_DURATION)
 			{
-				// Turn
-	            if (input_axis_x != 0 and image_xscale != input_axis_x)
-	            {
-	                animation_play(TAILS_ANIMATION.FLYING_TURN);
-	                image_xscale *= -1;
-	            }
-            
-	            if (animation_data.index == TAILS_ANIMATION.FLYING_TURN and animation_is_finished())
+	            if (animation_data.index != TAILS_ANIMATION.FLYING_TURN or animation_is_finished())
 	            {
 	            	animation_play(TAILS_ANIMATION.FLYING);
 	            }
 				
-				// Play the sound
 				if (not audio_is_playing(sfxTailsFlying))
 				{
 					audio_stop_sound(fly_sound);
@@ -119,14 +89,8 @@ function tails_is_flying(phase)
 			}
 			else
 			{
-				// Tire out
 				animation_play(TAILS_ANIMATION.FLYING_TIRED);
-				
-				// Stop the sound
-				if (audio_is_playing(fly_sound))
-				{
-					audio_stop_sound(fly_sound);
-				}
+				audio_stop_sound(fly_sound);
 			}
 			
 			break;
@@ -134,11 +98,7 @@ function tails_is_flying(phase)
 		case PHASE.EXIT:
 		{
 			// Stop the sound
-			if (audio_is_playing(fly_sound))
-			{
-				audio_stop_sound(fly_sound);
-			}
-			fly_state_time = 0;
+			audio_stop_sound(fly_sound);
 			break;
 		}
 	}

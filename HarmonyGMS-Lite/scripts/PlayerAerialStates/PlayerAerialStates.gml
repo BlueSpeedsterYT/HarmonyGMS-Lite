@@ -45,10 +45,7 @@ function player_is_falling(phase)
 			if (on_ground) return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
 			
 			// Apply air resistance
-			if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
-			{
-				x_speed *= AIR_DRAG;
-			}
+			player_resist_air();
 			
 			// Fall
 			if (y_speed < gravity_cap)
@@ -123,10 +120,7 @@ function player_is_jumping(phase)
 			}
 			
 			// Apply air resistance
-			if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
-			{
-				x_speed *= AIR_DRAG;
-			}
+			player_resist_air();
 			
 			// Fall
 			if (y_speed < gravity_cap)

@@ -74,7 +74,7 @@ render_transition_ui_in = function()
 	if (i > 0)
 	{
 		// TODO: Make this sliding portrait work for the love of god.
-		//char_portrait_x = char_portrait_base_x + ((CAMERA_WIDTH_CENTER + 8) - (dcos(i * 90) / 128)) * 2;
+		//char_portrait_x = char_portrait_base_x + (128 - (dcos(i * 22.5) / 128)) * 2;
 		char_portrait_x = char_portrait_base_x;
 	}
 	else
@@ -144,7 +144,7 @@ render_carousel_scroll = function()
 	if (character_portait_i > 0)
 	{
 		// TODO: Make this sliding portrait work for the love of god.
-		//char_portrait_x = char_portrait_base_x + ((CAMERA_WIDTH_CENTER + 8) - (dcos(character_portait_i * 90) / 128)) * 2;
+		//char_portrait_x = char_portrait_base_x + (128 - (dcos(character_portait_i * 22.5) / 128)) * 2;
 		char_portrait_x = char_portrait_base_x;
 	}
 	else

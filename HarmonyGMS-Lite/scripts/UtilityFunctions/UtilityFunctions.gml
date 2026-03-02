@@ -247,7 +247,7 @@ function game_over_create(type)
 {
 	if (instance_exists(objGameOver)) exit;
 	
-	with (instance_create_layer(0, 0, "Overlays", objGameOver))
+	with (instance_create_depth(0, 0, ctrlZone.overlays_depth, objGameOver))
 	{
 		game_over_cause = type;
 		delay = 10;
@@ -258,6 +258,27 @@ function game_over_create(type)
 		else
 		{
 			frames_until_done = 180;
+		}
+	}
+}
+
+/// @description Sets up the countdown
+/// @param {Real} has_skipped Skip the countdown timer just a slight bit.
+function countdown_create(has_skipped)
+{
+	if (instance_exists(objCountdown)) exit;
+	
+	with (instance_create_depth(objPlayer.x div 1, objPlayer.y div 1, ctrlZone.player_depth, objCountdown))
+	{
+		speed_boost = false;
+		disable_boost = false;
+		if (not has_skipped)
+		{
+			timer = time_to_frames(0, 5) + 10;
+		}
+		else
+		{
+			timer = time_to_frames(0, 3);
 		}
 	}
 }

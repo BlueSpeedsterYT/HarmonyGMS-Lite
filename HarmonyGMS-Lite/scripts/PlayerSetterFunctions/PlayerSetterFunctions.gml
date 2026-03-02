@@ -226,10 +226,10 @@ function player_refresh_boost_mode()
 
 	if (boost_mode)
 	{
-	    if (on_ground or superspeed_time < 0)
+	    if (on_ground)
 	    {
 	        boost_speed = boost_threshold[boost_index];
-	        if (abs(x_speed) < 4.5 or superspeed_time < 0)
+	        if (abs(x_speed) < 4.5)
 	        {
 	            boost_mode = false;
 	            boost_speed = 0;
@@ -238,7 +238,7 @@ function player_refresh_boost_mode()
 	}
 	else
 	{
-	    if (on_ground and abs(x_speed) >= speed_limit and not (superspeed_time < 0))
+	    if (on_ground and abs(x_speed) >= speed_limit)
 	    {
 	        if (boost_speed >= boost_threshold[boost_index])
 	        {

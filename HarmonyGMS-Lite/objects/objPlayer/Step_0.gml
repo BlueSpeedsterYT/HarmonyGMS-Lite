@@ -93,12 +93,12 @@ with (spin_dash_dust)
 with (shield)
 {
     var invincible = (other.invincibility_time > 0);
-    if (index != SHIELD.NONE or invincible)
+    if (index != SHIELD_TYPE.NONE or invincible)
     {
         x = other.x div 1;
         y = other.y div 1;
         
-        var shield_advance = (index == SHIELD.BASIC or index == SHIELD.MAGNETIC or invincible);
+        var shield_advance = (index == SHIELD_TYPE.BASIC or index == SHIELD_TYPE.MAGNETIC or invincible);
         animation_play(invincible ? -1 : index);
         switch (animation_data.index)
         {
@@ -113,12 +113,12 @@ with (shield)
                 }
                 break;
             }
-            case SHIELD.BASIC:
+            case SHIELD_TYPE.BASIC:
             {
                 animation_set(global.ani_shield_basic_v0);
                 break;
             }
-            case SHIELD.MAGNETIC:
+            case SHIELD_TYPE.MAGNETIC:
             {
                 animation_set(global.ani_shield_magnetic_v0);
                 break;

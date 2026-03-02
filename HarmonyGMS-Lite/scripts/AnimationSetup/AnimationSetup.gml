@@ -26,6 +26,8 @@ global.ani_css_knuckles_portrait = [global.ani_css_knuckles_portrait_v0, global.
 
 #region Objects
 
+global.ani_level_machine_start_v0 = new animation(sprLevelStartMachine, [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2], 10);
+
 global.ani_ring_sparkle_v0 = new animation(sprRingSparkle, 4, -1);
 
 global.ani_spring_vertical_v0 = new animation(sprSpringVertical0, 0);
@@ -124,6 +126,10 @@ global.ani_sonic_hurt_v1 = new animation(sprSonicHurt1, 5, -1);
 global.ani_sonic_hurt = [global.ani_sonic_hurt_v0, global.ani_sonic_hurt_v1];
 
 global.ani_sonic_dead_v0 = new animation(sprSonicDead, [3, 3, 12, 2, 3, 3], 4);
+
+global.ani_sonic_pre_countdown_v0 = new animation(sprSonicPreCountdown, [2, 2, 4, 4, 4, 6, 4, 6, 4, 6, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 4, 4, 4, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 6, 6, 2], -1, [0, 1, 2, 3, 4, 5, 4, 3, 4, 5, 4, 6, 2, 1, 7, 8, 9, 10, 9, 8, 9, 10, 9, 7, 1, 0, 11, 12, 13, 14, 15, 12, 13, 14, 15, 11, 0, 16, 17, 18]);
+global.ani_sonic_pre_countdown_v1 = new animation(sprSonicPreCountdown, [1, 6, 60, 4], -1, [18, 19, 20, 21]);
+global.ani_sonic_pre_countdown = [global.ani_sonic_pre_countdown_v0, global.ani_sonic_pre_countdown_v1];
 
 global.ani_sonic_trick_up_v0 = new animation(sprSonicTrickUp0, [3, 6, 2], -1);
 global.ani_sonic_trick_up_v1 = new animation(sprSonicTrickUp1, [1, 1, 3, 3, 3], 2);

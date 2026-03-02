@@ -113,10 +113,7 @@ function player_is_tricking(phase)
 			if (not trick_glide)
 			{
 				// Apply air resistance
-				if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
-				{
-					x_speed *= AIR_DRAG;
-				}
+				player_resist_air();
 				
 				// Fall
 				if (y_speed < gravity_cap)

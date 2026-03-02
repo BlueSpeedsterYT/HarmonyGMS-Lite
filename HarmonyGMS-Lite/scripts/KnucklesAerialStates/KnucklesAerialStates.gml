@@ -5,6 +5,9 @@ function knuckles_is_gliding(phase)
 	{
 		case PHASE.ENTER:
 		{
+			// Reset flags
+			boost_mode = false;
+			
 			// Detach from ground
 			player_ground(undefined);
 			
@@ -56,7 +59,7 @@ function knuckles_is_gliding(phase)
 			if (state_changed) exit;
 			
 			// Glide fall
-			if (not input_button.jump.check)
+			if (not input_button.jump.check or underwater)
 			{
 				if (x_speed != 0) image_xscale = sign(x_speed);
 				return player_perform(knuckles_is_falling);
@@ -176,10 +179,7 @@ function knuckles_is_falling(phase)
 			}
 			
 			// Apply air resistance
-			if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
-			{
-				x_speed *= AIR_DRAG;
-			}
+			player_resist_air();
 			
 			// Fall
 			if (y_speed < gravity_cap)
@@ -272,10 +272,7 @@ function knuckles_is_drill_clawing(phase)
     			if (on_ground) return player_perform(knuckles_is_drill_clawing);
     			
     			// Apply air resistance
-    			if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
-    			{
-    				x_speed *= AIR_DRAG;
-    			}
+				player_resist_air();
     			
     			// Fall
     			if (y_speed < gravity_cap)

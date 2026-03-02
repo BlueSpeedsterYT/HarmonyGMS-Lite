@@ -43,7 +43,7 @@ boost_threshold = [8.0, 7.96875, 6.5625, 5.625, 4.21875];
 /// @description Resets the player's status.
 player_refresh_status = function()
 {
-    shield.index = SHIELD.NONE;
+    shield.index = SHIELD_TYPE.NONE;
     aerial_flags &= ~AERIAL_FLAG.SHIELD_ACTION;
     recovery_time = 0;
     invincibility_time = 0;
@@ -57,6 +57,7 @@ player_refresh_status();
 // Physics
 x_speed = 0;
 y_speed = 0;
+underwater = false;
 player_refresh_physics();
 
 // Collision detection
@@ -104,7 +105,7 @@ if (tilemap_count == 3)
 ground_id = noone;
 
 // Input
-input_allow = true;
+input_allow = false;
 input_axis_x = 0;
 input_axis_pressed_x = 0;
 input_axis_y = 0;
@@ -518,7 +519,7 @@ player_try_skill = function()
 					// Like Sonic 3, he can go to higher bounds never expected.
 					// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
 					// the Advance games.
-					if (state != tails_is_flying and fly_time < TAILS_FLY_DURATION)
+					if (state != tails_is_flying and fly_time < TAILS_FLY_DURATION and (not underwater))
 					{
 						player_perform(tails_is_flying);
 						return true;
@@ -561,7 +562,7 @@ player_try_skill = function()
 					// Unlike Sonic 3 for some reason, Knuckles can not glide underwater. Like at all.
 					// Maybe it's done to save on power and math on how his gliding works?
 					// SA1 allows him to float above water so I dunno...
-					if (state != knuckles_is_gliding)
+					if (state != knuckles_is_gliding and (not underwater))
 					{
 						player_perform(knuckles_is_gliding);
 						return true;
@@ -640,6 +641,17 @@ player_resist_slope = function(force, threshold)
 	// Apply
 	x_speed -= sine_value * force;
 };
+
+/// @method player_resist_air([resistance_amount])
+/// @description Updates the player's air resistance
+/// @param {Real} [resistance_amount] Amount of resistance given to the player (optional, defaults to 32).
+player_resist_air = function(resistance_amount = 32)
+{
+	if (y_speed < 0 and y_speed > -AIR_THRESHOLD)
+	{
+		x_speed -= x_speed / resistance_amount;
+	}
+}
 
 /// @method player_set_animation(ani, [ang])
 /// @description Sets the given animation within the player's animation core.
@@ -766,7 +778,7 @@ player_damage = function(inst)
     // Abort if the player is already dead or hurt
     if (state == player_is_dead or ((state == player_is_hurt or recovery_time > 0 or invincibility_time > 0) and inst != id)) exit;
     
-    if (inst == id or (player_index == 0 and shield.index == SHIELD.NONE and global.ring_count == 0))
+    if (inst == id or (player_index == 0 and shield.index == SHIELD_TYPE.NONE and global.ring_count == 0))
     {
         y_speed = -7;
         sound_play(sfxHurt);
@@ -793,9 +805,9 @@ player_damage = function(inst)
 		
         if (player_index == 0)
         {
-            if (shield != SHIELD.NONE)
+            if (shield != SHIELD_TYPE.NONE)
             {
-                shield = SHIELD.NONE;
+                shield = SHIELD_TYPE.NONE;
             }
             else
             {

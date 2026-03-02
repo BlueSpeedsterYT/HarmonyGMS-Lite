@@ -35,7 +35,10 @@ itembox_apply_item = function(pla)
 		case ITEM_INDEX.SHIELD:
 		case ITEM_INDEX.SHIELD_MAGNETIC:
 		{
-			pla.shield.index = index == ITEM_INDEX.SHIELD ? SHIELD.BASIC : SHIELD.MAGNETIC;
+			with (pla)
+			{
+				shield.index = other.index == ITEM_INDEX.SHIELD ? SHIELD_TYPE.BASIC : SHIELD_TYPE.MAGNETIC;
+			}
 			sound_play(sfxShieldGot);
 			break;
 		}

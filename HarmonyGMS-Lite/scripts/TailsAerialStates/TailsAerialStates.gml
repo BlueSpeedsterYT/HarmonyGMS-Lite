@@ -5,6 +5,10 @@ function tails_is_flying(phase)
 	{
 		case PHASE.ENTER:
 		{
+			// Reset Boost Mode
+			boost_mode = false;
+			boost_speed = 0;
+			
 			// Fly
 			fly_state_time = 0;
 			fly_force = TAILS_FLY_BASE_FORCE;
@@ -39,8 +43,15 @@ function tails_is_flying(phase)
 			player_move_in_air();
 			if (state_changed) exit;
 			
-			// Land
-			if (on_ground) return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
+			// Land/Fall
+			if (on_ground) 
+			{
+				return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
+			}
+			else if (underwater)
+			{
+				return player_perform(player_is_falling);
+			}
 			
 			// Ascend
 			if (input_button.jump.pressed and fly_time < TAILS_FLY_DURATION and y_speed >= TAILS_FLY_THRESHOLD)
@@ -50,10 +61,7 @@ function tails_is_flying(phase)
 			}
 			
 			// Apply air resistance
-			if (y_speed < 0 and y_speed > -4 and abs(x_speed) > AIR_DRAG_THRESHOLD)
-			{
-				x_speed *= AIR_DRAG;
-			}
+			player_resist_air();
 			
 			// Fall
 			y_speed += fly_force;
@@ -92,7 +100,6 @@ function tails_is_flying(phase)
 				animation_play(TAILS_ANIMATION.FLYING_TIRED);
 				audio_stop_sound(fly_sound);
 			}
-			
 			break;
 		}
 		case PHASE.EXIT:

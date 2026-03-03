@@ -1,6 +1,6 @@
 /// @description Start stage
 
-// Set stage data and music
+// Set stage data
 switch (room)
 {
 	case rmTest:
@@ -8,6 +8,9 @@ switch (room)
 		name = "DEMONSTRATION";
 		act = 1;
 		music_enqueue(musBlazeEventScrewStache, PRIORITY_MUSIC, true);
+		stage_init();
+		stage_pause_allow(true);
+		instance_create_layer(0, 0, "Overlays", objHUD);
 		break;
 	}
 	case rmTest2:
@@ -15,10 +18,8 @@ switch (room)
 		name = "LEAF FOREST";
 		act = 1;
 		music_enqueue(musHydrocityAct1Sonic360, PRIORITY_MUSIC, true);
+		instance_create_layer(0, 0, "Overlays", objTitleCard);
 		break;
 	}
 }
-
-// Create UI elements
-instance_create_layer(0, 0, "Overlays", objHUD);
 

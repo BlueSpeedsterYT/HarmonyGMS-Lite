@@ -1,9 +1,24 @@
 /// @description Behave
+if (ctrlGame.game_paused & PAUSE_FLAG.MENU) exit;
 
 // Skip intro
 if (timer > time_to_frames(0, 3) && (InputPressed(INPUT_VERB.CONFIRM) | InputPressed(INPUT_VERB.CANCEL)))
 {
 	timer = time_to_frames(0, 3);
+}
+
+// Play Announcer Countdown
+if (timer == time_to_frames(0, 3))
+{
+	sound_play(voAnnouncer3);
+}
+else if (timer == time_to_frames(0, 2))
+{
+	sound_play(voAnnouncer2);
+}
+else if (timer == time_to_frames(0, 1))
+{
+	sound_play(voAnnouncer1);
 }
 
 // Launch the player!
@@ -12,8 +27,12 @@ if (--timer == 0)
 	stage_init();
 	with (objPlayer)
 	{
+		player_perform(player_is_running);
 		x_speed = other.speed_boost ? 9 : 4;
 	}
+	instance_destroy();
+	race_start_message_create();
+	sound_play(voAnnouncerGo);
 }
 // Give the player a speed boost
 else if (timer < 5)
@@ -32,37 +51,26 @@ else
 	}
 }
 
+with (countdown)
+{
+	var countdown_time = other.timer;
+	if (countdown_time < time_to_frames(0, 3))
+	{
+		visible = true;
+		x = CAMERA_WIDTH_CENTER;
+		y = CAMERA_HEIGHT_CENTER - 24;
+		image_index = 2 - (countdown_time div 60);
+	}
+}
+
 // Set liftoff animation
-if (timer >= time_to_frames(0, (1 + 1. / 6.)) and timer < time_to_frames(0, 3))
+// NOTE: The hardcoded magic number of `71` is needed as it matches the duration length of
+// the second variant for the pre-countdown animation.
+// Just... don't pause during the whole thing will you?
+if (timer >= 71 and timer < time_to_frames(0, 3))
 {
 	with (objPlayer)
 	{
-		if (not animation_is_matching(PLAYER_ANIMATION.BEFORE_COUNTDOWN, 1))
-		{
-			animation_play(PLAYER_ANIMATION.BEFORE_COUNTDOWN, 1);
-		}
+		animation_play(PLAYER_ANIMATION.BEFORE_COUNTDOWN, 1);
 	}
-}
-
-with (machine)
-{
-	animation_play(-1);
-	switch (animation_data.index)
-	{
-		case -1:
-		{
-			animation_set(global.ani_level_machine_start_v0);
-			if (not objPlayer.input_allow)
-			{
-				x = objPlayer.x div 1;
-				y = objPlayer.y div 1;
-			}
-			break;
-		}
-	}
-}
-
-if (not instance_in_view())
-{
-	instance_destroy();
 }

@@ -1,5 +1,5 @@
 /// @description Render
-var time = ctrlZone.stage_time;
+var time = stage_time_get();
 var time_over = ctrlZone.time_over;
 var time_alert = (ctrlZone.time_limit - time) < time_to_frames(1, 0);
 var flash = ctrlGame.game_time mod 32 < 16;

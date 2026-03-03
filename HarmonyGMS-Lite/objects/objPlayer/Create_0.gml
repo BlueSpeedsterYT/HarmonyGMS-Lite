@@ -36,7 +36,7 @@ superspeed_time = 0;
 boost_mode = false;
 boost_index = 0;
 boost_speed = 0;
-boost_threshold = [8.0, 7.96875, 6.5625, 5.625, 4.21875];
+boost_thresholds = [8.0, 7.96875, 6.5625, 5.625, 4.21875];
 
 // Status
 /// @method player_refresh_status()

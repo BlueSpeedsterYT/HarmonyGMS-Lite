@@ -228,7 +228,7 @@ function player_refresh_boost_mode()
 	{
 	    if (on_ground)
 	    {
-	        boost_speed = boost_threshold[boost_index];
+	        boost_speed = boost_thresholds[boost_index] / 0.75;
 	        if (abs(x_speed) < 4.5)
 	        {
 	            boost_mode = false;
@@ -240,7 +240,7 @@ function player_refresh_boost_mode()
 	{
 	    if (on_ground and abs(x_speed) >= speed_limit)
 	    {
-	        if (boost_speed >= boost_threshold[boost_index])
+	        if (boost_speed >= boost_thresholds[boost_index] / 0.75)
 	        {
 	            boost_mode = true;
 	            player_speed_break();

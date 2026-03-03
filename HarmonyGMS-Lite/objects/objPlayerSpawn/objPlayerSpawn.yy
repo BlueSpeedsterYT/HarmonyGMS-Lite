@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprPlayerSpawn",
-    "path":"sprites/sprPlayerSpawn/sprPlayerSpawn.yy",
+    "name":"sprSonicIdle",
+    "path":"sprites/sprSonicIdle/sprSonicIdle.yy",
   },
   "spriteMaskId":null,
   "visible":false,

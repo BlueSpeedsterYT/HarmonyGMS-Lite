@@ -223,6 +223,10 @@ global.ani_tails_hurt = [global.ani_tails_hurt_v0, global.ani_tails_hurt_v1];
 
 global.ani_tails_dead_v0 = new animation(sprTailsDead, [3, 3, 12, 2, 3, 3], 4);
 
+global.ani_tails_pre_countdown_v0 = new animation(sprTailsPreCountdown, [6, 4, 4, 4, 6, 4, 4, 4, 6, 4, 4, 4, 6, 4, 6, 4, 4, 8, 6, 6, 6, 8, 4, 4, 4, 6, 4, 16, 2, 4, 4, 4, 4, 4, 4, 6, 2], -1, [0, 1, 2, 3, 4, 5, 6, 1, 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 11, 10, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 21, 25, 26]);
+global.ani_tails_pre_countdown_v1 = new animation(sprTailsPreCountdown, [1, 6, 60, 4], -1, [27, 28, 29, 30]);
+global.ani_tails_pre_countdown = [global.ani_tails_pre_countdown_v0, global.ani_tails_pre_countdown_v1];
+
 global.ani_tails_trick_up_v0 = new animation(sprTailsTrickUp0, [2, 1, 1, 8], -1);
 global.ani_tails_trick_up_v1 = new animation(sprTailsTrickUp1, [3, 4, 4, 4, 4], 2);
 global.ani_tails_trick_up_v2 = new animation(sprTailsTrickUp2, [2, 4, 4, 3, 3, 3], 3);
@@ -314,6 +318,10 @@ global.ani_knuckles_hurt_v1 = new animation(sprKnucklesHurt1, 5, -1);
 global.ani_knuckles_hurt = [global.ani_knuckles_hurt_v0, global.ani_knuckles_hurt_v1];
 
 global.ani_knuckles_dead_v0 = new animation(sprKnucklesDead, [3, 3, 12, 2, 3, 3], 4);
+
+global.ani_knuckles_pre_countdown_v0 = new animation(sprKnucklesPreCountdown, [37, 6, 5, 3, 5, 3, 5, 3, 5, 3, 8, 4, 5, 3, 5, 3, 10, 5, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 12, 6, 4, 4, 2], -1, [0, 1, 2, 3, 4, 3, 2, 3, 4, 3, 2, 5, 6, 7, 8, 7, 6, 9, 10, 11, 12, 13, 14, 15, 16, 10, 11, 12, 13, 14, 15, 16, 10, 9, 17, 18, 19]);
+global.ani_knuckles_pre_countdown_v1 = new animation(sprKnucklesPreCountdown, [1, 6, 60, 4], -1, [19, 20, 21, 22]);
+global.ani_knuckles_pre_countdown = [global.ani_knuckles_pre_countdown_v0, global.ani_knuckles_pre_countdown_v1];
 
 global.ani_knuckles_trick_up_v0 = new animation(sprKnucklesTrickUp0, [1, 2, 1], -1);
 global.ani_knuckles_trick_up_v1 = new animation(sprKnucklesTrickUp1, [4, 4, 8, 8, 8], -1);

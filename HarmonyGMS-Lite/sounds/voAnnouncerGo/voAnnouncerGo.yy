@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"voAnnouncerGo",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.8378232,
+  "exportDir":"",
+  "name":"voAnnouncerGo",
+  "parent":{
+    "name":"Countdown",
+    "path":"folders/Audio/Voice Over/Countdown.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"voAnnouncerGo.wav",
+  "volume":1.0,
+}

@@ -28,7 +28,7 @@ reaction = function(pla)
 					animation_play(ani_spring, 0);
 					player_perform(player_is_sprung);
 				}
-                pla.y_speed = -dsin(diff) * force;
+                pla.y_speed = -dsin(diff) * (force / 0.75);
             }
             else if (diff == 0 or diff == 180)
             {
@@ -46,7 +46,7 @@ reaction = function(pla)
 					}
                 }
                 pla.image_xscale = image_xscale;
-                pla.x_speed = image_xscale * force;
+                pla.x_speed = image_xscale * (force / 0.75);
             }
             else
             {
@@ -56,8 +56,8 @@ reaction = function(pla)
 					player_perform(player_is_sprung);
 				}
                 pla.image_xscale = image_xscale;
-                pla.x_speed = image_xscale * force;
-                pla.y_speed = -dsin(diff) * force;
+                pla.x_speed = image_xscale * (force / 0.75);
+                pla.y_speed = -dsin(diff) * (force / 0.75);
             }
             pla.state_time = max(2, TRICK_LOCK_DURATION - (force / 1.5) div 1);
 			pla.aerial_flags = 0;

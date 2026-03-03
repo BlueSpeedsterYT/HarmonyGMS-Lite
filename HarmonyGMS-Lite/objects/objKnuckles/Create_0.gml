@@ -232,6 +232,17 @@ player_animate = function()
             }
             break;
         }
+		case PLAYER_ANIMATION.BEFORE_COUNTDOWN:
+		{
+			player_set_animation(global.ani_knuckles_pre_countdown);
+            player_set_radii(6, 14);
+            if (image_index == 0)
+            {
+                hitboxes[0].set_size();
+                hitboxes[1].set_size();
+            }
+			break;
+		}
         case PLAYER_ANIMATION.TRICK_UP:
         {
             if (animation_data.variant == 1 and y_speed > 0) animation_data.variant = 2;

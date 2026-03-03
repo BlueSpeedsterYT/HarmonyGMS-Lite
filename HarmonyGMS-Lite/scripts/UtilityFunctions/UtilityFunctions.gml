@@ -268,7 +268,7 @@ function countdown_create(has_skipped)
 {
 	if (instance_exists(objCountdown)) exit;
 	
-	with (instance_create_depth(objPlayer.x div 1, objPlayer.y div 1, ctrlZone.player_depth, objCountdown))
+	with (instance_create_depth(objPlayer.x div 1, objPlayer.y div 1, ctrlZone.overlays_depth, objCountdown))
 	{
 		speed_boost = false;
 		disable_boost = false;
@@ -280,5 +280,16 @@ function countdown_create(has_skipped)
 		{
 			timer = time_to_frames(0, 3);
 		}
+	}
+}
+
+/// @description Sets up the race start message
+function race_start_message_create()
+{
+	if (instance_exists(objRaceStart)) exit;
+	
+	with (instance_create_depth(objPlayer.x div 1, objPlayer.y div 1, ctrlZone.overlays_depth, objRaceStart))
+	{
+		timer = time_to_frames(0, 1);
 	}
 }

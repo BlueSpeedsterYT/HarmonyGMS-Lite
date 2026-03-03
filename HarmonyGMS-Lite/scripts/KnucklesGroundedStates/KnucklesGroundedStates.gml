@@ -133,9 +133,9 @@ function knuckles_is_punching_left(phase)
 		case PHASE.ENTER:
 		{
 			// Set speed
-			if (abs(x_speed) < 3)
+			if (abs(x_speed) < (3 / 0.75))
 			{
-				x_speed = 3 * image_xscale;
+				x_speed = image_xscale * (3 / 0.75);
 			}
 			
 			// Animate
@@ -145,7 +145,7 @@ function knuckles_is_punching_left(phase)
 		case PHASE.STEP:
 		{
 			// Friction
-			x_speed -= min(abs(x_speed), 0.375) * sign(x_speed);
+			x_speed -= min(abs(x_speed), 0.375 / 0.75) * sign(x_speed);
 			
 			// Move
 			player_move_on_ground();
@@ -191,7 +191,7 @@ function knuckles_is_punching_right(phase)
 			// Set speed
 			if (abs(x_speed) < 3)
 			{
-				x_speed = 3 * image_xscale;
+				x_speed = image_xscale * (3 / 0.75);
 			}
 			
 			// Animate
@@ -201,7 +201,7 @@ function knuckles_is_punching_right(phase)
 		case PHASE.STEP:
 		{
 			// Friction
-			x_speed -= min(abs(x_speed), 0.375) * sign(x_speed);
+			x_speed -= min(abs(x_speed), 0.375 / 0.75) * sign(x_speed);
 			
 			// Move
 			player_move_on_ground();

@@ -8,7 +8,7 @@ function sonic_is_skidding(phase)
 			// Set flag
 			if (not boost_mode)
 			{
-				x_speed = 3 * image_xscale;
+				x_speed = image_xscale * (3 / 0.75);
 			}
 			
 			// Play sound
@@ -23,12 +23,9 @@ function sonic_is_skidding(phase)
 			if (on_ground)
 			{
 				// Friction
-				if (not boost_mode)
-				{
-					var is_skidding_anim = (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_data.variant == 1);
-					var friction_value = is_skidding_anim ? 0.125 : acceleration;
-					x_speed -= min(abs(x_speed), friction_value) * sign(x_speed);
-				}
+				var is_skidding_anim = (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_data.variant == 1);
+				var friction_value = is_skidding_anim ? (0.125 / 0.75) : (0.03125 / 0.75);
+				x_speed -= min(abs(x_speed), friction_value) * sign(x_speed);
 				
 				// Move
 				player_move_on_ground();
@@ -49,7 +46,6 @@ function sonic_is_skidding(phase)
 				}
 				else if ((x_speed != 0 and sign(x_speed) != image_xscale) or (mask_direction != gravity_direction))
 				{
-					control_lock_time = SLIDE_DURATION;
 					return player_perform(player_is_running);
 				}
 				
@@ -62,7 +58,7 @@ function sonic_is_skidding(phase)
 						{
 							animation_data.variant++;
 							sound_play(sfxSliding);
-							if (not boost_mode) x_speed = 4 * image_xscale;
+							if (not boost_mode) x_speed = image_xscale * (4 / 0.75);
 							break;
 						}
 						

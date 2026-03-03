@@ -1,4 +1,5 @@
 /// @description Behave
+if (ctrlGame.game_paused & PAUSE_FLAG.MENU) exit;
 
 counter++;
 
@@ -13,15 +14,15 @@ if (counter == (200 - getting_ready_duration[global.character]))
 {
 	with (objPlayer)
 	{
-		if (not animation_is_matching(PLAYER_ANIMATION.BEFORE_COUNTDOWN, 0))
-		{
-			animation_play(PLAYER_ANIMATION.BEFORE_COUNTDOWN, 0);
-		}
+		animation_play(PLAYER_ANIMATION.BEFORE_COUNTDOWN, 0);
 	}
 }
 
 if (counter > 200)
 {
+	ctrlGame.game_flags &= ~GAME_FLAG.HIDE_HUD;
+	stage_pause_allow(true);
+	instance_create_layer(0, 0, "Overlays", objHUD);
 	countdown_create(skipped_intro);
 	instance_destroy();
 }

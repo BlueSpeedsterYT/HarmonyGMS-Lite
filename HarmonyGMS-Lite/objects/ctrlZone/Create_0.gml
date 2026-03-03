@@ -1,7 +1,7 @@
 /// @description Initialize
 image_speed = 0;
 stage_player = noone;
-pause_enabled = true;
+pause_enabled = false;
 
 // Depths
 overlays_depth = layer_get_depth("Overlays");

@@ -19,27 +19,27 @@ function player_is_trick_preparing(phase)
 			// Trick
 			if (animation_is_finished())
 			{
-				if ((object_index == objSonic or object_index == objKnuckles) and trick_index == TRICK_TYPE.DOWN)
+				if ((not object_index == objTails) and trick_index == TRICK_TYPE.DOWN)
 				{
 					switch (object_index)
 					{
 						case objSonic:
 						{
-							y_speed = 2;
+							y_speed = 2 / 0.75;
 							return player_perform(sonic_is_bounding);
 						}
 						
 						case objKnuckles:
 						{
-							y_speed = 1;
+							y_speed = 1 / 0.75;
 							return player_perform(knuckles_is_drill_clawing);
 						}
 					}
 				}
 				else
 				{
-					x_speed = image_xscale * trick_speed[trick_index][0];
-					y_speed = trick_speed[trick_index][1];
+					x_speed = image_xscale * (trick_speed[trick_index][0] / 0.75);
+					y_speed = trick_speed[trick_index][1] / 0.75;
 					return player_perform(player_is_tricking);
 				}
 			}

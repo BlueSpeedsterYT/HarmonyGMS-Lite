@@ -12,7 +12,7 @@ else
 	}
 	else
 	{
-		var player_inst = instance_create_depth(x - 32, y, depth, player_objects[global.character]);
+		var player_inst = instance_create_depth(x, y, depth, player_objects[global.character]);
 		with (player_inst) player_index = 0;
 		with (ctrlZone) stage_player = player_inst;
 		instance_create_layer(x, y, layer, objCamera);

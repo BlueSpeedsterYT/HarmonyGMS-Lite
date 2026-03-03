@@ -17,14 +17,7 @@ function tails_is_tail_swipe(phase)
 			if (on_ground)
 			{
 				// Friction
-				if (x_speed > 0)
-				{
-					x_speed = max(0, x_speed - (deceleration / 2));
-				}
-				else
-				{
-					x_speed = min(0, x_speed + (deceleration / 2));
-				}
+				x_speed -= min(abs(x_speed), deceleration / 2) * sign(x_speed);
 				
 				// Move
 				player_move_on_ground();
@@ -39,11 +32,7 @@ function tails_is_tail_swipe(phase)
 				}
 				
 				// Slide down steep slopes
-				if (mask_direction != gravity_direction)
-				{
-					control_lock_time = SLIDE_DURATION;
-					return player_perform(player_is_running);
-				}
+				if (mask_direction != gravity_direction) return player_perform(player_is_running);
 			}
 			else
 			{
@@ -53,9 +42,6 @@ function tails_is_tail_swipe(phase)
 			
 				// Land
 				if (on_ground) return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
-				
-				// Apply air resistance
-				player_resist_air();
 				
 				// Fall
 				if (y_speed < gravity_cap)

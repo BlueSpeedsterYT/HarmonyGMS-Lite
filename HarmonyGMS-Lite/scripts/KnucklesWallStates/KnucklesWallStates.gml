@@ -19,7 +19,7 @@ function knuckles_is_climbing(phase)
 			if (player_try_jump())
 			{
 				image_xscale *= -1;
-				x_speed = 4 * image_xscale;
+				x_speed = image_xscale * 4;
 				y_speed = -4;
 				return true;
 			}
@@ -58,11 +58,18 @@ function knuckles_is_lifting(phase)
 	{
 		case PHASE.ENTER:
 		{
+			y -= 10;
+			y_speed = 0;
 			break;
 		}
 		case PHASE.STEP:
 		{
-			
+			if (animation_data.index == KNUCKLES_ANIMATION.CLIMB and animation_is_finished())
+			{
+				x += image_xscale * 16;
+				y -= 10;
+				return player_perform(player_is_standing);
+			}
 			break;
 		}
 		case PHASE.EXIT:

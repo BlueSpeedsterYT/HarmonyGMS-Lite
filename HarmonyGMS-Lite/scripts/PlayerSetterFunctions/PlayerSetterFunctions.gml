@@ -187,6 +187,13 @@ function player_in_camera_bounds()
 	return true;
 }
 
+/// @description Sets the player's velocity from ground speed
+function player_set_ground_velocity()
+{
+	x_speed = ground_speed * dcos(local_direction);
+	y_speed = ground_speed * -dsin(local_direction);
+}
+
 /// @description Resets the player's physics variables back to their default values, applying any modifiers afterward.
 function player_refresh_physics()
 {
@@ -228,7 +235,7 @@ function player_refresh_boost_mode()
 	{
 	    if (on_ground)
 	    {
-	        boost_speed = boost_thresholds[boost_index] / 0.75;
+	        boost_speed = boost_thresholds[boost_index];
 	        if (abs(x_speed) < 4.5)
 	        {
 	            boost_mode = false;
@@ -240,7 +247,7 @@ function player_refresh_boost_mode()
 	{
 	    if (on_ground and abs(x_speed) >= speed_limit)
 	    {
-	        if (boost_speed >= boost_thresholds[boost_index] / 0.75)
+	        if (boost_speed >= boost_thresholds[boost_index])
 	        {
 	            boost_mode = true;
 	            player_speed_break();

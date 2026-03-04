@@ -108,12 +108,12 @@ reaction = function(pla)
 				animation_play(ani_spring, 0);
 				player_perform(player_is_sprung);
 			}
-			var stored_y_speed = (pla.y_speed * 0.75);
+			var stored_y_speed = pla.y_speed;
 			var index = ((stored_y_speed * 256) / 400) div 1;
 			index = clamp(index, 1, 3);
-			var force = ((stored_y_speed + (stored_y_speed / 8)) / 0.75);
+			var force = (stored_y_speed + (stored_y_speed / 8));
             pla.y_speed = -force;
-			pla.y_speed = clamp(pla.y_speed, -(12.0 / 0.75), -(7.5 / 0.75));
+			pla.y_speed = clamp(pla.y_speed, -12.0, -7.5);
             pla.state_time = 3;
 			pla.aerial_flags = 0;
 			pla.player_refresh_aerials();

@@ -8,7 +8,7 @@ function sonic_is_skidding(phase)
 			// Set flag
 			if (not boost_mode)
 			{
-				x_speed = image_xscale * (3 / 0.75);
+				x_speed = image_xscale * 3;
 			}
 			
 			// Play sound
@@ -24,7 +24,7 @@ function sonic_is_skidding(phase)
 			{
 				// Friction
 				var is_skidding_anim = (animation_data.index == SONIC_ANIMATION.SKIDDING and animation_data.variant == 1);
-				var friction_value = is_skidding_anim ? (0.125 / 0.75) : (0.03125 / 0.75);
+				var friction_value = is_skidding_anim ? 0.125 : 0.03125;
 				x_speed -= min(abs(x_speed), friction_value) * sign(x_speed);
 				
 				// Move
@@ -58,7 +58,7 @@ function sonic_is_skidding(phase)
 						{
 							animation_data.variant++;
 							sound_play(sfxSliding);
-							if (not boost_mode) x_speed = image_xscale * (4 / 0.75);
+							if (not boost_mode) x_speed = image_xscale * 4;
 							break;
 						}
 						

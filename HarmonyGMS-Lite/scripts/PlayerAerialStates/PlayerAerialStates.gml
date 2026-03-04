@@ -144,6 +144,7 @@ function player_is_hurt(phase)
 		case PHASE.ENTER:
 		{
 			// Set flags
+			ground_speed = 0;
 			boost_mode = false;
 			
 			// Detach from ground
@@ -182,6 +183,7 @@ function player_is_dead(phase)
 		case PHASE.ENTER:
 		{
 			// Set flags
+			ground_speed = 0;
 			boost_mode = false;
 			
 			// Detach from ground
@@ -235,6 +237,7 @@ function player_is_debugging(phase)
 		{
 			// Reset stats
 			x_speed = 0;
+			ground_speed = 0;
 			y_speed = 0;
 			boost_mode = false;
 			

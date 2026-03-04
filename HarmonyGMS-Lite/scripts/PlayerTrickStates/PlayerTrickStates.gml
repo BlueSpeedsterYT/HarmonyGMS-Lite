@@ -25,21 +25,21 @@ function player_is_trick_preparing(phase)
 					{
 						case objSonic:
 						{
-							y_speed = 2 / 0.75;
+							y_speed = 2;
 							return player_perform(sonic_is_bounding);
 						}
 						
 						case objKnuckles:
 						{
-							y_speed = 1 / 0.75;
+							y_speed = 1;
 							return player_perform(knuckles_is_drill_clawing);
 						}
 					}
 				}
 				else
 				{
-					x_speed = image_xscale * (trick_speed[trick_index][0] / 0.75);
-					y_speed = trick_speed[trick_index][1] / 0.75;
+					x_speed = image_xscale * trick_speed[trick_index][0];
+					y_speed = trick_speed[trick_index][1];
 					return player_perform(player_is_tricking);
 				}
 			}
@@ -98,6 +98,8 @@ function player_is_tricking(phase)
 					}
 				}
 			}
+			
+			if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
 			
 			// Move
 			player_move_in_air();

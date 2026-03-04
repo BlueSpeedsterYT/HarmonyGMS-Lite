@@ -29,8 +29,8 @@ reaction = function(pla)
 				pla.player_perform(player_is_dashing);
 			}
 			if (dcos(diff) != 0) pla.image_xscale = sign(dcos(diff));
-			pla.x_speed = dcos(diff) * (8 / 0.75);
-            pla.y_speed = -dsin(diff) * (8 / 0.75);
+			pla.x_speed = dcos(diff) * 8;
+            pla.y_speed = -dsin(diff) * 8;
 			pla.state_time = 16;
 			pla.aerial_flags = 0;
 			pla.player_refresh_aerials();

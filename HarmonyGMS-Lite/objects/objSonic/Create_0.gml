@@ -1,9 +1,6 @@
 /// @description Initialize
-// Inherit the parent event
 event_inherited();
-
 character_index = CHARACTER.SONIC;
-
 trick_speed =
 [
     [0, -6],
@@ -13,7 +10,19 @@ trick_speed =
 ];
 
 insta_shield = new stamp();
-trick_spin = new stamp();
+trick_fx = new stamp();
+
+player_draw_before = function()
+{
+	// TODO: Migrate Bound code to here if possible
+};
+
+player_draw_after = function()
+{
+	// TODO: Rework all of this
+	with (trick_fx) draw_self_floored();
+	with (insta_shield) draw_self_floored();
+};
 
 player_animate = function()
 {
@@ -478,10 +487,4 @@ player_animate = function()
 			break;
 		}
     }
-};
-
-player_draw_after = function()
-{
-	with (trick_spin) draw_self_floored();
-	with (insta_shield) draw_self_floored();
 };

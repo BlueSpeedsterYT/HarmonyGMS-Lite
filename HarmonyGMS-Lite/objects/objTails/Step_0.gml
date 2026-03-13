@@ -1,8 +1,6 @@
 /// @description Tails
-if (ctrlGame.game_paused) exit;
-
-// Inherit the parent event
 event_inherited();
+if (ctrlGame.game_paused) exit;
 
 var rolling = (animation_data.ani == global.ani_tails_roll_v0 || animation_data.ani == global.ani_tails_jump_v1);
 

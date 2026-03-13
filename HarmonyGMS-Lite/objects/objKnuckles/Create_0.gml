@@ -1,13 +1,6 @@
 /// @description Initialize
-// Inherit the parent event
 event_inherited();
-
 character_index = CHARACTER.KNUCKLES;
-
-glide_speed = 0;
-glide_angle = 0;
-glide_direction = 1;
-
 trick_speed =
 [
     [0, -6],
@@ -15,6 +8,10 @@ trick_speed =
     [6, 0],
     [-5, -0]
 ];
+
+glide_speed = 0;
+glide_angle = 0;
+glide_direction = 1;
 
 player_animate = function()
 {

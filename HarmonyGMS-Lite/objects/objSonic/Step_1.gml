@@ -1,8 +1,5 @@
 /// @description Update
-if (ctrlGame.game_paused) exit;
-
-// Inherit the parent event
 event_inherited();
-
-with (trick_spin) animation_update();
+if (ctrlGame.game_paused & PAUSE_FLAG.MENU) exit;
+with (trick_fx) animation_update();
 with (insta_shield) animation_update();

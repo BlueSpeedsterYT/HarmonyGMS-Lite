@@ -1,14 +1,6 @@
 /// @description Initialize
-// Inherit the parent event
 event_inherited();
-
 character_index = CHARACTER.TAILS;
-
-fly_time = 0;
-fly_state_time = 0;
-fly_force = TAILS_FLY_BASE_FORCE;
-fly_sound = noone;
-
 trick_speed =
 [
     [0, -6],
@@ -17,7 +9,18 @@ trick_speed =
     [-3.5, -3]
 ];
 
+fly_time = 0;
+fly_state_time = 0;
+fly_force = TAILS_FLY_BASE_FORCE;
+fly_sound = noone;
+
 tails = new stamp();
+
+player_draw_before = function()
+{
+    tails.image_alpha = image_alpha;
+    with (tails) draw_self_floored();
+};
 
 player_animate = function()
 {
@@ -514,10 +517,4 @@ player_animate = function()
 			break;
 		}
     }
-};
-
-player_draw_before = function()
-{
-    tails.image_alpha = image_alpha;
-    with (tails) draw_self_floored();
 };

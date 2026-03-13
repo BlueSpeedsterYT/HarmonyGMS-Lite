@@ -1,12 +1,11 @@
 /// @description Stamps
+event_inherited();
 if (ctrlGame.game_paused) exit;
 
-// Inherit the parent event
-event_inherited();
-
-// Trick Spin
-with (trick_spin)
+// Trick FX
+with (trick_fx)
 {
+	// Animate the front trick effect (Sonic)
 	var is_trick_front_spinning_ani = (other.animation_data.index == PLAYER_ANIMATION.TRICK_FRONT and other.animation_data.variant == 1)
 	if (is_trick_front_spinning_ani)
     {

@@ -204,14 +204,6 @@ function sonic_is_bounding(phase)
 			{
 				y_speed = min(y_speed + SONIC_BOUND_FORCE, gravity_cap);
 			}
-			
-			// Create bound effect
-			if (animation_data.time mod 2 == 0)
-			{
-				var ox = x div 1;
-				var oy = y div 1;
-				particle_create(ox, oy, global.ani_sonic_trick_down_v2, , , , , , , 110);
-			}
 			break;
 		}
 		case PHASE.EXIT:

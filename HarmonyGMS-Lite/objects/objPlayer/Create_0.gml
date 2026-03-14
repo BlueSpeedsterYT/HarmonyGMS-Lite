@@ -379,17 +379,19 @@ player_try_crouch_or_roll = function()
 {
 	if (input_axis_y == 1)
 	{
-		if ((abs(x_speed) + 0.49609375) > ROLL_THRESHOLD or mask_direction != gravity_direction)
+		// Crouch
+		if (x_speed == 0 and mask_direction != gravity_direction)
+		{
+			player_perform(player_is_crouching);
+			animation_play(PLAYER_ANIMATION.CROUCH);
+			return true;
+		}
+		// Roll
+		else if ((abs(x_speed) + 0.49609375) > ROLL_THRESHOLD)
 		{
 			sound_play(sfxRoll);
 			player_perform(player_is_rolling);
 			animation_play(PLAYER_ANIMATION.ROLL);
-			return true;
-		}
-		else if (x_speed == 0)
-		{
-			player_perform(player_is_crouching);
-			animation_play(PLAYER_ANIMATION.CROUCH);
 			return true;
 		}
 	}

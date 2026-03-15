@@ -144,7 +144,6 @@ function player_is_hurt(phase)
 		case PHASE.ENTER:
 		{
 			// Set flags
-			ground_speed = 0;
 			boost_mode = false;
 			
 			// Detach from ground
@@ -163,7 +162,7 @@ function player_is_hurt(phase)
             // Fall
 			if (y_speed < gravity_cap)
 			{
-				y_speed = min(y_speed + recoil_gravity, gravity_cap);
+				y_speed = min(y_speed + gravity_force, gravity_cap);
 			}
             break;
 		}
@@ -183,7 +182,6 @@ function player_is_dead(phase)
 		case PHASE.ENTER:
 		{
 			// Set flags
-			ground_speed = 0;
 			boost_mode = false;
 			
 			// Detach from ground
@@ -237,7 +235,6 @@ function player_is_debugging(phase)
 		{
 			// Reset stats
 			x_speed = 0;
-			ground_speed = 0;
 			y_speed = 0;
 			boost_mode = false;
 			

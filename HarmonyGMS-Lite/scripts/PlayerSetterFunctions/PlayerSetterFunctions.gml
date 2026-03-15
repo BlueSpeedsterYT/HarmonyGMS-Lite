@@ -187,32 +187,23 @@ function player_in_camera_bounds()
 	return true;
 }
 
-/// @description Sets the player's velocity from ground speed
-function player_set_ground_velocity()
-{
-	x_speed = ground_speed * dcos(local_direction);
-	y_speed = ground_speed * -dsin(local_direction);
-}
-
 /// @description Resets the player's physics variables back to their default values, applying any modifiers afterward.
 function player_refresh_physics()
 {
 	// Speed values
 	speed_limit = 6;
-	speed_cap = 16;
-	base_acceleration = 0.046875;
-	acceleration = base_acceleration;
-	deceleration = 0.5;
-	air_acceleration = 0.09375;
-	roll_deceleration = 0.125;
-	roll_friction = 0.0234375;
+	speed_cap = 15;
+	base_acceleration = 8 / 256;
+	deceleration = 96 / 256;
+	
+	roll_deceleration = 24 / 256;
+	roll_friction = 8 / 256;
 	
 	// Aerial values
 	gravity_cap = 16;
-	gravity_force = 0.21875;
-	recoil_gravity = 0.1875;
-	jump_height = 6.5;
-	jump_release = 4;
+	gravity_force = 42 / 256;
+	jump_height = 4.875;
+	jump_release = 3;
 	
 	// Superspeed modification
 	if (superspeed_time > 0)
@@ -264,12 +255,12 @@ function player_refresh_boost_mode()
 	if (boost_mode)
 	{
 	    speed_limit = 12;
-	    speed_cap = 16;
+	    speed_cap = 15;
 	}
 	else if (state == player_is_rolling)
 	{
 	    speed_limit = 6;
-	    speed_cap = 16;
+	    speed_cap = 15;
 	}
 	else
 	{

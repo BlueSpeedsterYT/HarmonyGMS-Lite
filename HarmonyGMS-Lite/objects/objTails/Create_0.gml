@@ -11,7 +11,6 @@ trick_speed =
 
 fly_time = 0;
 fly_state_time = 0;
-fly_force = TAILS_FLY_BASE_FORCE;
 fly_sound = noone;
 
 tails = new stamp();

@@ -18,7 +18,7 @@ switch (room)
 		name = "LEAF FOREST";
 		act = 1;
 		music_enqueue(musHydrocityAct1Sonic360, PRIORITY_MUSIC, true);
-		instance_create_layer(0, 0, "Overlays", objTitleCard);
+		instance_create_layer(0, 0, "Overlays", objTitleCard, {counter: 2});
 		break;
 	}
 }

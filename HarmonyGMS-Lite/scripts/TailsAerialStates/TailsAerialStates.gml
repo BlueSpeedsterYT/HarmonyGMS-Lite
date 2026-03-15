@@ -11,7 +11,6 @@ function tails_is_flying(phase)
 			
 			// Fly
 			fly_state_time = 0;
-			fly_force = TAILS_FLY_BASE_FORCE;
 			
 			// Detach from ground
 			player_ground(undefined);
@@ -25,7 +24,11 @@ function tails_is_flying(phase)
 			// Accelerate
 			if (input_axis_x != 0)
 			{
-				if (image_xscale != input_axis_x and fly_time < TAILS_FLY_DURATION) animation_play(TAILS_ANIMATION.FLYING_TURN);
+				if (image_xscale != input_axis_x and fly_time < TAILS_FLY_DURATION) 
+				{
+					animation_play(TAILS_ANIMATION.FLYING_TURN);
+				}
+				
 				image_xscale = input_axis_x;
 				if (abs(x_speed) < speed_limit or sign(x_speed) != input_axis_x)
 				{
@@ -54,32 +57,40 @@ function tails_is_flying(phase)
 			}
 			
 			// Ascend
-			if (input_button.jump.pressed and fly_time < TAILS_FLY_DURATION and y_speed >= TAILS_FLY_THRESHOLD)
+			if (fly_state_time != 1)
 			{
-				fly_state_time = 60;
-				fly_force = -TAILS_FLY_ASCEND_FORCE;
+				if (y_speed >= TAILS_FLY_THRESHOLD)
+				{
+					y_speed -= TAILS_FLY_ASCEND_FORCE;
+					if (++fly_state_time == 32) fly_state_time = 1;
+				}
+				else
+				{
+					fly_state_time = 1;
+				}
+			}
+			else
+			{
+				if (input_button.jump.pressed and fly_time < TAILS_FLY_DURATION and y_speed >= TAILS_FLY_THRESHOLD)
+				{
+					fly_state_time = 2;
+				}
+				
+				// Fall
+				y_speed += TAILS_FLY_BASE_FORCE;
 			}
 			
 			// Apply air resistance
 			player_resist_air();
 			
-			// Fall
-			y_speed += fly_force;
-			
-			// Reset
-			if (y_speed < TAILS_FLY_THRESHOLD or fly_state_time == 0)
-			{
-				fly_force = TAILS_FLY_BASE_FORCE;
-			}
-			
+			// Ceiling cap
 			if (y < 0 and y_speed < 0)
 			{
 				y_speed = 0;
 			}
 			
 			// Timers
-			fly_time = min(++fly_time, TAILS_FLY_DURATION);
-			fly_state_time = max(--fly_state_time, 0);
+			if (fly_time < TAILS_FLY_DURATION) fly_time++;
 			
 			// Animate
 			if (fly_time < TAILS_FLY_DURATION)

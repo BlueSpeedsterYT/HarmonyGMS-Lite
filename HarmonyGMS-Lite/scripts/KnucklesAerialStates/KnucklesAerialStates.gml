@@ -12,20 +12,18 @@ function knuckles_is_gliding(phase)
 			player_ground(undefined);
 			
 			// Adjust Y Speed
-			if (y_speed <= -8) 
+			y_speed += (1.5 / 256);
+			
+			if (y_speed < 0) 
 			{
-		        y_speed *= 0.25;
-		    } 
-			else if (y_speed < 0) 
-			{
-		        y_speed = 0;
-		    }
+				y_speed = 0;
+			}
 			
 			// Set up Gliding values
-			glide_speed = 4;
-		    glide_direction = image_xscale;
-		    glide_angle = 90 - (90 * image_xscale);
-		    glide_force = 0.5;
+			glide_speed = 3;
+			glide_direction = image_xscale;
+			glide_angle = 90 - (90 * image_xscale);
+			glide_force = 0.5;
 			
 			// Animate
 			animation_play(KNUCKLES_ANIMATION.GLIDE);
@@ -40,13 +38,17 @@ function knuckles_is_gliding(phase)
 		    }
 			
 			// Give speed if dead ahead
-			if (glide_angle mod 180 == 0) 
+			if (glide_speed < 3)
 			{
-		        if (glide_speed < 16)
+				glide_speed = min(glide_speed + KNUCKLES_GLIDE_FAST_ACCELERATION, 3);
+			}
+			else if (glide_speed < 15)
+			{
+				if (glide_angle mod 180 == 0)
 				{
-					glide_speed = min(glide_speed + KNUCKLES_GLIDE_ACCELERATION, 16);
+					glide_speed = min(glide_speed + KNUCKLES_GLIDE_SLOW_ACCELERATION, 15);
 				}
-		    }
+			}
 
 		    // Clamp the gliding angle
 			glide_angle = clamp(glide_angle - (2.8125 * glide_direction), 0, 180);

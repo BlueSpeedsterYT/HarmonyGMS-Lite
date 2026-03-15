@@ -1,7 +1,8 @@
 /// @description Behave
 if (ctrlGame.game_paused & PAUSE_FLAG.MENU) exit;
 
-counter++;
+var frame_counter = counter;
+frame_counter++;
 
 // Skip the intro animation
 if (InputPressed(INPUT_VERB.CONFIRM))
@@ -10,7 +11,9 @@ if (InputPressed(INPUT_VERB.CONFIRM))
 	skipped_intro = true;
 }
 
-if (counter == (200 - getting_ready_duration[global.character]))
+counter = frame_counter;
+
+if (frame_counter == (200 - getting_ready_duration[global.character]))
 {
 	with (objPlayer)
 	{
@@ -18,7 +21,7 @@ if (counter == (200 - getting_ready_duration[global.character]))
 	}
 }
 
-if (counter > 200)
+if (frame_counter > 200)
 {
 	ctrlGame.game_flags &= ~GAME_FLAG.HIDE_HUD;
 	stage_pause_allow(true);

@@ -10,7 +10,7 @@ function player_move_on_ground()
 	}
 	
 	// Initialize movement loop
-	var total_steps = 1 + (abs(x_speed) div x_radius);
+	var total_steps = 1 + abs(x_speed) div 13;
 	var step = x_speed / total_steps;
 	
 	// Process movement loop
@@ -68,7 +68,7 @@ function player_move_on_ground()
 function player_move_in_air()
 {
 	// Initialize horizontal movement loop
-	var total_steps = 1 + (abs(x_speed) div x_radius);
+	var total_steps = 1 + abs(x_speed) div 13;
 	var step = x_speed / total_steps;
 	
 	// Process horizontal movement loop
@@ -94,7 +94,7 @@ function player_move_in_air()
 	}
 	
 	// Initialize vertical movement loop
-	total_steps = 1 + (abs(y_speed) div y_radius);
+	total_steps = 1 + abs(y_speed) div 13;
 	step = y_speed / total_steps;
 	
 	// Process vertical movement loop

@@ -57,7 +57,6 @@ player_refresh_status();
 // Physics
 x_speed = 0;
 y_speed = 0;
-ground_speed = 0;
 underwater = false;
 player_refresh_physics();
 
@@ -380,14 +379,14 @@ player_try_crouch_or_roll = function()
 	if (input_axis_y == 1)
 	{
 		// Crouch
-		if (x_speed == 0 and mask_direction != gravity_direction)
+		if (x_speed == 0 and mask_direction == gravity_direction)
 		{
 			player_perform(player_is_crouching);
 			animation_play(PLAYER_ANIMATION.CROUCH);
 			return true;
 		}
 		// Roll
-		else if ((abs(x_speed) + 0.49609375) > ROLL_THRESHOLD)
+		else if ((abs(x_speed) + (0.5 - (1 / 256))) > ROLL_THRESHOLD)
 		{
 			sound_play(sfxRoll);
 			player_perform(player_is_rolling);
@@ -628,21 +627,22 @@ player_rotate_mask = function()
 	}
 }
 
-/// @method player_resist_slope(force, threshold)
+/// @method player_resist_slope()
 /// @description Applies slope friction to the player's horizontal speed, if appropriate.
-/// @param {Real} force Friction value to use.
-/// @param {Real} threshold Threshold value to use.
-player_resist_slope = function(force, threshold)
+player_resist_slope = function()
 {
-	var sine_value = dsin(local_direction);
-	// Abort if...
-	if (not on_ground) exit; // Not on the ground
-	if (sign(sine_value) == sign(x_speed)) exit; // The signed sine value is equal to the signed horizontal speed value
-	if (local_direction < 22.5 or local_direction > 337.5) exit; // Moving on a shallow surface
-	if (abs(sine_value * force) <= threshold) exit; // Is under the provided threshold
-	
-	// Apply
-	x_speed -= sine_value * force;
+    // Abort if moving along a ceiling
+    if (local_direction >= 135 and local_direction <= 225) exit;
+
+    // Apply (Sonic Advance method)
+    if (x_speed != 0)
+    {
+        var slope_factor = (dsin(local_direction) * 3) / 32;
+        x_speed -= slope_factor;
+        
+        // Apply speed cap
+        if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
+    }
 };
 
 /// @method player_resist_air([resistance_amount])
@@ -650,7 +650,7 @@ player_resist_slope = function(force, threshold)
 /// @param {Real} [resistance_amount] Amount of resistance given to the player (optional, defaults to 32).
 player_resist_air = function(resistance_amount = 32)
 {
-	if (y_speed < 0 and y_speed > -AIR_THRESHOLD)
+	if (y_speed > LOW_AIR_THRESHOLD and y_speed < HIGH_AIR_THRESHOLD)
 	{
 		x_speed -= x_speed / resistance_amount;
 	}
@@ -725,11 +725,11 @@ player_gain_rings = function(num)
 	}
 };
 
-/// @method player_lose_rings()
+/// @method player_drop_rings()
 /// @description Creates up to 32 lost rings in circles of 16 at the player's position.
-player_lose_rings = function()
+player_drop_rings = function()
 {
-    var spd = 4;
+    var spd = 3;
     var dir = 101.25;
     
     for (var n = min(global.ring_count, 32); n > 0; --n)
@@ -783,13 +783,13 @@ player_damage = function(inst)
     
     if (inst == id or (player_index == 0 and shield.index == SHIELD_TYPE.NONE and global.ring_count == 0))
     {
-        y_speed = -7;
+        y_speed = -4.875;
         sound_play(sfxHurt);
         return player_perform(player_is_dead);
     }
     else
     {
-    	var hurt_speed = -2;
+    	var hurt_speed = -1.5;
         var ring_loss = false;
         animation_play(PLAYER_ANIMATION.HURT);
         if (inst == noone or abs(x_speed) <= 2.5)
@@ -804,7 +804,7 @@ player_damage = function(inst)
             animation_data.variant = 1;
         }
 		
-        y_speed = -4;
+        y_speed = -3;
 		
         if (player_index == 0)
         {
@@ -815,7 +815,7 @@ player_damage = function(inst)
             else
             {
                 ring_loss = true;
-                player_lose_rings();
+                player_drop_rings();
             }
         }
 		

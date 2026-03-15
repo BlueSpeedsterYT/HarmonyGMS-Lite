@@ -110,7 +110,7 @@ function sonic_is_skidding(phase)
 				}
 				
 				// Finish off the skidding
-				if (animation_data.time >= 32)
+				if (animation_data.time > 32)
 				{
 					if (on_ground)
 					{

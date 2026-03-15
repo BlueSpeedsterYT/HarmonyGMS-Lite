@@ -53,7 +53,7 @@ function player_is_standing(phase)
 			}
 			
 			// Apply slope friction
-			player_resist_slope(SLOPE_FRICTION, acceleration);
+			player_resist_slope();
 			
 			// Skill
 			if (player_try_skill()) exit;
@@ -182,7 +182,7 @@ function player_is_running(phase)
 			if (player_try_skill()) exit;
 			
 			// Apply slope friction
-			player_resist_slope(SLOPE_FRICTION, acceleration);
+			player_resist_slope();
 			
 			// Crouch or Roll
 			if (player_try_crouch_or_roll()) return true;
@@ -264,7 +264,7 @@ function player_is_appealing(phase)
 			}
 			
 			// Apply slope friction
-			player_resist_slope(SLOPE_FRICTION, acceleration);
+			player_resist_slope();
 			
 			// Skill
 			if (player_try_skill()) exit;
@@ -331,7 +331,7 @@ function player_is_crouching(phase)
 			}
 			
 			// Apply slope friction
-			player_resist_slope(SLOPE_FRICTION, acceleration);
+			player_resist_slope();
 			
 			// Skill
 			if (player_try_skill()) exit;
@@ -386,7 +386,7 @@ function player_is_rolling(phase)
 					if (sign(x_speed) != input_axis_x)
 					{
 						x_speed += roll_deceleration * input_axis_x;
-						if (sign(x_speed) == input_axis_x) x_speed = roll_deceleration * input_axis_x;
+						if (sign(x_speed) == input_axis_x) x_speed = 0.375 * input_axis_x;
 					}
 					else image_xscale = input_axis_x;
 				}
@@ -418,8 +418,16 @@ function player_is_rolling(phase)
 			}
 			
 			// Apply slope friction
-			var slope_friction = (sign(x_speed) == sign(dsin(local_direction)) ? ROLL_SLOPE_FRICTION_UP : ROLL_SLOPE_FRICTION_DOWN);
-			player_resist_slope(slope_friction, roll_friction);
+			if (not (local_direction >= 135 and local_direction <= 225) and x_speed != 0)
+			{
+				var friction_downhill = 60 / 256;
+				var friction_uphill = friction_downhill  / 4;
+				var slope_friction = (sign(x_speed) == sign(dsin(local_direction)) ? friction_uphill : friction_downhill);
+				x_speed -= dsin(local_direction) * slope_friction;
+				
+				// Apply speed cap
+				if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
+			}
 			
 			// Unroll
 			if (abs(x_speed) < UNROLL_THRESHOLD and mask_direction == gravity_direction) 
@@ -470,7 +478,7 @@ function player_is_spin_dashing(phase)
 			// Roll
 			if (input_axis_y != 1)
 			{
-				x_speed = image_xscale * (8 + spin_dash_charge div 2);
+				x_speed = image_xscale * (6 + spin_dash_charge * (3 / 8));
 				camera_set_x_lag_time(16);
 				audio_stop_sound(sfxRoll);
 				sound_play(sfxSpinDash);

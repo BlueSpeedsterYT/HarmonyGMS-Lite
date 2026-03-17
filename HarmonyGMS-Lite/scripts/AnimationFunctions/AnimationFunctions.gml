@@ -152,6 +152,7 @@ function stamp() constructor
 {
     x = 0;
     y = 0;
+    visible = true;
     sprite_index = -1;
     image_index = 0;
     image_xscale = 1;
@@ -160,5 +161,4 @@ function stamp() constructor
     image_blend = c_white;
     image_alpha = 1;
     animation_data = new animation_core();
-    visible = true;
 }

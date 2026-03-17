@@ -13,7 +13,7 @@ function player_is_sprung(phase)
 		{
 			// Trick
 			if (state_time != 0) state_time--;
-			if (player_try_trick()) return true;
+			if (player_try_trick_action()) return true;
 			
 			// Accelerate
 			if (input_axis_x != 0)
@@ -73,7 +73,7 @@ function player_is_dashing(phase)
 		{
 			// Trick
 			if (state_time != 0) state_time--;
-			if (player_try_trick()) return true;
+			if (player_try_trick_action()) return true;
 			
 			// Move
 			player_move_in_air();

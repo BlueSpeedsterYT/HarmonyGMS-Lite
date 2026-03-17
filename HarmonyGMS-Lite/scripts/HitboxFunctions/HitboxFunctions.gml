@@ -1,3 +1,23 @@
+/// @description Creates a new rectangle with dimensions assuming (0, 0) origin.
+/// @param {Real} left Left radius of the rectangle (optional, default is 0).
+/// @param {Real} top Top radius of the rectangle (optional, default is 0).
+/// @param {Real} right Right radius of the rectangle (optional, default is 0).
+/// @param {Real} bottom Bottom radius of the rectangle (optional, default is 0).
+function rect(_left = 0, _top = 0, _right = 0, _bottom = 0) constructor
+{
+	left = _left;
+	top = _top;
+	right = _right;
+	bottom = _bottom;
+    static set_size = function(_left = 0, _top = 0, _right = 0, _bottom = 0)
+    {
+        left = _left;
+        top = _top;
+        right = _right;
+        bottom = _bottom;
+    };
+}
+
 /// @description Creates a new hitbox with a color and dimensions assuming (0, 0) origin.
 /// @param {Constant.Colour} col Color of the hitbox.
 /// @param {Real} left Left radius of the hitbox (optional, default is 0).

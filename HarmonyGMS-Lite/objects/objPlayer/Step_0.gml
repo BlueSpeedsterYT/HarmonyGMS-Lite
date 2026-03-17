@@ -224,7 +224,7 @@ with (speed_break)
 }
 
 // Afterimages
-player_update_animation_history();
+player_refresh_animation_history();
 
 afterimage_visible = boost_mode;
 if (afterimage_visible)

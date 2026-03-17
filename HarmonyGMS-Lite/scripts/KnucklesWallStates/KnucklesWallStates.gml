@@ -38,8 +38,7 @@ function knuckles_is_climbing(phase)
 			if (on_ground) return player_perform(player_is_standing);
 			
 			// Attach to wall
-			var hit_wall = player_beam_collision(tilemaps, x_wall_radius * 2);
-			if (hit_wall == noone)
+			if (not player_linecast(tilemaps, x_wall_radius * 2))
 			{
 				return player_perform((y_speed < 0) ? knuckles_is_lifting : knuckles_is_falling);
 			}

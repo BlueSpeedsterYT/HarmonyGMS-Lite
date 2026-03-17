@@ -51,10 +51,6 @@ function tails_is_flying(phase)
 			{
 				return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
 			}
-			else if (underwater)
-			{
-				return player_perform(player_is_falling);
-			}
 			
 			// Ascend
 			if (fly_state_time != 1)

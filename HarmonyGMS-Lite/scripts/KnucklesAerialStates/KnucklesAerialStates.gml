@@ -61,7 +61,7 @@ function knuckles_is_gliding(phase)
 			if (state_changed) exit;
 			
 			// Glide fall
-			if (not input_button.jump.check or underwater)
+			if (not input_button.jump.check)
 			{
 				if (x_speed != 0) image_xscale = sign(x_speed);
 				return player_perform(knuckles_is_falling);
@@ -69,7 +69,7 @@ function knuckles_is_gliding(phase)
 			
 			// Attach to a wall and climb
 			// NOTE: Might tackle this later as it does impact the gliding state
-			if (player_arm_collision(tilemaps, x_wall_radius * glide_direction) != noone)
+			if (player_armcast(tilemaps, x_wall_radius * glide_direction, 0))
 			{
 				return player_perform(knuckles_is_climbing);
 			}

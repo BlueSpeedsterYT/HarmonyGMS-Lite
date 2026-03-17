@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"PlayerGetterFunctions",
+  "%Name":"SA2Functions",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PlayerGetterFunctions",
+  "name":"SA2Functions",
   "parent":{
-    "name":"Physics",
-    "path":"folders/Scripts/Player/Physics.yy",
+    "name":"Global",
+    "path":"folders/Scripts/Global.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

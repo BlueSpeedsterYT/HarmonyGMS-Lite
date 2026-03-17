@@ -5,9 +5,9 @@ var frame_counter = counter;
 frame_counter++;
 
 // Skip the intro animation
-if (InputPressed(INPUT_VERB.CONFIRM))
+if (InputPressed(INPUT_VERB.CONFIRM) or InputPressed(INPUT_VERB.CANCEL))
 {
-	counter = 200;
+	frame_counter = 200;
 	skipped_intro = true;
 }
 

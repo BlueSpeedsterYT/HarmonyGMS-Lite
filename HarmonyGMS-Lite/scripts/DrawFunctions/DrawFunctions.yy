@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"PlayerTerrainFunctions",
+  "%Name":"DrawFunctions",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PlayerTerrainFunctions",
+  "name":"DrawFunctions",
   "parent":{
-    "name":"Physics",
-    "path":"folders/Scripts/Player/Physics.yy",
+    "name":"Global",
+    "path":"folders/Scripts/Global.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

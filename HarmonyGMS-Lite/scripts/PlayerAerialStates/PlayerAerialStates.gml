@@ -111,7 +111,7 @@ function player_is_jumping(phase)
 			if (on_ground) return player_perform(x_speed != 0 ? player_is_running : player_is_standing);
 			
 			// Skill
-			if (player_try_skill()) exit;
+			if (player_try_air_skill()) exit;
 			
 			// Lower height
 			if (jump_cap and y_speed < -jump_release and not input_button.jump.check)

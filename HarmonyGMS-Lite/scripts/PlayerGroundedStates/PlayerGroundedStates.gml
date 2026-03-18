@@ -46,7 +46,7 @@ function player_is_standing(phase)
 			}
 			
 			// Slide down steep slopes
-			if (mask_direction != gravity_direction)
+			if (local_direction >= 45 and local_direction <= 315)
 			{
 				control_lock_time = SLIDE_DURATION;
 				return player_perform(player_is_running);
@@ -56,7 +56,7 @@ function player_is_standing(phase)
 			player_resist_slope();
 			
 			// Skill
-			if (player_try_skill()) exit;
+			if (player_try_ground_skill()) exit;
 			
 			// Turn
             if (input_axis_x != 0 and image_xscale != input_axis_x)
@@ -166,20 +166,17 @@ function player_is_running(phase)
 			if (not on_ground) return player_perform(player_is_falling);
 			
 			// Slide down steep slopes
-			if (abs(x_speed) < SLIDE_THRESHOLD and mask_direction != gravity_direction)
+			if (abs(x_speed) < SLIDE_THRESHOLD)
 			{
 				if (local_direction >= 90 and local_direction <= 270)
 				{
 					return player_perform(player_is_falling);
 				}
-				else
+				else if (local_direction >= 45 and local_direction <= 315)
 				{
 					control_lock_time = SLIDE_DURATION;
 				}
 			}
-			
-			// Skill
-			if (player_try_skill()) exit;
 			
 			// Apply slope friction
 			player_resist_slope();
@@ -189,6 +186,9 @@ function player_is_running(phase)
 			
 			// Stand
 			if (x_speed == 0 and input_axis_x == 0) return player_perform(player_is_standing);
+			
+			// Skill
+			if (player_try_ground_skill()) exit;
 			
 			// Animate
 			var velocity = abs(x_speed);
@@ -257,7 +257,7 @@ function player_is_appealing(phase)
 			}
 			
 			// Slide down steep slopes
-			if (mask_direction != gravity_direction)
+			if (local_direction >= 45 and local_direction <= 315)
 			{
 				control_lock_time = SLIDE_DURATION;
 				return player_perform(player_is_running);
@@ -267,7 +267,7 @@ function player_is_appealing(phase)
 			player_resist_slope();
 			
 			// Skill
-			if (player_try_skill()) exit;
+			if (player_try_ground_skill()) exit;
 			
 			// Run
 			if (x_speed != 0) return player_perform(player_is_running);
@@ -324,7 +324,7 @@ function player_is_crouching(phase)
 			}
 			
 			// Slide down steep slopes
-			if (mask_direction != gravity_direction)
+			if (local_direction >= 45 and local_direction <= 315)
 			{
 				control_lock_time = SLIDE_DURATION;
 				return player_perform(player_is_running);
@@ -334,7 +334,7 @@ function player_is_crouching(phase)
 			player_resist_slope();
 			
 			// Skill
-			if (player_try_skill()) exit;
+			if (player_try_ground_skill()) exit;
 			
 			// Run
 			if (x_speed != 0) return player_perform(player_is_running);
@@ -405,35 +405,26 @@ function player_is_rolling(phase)
 			if (not on_ground) return player_perform(player_is_falling);
 			
 			// Slide down steep slopes
-			if (abs(x_speed) < SLIDE_THRESHOLD and mask_direction != gravity_direction)
+			if (abs(x_speed) < SLIDE_THRESHOLD)
 			{
 				if (local_direction >= 90 and local_direction <= 270)
 				{
 					return player_perform(player_is_falling);
 				}
-				else
+				else if (local_direction >= 45 and local_direction <= 315)
 				{
 					control_lock_time = SLIDE_DURATION;
 				}
 			}
 			
 			// Apply slope friction
-			if (not (local_direction >= 135 and local_direction <= 225) and x_speed != 0)
-			{
-				var friction_downhill = 60 / 256;
-				var friction_uphill = friction_downhill  / 4;
-				var slope_friction = (sign(x_speed) == sign(dsin(local_direction)) ? friction_uphill : friction_downhill);
-				x_speed -= dsin(local_direction) * slope_friction;
-				
-				// Apply speed cap
-				if (abs(x_speed) > speed_cap) x_speed = speed_cap * sign(x_speed);
-			}
+			var friction_downhill = 60 / 256;
+			var friction_uphill = friction_downhill  / 4;
+			var slope_friction = (sign(x_speed) == sign(dsin(local_direction)) ? friction_uphill : friction_downhill);
+			player_resist_slope(slope_friction);
 			
 			// Unroll
-			if (abs(x_speed) < UNROLL_THRESHOLD and mask_direction == gravity_direction) 
-			{
-				return player_perform(player_is_running);
-			}
+			if (abs(x_speed) < UNROLL_THRESHOLD) return player_perform(player_is_running);
 			break;
 		}
 		case PHASE.EXIT:
@@ -468,7 +459,7 @@ function player_is_spin_dashing(phase)
 			}
 			
 			// Slide down steep slopes
-			if (mask_direction != gravity_direction)
+			if (local_direction >= 45 and local_direction <= 315)
 			{
 				control_lock_time = SLIDE_DURATION;
 				sound_play(sfxRoll);

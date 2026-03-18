@@ -103,7 +103,7 @@ reaction = function(pla)
 				}
 			}
 			pla.aerial_flags = 0;
-			pla.player_refresh_aerials();
+			pla.player_refresh_air_skills();
 			sound_play(sfxItemBoxBreak);
 			particle_create(x, y, global.ani_dust_cloud_v0);
 			frames = 0;

@@ -33,7 +33,7 @@ reaction = function(pla)
             pla.y_speed = -dsin(diff) * 8;
 			pla.state_time = 16;
 			pla.aerial_flags = 0;
-			pla.player_refresh_aerials();
+			pla.player_refresh_air_skills();
             active |= bit;
 			sound_play(sfxDashRing);
         }

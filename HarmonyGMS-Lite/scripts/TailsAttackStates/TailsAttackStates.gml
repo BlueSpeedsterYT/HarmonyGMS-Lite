@@ -32,7 +32,10 @@ function tails_is_tail_swipe(phase)
 				}
 				
 				// Slide down steep slopes
-				if (mask_direction != gravity_direction) return player_perform(player_is_running);
+				if (local_direction >= 45 and local_direction <= 315) 
+				{
+					return player_perform(player_is_running);
+				}
 			}
 			else
 			{

@@ -1,12 +1,5 @@
 /// @description Actions
 
-/// @description Checks if the player can perform a ground skill.
-/// @returns {Bool}
-player_check_ground_skill = function()
-{
-    return (on_ground and not (local_direction >= 90 and local_direction <= 270));
-};
-
 /// @description Sets the player's current state to jumping, if applicable.
 /// @returns {Bool}
 player_try_jump = function()
@@ -41,7 +34,7 @@ player_try_crouch_or_roll = function()
 	if (input_axis_y == 1)
 	{
 		// Crouch
-		if (x_speed == 0 and mask_direction == gravity_direction)
+		if (x_speed == 0)
 		{
 			player_perform(player_is_crouching);
 			animation_play(PLAYER_ANIMATION.CROUCH);
@@ -96,151 +89,164 @@ player_try_trick_action = function(time = 0)
 	return false;
 };
 
-/// @description Checks if the player performs a character skill.
+/// @description Checks if the player can perform a ground skill.
 /// @returns {Bool}
-player_try_skill = function()
+player_check_ground_skill = function()
 {
-	if (player_index == 0)
+    return (on_ground and not (local_direction >= 90 and local_direction <= 270));
+};
+
+/// @description Checks if the player performs a ground skill.
+/// @returns {Bool}
+player_try_ground_skill = function()
+{
+	if (player_index != 0) return false;
+	
+	switch (object_index)
 	{
-		switch (object_index)
+		case objSonic:
 		{
-			case objSonic:
+			if (input_button.attack.pressed and player_check_ground_skill())
 			{
-				if (not on_ground)
-				{
-					if (input_axis_pressed_x != 0 and sign(input_double_tap_direction_x) == image_xscale)
-					{
-						// Forward Thrust
-						if (not (aerial_flags & AERIAL_FLAG.FORWARD_THRUST))
-						{
-							aerial_flags |= AERIAL_FLAG.FORWARD_THRUST;
-							x_speed += (2.25 * input_double_tap_direction_x);
-							y_speed = 0;
-							animation_play(SONIC_ANIMATION.FORWARD_THRUST);
-							sound_play(sfxSonicThrust);
-							player_perform(player_is_falling, false);
-							return true;
-						}
-					}
-				
-					if (input_button.jump.pressed)
-					{
-						// Insta-Shield (or Homing Attack at close distances)
-						// TODO: Implement some sort of range check to allow for the homing attack to take
-						// over from the insta-shield
-						if (not (aerial_flags & AERIAL_FLAG.SHIELD_ACTION))
-						{
-							aerial_flags |= AERIAL_FLAG.SHIELD_ACTION;
-							with (insta_shield)
-							{
-								x = other.x div 1;
-								y = other.y div 1;
-								depth = other.depth;
-								image_xscale = other.image_xscale;
-								image_angle = other.image_angle;
-				
-								animation_set(global.ani_sonic_insta_shield_v1);
-							}
-							animation_play(SONIC_ANIMATION.INSTA_SHIELD);
-							sound_play(sfxSonicInstaShield);
-							player_perform(player_is_falling, false);
-							return true;
-						}
-					}
-				
-					if (input_button.attack.pressed)
-					{
-						// Bound
-						player_perform(sonic_is_preparing_bound);
-						return true;
-					}
-				}
-				else
-				{
-					if (input_button.attack.pressed and player_check_ground_skill())
-					{
-						// Skid Attack
-						// Sonic's skid attack is simple and effective, however
-						// it gets supercharged while in boost mode, the skys the limit with this power.
-						// so use it wisely.
-						player_perform(sonic_is_skidding);
-						return true;
-					}
-				}
-				break;
+				// Skid Attack
+				// Sonic's skid attack is simple and effective, however
+				// it gets supercharged while in boost mode, the skys the limit with this power.
+				// so use it wisely.
+				player_perform(sonic_is_skidding);
+				return true;
 			}
-			case objTails:
+			break;
+		}
+		case objTails:
+		{
+			// However, unlike the air, Tails does have a ground attack...
+			// it is a ground attack.
+			if (input_button.attack.pressed and player_check_ground_skill())
 			{
-				if (not on_ground)
-				{
-				    // Tails has no air attacks so he only got to have the jump skill.
-					// Good for him.
-					// Sadly his flight is screwed over by water which is different than Sonic 3 so uhhhhhh.
-					if (input_button.jump.pressed)
-				    {
-						// Fly
-						// Like Sonic 3, he can go to higher bounds never expected.
-						// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
-						// the Advance games.
-						if (state != tails_is_flying and fly_time < TAILS_FLY_DURATION)
-						{
-							player_perform(tails_is_flying);
-							return true;
-						}
-				    }
-				}
-				else
-				{
-					// However, unlike the air, Tails does have a ground attack...
-					// it is a ground attack.
-					if (input_button.attack.pressed and player_check_ground_skill())
-					{
-						// Tail Swipe
-						// it is a swiping attack.
-						player_perform(tails_is_tail_swipe);
-						return true;
-					}
-				}
-				break;
+				// Tail Swipe
+				// it is a swiping attack.
+				player_perform(tails_is_tail_swipe);
+				return true;
 			}
-			case objKnuckles:
+			break;
+		}
+		case objKnuckles:
+		{
+			if (input_button.attack.pressed and player_check_ground_skill())
 			{
-				if (not on_ground)
-				{
-					if (input_button.jump.pressed)
-					{
-						// Glide
-						// Unlike Sonic 3 for some reason, Knuckles can not glide underwater. Like at all.
-						// Maybe it's done to save on power and math on how his gliding works?
-						// SA1 allows him to float above water so I dunno...
-						player_perform(knuckles_is_gliding);
-						return true;
-					}
-				
-					if (input_button.attack.pressed)
-					{
-						// Drill Claw
-						if (state != knuckles_is_preparing_drill_clawing)
-						{
-							player_perform(knuckles_is_preparing_drill_clawing);
-							return true;
-						}
-					}
-				}
-				else
-				{
-					if (input_button.attack.pressed and player_check_ground_skill())
-					{
-						// Punch/Spiral Attack
-						// If the player is not in boost mode, then Knuckles would do a simple punch.
-						// however, that punch turns into a spiral strike when in boost mode.
-						// Be noteful on how you handle that.
-						player_perform((not boost_mode) ? knuckles_is_punching_left : knuckles_is_sprial_attack);
-						return true;
-					}
-				}
-				break;
+				// Punch/Spiral Attack
+				// If the player is not in boost mode, then Knuckles would do a simple punch.
+				// however, that punch turns into a spiral strike when in boost mode.
+				// Be noteful on how you handle that.
+				player_perform((not boost_mode) ? knuckles_is_punching_left : knuckles_is_sprial_attack);
+				return true;
 			}
+			break;
+		}
+	}
+	
+	return false;
+}
+
+/// @description Checks if the player performs an air skill.
+/// @returns {Bool}
+player_try_air_skill = function()
+{
+	if (player_index != 0) return false;
+	
+	switch (object_index)
+	{
+		case objSonic:
+		{
+			if (input_axis_pressed_x != 0 and sign(input_double_tap_direction_x) == image_xscale)
+			{
+				// Forward Thrust
+				if (not (aerial_flags & AERIAL_FLAG.FORWARD_THRUST))
+				{
+					aerial_flags |= AERIAL_FLAG.FORWARD_THRUST;
+					x_speed += (2.25 * input_double_tap_direction_x);
+					y_speed = 0;
+					animation_play(SONIC_ANIMATION.FORWARD_THRUST);
+					sound_play(sfxSonicThrust);
+					player_perform(player_is_falling, false);
+					return true;
+				}
+			}
+				
+			if (input_button.jump.pressed)
+			{
+				// Insta-Shield (or Homing Attack at close distances)
+				// TODO: Implement some sort of range check to allow for the homing attack to take
+				// over from the insta-shield
+				if (not (aerial_flags & AERIAL_FLAG.SHIELD_ACTION))
+				{
+					aerial_flags |= AERIAL_FLAG.SHIELD_ACTION;
+					with (insta_shield)
+					{
+						x = other.x div 1;
+						y = other.y div 1;
+						depth = other.depth;
+						image_xscale = other.image_xscale;
+						image_angle = other.image_angle;
+				
+						animation_set(global.ani_sonic_insta_shield_v1);
+					}
+					animation_play(SONIC_ANIMATION.INSTA_SHIELD);
+					sound_play(sfxSonicInstaShield);
+					player_perform(player_is_falling, false);
+					return true;
+				}
+			}
+				
+			if (input_button.attack.pressed)
+			{
+				// Bound
+				player_perform(sonic_is_preparing_bound);
+				return true;
+			}
+			break;
+		}
+		case objTails:
+		{
+			// Tails has no air attacks so he only got to have the jump skill.
+			// Good for him.
+			// Sadly his flight is screwed over by water which is different than Sonic 3 so uhhhhhh.
+			if (input_button.jump.pressed)
+			{
+				// Fly
+				// Like Sonic 3, he can go to higher bounds never expected.
+				// Unlike Sonic 3, he can't swim with it, cuz the state for it is not in
+				// the Advance games.
+				if (state != tails_is_flying and fly_time < TAILS_FLY_DURATION)
+				{
+					player_perform(tails_is_flying);
+					return true;
+				}
+			}
+			break;
+		}
+		case objKnuckles:
+		{
+			if (input_button.jump.pressed)
+			{
+				// Glide
+				// Unlike Sonic 3 for some reason, Knuckles can not glide underwater. Like at all.
+				// Maybe it's done to save on power and math on how his gliding works?
+				// SA1 allows him to float above water so I dunno...
+				player_perform(knuckles_is_gliding);
+				return true;
+			}
+				
+			if (input_button.attack.pressed)
+			{
+				// Drill Claw
+				if (state != knuckles_is_preparing_drill_clawing)
+				{
+					player_perform(knuckles_is_preparing_drill_clawing);
+					return true;
+				}
+			}
+			break;
 		}
 	}
 	
@@ -248,7 +254,7 @@ player_try_skill = function()
 }
 
 /// @description Resets aerial character skills when grounded.
-player_refresh_aerials = function() 
+player_refresh_air_skills = function() 
 {
 	switch (object_index)
 	{

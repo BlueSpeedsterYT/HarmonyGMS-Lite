@@ -44,7 +44,7 @@ function sonic_is_skidding(phase)
 				{
 					return player_perform(player_is_falling);
 				}
-				else if ((x_speed != 0 and sign(x_speed) != image_xscale) or (mask_direction != gravity_direction))
+				else if ((x_speed != 0 and sign(x_speed) != image_xscale) or (local_direction >= 45 and local_direction <= 315))
 				{
 					return player_perform(player_is_running);
 				}

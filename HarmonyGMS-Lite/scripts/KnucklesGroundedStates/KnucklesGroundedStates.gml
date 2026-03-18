@@ -28,7 +28,7 @@ function knuckles_is_landing(phase)
 			}
 
 		    // Slide down steep slopes
-			if (mask_direction != gravity_direction)
+			if (local_direction >= 45 and local_direction <= 315)
 			{
 				control_lock_time = SLIDE_DURATION;
 				return player_perform(player_is_running);
@@ -87,13 +87,13 @@ function knuckles_is_sliding(phase)
 			}
 
 		    // Slide down steep slopes
-			if (abs(x_speed) < SLIDE_THRESHOLD and mask_direction != gravity_direction)
+			if (abs(x_speed) < SLIDE_THRESHOLD)
 			{
 				if (local_direction >= 90 and local_direction <= 270)
 				{
 					return player_perform(knuckles_is_falling);
 				}
-				else
+				else if (local_direction >= 45 and local_direction <= 315)
 				{
 					control_lock_time = SLIDE_DURATION;
 					return player_perform(player_is_running)
@@ -152,7 +152,7 @@ function knuckles_is_punching_left(phase)
 			if (state_changed) exit;
 			
 			// Slide down steep slopes
-			if (mask_direction != gravity_direction)
+			if (local_direction >= 45 and local_direction <= 315)
 			{
 				control_lock_time = SLIDE_DURATION;
 				return player_perform(player_is_running);

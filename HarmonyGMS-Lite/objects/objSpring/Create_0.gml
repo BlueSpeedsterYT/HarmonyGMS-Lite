@@ -55,7 +55,7 @@ reaction = function(pla)
             }
             pla.state_time = max(2, TRICK_LOCK_DURATION - (force / 1.5) div 1);
 			pla.aerial_flags = 0;
-			pla.player_refresh_aerials();
+			pla.player_refresh_air_skills();
             active |= bit;
             animation_data.variant = 1;
             sound_play(sfxSpring);

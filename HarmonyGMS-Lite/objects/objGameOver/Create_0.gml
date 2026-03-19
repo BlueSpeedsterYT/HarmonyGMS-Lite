@@ -7,8 +7,8 @@ frames_until_done = 0;
 left_x = 0;
 right_x = CAMERA_WIDTH;
 
-/// @method update_over_text(screen_type)
-update_over_text = function(screen_type)
+/// @method update_time_over_text()
+update_time_over_text = function()
 {
 	if (frames_until_done > 140)
 	{
@@ -26,5 +26,9 @@ update_over_text = function(screen_type)
 		var final_temp_x = CAMERA_WIDTH_CENTER - ((40 - frames_until_done) * 2);
 		left_x = final_temp_x;
 		right_x = final_temp_x;
+	}
+	else
+	{
+		return;
 	}
 }

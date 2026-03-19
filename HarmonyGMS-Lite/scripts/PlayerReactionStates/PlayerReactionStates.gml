@@ -13,7 +13,7 @@ function player_is_sprung(phase)
 		{
 			// Trick
 			if (state_time != 0) state_time--;
-			if (player_try_trick_action()) return true;
+			if (player_try_trick_action(state_time)) exit;
 			
 			// Accelerate
 			if (input_axis_x != 0)
@@ -73,7 +73,7 @@ function player_is_dashing(phase)
 		{
 			// Trick
 			if (state_time != 0) state_time--;
-			if (player_try_trick_action()) return true;
+			if (player_try_trick_action(state_time)) exit;
 			
 			// Move
 			player_move_in_air();
@@ -119,7 +119,7 @@ function player_is_corkscrewing(phase)
 		case PHASE.STEP:
 		{
 			// Jump
-			if (player_try_jump()) return true;
+			if (player_try_jump()) exit;
 			
 			// Accelerate
 			if (input_axis_x != 0)
@@ -149,7 +149,7 @@ function player_is_corkscrewing(phase)
 			if (state_changed) exit;
 			
 			// Crouch or Roll
-			if (player_try_crouch_or_roll()) return true;
+			if (player_try_crouch_or_roll()) exit;
 			break;
 		}
 		case PHASE.EXIT:

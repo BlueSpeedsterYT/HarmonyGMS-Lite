@@ -146,14 +146,14 @@ player_calc_tile_normal = function(_x, _y)
     if (sine == 0)
     {
         var sensor_y = array_create(2, _y);
-        var sensor_x = array_create(2, _x - _x mod 8);
-        sensor_x[mask_direction == 0] += 7;
+        var sensor_x = array_create(2, _x - _x mod 16);
+        sensor_x[mask_direction == 0] += 15;
     }
     else
     {
         var sensor_x = array_create(2, _x);
-        var sensor_y = array_create(2, _y - _y mod 8);
-        sensor_y[mask_direction == 270] += 7;
+        var sensor_y = array_create(2, _y - _y mod 16);
+        sensor_y[mask_direction == 270] += 15;
     }
     
     // Cache tilemap id to prevent unnecessary iteration through colliders

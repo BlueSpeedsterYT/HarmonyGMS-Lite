@@ -21,7 +21,7 @@ function knuckles_is_climbing(phase)
 				image_xscale *= -1;
 				x_speed = image_xscale * 4;
 				y_speed = -4;
-				return true;
+				exit;
 			}
 			
 			// Climb

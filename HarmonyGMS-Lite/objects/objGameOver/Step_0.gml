@@ -69,7 +69,7 @@ switch (state)
 				}
 			}
 			
-			update_over_text(game_over_cause);
+			update_time_over_text();
 		}
 		break;
 	}

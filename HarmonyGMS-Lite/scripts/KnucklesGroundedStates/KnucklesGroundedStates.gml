@@ -15,7 +15,7 @@ function knuckles_is_landing(phase)
 		case PHASE.STEP:
 		{
 			// Jump
-			if (player_try_jump()) return true;
+			if (player_try_jump()) exit;
 
 		    // Move
 			player_move_on_ground();
@@ -71,7 +71,7 @@ function knuckles_is_sliding(phase)
 		case PHASE.STEP:
 		{
 			// Jump
-			if (player_try_jump()) return true;
+			if (player_try_jump()) exit;
 
 		    // Friction
 			x_speed -= min(abs(x_speed), KNUCKLES_GLIDE_SLIDE_FRICTION) * sign(x_speed);

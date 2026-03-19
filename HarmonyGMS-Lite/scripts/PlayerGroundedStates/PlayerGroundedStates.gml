@@ -33,7 +33,7 @@ function player_is_standing(phase)
 		case PHASE.STEP:
 		{
 			// Jump
-			if (player_try_jump()) return true;
+			if (player_try_jump()) exit;
 			
 			// Move
 			player_move_on_ground();
@@ -54,9 +54,6 @@ function player_is_standing(phase)
 			
 			// Apply slope friction
 			player_resist_slope();
-			
-			// Skill
-			if (player_try_ground_skill()) exit;
 			
 			// Turn
             if (input_axis_x != 0 and image_xscale != input_axis_x)
@@ -79,9 +76,12 @@ function player_is_standing(phase)
                 }
                 
                 // Look / crouch or roll
-                if (player_try_appeal()) return true;
-                if (player_try_crouch_or_roll()) return true;
+                if (player_try_appeal()) exit;
+                if (player_try_crouch_or_roll()) exit;
             }
+			
+			// Ground skill
+			if (player_try_ground_skill()) exit;
 			break;
 		}
 		case PHASE.EXIT:
@@ -105,7 +105,7 @@ function player_is_running(phase)
 		case PHASE.STEP:
 		{
 			// Jump
-			if (player_try_jump()) return true;
+			if (player_try_jump()) exit;
 			
 			// Handle ground motion
 			var can_brake = false;
@@ -182,12 +182,12 @@ function player_is_running(phase)
 			player_resist_slope();
 			
 			// Crouch or Roll
-			if (player_try_crouch_or_roll()) return true;
+			if (player_try_crouch_or_roll()) exit;
 			
 			// Stand
 			if (x_speed == 0 and input_axis_x == 0) return player_perform(player_is_standing);
 			
-			// Skill
+			// Ground skill
 			if (player_try_ground_skill()) exit;
 			
 			// Animate
@@ -244,7 +244,7 @@ function player_is_appealing(phase)
 		case PHASE.STEP:
 		{
 			// Jump
-			if (player_try_jump()) return true;
+			if (player_try_jump()) exit;
 			
 			// Move
 			player_move_on_ground();
@@ -266,9 +266,6 @@ function player_is_appealing(phase)
 			// Apply slope friction
 			player_resist_slope();
 			
-			// Skill
-			if (player_try_ground_skill()) exit;
-			
 			// Run
 			if (x_speed != 0) return player_perform(player_is_running);
 			
@@ -286,6 +283,9 @@ function player_is_appealing(phase)
             {
                 return player_perform(player_is_standing);
             }
+			
+			// Ground skill
+			if (player_try_ground_skill()) exit;
 			break;
 		}
 		case PHASE.EXIT:
@@ -333,9 +333,6 @@ function player_is_crouching(phase)
 			// Apply slope friction
 			player_resist_slope();
 			
-			// Skill
-			if (player_try_ground_skill()) exit;
-			
 			// Run
 			if (x_speed != 0) return player_perform(player_is_running);
 			
@@ -353,6 +350,9 @@ function player_is_crouching(phase)
             {
                 return player_perform(player_is_standing);
             }
+			
+			// Ground skill
+			if (player_try_ground_skill()) exit;
 			break;
 		}
 		case PHASE.EXIT:
@@ -376,7 +376,7 @@ function player_is_rolling(phase)
 		case PHASE.STEP:
 		{
 			// Jump
-			if (player_try_jump()) return true;
+			if (player_try_jump()) exit;
 			
 			// Decelerate
 			if (control_lock_time == 0)

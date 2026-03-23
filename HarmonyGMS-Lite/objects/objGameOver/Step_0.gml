@@ -28,11 +28,10 @@ switch (state)
 	{
 		if (game_over_cause == GAME_OVER_TYPE.ZERO_LIVES)
 		{
-			if (frames_until_done > 60)
+			if (frames_until_done > GAME_OVER_FADE_1_X)
 			{
-				var temp_x = (CAMERA_WIDTH_CENTER + 40) - (100 - frames_until_done);
-				left_x = temp_x;
-				right_x = temp_x;
+				left_x = frames_until_done + GAME_OVER_FADE_1_X;
+				right_x = frames_until_done + GAME_OVER_FADE_1_X;
 			}
 			else
 			{
@@ -40,15 +39,15 @@ switch (state)
 				right_x = CAMERA_WIDTH_CENTER;
 			}
 			
-			if (--frames_until_done == 0)
+			if (--frames_until_done == GAME_OVER_END_X)
 			{
-				frames_until_done = 120;
+				frames_until_done = CAMERA_WIDTH_CENTER;
 				state++;
 			}
 		}
 		else
 		{
-			if (--frames_until_done == 0)
+			if (--frames_until_done == TIME_OVER_END_X)
 			{
 				global.ring_count = 0;
 				if (ctrlGame.game_mode == GAME_MODE.TIME_ATTACK)
@@ -57,16 +56,9 @@ switch (state)
 				}
 				else
 				{
-					// NOTE: This lil code-snippet was moved from the player to here for one simple reason.
-					// it did not work as intended. (The life counter decreased too quick while in Time Over)
-					// As such, the life loss is done here instead of the player, with the check
-					// needed for lives of course.
-					if (LIVES_ENABLED) 
-					{
-						--global.life_count;
-					}
 					room_restart();
 				}
+				return;
 			}
 			
 			update_time_over_text();
@@ -75,7 +67,7 @@ switch (state)
 	}
 	case 2:
 	{
-		if (--frames_until_done == 0)
+		if (--frames_until_done == GAME_OVER_END_X)
 		{
 			state++;
 		}
@@ -83,17 +75,15 @@ switch (state)
 	}
 	case 3:
 	{
-		frames_until_done = 140;
+		frames_until_done = TIME_OVER_PAUSE_X;
 		state++;
 		break;
 	}
 	case 4:
 	{
-		if (--frames_until_done == 0)
+		if (--frames_until_done == GAME_OVER_END_X)
 		{
-			// NOTE: Input *HATES* using "game_restart()" here, find another way
-			// to reset the game accordingly instead if possible.
-			game_restart();
+			room_goto(rmCharacterSelect);
 		}
 		break;
 	}

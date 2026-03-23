@@ -287,6 +287,7 @@ player_handle_death = function()
 			if (GAME_MODE_IS_TIME_ATTACK)
 			{
 				// TODO: Reset to a potential Time Attack menu.
+				return false;
 			}
 			else // Else it is Single/Multi Player
 			{
@@ -294,21 +295,25 @@ player_handle_death = function()
 				if (LIVES_ENABLED)
 				{
 					// Show a Game Over screen depending on certain conditions
+					--global.life_count;
 					if (global.life_count > 0)
 					{
 						// When it is Time Over
-						return game_over_create(GAME_OVER_TYPE.TIME_UP);
+						game_over_create(GAME_OVER_TYPE.TIME_UP);
+						return true;
 					}
 					else
 					{
 						// When the life count is at *zero*
-						return game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
+						game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
+						return true;
 					}
 				}
 				else
 				{
 					// Show a Time Over screen
-					return game_over_create(GAME_OVER_TYPE.TIME_UP);
+					game_over_create(GAME_OVER_TYPE.TIME_UP);
+					return true;
 				}
 			}
 		}
@@ -318,6 +323,7 @@ player_handle_death = function()
 			if (GAME_MODE_IS_TIME_ATTACK)
 			{
 				// TODO: Reset to a potential Time Attack menu.
+				return false;
 			}
 			else // Else it is Single/Multi Player
 			{
@@ -328,22 +334,26 @@ player_handle_death = function()
 					if (--global.life_count > 0)
 					{
 						// Restart the stage
-						return room_restart();
+						room_restart();
+						return true;
 					}
 					else
 					{
 						// Show a Game Over screen
-						return game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
+						game_over_create(GAME_OVER_TYPE.ZERO_LIVES);
+						return true;
 					}
 				}
 				else
 				{
 					// Restart the stage
-					return room_restart();
+					room_restart();
+					return true;
 				}
 			}
 		}
 	}
+	return false;
 };
 
 /// @description Creates a Speed Break effect.

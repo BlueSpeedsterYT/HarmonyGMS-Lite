@@ -10,20 +10,20 @@ right_x = CAMERA_WIDTH;
 /// @method update_time_over_text()
 update_time_over_text = function()
 {
-	if (frames_until_done > 140)
+	if (frames_until_done > (CAMERA_WIDTH_CENTER + 20))
 	{
-		var temp_x = (CAMERA_WIDTH_CENTER - 280) + (frames_until_done * 2);
+		var temp_x = (frames_until_done * 2) - (CAMERA_WIDTH_CENTER + 40);
 		left_x = temp_x;
 		right_x = temp_x;
 	}
-	else if (frames_until_done > 40)
+	else if (frames_until_done > TIME_OVER_RESUME_X)
 	{
 		left_x = CAMERA_WIDTH_CENTER;
 		right_x = CAMERA_WIDTH_CENTER;
 	}
-	else if (frames_until_done > 0)
+	else if (frames_until_done > TIME_OVER_END_X)
 	{
-		var final_temp_x = CAMERA_WIDTH_CENTER - ((40 - frames_until_done) * 2);
+		var final_temp_x = CAMERA_WIDTH_CENTER - ((TIME_OVER_RESUME_X - frames_until_done) * 2);
 		left_x = final_temp_x;
 		right_x = final_temp_x;
 	}

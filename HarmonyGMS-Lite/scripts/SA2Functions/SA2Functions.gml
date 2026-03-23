@@ -10,11 +10,11 @@ function game_over_create(type)
 		delay = 10;
 		if (type == GAME_OVER_TYPE.ZERO_LIVES)
 		{
-			frames_until_done = 140;
+			frames_until_done = GAME_OVER_START_X;
 		}
 		else
 		{
-			frames_until_done = 180;
+			frames_until_done = TIME_OVER_START_X;
 		}
 	}
 }

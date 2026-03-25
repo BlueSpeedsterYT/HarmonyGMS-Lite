@@ -8,14 +8,7 @@ function game_over_create(type)
 	{
 		game_over_cause = type;
 		delay = 10;
-		if (type == GAME_OVER_TYPE.ZERO_LIVES)
-		{
-			frames_until_done = GAME_OVER_START_X;
-		}
-		else
-		{
-			frames_until_done = TIME_OVER_START_X;
-		}
+		frames_until_done = (type == GAME_OVER_TYPE.ZERO_LIVES) ? GAME_OVER_START_X : TIME_OVER_START_X;
 	}
 }
 

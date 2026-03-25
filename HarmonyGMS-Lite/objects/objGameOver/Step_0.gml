@@ -30,8 +30,8 @@ switch (state)
 		{
 			if (frames_until_done > GAME_OVER_FADE_1_X)
 			{
-				left_x = frames_until_done + GAME_OVER_FADE_1_X;
-				right_x = frames_until_done + GAME_OVER_FADE_1_X;
+				left_x = frames_until_done + 60;
+				right_x = frames_until_done + 60;
 			}
 			else
 			{

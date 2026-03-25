@@ -10,9 +10,9 @@ right_x = CAMERA_WIDTH;
 /// @method update_time_over_text()
 update_time_over_text = function()
 {
-	if (frames_until_done > (CAMERA_WIDTH_CENTER + 20))
+	if (frames_until_done > TIME_OVER_PAUSE_X)
 	{
-		var temp_x = (frames_until_done * 2) - (CAMERA_WIDTH_CENTER + 40);
+		var temp_x = (frames_until_done * 2) - (TIME_OVER_PAUSE_X + 20);
 		left_x = temp_x;
 		right_x = temp_x;
 	}
